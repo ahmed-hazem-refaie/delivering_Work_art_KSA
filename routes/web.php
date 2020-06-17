@@ -26,3 +26,5 @@ Route::resource('artists', 'ArtistController');
 Route::resource('appliedartists', 'AppliedartistController');
 
 Route::resource('reviews', 'ReviewController');
+
+Route::resource('palettes', 'PaletteController');

@@ -1,0 +1,126 @@
+<!-- Name Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('name', 'Name:') !!}
+    {!! Form::text('name', null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- Img Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('img', 'Img:') !!}
+    {!! Form::file('img') !!}
+</div>
+<div class="clearfix"></div>
+
+<!-- Palette Copies Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('palette_copies', 'Palette Copies:') !!}
+    {!! Form::number('palette_copies', null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- Avalible Copies Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('avalible_copies', 'Avalible Copies:') !!}
+    {!! Form::number('avalible_copies', null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- S Copies Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('S_copies', 'S Copies:') !!}
+    {!! Form::number('S_copies', null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- S Avalible Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('S_avalible', 'S Avalible:') !!}
+    {!! Form::number('S_avalible', null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- S Price Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('S_price', 'S Price:') !!}
+    {!! Form::text('S_price', null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- M Copies Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('M_copies', 'M Copies:') !!}
+    {!! Form::number('M_copies', null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- M Avalible Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('M_avalible', 'M Avalible:') !!}
+    {!! Form::number('M_avalible', null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- M Price Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('M_price', 'M Price:') !!}
+    {!! Form::text('M_price', null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- L Copies Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('L_copies', 'L Copies:') !!}
+    {!! Form::number('L_copies', null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- L Avalible Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('L_avalible', 'L Avalible:') !!}
+    {!! Form::number('L_avalible', null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- L Price Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('L_price', 'L Price:') !!}
+    {!! Form::text('L_price', null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- Sizing Details Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('sizing_details', 'Sizing Details:') !!}
+    {!! Form::text('sizing_details', null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- Print Material Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('print_material', 'Print Material:') !!}
+    {!! Form::text('print_material', null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- Print Ink Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('print_ink', 'Print Ink:') !!}
+    {!! Form::text('print_ink', null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- Print Finish Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('print_finish', 'Print Finish:') !!}
+    {!! Form::text('print_finish', null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- Frame Material Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('frame_material', 'Frame Material:') !!}
+    {!! Form::text('frame_material', null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- Frame Finish Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('frame_finish', 'Frame Finish:') !!}
+    {!! Form::text('frame_finish', null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- Artist Id Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('artist_id', 'Artist Id:') !!}
+    {!! Form::select('artist_id', $artistItems, null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- Submit Field -->
+<div class="form-group col-sm-12">
+    {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+    <a href="{{ route('palettes.index') }}" class="btn btn-default">Cancel</a>
+</div>

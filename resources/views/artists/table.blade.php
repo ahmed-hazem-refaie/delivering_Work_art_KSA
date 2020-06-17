@@ -3,7 +3,7 @@
         <thead>
             <tr>
                 <th>Name</th>
-        <th>Plates Description</th>
+        <th>Palette Description</th>
         <th>Email</th>
         <th>Artist Img</th>
         <th>Cover Img</th>
