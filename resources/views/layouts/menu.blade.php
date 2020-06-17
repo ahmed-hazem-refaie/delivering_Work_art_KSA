@@ -10,3 +10,7 @@
     <a href="{{ route('reviews.index') }}"><i class="fa fa-edit"></i><span>Reviews</span></a>
 </li>
 
+<li class="{{ Request::is('palettes*') ? 'active' : '' }}">
+    <a href="{{ route('palettes.index') }}"><i class="fa fa-edit"></i><span>Palettes</span></a>
+</li>
+
