@@ -113,6 +113,12 @@
     {!! Form::text('frame_finish', null, ['class' => 'form-control']) !!}
 </div>
 
+<!-- Artist Id Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('artist_id', 'Artist Id:') !!}
+    {!! Form::select('artist_id', $artistItems, null, ['class' => 'form-control']) !!}
+</div>
+
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}

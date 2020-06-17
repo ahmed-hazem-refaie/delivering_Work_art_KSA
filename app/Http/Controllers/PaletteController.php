@@ -57,6 +57,7 @@ class PaletteController extends AppBaseController
         // $input = $request->all();
 
         $palette = $this->paletteRepository->createPalette($request);
+
         Flash::success('Palette saved successfully.');
 
         return redirect(route('palettes.index'));

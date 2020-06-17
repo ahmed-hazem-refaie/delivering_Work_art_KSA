@@ -112,6 +112,12 @@
     <p>{{ $palette->frame_finish }}</p>
 </div>
 
+<!-- Artist Id Field -->
+<div class="form-group">
+    {!! Form::label('artist_id', 'Artist Id:') !!}
+    <p>{{ $palette->artist_id }}</p>
+</div>
+
 <!-- Created At Field -->
 <div class="form-group">
     {!! Form::label('created_at', 'Created At:') !!}

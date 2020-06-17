@@ -27,6 +27,7 @@ $factory->define(Palette::class, function (Faker $faker) {
         'print_finish' => $faker->word,
         'frame_material' => $faker->word,
         'frame_finish' => $faker->word,
+        'artist_id' => $faker->randomDigitNotNull,
         'created_at' => $faker->date('Y-m-d H:i:s'),
         'updated_at' => $faker->date('Y-m-d H:i:s')
     ];

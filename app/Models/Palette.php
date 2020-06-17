@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Palette
  * @package App\Models
- * @version June 17, 2020, 3:53 pm UTC
+ * @version June 17, 2020, 4:50 pm UTC
  *
  * @property string $name
  * @property string $img
@@ -29,6 +29,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $print_finish
  * @property string $frame_material
  * @property string $frame_finish
+ * @property integer $artist_id
  */
 class Palette extends Model
 {
@@ -60,7 +61,8 @@ class Palette extends Model
         'print_ink',
         'print_finish',
         'frame_material',
-        'frame_finish'
+        'frame_finish',
+        'artist_id'
     ];
 
     /**
@@ -88,7 +90,8 @@ class Palette extends Model
         'print_ink' => 'string',
         'print_finish' => 'string',
         'frame_material' => 'string',
-        'frame_finish' => 'string'
+        'frame_finish' => 'string',
+        'artist_id' => 'integer'
     ];
 
     /**

@@ -9,7 +9,7 @@ use Intervention\Image\Facades\Image;
 /**
  * Class PaletteRepository
  * @package App\Repositories
- * @version June 17, 2020, 3:53 pm UTC
+ * @version June 17, 2020, 4:50 pm UTC
 */
 
 class PaletteRepository extends BaseRepository
@@ -36,7 +36,8 @@ class PaletteRepository extends BaseRepository
         'print_ink',
         'print_finish',
         'frame_material',
-        'frame_finish'
+        'frame_finish',
+        'artist_id'
     ];
 
     /**
@@ -56,6 +57,7 @@ class PaletteRepository extends BaseRepository
     {
         return Palette::class;
     }
+
     public function createPalette(Request $request){
         $file = $request->file('img');
         $originalName = $file->getClientOriginalName();
