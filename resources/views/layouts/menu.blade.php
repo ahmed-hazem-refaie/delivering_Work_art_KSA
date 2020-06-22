@@ -1,6 +1,6 @@
 <br>
-<li class="{{ Request::is('home*') ? 'active' : '' }}">
-    <a href="{{ route('home.index') }}"><i class="fa fa-tachometer"></i><span>Dashboard</span></a>
+<li class="{{ Request::is('admin*') ? 'active' : '' }}">
+    <a href="{{ route('admin.index') }}"><i class="fa fa-tachometer"></i><span>Dashboard</span></a>
 </li>
 <br>
 <li class="{{ Request::is('artists*') ? 'active' : '' }}">

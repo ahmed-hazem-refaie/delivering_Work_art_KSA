@@ -1,5 +1,7 @@
 <?php
 
+use Facade\FlareClient\View;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,13 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')->middleware('verified')->name("home.index");
+// Route::get('/home', 'HomeController@index')->middleware('verified')->name("home.index");
+Route::get('/', 'HomeController@index');
+Route::get('/admin', 'AdminController@index')->middleware('verified')->name("admin.index");
 
 
 Route::resource('artists', 'ArtistController');
