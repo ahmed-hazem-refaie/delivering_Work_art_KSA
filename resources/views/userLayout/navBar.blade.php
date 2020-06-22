@@ -19,7 +19,7 @@
 	</div>
 	<form class="form-inline my-2 my-lg-0">
 		<!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
-		<button class="nav-btns" id="searchArea" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="search-icon_black" src="//cdn.shopify.com/s/files/1/3000/4362/t/109/assets/icon-search_black.png?v=13989404507242821394" alt="Search Icon" width="33px"></button>
+		<button class="nav-btns" id="searchArea" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="search-icon_black" src="//cdn.shopify.com/s/files/1/3000/4362/t/109/assets/icon-search_black.png?v=13989404507242821394" alt="Search Icon" width="30px"></button>
 		<div class="dropdown-menu" aria-labelledby="searchArea">
 			<input class="form-control mr-sm-2" type="search" placeholder="Search ..." aria-label="Search">
 		</div>
