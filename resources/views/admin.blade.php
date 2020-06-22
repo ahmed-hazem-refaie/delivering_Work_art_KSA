@@ -1,16 +1,29 @@
 @extends('layouts.app')
 
 @section('content')
-<style>
-    
-</style>
+<link rel="stylesheet" href="css/admin/index.css">
+
 <div class="container">
     <div class="row">
-        <div class="col-sm12 col-md6">
-            <img src="images/artist.png" alt="">
+        <div class="col-sm-12 col-md-6">
+            <a href="#">
+                <div class="card" style="margin: 0 auto;">
+                    <img class="card-img-top" src="images/artist.jpg">
+                    <div class="card-body">
+                        <button class="btn btn-secondary">Go somewhere</button>
+                    </div>
+                </div>
+            </a>
         </div>
-        <div class="col-sm12 col-md6">
-            <img src="images/palette.jpg" alt="">
+        <div class="col-sm-12 col-md-6">
+            <a href="#">
+                <div class="card">
+                    <img class="card-img-top" src="images/palette.jpg">
+                    <div class="card-body">
+                        <button class="btn btn-secondary">Go somewhere</button>
+                    </div>
+                </div>
+            </a>
         </div>
     </div>
 </div>
