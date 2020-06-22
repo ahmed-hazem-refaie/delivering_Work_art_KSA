@@ -19,7 +19,7 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')->middleware('verified');
+Route::get('/home', 'HomeController@index')->middleware('verified')->name("home.index");
 
 
 Route::resource('artists', 'ArtistController');
@@ -29,3 +29,7 @@ Route::resource('appliedartists', 'AppliedartistController');
 Route::resource('reviews', 'ReviewController');
 
 Route::resource('palettes', 'PaletteController');
+
+Route::resource('paletteimages', 'PaletteimageController');
+
+Route::resource('discounts', 'DiscountController');

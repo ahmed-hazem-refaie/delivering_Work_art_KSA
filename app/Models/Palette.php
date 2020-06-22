@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+// use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Palette
@@ -102,6 +103,8 @@ class Palette extends Model
     public static $rules = [
         
     ];
-
+    // public function artist(){
+    //     return $this->belongsTo(Artist::class,"artist_id");
+    // }
     
 }
