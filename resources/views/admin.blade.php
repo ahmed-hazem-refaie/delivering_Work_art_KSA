@@ -5,11 +5,11 @@
 <link rel="stylesheet" href="css/admin/index.css">
 
 <div class="container">
-    <nav aria-label="breadcrumb">
+    <!-- <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item active" aria-current="page">Home</li>
         </ol>
-    </nav>
+    </nav> -->
 
     <div class="row">
         <div class="col-sm-12 col-md-6">
@@ -20,7 +20,7 @@
                     <i class="fa fa-user" aria-hidden="true"></i>
 
                     <div class="card-body">
-                        <p> Artists <span>12</span> </p>
+                        <p> Artists <span>6</span> </p>
                     </div>
                 </div>
             </a>
@@ -31,7 +31,7 @@
                     <!-- <img class="card-img-top" src="images/art.png"> -->
                     <i class='fas fa-palette'></i>
                     <div class="card-body">
-                        <p> Paintings <span>12</span></p>
+                        <p> Palettes <span>18</span></p>
                     </div>
                 </div>
             </a>

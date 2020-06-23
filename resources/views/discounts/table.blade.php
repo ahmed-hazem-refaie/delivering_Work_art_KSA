@@ -15,8 +15,8 @@
                 <td>
                     {!! Form::open(['route' => ['discounts.destroy', $discount->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
-                        <a href="{{ route('discounts.show', [$discount->id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
-                        <a href="{{ route('discounts.edit', [$discount->id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
+                        <a style=" margin-left: 15px;" href="{{ route('discounts.show', [$discount->id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
+                        <a style=" margin-left: 15px;margin-right: 15px;"href="{{ route('discounts.edit', [$discount->id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
                         {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
                     </div>
                     {!! Form::close() !!}

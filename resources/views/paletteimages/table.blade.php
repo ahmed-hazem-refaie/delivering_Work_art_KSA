@@ -17,8 +17,8 @@
                 <td>
                     {!! Form::open(['route' => ['paletteimages.destroy', $paletteimage->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
-                        <a href="{{ route('paletteimages.show', [$paletteimage->id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
-                        <a href="{{ route('paletteimages.edit', [$paletteimage->id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
+                        <a style=" margin-left: 15px;" href="{{ route('paletteimages.show', [$paletteimage->id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
+                        <a style=" margin-left: 15px;margin-right: 15px;"  href="{{ route('paletteimages.edit', [$paletteimage->id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
                         {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
                     </div>
                     {!! Form::close() !!}

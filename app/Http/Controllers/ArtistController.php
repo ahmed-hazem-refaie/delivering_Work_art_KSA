@@ -29,7 +29,7 @@ class ArtistController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $artists = $this->artistRepository->paginate(2);
+        $artists = $this->artistRepository->paginate(5);
 
         return view('artists.index')
             ->with('artists', $artists);
