@@ -4,16 +4,16 @@
             <tr>
                 <th>Name</th>
                 <th>Img</th>
-                <th>Palette Copies</th>
+                <th>All Copies</th>
                 <!-- <th>Avalible Copies</th> -->
                 <!-- <th>S Copies</th> -->
-                <th>S Avalible</th>
+                <th>S Left</th>
                 <!-- <th>S Price</th> -->
                 <!-- <th>M Copies</th> -->
-                <th>M Avalible</th>
+                <th>M Left</th>
                 <!-- <th>M Price</th> -->
                 <!-- <th>L Copies</th> -->
-                <th>L Avalible</th>
+                <th>L Left</th>
                 <!-- <th>L Price</th> -->
                 <!-- <th>Sizing Details</th> -->
                 <!-- <th>Print Material</th> -->
@@ -29,7 +29,7 @@
             @foreach($palettes as $palette)
             <tr>
                 <td>{{ $palette->name }}</td>
-                <td><img height="50" src="{{ $palette->img }}" /></td>
+                <td><img height="50" width="50" src="{{ $palette->img }}" /></td>
                 <td>{{ $palette->palette_copies }}</td>
                 <!-- <td>{{ $palette->avalible_copies }}</td> -->
                 <!-- <td>{{ $palette->S_copies }}</td> -->
@@ -61,4 +61,6 @@
             @endforeach
         </tbody>
     </table>
+    <div class="center" style="display: flex;justify-content: center;">{{$palettes->links()}}</div>
+
 </div>

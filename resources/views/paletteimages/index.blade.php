@@ -1,8 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
+<link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
+    <link rel="stylesheet" href="css/admin/font.css">
     <section class="content-header">
-        <h1 class="pull-left">Paletteimages</h1>
+        <h1 class="pull-left">Palette Images</h1>
         <h1 class="pull-right">
            <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{{ route('paletteimages.create') }}">Add New</a>
         </h1>

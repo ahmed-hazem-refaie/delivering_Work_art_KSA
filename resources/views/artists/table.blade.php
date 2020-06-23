@@ -16,8 +16,8 @@
                 <td>{{ $artist->name }}</td>
                 <!-- <td>{{ $artist->Plates_description }}</td> -->
                 <td>{{ $artist->email }}</td>
-                <td><img height="50" src="{{ $artist->artist_img }}" /></td>
-                <td><img height="50" src="{{ $artist->cover_img }}" /></td>
+                <td><img height="50" width="50" src="{{ $artist->artist_img }}" /></td>
+                <td><img height="50" width="50" src="{{ $artist->cover_img }}" /></td>
                 <td>
                     {!! Form::open(['route' => ['artists.destroy', $artist->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
@@ -31,4 +31,6 @@
             @endforeach
         </tbody>
     </table>
+    <div class="center" style="display: flex;justify-content: center;">{{$artists->links()}}</div>
+
 </div>

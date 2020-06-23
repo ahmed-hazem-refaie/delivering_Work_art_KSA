@@ -25,7 +25,7 @@
     color: black;
     width: 100%;
     margin-bottom: 0;
-    padding: 5px;
+    padding: 22px;
 }
 
 .card .card-body p span {
@@ -62,3 +62,5 @@
         font-size: 200px;
     }
 }
+
+  

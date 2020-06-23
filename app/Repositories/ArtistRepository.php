@@ -6,11 +6,12 @@ use App\Models\Artist;
 use App\Repositories\BaseRepository;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
+
 /**
  * Class ArtistRepository
  * @package App\Repositories
  * @version June 17, 2020, 4:00 am UTC
-*/
+ */
 
 class ArtistRepository extends BaseRepository
 {
@@ -42,18 +43,29 @@ class ArtistRepository extends BaseRepository
     {
         return Artist::class;
     }
-    
-    public function createArtist(Request $request){
+
+    public function createArtist(Request $request)
+    {
+        // dd($request);
         $file = $request->file('artist_img');
         $originalName = $file->getClientOriginalName();
         $extension = $file->getClientOriginalExtension();
-
-        $path = 'images/'.uniqid().'.'.$extension;
+        $path = 'images/' . uniqid() . '.' . $extension;
         $img = Image::make($file);
         $img->save(public_path($path));
+
+
+        $file2 = $request->file('cover_img');
+        $originalName = $file2->getClientOriginalName();
+        $extension2 = $file2->getClientOriginalExtension();
+        $path2 = 'images/' . uniqid() . '.' . $extension2;
+        $img2 = Image::make($file2);
+        $img2->save(public_path($path2));
+
+
         $input = $request->all();
         $input['artist_img'] = $path;
-        $input['cover_img'] = $path;
+        $input['cover_img'] = $path2;
 
         return $this->create($input);
     }

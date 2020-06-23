@@ -27,6 +27,8 @@
 
     <link rel="stylesheet" href="css/admin/styles.css">
     @yield('css')
+    <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
+    <link rel="stylesheet" href="css/admin/font.css">
 </head>
 
 <body class="skin-blue sidebar-mini">

@@ -11,7 +11,7 @@
             @foreach($paletteimages as $paletteimage)
             <tr>
                 <!-- <td>{{ $paletteimage->img }}</td> -->
-                <td><img height="50" src="{{ $paletteimage->img }}" /></td>
+                <td><img height="50" width="50" src="{{ $paletteimage->img }}" /></td>
 
                 <td>{{ $paletteimage->palatte_id }}</td>
                 <td>

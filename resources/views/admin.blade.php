@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="css/admin/index.css">
 
 <div class="container">
-    @include('adminBreadCrumb')
+    <!-- @include('adminBreadCrumb') -->
 
     <div class="row">
         <div class="col-sm-12 col-md-6">

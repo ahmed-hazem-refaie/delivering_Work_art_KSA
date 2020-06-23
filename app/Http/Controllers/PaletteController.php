@@ -9,6 +9,8 @@ use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
+use Illuminate\Support\Facades\DB;
+
 
 class PaletteController extends AppBaseController
 {
@@ -29,7 +31,7 @@ class PaletteController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $palettes = $this->paletteRepository->all();
+        $palettes =DB::table('palettes')->paginate(6);
 
         return view('palettes.index')
             ->with('palettes', $palettes);

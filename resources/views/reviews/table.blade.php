@@ -3,7 +3,7 @@
         <thead>
             <tr>
                 <th>Name</th>
-        <th>Email</th>
+        <!-- <th>Email</th> -->
         <th>Title</th>
         <th>Body</th>
         <th>Rate</th>
@@ -16,7 +16,7 @@
         @foreach($reviews as $review)
             <tr>
                 <td>{{ $review->name }}</td>
-            <td>{{ $review->email }}</td>
+            <!-- <td>{{ $review->email }}</td> -->
             <td>{{ $review->title }}</td>
             <td>{{ $review->body }}</td>
             <td>{{ $review->rate }}</td>
