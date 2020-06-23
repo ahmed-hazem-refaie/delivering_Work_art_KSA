@@ -9,7 +9,12 @@
         <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{{ route('palettes.create') }}">Add New</a>
     </h1>
 </section>
-@include('adminBreadCrumb')
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/admin">Admin</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Palettes</li>
+    </ol>
+</nav>
 <div class="content">
     <div class="clearfix"></div>
 

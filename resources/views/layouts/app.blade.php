@@ -25,10 +25,10 @@
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
 
-    <link rel="stylesheet" href="css/admin/styles.css">
+    <link rel="stylesheet" href="/css/admin/styles.css">
     @yield('css')
     <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
-    <link rel="stylesheet" href="css/admin/font.css">
+    <link rel="stylesheet" href="/css/admin/font.css">
 </head>
 
 <body class="skin-blue sidebar-mini">
@@ -158,14 +158,6 @@
     @stack('scripts')
     <script>
         $('.content-header').append(`<div style="clear:both;"></div>`);
-        window.location.pathname !== '/admin' ?
-            $('.breadcrumb').append(`
-            <li class="breadcrumb-item"><a href="/admin">Admin</a></li>
-            <li class="breadcrumb-item active" aria-current="page">${window.location.pathname.substr(1).charAt(0).toUpperCase() + window.location.pathname.substr(2)}</li>
-            `) : $('.breadcrumb').append(`
-            <li class="breadcrumb-item active" aria-current="page">Home</li>
-
-            `);
     </script>
 </body>
 

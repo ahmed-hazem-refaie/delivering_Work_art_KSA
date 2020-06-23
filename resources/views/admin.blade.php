@@ -5,7 +5,11 @@
 <link rel="stylesheet" href="css/admin/index.css">
 
 <div class="container">
-    <!-- @include('adminBreadCrumb') -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">Home</li>
+        </ol>
+    </nav>
 
     <div class="row">
         <div class="col-sm-12 col-md-6">
