@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
 
+    <link rel="stylesheet" href="css/admin/styles.css">
     @yield('css')
 </head>
 
@@ -58,23 +59,23 @@
                                 <!-- <span class="hidden-xs">{{ Auth::user()->name }}</span> -->
                             </a>
                             <!-- <ul class="dropdown-menu"> -->
-                                <!-- The user image in the menu -->
-                               
-                                <!-- Menu Footer-->
-                                <li class="user-footer">
-                                    <!-- <div class="pull-left">
+                            <!-- The user image in the menu -->
+
+                            <!-- Menu Footer-->
+                        <li class="user-footer">
+                            <!-- <div class="pull-left">
                                         <a href="#" class="btn btn-default btn-flat">Profile</a>
                                     </div> -->
-                                    <div class="pull-right">
-                                        <a href="{{ url('/logout') }}" class="btn btn-default btn-flat" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                            Sign out
-                                        </a>
-                                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                                            @csrf
-                                        </form>
-                                    </div>
-                                </li>
-                            <!-- </ul> -->
+                            <div class="pull-right">
+                                <a href="{{ url('/logout') }}" class="btn btn-default btn-flat log-out" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    Sign out
+                                </a>
+                                <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
+                        <!-- </ul> -->
                         </li>
                     </ul>
                 </div>
@@ -153,6 +154,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.min.js"></script>
 
     @stack('scripts')
+    <script>
+        $('.content-header').append(`<div style="clear:both;"></div>`);
+        window.location.pathname !== '/admin' ?
+            $('.breadcrumb').append(`
+            <li class="breadcrumb-item"><a href="/admin">Admin</a></li>
+            <li class="breadcrumb-item active" aria-current="page">${window.location.pathname.substr(1).charAt(0).toUpperCase() + window.location.pathname.substr(2)}</li>
+            `) : $('.breadcrumb').append(`
+            <li class="breadcrumb-item active" aria-current="page">Home</li>
+
+            `);
+    </script>
 </body>
 
 </html>

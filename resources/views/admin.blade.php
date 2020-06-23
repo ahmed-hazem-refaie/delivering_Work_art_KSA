@@ -1,11 +1,12 @@
 @extends('layouts.app')
-<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
 @section('content')
 
 <link rel="stylesheet" href="css/admin/index.css">
 
 <div class="container">
+    @include('adminBreadCrumb')
+
     <div class="row">
         <div class="col-sm-12 col-md-6">
             <a href="#">
@@ -15,7 +16,7 @@
                     <i class="fa fa-user" aria-hidden="true"></i>
 
                     <div class="card-body">
-                        <button class="btn btn-secondary">Go somewhere</button>
+                        <p> Artists <span>12</span> </p>
                     </div>
                 </div>
             </a>
@@ -26,13 +27,13 @@
                     <!-- <img class="card-img-top" src="images/art.png"> -->
                     <i class='fas fa-palette'></i>
                     <div class="card-body">
-                        <button class="btn btn-secondary">Go somewhere</button>
+                        <p> Paintings <span>12</span></p>
                     </div>
                 </div>
             </a>
         </div>
     </div>
 </div>
-<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
 @endsection
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>

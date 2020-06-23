@@ -1,5 +1,5 @@
 <div class="table-responsive">
-    <table class="table" id="discounts-table">
+    <table class="table table-striped" id="discounts-table">
         <thead>
             <tr>
                 <th>Code</th>

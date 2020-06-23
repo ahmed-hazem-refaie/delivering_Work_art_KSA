@@ -7,6 +7,7 @@
            <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{{ route('discounts.create') }}">Add New</a>
         </h1>
     </section>
+    @include('adminBreadCrumb')
     <div class="content">
         <div class="clearfix"></div>
 

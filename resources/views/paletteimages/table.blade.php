@@ -1,5 +1,5 @@
 <div class="table-responsive">
-    <table class="table" id="paletteimages-table">
+    <table class="table table-striped" id="paletteimages-table">
         <thead>
             <tr>
                 <th>Img</th>

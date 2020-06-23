@@ -1,5 +1,5 @@
 <div class="table-responsive">
-    <table class="table" id="appliedartists-table">
+    <table class="table table-striped" id="appliedartists-table">
         <thead>
             <tr>
                 <th>Name</th>
