@@ -31,5 +31,6 @@ Route::resource('reviews', 'ReviewController');
 Route::resource('palettes', 'PaletteController');
 
 Route::resource('paletteimages', 'PaletteimageController');
+Route::get('palette/{id}/images','AllDetailsController@index');
 
 Route::resource('discounts', 'DiscountController');

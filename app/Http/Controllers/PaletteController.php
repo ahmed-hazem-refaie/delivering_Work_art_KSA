@@ -153,4 +153,18 @@ class PaletteController extends AppBaseController
 
         return redirect(route('palettes.index'));
     }
+    public function images($id)
+    {
+        $paletteimage = $this->paletteimageRepository->find($id);
+        // $paletteimage=  DB::table('paletteimages')->where('palatte_id',$id)->get();
+        // dd($paletteimage);
+
+        if (empty($paletteimage)) {
+            Flash::error('Paletteimage not found');
+
+            return redirect(route('paletteimages.index'));
+        }
+
+        return view('paletteimages.show')->with('paletteimage', $paletteimage);
+    }
 }

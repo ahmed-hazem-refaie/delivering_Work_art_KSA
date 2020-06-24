@@ -3,7 +3,7 @@
         <thead>
             <tr>
                 <th>Name</th>
-                <th>Img</th>
+                <th>Image</th>
                 <th>All Copies</th>
                 <!-- <th>Avalible Copies</th> -->
                 <!-- <th>S Copies</th> -->
@@ -22,7 +22,7 @@
                 <!-- <th>Frame Material</th> -->
                 <!-- <th>Frame Finish</th> -->
                 <th>Artist Id</th>
-                <th colspan="3">Action</th>
+                <th colspan="3" style=" padding-left: 2%;">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -54,6 +54,8 @@
                         <a style=" margin-left: 15px;"  href="{{ route('palettes.show', [$palette->id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
                         <a style=" margin-left: 15px;margin-right: 15px;" href="{{ route('palettes.edit', [$palette->id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
                         {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                       
+                        <a style=" margin-left: 15px;margin-right: 15px;" href="{{ route('paletteimages.show', [$palette->id]) }}" class='btn btn-default btn-xs'> <i class="fa fa-info-circle" aria-hidden="true"></i></a>
                     </div>
                     {!! Form::close() !!}
                 </td>
