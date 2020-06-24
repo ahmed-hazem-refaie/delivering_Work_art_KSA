@@ -1,3 +1,7 @@
+.row{
+    margin: 0;
+    padding: 0;
+}
 body {
     font-family: serif, sans-serif;
 }
@@ -74,16 +78,25 @@ nav.navbar {
 
 .hero {
     position: relative;
-    display: flex;
     margin-bottom: 16px;
-    color: #fff;
-    align-items: flex-end;
+    color: #000;
 }
 
-.hero img {
+.hero .hero-image-pc {
     max-width: 100%;
     vertical-align: middle;
-    padding: 10px;
+}
+.hero .hero-image-md {
+    max-width: 100%;
+    display: none;
+}
+@media (max-width:991px){
+    .hero .hero-image-pc {
+        display: none;
+    }
+    .hero .hero-image-md {
+        display: block;
+    }
 }
 
 .hero-classic .hero-content {
@@ -95,6 +108,14 @@ nav.navbar {
     width: 450px;
     padding: 0;
     text-align: center;
+}
+@media (max-width: 991px)
+{
+    .hero-classic .hero-content {
+        position: relative;
+        top:0;
+        box-sizing: border-box;
+    }
 }
 
 #block-1592300721990 .hero-title,
@@ -108,6 +129,7 @@ nav.navbar {
 .hero-classic .hero-subtitle {
     font-size: 25px;
     margin-bottom: -16px;
+    margin-top: 10px;
     letter-spacing: 1.6px;
 }
 
@@ -124,6 +146,8 @@ nav.navbar {
     text-transform: unset;
     border: 3px solid #000;
     border-radius: 9999px;
+    background-color: #000;
+    color: #fff;
 }
 
 .hero-classic .hero-counter {
@@ -389,4 +413,12 @@ nav.navbar {
 }
 .swiper-pagination-bullet-active {
     background: #8a8888;
+}
+.swiper-slide {
+    width: 80% !important;
+}
+@media (min-width:768px){
+    .swiper-slide    {
+        width: 33.33% !important;
+    }
 }
