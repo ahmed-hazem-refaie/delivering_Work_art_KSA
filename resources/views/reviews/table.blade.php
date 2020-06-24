@@ -12,7 +12,7 @@
                 </th>
                 <th><i class="fa fa-thumbs-o-down fa-2x" aria-hidden="true" style="color: red;"></i>
                 </th>
-                <th colspan="3">Action</th>
+                <th colspan="3" style=" padding-left: 2%;">Action</th>
             </tr>
         </thead>
         <tbody>

@@ -4,7 +4,7 @@
             <tr>
                 <th>Img</th>
                 <th>Palatte Id</th>
-                <th colspan="3">Action</th>
+                <th colspan="3" style=" padding-left: 2%;">Action</th>
             </tr>
         </thead>
         <tbody>

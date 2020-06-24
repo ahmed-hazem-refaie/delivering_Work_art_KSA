@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Flash;
 use Response;
 use App\Models\Paletteimage;
+use Illuminate\Support\Facades\DB;
 
 class PaletteimageController extends AppBaseController
 {
@@ -61,28 +62,10 @@ class PaletteimageController extends AppBaseController
         ]);
         if ($files = $request->file('img')) {
             // Define upload path
-            // $destinationPath = public_path('/images/'); // upload path
             foreach ($files as $img) {
-                // Upload Orginal Image           
-                // $profileImage = $img->getClientOriginalName();
-                // $img->move($destinationPath, $profileImage);
-                // Save In Database
-                // $imagemodel = new Paletteimage();
-                // $imagemodel->img = "$profileImage";
-                // dd($request->all());
-                // $imagemodel->palatte_id=$request->palatte_id;
-                // $imagemodel->save();
-                // $input["img"]="$profileImage";
-
-                // dd($input);
-                $paletteimage = $this->paletteimageRepository->createPalatteImages($request,$img);
+                $paletteimage = $this->paletteimageRepository->createPalatteImages($request, $img);
             }
         }
-        // return back()->with('success', 'Image Upload successfully');
-        // orginal
-        // $paletteimage = $this->paletteimageRepository->create($input);
-        // Flash::success('Paletteimage saved successfully.');
-        // return back()->with('success', 'Image Upload successfully');
         return redirect(route('paletteimages.index'));
     }
 
@@ -96,6 +79,8 @@ class PaletteimageController extends AppBaseController
     public function show($id)
     {
         $paletteimage = $this->paletteimageRepository->find($id);
+        // $paletteimage=  DB::table('paletteimages')->where('palatte_id',$id)->get();
+        // dd($paletteimage);
 
         if (empty($paletteimage)) {
             Flash::error('Paletteimage not found');

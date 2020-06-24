@@ -13,13 +13,13 @@
 
 <!-- Palette Copies Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('palette_copies', 'Palette Copies:') !!}
+    {!! Form::label('palette_copies', 'All Copies:') !!}
     {!! Form::number('palette_copies', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Avalible Copies Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('avalible_copies', 'Avalible Copies:') !!}
+    {!! Form::label('avalible_copies', 'Left Copies:') !!}
     {!! Form::number('avalible_copies', null, ['class' => 'form-control']) !!}
 </div>
 
@@ -31,7 +31,7 @@
 
 <!-- S Avalible Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('S_avalible', 'S Avalible:') !!}
+    {!! Form::label('S_avalible', 'S Left:') !!}
     {!! Form::number('S_avalible', null, ['class' => 'form-control']) !!}
 </div>
 
@@ -49,7 +49,7 @@
 
 <!-- M Avalible Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('M_avalible', 'M Avalible:') !!}
+    {!! Form::label('M_avalible', 'M Left:') !!}
     {!! Form::number('M_avalible', null, ['class' => 'form-control']) !!}
 </div>
 
@@ -67,7 +67,7 @@
 
 <!-- L Avalible Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('L_avalible', 'L Avalible:') !!}
+    {!! Form::label('L_avalible', 'L Left:') !!}
     {!! Form::number('L_avalible', null, ['class' => 'form-control']) !!}
 </div>
 

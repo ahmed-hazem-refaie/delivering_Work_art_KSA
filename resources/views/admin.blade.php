@@ -13,25 +13,25 @@
 
     <div class="row">
         <div class="col-sm-12 col-md-6">
-            <a href="#">
+            <a href="/artists">
                 <div class="card" style="margin: 0 auto;">
                     <!-- <img class="card-img-top" src="images/art2.png"> -->
                     <!-- <i class="fa fa-users fa-4x" aria-hidden="true"></i> -->
                     <i class="fa fa-user" aria-hidden="true"></i>
 
                     <div class="card-body">
-                        <p> Artists <span>6</span> </p>
+                        <p> Artists <span>{{$artists}}</span> </p>
                     </div>
                 </div>
             </a>
         </div>
         <div class="col-sm-12 col-md-6">
-            <a href="#">
+            <a href="/palettes">
                 <div class="card">
                     <!-- <img class="card-img-top" src="images/art.png"> -->
                     <i class='fas fa-palette'></i>
                     <div class="card-body">
-                        <p> Palettes <span>18</span></p>
+                        <p> Palettes <span>{{$palettes}}</span></p>
                     </div>
                 </div>
             </a>

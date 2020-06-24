@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+// use App\Models\Artist;
+// use App\Models\Palette;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -23,6 +26,9 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin');
+        $artists = DB::table('artists')->count();    
+        $palettes = DB::table('palettes')->count();    
+
+        return view('admin',['artists'=>$artists,"palettes"=>$palettes]);
     }
 }

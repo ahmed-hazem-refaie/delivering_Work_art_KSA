@@ -7,7 +7,7 @@
                 <th>Email</th>
                 <th>Artist Img</th>
                 <th>Cover Img</th>
-                <th colspan="3">Action</th>
+                <th colspan="3" style=" padding-left: 2%;">Action</th>
             </tr>
         </thead>
         <tbody>
