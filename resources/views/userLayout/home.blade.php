@@ -6,6 +6,8 @@
 
 	@component('components.Slider')
 	@endcomponent
+	@component('components.Footer')
+	@endcomponent
 @endsection
 
 @section('scripts')
@@ -20,6 +22,7 @@
 		$(".owl-carousel").owlCarousel();
 	});
 	var swiper = new Swiper('.swiper-container', {
+      slidesPerView: 3,
       spaceBetween: 30,
       freeMode: true,
       pagination: {
