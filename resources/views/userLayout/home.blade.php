@@ -6,6 +6,11 @@
 
 	@component('components.Slider')
 	@endcomponent
+
+
+	@component('components.Video')
+	@endcomponent
+
 	@component('components.Footer')
 	@endcomponent
 @endsection
