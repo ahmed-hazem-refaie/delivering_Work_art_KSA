@@ -16,7 +16,7 @@
                 <div class="col-md-6 col-lg-3 mb-2">
                     <ul class="footer-menu">
                         <li class="footer-title">
-                            LIMITED ARTWORKS
+                            limitworks
                         </li>
                         <li class="footer-menu-item">
                             <a href="#" class="footer-menu-item-link">Porta ac consectetur ac</a>
@@ -31,7 +31,7 @@
                 <div class="col-md-6 col-lg-3 mb-2">
                     <ul class="footer-menu">
                         <li class="footer-title">
-                            LIMITED ARTWORKS
+                            Company
                         </li>
                         <li class="footer-menu-item">
                             <a href="#" class="footer-menu-item-link">Porta ac consectetur ac</a>
@@ -46,7 +46,7 @@
                 <div class="col-md-6 col-lg-3 mb-2">
                     <ul class="footer-menu">
                         <li class="footer-title">
-                            LIMITED ARTWORKS
+                            others
                         </li>
                         <li class="footer-menu-item">
                             <a href="#" class="footer-menu-item-link">Porta ac consectetur ac</a>
