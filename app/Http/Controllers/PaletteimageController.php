@@ -42,9 +42,10 @@ class PaletteimageController extends AppBaseController
      *
      * @return Response
      */
-    public function create()
+    public function create($palette=null)
     {
-        return view('paletteimages.create');
+        // dd($palette);
+        return view('paletteimages.create',["palette"=>$palette]);
     }
 
     /**
@@ -66,7 +67,7 @@ class PaletteimageController extends AppBaseController
                 $paletteimage = $this->paletteimageRepository->createPalatteImages($request, $img);
             }
         }
-        return redirect(route('paletteimages.index'));
+        return redirect(route('palettes.index'));
     }
 
     /**
@@ -78,17 +79,18 @@ class PaletteimageController extends AppBaseController
      */
     public function show($id)
     {
-        $paletteimage = $this->paletteimageRepository->find($id);
-        // $paletteimage=  DB::table('paletteimages')->where('palatte_id',$id)->get();
-        // dd($paletteimage);
+        // $paletteimages = $this->paletteimageRepository->find($id);
+        $paletteimages=  DB::table('paletteimages')->where('palatte_id',$id)->get();
+        $paletteimages=Paletteimage::all()->where('palatte_id',$id);
+        // dd($paletteimages);
 
-        if (empty($paletteimage)) {
+        if (empty($paletteimages)) {
             Flash::error('Paletteimage not found');
 
             return redirect(route('paletteimages.index'));
         }
 
-        return view('paletteimages.show')->with('paletteimage', $paletteimage);
+        return view('paletteimages.show',['paletteimages'=>$paletteimages,'id'=>$id]);
     }
 
     /**
@@ -100,6 +102,7 @@ class PaletteimageController extends AppBaseController
      */
     public function edit($id)
     {
+        
         $paletteimage = $this->paletteimageRepository->find($id);
 
         if (empty($paletteimage)) {
@@ -108,7 +111,9 @@ class PaletteimageController extends AppBaseController
             return redirect(route('paletteimages.index'));
         }
 
-        return view('paletteimages.edit')->with('paletteimage', $paletteimage);
+        // return view('paletteimages.edit')->with('paletteimage', $paletteimage);
+        // dd($paletteimage->palette_id);
+        return view('paletteimages.edit',['paletteimage'=>$paletteimage,"palette"=>$paletteimage->palette_id]);
     }
 
     /**

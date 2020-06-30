@@ -29,9 +29,9 @@
     <a href="{{ route('palettes.index') }}"><i class="fa fa-picture-o" aria-hidden="true"></i>
         <span>Palettes</span></a>
 </li>
-<li class="{{ Request::is('paletteimages*') ? 'active' : '' }}">
+<!-- <li class="{{ Request::is('paletteimages*') ? 'active' : '' }}">
     <a href="{{ route('paletteimages.index') }}"><i class="fa fa-picture-o" aria-hidden="true"></i><span>Palette Images</span></a>
-</li>
+</li> -->
 <br>
 <li class="{{ Request::is('reviews*') ? 'active' : '' }}">
     <a href="{{ route('reviews.index') }}"><i class="fa fa-comments-o" aria-hidden="true"></i>
@@ -42,4 +42,5 @@
 <li class="{{ Request::is('discounts*') ? 'active' : '' }}">
     <a href="{{ route('discounts.index') }}"><i class="fa fa-minus" aria-hidden="true"></i>
         </i><span>Discounts</span></a>
-</li>
+
+
