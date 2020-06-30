@@ -283,4 +283,7 @@ export default {
     .add-cart .more{
         outline: none;
     }
+    .list-group .list-group-item{
+        cursor: pointer;
+    }
 </style>
