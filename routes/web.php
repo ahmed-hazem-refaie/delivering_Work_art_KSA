@@ -16,7 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes(['verify' => true]);
-
+Route::view('/','userLayout.home');
+Route::view('/{any}','userLayout.home');
 // Route::get('/home', 'HomeController@index')->middleware('verified')->name("home.index");
 Route::get('/', 'HomeController@index');
 Route::get('/admin', 'AdminController@index')->middleware('verified')->name("admin.index");
@@ -31,6 +32,6 @@ Route::resource('reviews', 'ReviewController');
 Route::resource('palettes', 'PaletteController');
 
 Route::resource('paletteimages', 'PaletteimageController');
-Route::get('palette/{id}/images','AllDetailsController@index');
+// Route::get('palette/{id}/images','AllDetailsController@index');
 
 Route::resource('discounts', 'DiscountController');

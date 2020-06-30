@@ -1,4 +1,5 @@
-<footer>
+<template>
+  <footer>
     <div class="row mb-3">
         <div class="col-md-4 footer-col-1">
             <a href="" class="footer-logo">ECSTASE</a>
@@ -76,7 +77,7 @@
                                     <form action="" method="">
                                         @csrf
                     
-                                        <div id='consmodal'class="modal-body mx-3 text-dark">
+                                        <div id='consmodal' class="modal-body mx-3 text-dark">
                                             <div class="md-form mb-2">
                                                 <i class="fa fa-user"></i>
                                                 <input  type="text" class="form-control validate" name="username">
@@ -119,3 +120,14 @@
         </div>
     </div>
 </footer>
+</template>
+
+<script>
+export default {
+
+}
+</script>
+
+<style>
+
+</style>

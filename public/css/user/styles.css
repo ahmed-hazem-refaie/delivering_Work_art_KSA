@@ -16,8 +16,9 @@ li.nav-item {
     transition: border-bottom 0.5s;
 }
 
-li.active {
+.navbar-nav li.active {
     border-bottom-color: black;
+   
 }
 
 li.nav-item:hover {
