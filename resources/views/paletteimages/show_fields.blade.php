@@ -1,24 +1,28 @@
-<!-- Img Field -->
-<div class="form-group">
-    {!! Form::label('img', 'Img:') !!}
-    <p>{{ $paletteimage->img }}</p>
-</div>
+<div class="table-responsive">
+    <table class="table table-striped" id="paletteimages-table">
+        <thead>
+            <tr>
+                <th>Img</th>
+                <th colspan="3" style=" padding-left: 2%;">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($paletteimages as $paletteimage)
+            <tr>
+                <!-- <td>{{ $paletteimage->img }}</td> -->
+                <td><img height="80" width="140" src="/{{ $paletteimage->img }}"  /></td>
 
-<!-- Palatte Id Field -->
-<div class="form-group">
-    {!! Form::label('palatte_id', 'Palatte Id:') !!}
-    <p>{{ $paletteimage->palatte_id }}</p>
+                <td>
+                    {!! Form::open(['route' => ['paletteimages.destroy', $paletteimage->id], 'method' => 'delete']) !!}
+                    <div class='btn-group'>
+                        <a style=" margin-left: 15px;" href="{{ route('paletteimages.show', [$paletteimage->id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
+                        <a style=" margin-left: 15px;margin-right: 15px;" href="{{ route('paletteimages.edit', [$paletteimage->id]) }}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
+                        {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                    </div>
+                    {!! Form::close() !!}
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
 </div>
-
-<!-- Created At Field -->
-<div class="form-group">
-    {!! Form::label('created_at', 'Created At:') !!}
-    <p>{{ $paletteimage->created_at }}</p>
-</div>
-
-<!-- Updated At Field -->
-<div class="form-group">
-    {!! Form::label('updated_at', 'Updated At:') !!}
-    <p>{{ $paletteimage->updated_at }}</p>
-</div>
-
