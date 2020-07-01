@@ -1,6 +1,6 @@
 <template>
   <footer>
-    <div class="row mb-3">
+    <div class="row mb-3 pl-1">
         <div class="col-md-4 footer-col-1">
             <a href="" class="footer-logo">ECSTASE</a>
             <div class="footer-info">
@@ -12,9 +12,9 @@
                 <a href="" class="custom-social-link"><i class="fa fa-instagram"></i></a>
             </div>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-8 ">
             <div class="row">
-                <div class="col-md-6 col-lg-3 mb-2">
+                <div class="col-md-6 col-lg-3 mb-2 pl-5">
                     <ul class="footer-menu">
                         <li class="footer-title">
                             limitworks
@@ -29,7 +29,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="col-md-6 col-lg-3 mb-2">
+                <div class="col-md-6 col-lg-3 mb-2 pl-5">
                     <ul class="footer-menu">
                         <li class="footer-title">
                             Company
@@ -44,7 +44,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="col-md-6 col-lg-3 mb-2">
+                <div class="col-md-6 col-lg-3 mb-2 pl-5">
                     <ul class="footer-menu">
                         <li class="footer-title">
                             others
@@ -59,7 +59,7 @@
                         </li>
                     </ul> 
                 </div>
-                <div class="col-md-6 col-lg-3 mb-2">
+                <div class="col-md-6 col-lg-3 mb-2 pl-0">
                     <div class="footer-col footer-col-2">
                         <h3 class="footer-title">NEWSLETTER</h3>
                         <p >Sign up for a notification email when new limited artworks are released.</p>

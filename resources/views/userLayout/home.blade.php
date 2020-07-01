@@ -10,7 +10,9 @@
         
         $(this).addClass('active').siblings().removeClass('active');
     });
-    
+	$('#myCollapsible').collapse({
+  toggle: true
+})
 	$('.product-grid-item__image').hover(function(e) {
 		console.log(e)
 
