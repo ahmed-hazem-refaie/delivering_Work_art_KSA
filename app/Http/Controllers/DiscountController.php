@@ -54,6 +54,10 @@ class DiscountController extends AppBaseController
      */
     public function store(CreateDiscountRequest $request)
     {
+         $request->validate([
+            'code' => 'required|unique:discounts|max:255',
+            'discount_percentage' => 'required',
+        ]);
         $input = $request->all();
 
         $discount = $this->discountRepository->create($input);

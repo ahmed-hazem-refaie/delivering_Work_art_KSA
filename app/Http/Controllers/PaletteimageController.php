@@ -57,6 +57,9 @@ class PaletteimageController extends AppBaseController
      */
     public function store(CreatePaletteimageRequest $request)
     {
+        // $request->validate([
+        //     'img	' => 'mimes:jpeg,jpg,png,gif|required|max:10000',
+        // ]);
         $input = $request->all();
         request()->validate([
             'img.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -67,7 +70,10 @@ class PaletteimageController extends AppBaseController
                 $paletteimage = $this->paletteimageRepository->createPalatteImages($request, $img);
             }
         }
-        return redirect(route('palettes.index'));
+        // dd($request->palatte_id);
+        // return redirect(route('palettes.index'));
+        return redirect('/paletteimages/'.$request->palatte_id);
+
     }
 
     /**
@@ -153,7 +159,7 @@ class PaletteimageController extends AppBaseController
     public function destroy($id)
     {
         $paletteimage = $this->paletteimageRepository->find($id);
-
+        // dd();
         if (empty($paletteimage)) {
             Flash::error('Paletteimage not found');
 
@@ -164,6 +170,8 @@ class PaletteimageController extends AppBaseController
 
         Flash::success('Paletteimage deleted successfully.');
 
-        return redirect(route('paletteimages.index'));
+        // return redirect(route('palettes.index'));
+        return redirect('/paletteimages/'.$paletteimage->palatte_id);
+
     }
 }

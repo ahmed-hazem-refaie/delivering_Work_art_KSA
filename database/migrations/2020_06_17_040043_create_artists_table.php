@@ -18,8 +18,8 @@ class CreateArtistsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('Plates_description');
-            $table->string('email');
-            $table->string('artist_img');
+            $table->string('email')->nullable();
+            $table->string('artist_img')->nullable();
             $table->string('cover_img');
             $table->timestamps();
             $table->softDeletes();

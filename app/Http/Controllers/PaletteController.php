@@ -54,6 +54,26 @@ class PaletteController extends AppBaseController
      */
     public function store(CreatePaletteRequest $request)
     {
+        // name	img	palette_copies	avalible_copies	S_copies	S_avalible
+        //     S_price	M_copies	M_avalible	M_price	L_copies	L_avalible
+        //     	L_price	sizing_details	print_material	
+        // print_ink	print_finish	frame_material	frame_finish	artist_id
+        // $request->validate([
+        //     'name' => 'required',
+        //     'palette_copies' => 'required',
+        //     'avalible_copies' => 'required',
+        //     'S_copies' => 'required',
+        //     'S_avalible' => 'required',
+        //     'S_price' => 'required',
+        //     'M_copies' => 'required',
+        //     'M_avalible' => 'required',
+        //     'M_price' => 'required',
+        //     'L_copies' => 'required',
+        //     'L_avalible' => 'required',
+        //     'L_price' => 'required',
+        //     'artist_id' => 'required',
+        //     'img' => 'mimes:jpeg,jpg,png,gif|required|max:10000',
+        // ]);
         // $input = $request->all();
 
         $palette = $this->paletteRepository->createPalette($request);

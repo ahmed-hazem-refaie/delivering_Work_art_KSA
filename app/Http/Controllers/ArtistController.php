@@ -56,6 +56,13 @@ class ArtistController extends AppBaseController
     {
         // $input = $request->all();
         // $artist = $this->artistRepository->create($input);
+         $request->validate([
+            'name' => 'required|unique:artists|max:255',
+            'cover_img' => 'mimes:jpeg,jpg,png,gif|required|max:10000' ,
+            'Plates_description' => 'required',
+            'artist_img' => 'mimes:jpeg,jpg,png,gif|required|max:10000',
+
+        ]);
         $artist = $this->artistRepository->createArtist($request);
         Flash::success('Artist saved successfully.');
 

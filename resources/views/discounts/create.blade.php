@@ -13,6 +13,7 @@
         <li class="breadcrumb-item active" aria-current="page">Create</li>
     </ol>
 </nav>
+
 <div class="content">
     @include('adminlte-templates::common.errors')
     <div class="box box-primary">

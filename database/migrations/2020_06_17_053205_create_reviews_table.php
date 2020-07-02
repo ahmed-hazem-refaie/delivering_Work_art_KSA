@@ -17,12 +17,12 @@ class CreateReviewsTable extends Migration
         Schema::create('reviews', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('email');
+            $table->string('email')->nullable();
             $table->string('title');
             $table->string('body');
             $table->integer('rate');
-            $table->integer('like_counter');
-            $table->integer('dislike_counter');
+            $table->integer('like_counter')->nullable();
+            $table->integer('dislike_counter')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

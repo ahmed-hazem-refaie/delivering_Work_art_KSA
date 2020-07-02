@@ -17,7 +17,7 @@ class CreatePaletteimagesTable extends Migration
         Schema::create('paletteimages', function (Blueprint $table) {
             $table->increments('id');
             $table->string('img');
-            $table->integer('palatte_id')->unsigned()->nullable();
+            $table->integer('palatte_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('palatte_id')->references('id')->on('palettes');

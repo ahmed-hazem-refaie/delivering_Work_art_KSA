@@ -69,4 +69,29 @@ class ArtistRepository extends BaseRepository
 
         return $this->create($input);
     }
+    // public function updateArtist(Request $request,$id)
+    // {
+    //     // dd($request);
+    //     $file = $request->file('artist_img');
+    //     $originalName = $file->getClientOriginalName();
+    //     $extension = $file->getClientOriginalExtension();
+    //     $path = 'images/' . uniqid() . '.' . $extension;
+    //     $img = Image::make($file);
+    //     $img->save(public_path($path));
+
+
+    //     $file2 = $request->file('cover_img');
+    //     $originalName = $file2->getClientOriginalName();
+    //     $extension2 = $file2->getClientOriginalExtension();
+    //     $path2 = 'images/' . uniqid() . '.' . $extension2;
+    //     $img2 = Image::make($file2);
+    //     $img2->save(public_path($path2));
+
+
+    //     $input = $request->all();
+    //     $input['artist_img'] = $path;
+    //     $input['cover_img'] = $path2;
+
+    //     return $this->create($input);
+    // }
 }

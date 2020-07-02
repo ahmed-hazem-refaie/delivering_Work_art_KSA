@@ -54,6 +54,13 @@ class ReviewController extends AppBaseController
      */
     public function store(CreateReviewRequest $request)
     {
+        // 	email		like_counter	dislike_counter
+        $request->validate([
+            'name	' => 'required',
+            'body	' => 'required',
+            'title	' => 'required',
+            'rate	' => 'required',
+        ]);
         $input = $request->all();
 
         $review = $this->reviewRepository->create($input);
