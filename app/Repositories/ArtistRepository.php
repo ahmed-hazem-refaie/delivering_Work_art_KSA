@@ -69,29 +69,34 @@ class ArtistRepository extends BaseRepository
 
         return $this->create($input);
     }
-    // public function updateArtist(Request $request,$id)
-    // {
-    //     // dd($request);
-    //     $file = $request->file('artist_img');
-    //     $originalName = $file->getClientOriginalName();
-    //     $extension = $file->getClientOriginalExtension();
-    //     $path = 'images/' . uniqid() . '.' . $extension;
-    //     $img = Image::make($file);
-    //     $img->save(public_path($path));
+    public function updateArtist(Request $request, $id)
+    {
+        // dd($request->all());
+        $input = $request->all();
+
+        $file = $request->file('artist_img');
+        if ($file) {
+            $originalName = $file->getClientOriginalName();
+            $extension = $file->getClientOriginalExtension();
+            $path = 'images/' . uniqid() . '.' . $extension;
+            $img = Image::make($file);
+            $img->save(public_path($path));
+            $input['artist_img'] = $path;
+
+        }
+
+        $file2 = $request->file('cover_img');
+        if ($file2) {
+            $originalName = $file2->getClientOriginalName();
+            $extension2 = $file2->getClientOriginalExtension();
+            $path2 = 'images/' . uniqid() . '.' . $extension2;
+            $img2 = Image::make($file2);
+            $img2->save(public_path($path2));
+            $input['cover_img'] = $path2;
+
+        }
 
 
-    //     $file2 = $request->file('cover_img');
-    //     $originalName = $file2->getClientOriginalName();
-    //     $extension2 = $file2->getClientOriginalExtension();
-    //     $path2 = 'images/' . uniqid() . '.' . $extension2;
-    //     $img2 = Image::make($file2);
-    //     $img2->save(public_path($path2));
-
-
-    //     $input = $request->all();
-    //     $input['artist_img'] = $path;
-    //     $input['cover_img'] = $path2;
-
-    //     return $this->create($input);
-    // }
+        return $this->update($input, $id);
+    }
 }

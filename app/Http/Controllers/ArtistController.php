@@ -126,8 +126,9 @@ class ArtistController extends AppBaseController
 
             return redirect(route('artists.index'));
         }
+        // $artist = $this->artistRepository->createArtist($request);
 
-        $artist = $this->artistRepository->update($request->all(), $id);
+        $artist = $this->artistRepository->updateArtist($request, $id);
 
         Flash::success('Artist updated successfully.');
 
