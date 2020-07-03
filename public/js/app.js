@@ -2112,12 +2112,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
@@ -2929,6 +2923,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -7818,7 +7814,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n@media(max-width:991px){\n.wrapper[data-v-266b1872]{\n        display: none;\n}\n}\n.header_sm[data-v-266b1872]{\n    background-image: url('https://cdn.shopify.com/s/files/1/3000/4362/files/turrell_mobile_final_post_3_2048x.jpg?v=1565189502');\n    background-size: cover;\n    height: 300px;\n    background-position: center;\n    position: relative;\n    display: none;\n}\n@media(max-width:991px){\n.header_sm[data-v-266b1872]{\n        display: none;\n}\n}\n.wrapper[data-v-266b1872]{\n    position: absolute;\n    top: 7%;\n    left: 32%;\n}\n.details[data-v-266b1872]{\nwidth: 16%;\ndisplay: inline-block;\nmargin: 15px;\ncolor: #fff;\n}\n.details img[data-v-266b1872]{\n    width: 100%;\n    transition: all 1s;\n    /* height: 200px; */\n}\n.wrapper .details .content[data-v-266b1872]{\n    font-size: 14px;\n    width: 100%;\n    margin: 16px auto 0;\n    padding: 6px 5px;\n    transition: all .5s;\n    color: #fff;\n    border-radius: 10px;\n    background-color: rgba(0,0,0,.75);\n    background-repeat: no-repeat;\n    background-position: 50%;\n    background-size: 100%;\n}\n.wrapper .details .content[data-v-266b1872]:hover{\n    border: 2px solid #00a4ee;\n}\n.details:hover img[data-v-266b1872]{\n    transform: scale(1.1);\n}\n.add-cart div span[data-v-266b1872]{\n    font-size: 15px;\n    font-weight: 400;\n    line-height: 22px;\n    display: inline-block;\n    margin-right: 5px;\n    padding: 0 10px;\n    text-transform: lowercase;\n    color: #fff;\n    border-radius: 999px;\n    background-color: #000;\n}\n.add-cart p[data-v-266b1872]{\n    font-size: 20px;\n}\n.add-cart .add-button[data-v-266b1872]{\n    font-size: 20px;\n    font-weight: 700;\n    line-height: 70px;\n    display: block;\n    width: 100%;\n    margin-bottom: 10px;\n    cursor: pointer;\n    text-align: center;\n    text-decoration: none;\n    color: #fff;\n    border: none;\n    background-color: #000;\n}\n.add-cart .more[data-v-266b1872]{\n    outline: none;\n}\n.list-group .list-group-item[data-v-266b1872]{\n    cursor: pointer;\n}\n.carousel-control-prev[data-v-266b1872]{\n    left: -50%;\n}\n\n", ""]);
+exports.push([module.i, "\n.carousel-item .header[data-v-266b1872]{\n    width: 100%;\n    height: 640px;\n}\n@media(max-width:991px){\n.wrapper[data-v-266b1872]{\n        display: none;\n}\n.carousel-item .header[data-v-266b1872]{\n        height: 300px;\n}\n}\n.header_sm[data-v-266b1872]{\n    background-image: url('https://cdn.shopify.com/s/files/1/3000/4362/files/turrell_mobile_final_post_3_2048x.jpg?v=1565189502');\n    background-size: cover;\n    height: 300px;\n    background-position: center;\n    position: relative;\n    display: none;\n}\n@media(max-width:991px){\n.header_sm[data-v-266b1872]{\n        display: none;\n}\n}\n.wrapper[data-v-266b1872]{\n    position: absolute;\n    top: 7%;\n    left: 32%;\n}\n.details[data-v-266b1872]{\nwidth: 16%;\ndisplay: inline-block;\nmargin: 15px;\ncolor: #fff;\n}\n.details img[data-v-266b1872]{\n    width: 100%;\n    transition: all 1s;\n    /* height: 200px; */\n}\n.wrapper .details .content[data-v-266b1872]{\n    font-size: 14px;\n    width: 100%;\n    margin: 16px auto 0;\n    padding: 6px 5px;\n    transition: all .5s;\n    color: #fff;\n    border-radius: 10px;\n    background-color: rgba(0,0,0,.75);\n    background-repeat: no-repeat;\n    background-position: 50%;\n    background-size: 100%;\n}\n.wrapper .details .content[data-v-266b1872]:hover{\n    border: 2px solid #00a4ee;\n}\n.details:hover img[data-v-266b1872]{\n    transform: scale(1.1);\n}\n.add-cart div span[data-v-266b1872]{\n    font-size: 15px;\n    font-weight: 400;\n    line-height: 22px;\n    display: inline-block;\n    margin-right: 5px;\n    padding: 0 10px;\n    text-transform: lowercase;\n    color: #fff;\n    border-radius: 999px;\n    background-color: #000;\n}\n.add-cart p[data-v-266b1872]{\n    font-size: 20px;\n}\n.add-cart .add-button[data-v-266b1872]{\n    font-size: 20px;\n    font-weight: 700;\n    line-height: 70px;\n    display: block;\n    width: 100%;\n    margin-bottom: 10px;\n    cursor: pointer;\n    text-align: center;\n    text-decoration: none;\n    color: #fff;\n    border: none;\n    background-color: #000;\n}\n.add-cart .more[data-v-266b1872]{\n    outline: none;\n}\n.list-group .list-group-item[data-v-266b1872]{\n    cursor: pointer;\n    border-left: none;\n    border-right: none;\n    padding-left: 10px;\n    padding-right: 10px;\n}\n.carousel-control-prev[data-v-266b1872]{\n    left: -50%;\n}\n\n\n", ""]);
 
 // exports
 
@@ -39715,10 +39711,10 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("footer", [
-      _c("div", { staticClass: "row mb-3 pl-1" }, [
+      _c("div", { staticClass: "row mb-3 pl-2" }, [
         _c("div", { staticClass: "col-md-4 footer-col-1" }, [
           _c("a", { staticClass: "footer-logo", attrs: { href: "" } }, [
-            _vm._v("ECSTASE")
+            _vm._v("Ecstase")
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "footer-info" }, [
@@ -39732,14 +39728,14 @@ var staticRenderFns = [
           _c("div", { staticClass: "footer-social" }, [
             _c(
               "a",
-              { staticClass: "custom-social-link", attrs: { href: "" } },
-              [_c("i", { staticClass: "fa fa-facebook" })]
+              { staticClass: "custom-social-link ", attrs: { href: "" } },
+              [_c("i", { staticClass: "fa fa-facebook facebook" })]
             ),
             _vm._v(" "),
             _c(
               "a",
-              { staticClass: "custom-social-link", attrs: { href: "" } },
-              [_c("i", { staticClass: "fa fa-instagram" })]
+              { staticClass: "custom-social-link ", attrs: { href: "" } },
+              [_c("i", { staticClass: "fa fa-instagram instagram" })]
             )
           ])
         ]),
@@ -39750,7 +39746,7 @@ var staticRenderFns = [
               _c("ul", { staticClass: "footer-menu" }, [
                 _c("li", { staticClass: "footer-title" }, [
                   _vm._v(
-                    "\n                            limitworks\n                        "
+                    "\n                            Limitworks\n                        "
                   )
                 ]),
                 _vm._v(" "),
@@ -39814,7 +39810,7 @@ var staticRenderFns = [
               _c("ul", { staticClass: "footer-menu" }, [
                 _c("li", { staticClass: "footer-title" }, [
                   _vm._v(
-                    "\n                            others\n                        "
+                    "\n                            Others\n                        "
                   )
                 ]),
                 _vm._v(" "),
@@ -39845,7 +39841,7 @@ var staticRenderFns = [
             _c("div", { staticClass: "col-md-6 col-lg-3 mb-2 pl-0" }, [
               _c("div", { staticClass: "footer-col footer-col-2" }, [
                 _c("h3", { staticClass: "footer-title" }, [
-                  _vm._v("NEWSLETTER")
+                  _vm._v("Newsletter")
                 ]),
                 _vm._v(" "),
                 _c("p", [
@@ -40194,70 +40190,24 @@ var staticRenderFns = [
           width: "32px",
           alt: ""
         }
-      }),
-      _vm._v(" Name")
+      })
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("form", { staticClass: "form-inline my-2 my-lg-0" }, [
-      _c(
-        "button",
-        {
-          staticClass: "nav-btns",
-          attrs: {
-            id: "searchArea",
-            role: "button",
-            "data-toggle": "dropdown",
-            "aria-haspopup": "true",
-            "aria-expanded": "false"
-          }
-        },
-        [
-          _c("img", {
-            staticClass: "search-icon_black",
-            attrs: {
-              src:
-                "//cdn.shopify.com/s/files/1/3000/4362/t/109/assets/icon-search_black.png?v=13989404507242821394",
-              alt: "Search Icon",
-              width: "30px"
-            }
-          })
-        ]
-      ),
+    return _c("button", { staticClass: "nav-btns" }, [
+      _c("img", {
+        attrs: {
+          src:
+            "//cdn.shopify.com/s/files/1/3000/4362/t/109/assets/nav_icons_bag.svg?v=8412811641524949656",
+          alt: "Shopping Cart",
+          width: "33px"
+        }
+      }),
       _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "dropdown-menu",
-          attrs: { "aria-labelledby": "searchArea" }
-        },
-        [
-          _c("input", {
-            staticClass: "form-control mr-sm-2",
-            attrs: {
-              type: "search",
-              placeholder: "Search ...",
-              "aria-label": "Search"
-            }
-          })
-        ]
-      ),
-      _vm._v(" "),
-      _c("button", { staticClass: "nav-btns" }, [
-        _c("img", {
-          attrs: {
-            src:
-              "//cdn.shopify.com/s/files/1/3000/4362/t/109/assets/nav_icons_bag.svg?v=8412811641524949656",
-            alt: "Shopping Cart",
-            width: "33px"
-          }
-        }),
-        _vm._v(" "),
-        _c("span", [_vm._v("0")])
-      ])
+      _c("span", [_vm._v("0")])
     ])
   }
 ]
@@ -42018,7 +41968,7 @@ var staticRenderFns = [
               ]),
               _vm._v(" "),
               _c("img", {
-                staticClass: "hero-counter__eye",
+                staticClass: "hero-counter__eye ml-2 mr-1",
                 attrs: {
                   src:
                     "//cdn.shopify.com/s/files/1/3000/4362/t/109/assets/eye.png?v=10839783198912625093"
@@ -42092,28 +42042,21 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    _vm._m(0)
+    _c(
+      "div",
+      { staticClass: "text" },
+      [
+        _c("h1", [_vm._v("Aboute ECSTASE")]),
+        _vm._v(" "),
+        _c("router-link", { attrs: { to: "/about" } }, [
+          _c("a", { staticClass: "btn btn-light" }, [_vm._v("Read More")])
+        ])
+      ],
+      1
+    )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "text" }, [
-      _c("h1", [_vm._v("Aboute ECSTASE")]),
-      _vm._v(" "),
-      _c(
-        "a",
-        {
-          staticStyle: { "text-decoration": "none", color: "#fff" },
-          attrs: { href: "" }
-        },
-        [_vm._v("Read More > ")]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -42172,7 +42115,7 @@ var render = function() {
               },
               [
                 _c("img", {
-                  staticClass: "d-block w-100",
+                  staticClass: "header",
                   attrs: { src: palette.img, alt: "..." }
                 }),
                 _vm._v(" "),

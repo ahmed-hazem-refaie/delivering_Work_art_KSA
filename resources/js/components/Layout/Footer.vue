@@ -1,15 +1,15 @@
 <template>
   <footer>
-    <div class="row mb-3 pl-1">
+    <div class="row mb-3 pl-2">
         <div class="col-md-4 footer-col-1">
-            <a href="" class="footer-logo">ECSTASE</a>
+            <a href="" class="footer-logo">Ecstase</a>
             <div class="footer-info">
-                <p class="lead">ecstase BV. Westplein 12 </br>
+                <p class="lead">ecstase BV. Westplein 12 <br>
                     3016BM Rotterdam, The Netherlands</p>
             </div>
             <div class="footer-social">
-                <a href="" class="custom-social-link"><i class="fa fa-facebook"></i></a>
-                <a href="" class="custom-social-link"><i class="fa fa-instagram"></i></a>
+                <a href="" class="custom-social-link "><i class="fa fa-facebook facebook"></i></a>
+                <a href="" class="custom-social-link "><i class="fa fa-instagram instagram"></i></a>
             </div>
         </div>
         <div class="col-md-8 ">
@@ -17,7 +17,7 @@
                 <div class="col-md-6 col-lg-3 mb-2 pl-5">
                     <ul class="footer-menu">
                         <li class="footer-title">
-                            limitworks
+                            Limitworks
                         </li>
                         <li class="footer-menu-item">
                             <a href="#" class="footer-menu-item-link">Porta ac consectetur ac</a>
@@ -47,7 +47,7 @@
                 <div class="col-md-6 col-lg-3 mb-2 pl-5">
                     <ul class="footer-menu">
                         <li class="footer-title">
-                            others
+                            Others
                         </li>
                         <li class="footer-menu-item">
                             <a href="#" class="footer-menu-item-link">Porta ac consectetur ac</a>
@@ -61,7 +61,7 @@
                 </div>
                 <div class="col-md-6 col-lg-3 mb-2 pl-0">
                     <div class="footer-col footer-col-2">
-                        <h3 class="footer-title">NEWSLETTER</h3>
+                        <h3 class="footer-title">Newsletter</h3>
                         <p >Sign up for a notification email when new limited artworks are released.</p>
                         <button class="btn btn-primary" data-toggle="modal" data-target="#modalLoginForm">SUBSCRIBE</button>
                         <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

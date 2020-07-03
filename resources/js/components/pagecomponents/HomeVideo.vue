@@ -6,7 +6,9 @@
         </video>
         <div class="text">
             <h1>Aboute ECSTASE</h1>
-            <a href="" style="text-decoration: none;color:#fff">Read More > </a>
+            <router-link to="/about">
+                <a class="btn btn-light">Read More</a>
+            </router-link>
         </div>
     </header>
 </template>

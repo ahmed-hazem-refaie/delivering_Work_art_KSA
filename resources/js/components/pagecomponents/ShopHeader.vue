@@ -7,7 +7,7 @@
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item" v-for="(palette , index) in palettes" :class="{ 'active': index === 0 }" :key="palette.id">
-                <img :src="palette.img" class="d-block w-100" alt="...">
+                <img :src="palette.img" class="header" alt="...">
                     <div class="wrapper">
                         <div class="details">
                             <img src="//cdn.shopify.com/s/files/1/3000/4362/products/Cosmic_Skies_Room_Image_400x.jpg?v=1583329073" class="w-30" alt="...">
@@ -165,10 +165,16 @@ export default {
 </script>
 
 <style scoped>
-
+    .carousel-item .header{
+        width: 100%;
+        height: 640px;
+    }
     @media(max-width:991px){
         .wrapper{
             display: none;
+        }
+        .carousel-item .header{
+            height: 300px;
         }
     }
     .header_sm{
@@ -257,10 +263,15 @@ export default {
     }
     .list-group .list-group-item{
         cursor: pointer;
+        border-left: none;
+        border-right: none;
+        padding-left: 10px;
+        padding-right: 10px;
     }
 
     .carousel-control-prev{
         left: -50%;
     }
+
 
 </style>
