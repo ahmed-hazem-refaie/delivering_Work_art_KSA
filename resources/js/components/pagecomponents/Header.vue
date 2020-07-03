@@ -1,4 +1,5 @@
- <div class="hero hero-classic"> 
+<template>
+   <div class="hero hero-classic"> 
     <div class="row">
         <img class="hero-image-md" src="//cdn.shopify.com/s/files/1/3000/4362/files/desktop-hero-1_2048x.jpg?v=1592197390" alt="Fine art">
         <div class="col-md-12">
@@ -17,3 +18,14 @@
         </div>
     </div>
  </div>
+</template>
+
+<script>
+export default {
+
+}
+</script>
+
+<style>
+
+</style>
