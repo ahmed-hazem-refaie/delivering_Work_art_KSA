@@ -7,6 +7,7 @@ use App\Http\Requests\UpdatePaletteRequest;
 use App\Repositories\PaletteRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
+
 use Flash;
 use Response;
 
@@ -34,6 +35,7 @@ class PaletteController extends AppBaseController
         return view('palettes.index')
             ->with('palettes', $palettes);
     }
+
 
     /**
      * Show the form for creating a new Palette.

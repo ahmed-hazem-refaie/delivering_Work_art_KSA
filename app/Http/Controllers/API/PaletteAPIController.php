@@ -8,6 +8,7 @@ use App\Models\Palette;
 use App\Repositories\PaletteRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
+use App\Models\Artist;
 use Response;
 
 /**
@@ -34,13 +35,9 @@ class PaletteAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $palettes = $this->paletteRepository->all(
-            $request->except(['skip', 'limit']),
-            $request->get('skip'),
-            $request->get('limit')
-        );
-
-        return $this->sendResponse($palettes->toArray(), 'Palettes retrieved successfully');
+        $palettes = Palette::all();
+        $artists = Artist::all();
+        return response()->json(['palettes' => $palettes,'artists' => $artists]);
     }
 
     /**

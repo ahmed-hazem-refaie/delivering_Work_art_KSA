@@ -322,76 +322,10 @@
                   </div>
                   <div class="col-sm-12">
                       <div class="row">
-                          <div class="col-sm-4 col-md-3 col-lg-2">
+                          <div class="col-sm-4 col-md-3 col-lg-2" v-for="artist in artists" :key="artist.id">
                             <div class="about-team__people">
-                                <img src="//cdn.shopify.com/s/files/1/3000/4362/files/artists_0009_Justin-vangenderen_400x.png?v=1565176647" alt="">
-                                <h3 class="about-team__name">Justin vanGenderenr</h3>
-                            </div>
-                          </div>
-                          <div class="col-sm-4 col-md-3 col-lg-2">
-                            <div class="about-team__people">
-                                <img src="//cdn.shopify.com/s/files/1/3000/4362/files/Untitled-1_9a196293-547f-4fab-badb-dbc38cc8d9e3_400x.jpg?v=1583776217" alt="">
-                                <h3 class="about-team__name">Justin vanGenderenr</h3>
-                            </div>
-                          </div>
-                          <div class="col-sm-4 col-md-3 col-lg-2">
-                            <div class="about-team__people">
-                                <img src="//cdn.shopify.com/s/files/1/3000/4362/files/SwadeProfile1_400x.jpg?v=1584779828" alt="">
-                                <h3 class="about-team__name">Justin vanGenderenr</h3>
-                            </div>
-                          </div>
-                          <div class="col-sm-4 col-md-3 col-lg-2">
-                            <div class="about-team__people">
-                                <img src="//cdn.shopify.com/s/files/1/3000/4362/files/Icon2_400x.jpg?v=1589612708" alt="">
-                                <h3 class="about-team__name">Justin vanGenderenr</h3>
-                            </div>
-                          </div>
-                          <div class="col-sm-4 col-md-3 col-lg-2">
-                            <div class="about-team__people">
-                                <img src="//cdn.shopify.com/s/files/1/3000/4362/files/artists_0006_Daniel-Ignacio_400x.png?v=1565176694" alt="">
-                                <h3 class="about-team__name">Justin vanGenderenr</h3>
-                            </div>
-                          </div>
-                          <div class="col-sm-4 col-md-3 col-lg-2">
-                            <div class="about-team__people">
-                                <img src="//cdn.shopify.com/s/files/1/3000/4362/files/artists_0005_Dorian-Legret_400x.png?v=1565176708" alt="">
-                                <h3 class="about-team__name">Justin vanGenderenr</h3>
-                            </div>
-                          </div>
-                          <div class="col-sm-4 col-md-3 col-lg-2">
-                            <div class="about-team__people">
-                                <img src="//cdn.shopify.com/s/files/1/3000/4362/files/artists_0004_Seamless_400x.png?v=1565176729" alt="">
-                                <h3 class="about-team__name">Justin vanGenderenr</h3>
-                            </div>
-                          </div>
-                          <div class="col-sm-4 col-md-3 col-lg-2">
-                            <div class="about-team__people">
-                                <img src="//cdn.shopify.com/s/files/1/3000/4362/files/new_profile_pic_2019_smaller---Justin-Johnson1_400x.jpg?v=1573648691" alt="">
-                                <h3 class="about-team__name">Justin vanGenderenr</h3>
-                            </div>
-                          </div>
-                          <div class="col-sm-4 col-md-3 col-lg-2">
-                            <div class="about-team__people">
-                                <img src="//cdn.shopify.com/s/files/1/3000/4362/files/Untitled-2_400x.jpg?v=1578046949" alt="">
-                                <h3 class="about-team__name">Justin vanGenderenr</h3>
-                            </div>
-                          </div>
-                          <div class="col-sm-4 col-md-3 col-lg-2">
-                            <div class="about-team__people">
-                                <img src="//cdn.shopify.com/s/files/1/3000/4362/files/artists_0007_Zach-Doehler_400x.png?v=1565176681" alt="">
-                                <h3 class="about-team__name">Justin vanGenderenr</h3>
-                            </div>
-                          </div>
-                          <div class="col-sm-4 col-md-3 col-lg-2">
-                            <div class="about-team__people">
-                                <img src="//cdn.shopify.com/s/files/1/3000/4362/files/artists_0003_Mooncrab_400x.png?v=1565176751" alt="">
-                                <h3 class="about-team__name">Justin vanGenderenr</h3>
-                            </div>
-                          </div>
-                          <div class="col-sm-4 col-md-3 col-lg-2">
-                            <div class="about-team__people">
-                                <img src="//cdn.shopify.com/s/files/1/3000/4362/files/artists_0008_Rannva-Joenssen_400x.png?v=1565176666" alt="">
-                                <h3 class="about-team__name">Justin vanGenderenr</h3>
+                                <img :src="artist.artist_img" alt="" style="border-radius:28%">
+                                <h3 class="about-team__name">{{artist.name}}</h3>
                             </div>
                           </div>
                       </div>
@@ -556,6 +490,7 @@ import $ from 'jquery';
 export default {
     data(){
         return {
+            artists:[],
             mission: false,
             team:false,
             support:false,
@@ -572,6 +507,14 @@ export default {
 
             }
         }
+    },
+        created() {
+      axios.get('/api/palettes')
+      .then(response =>{
+         console.log(response.data.artists);
+          this.artists = response.data.artists
+    })  
+      .catch(error => console.log(error.response.data))
     },
       methods:{
     activate:function(el){

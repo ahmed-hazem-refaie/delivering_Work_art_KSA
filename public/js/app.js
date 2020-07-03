@@ -2620,76 +2620,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      artists: [],
       mission: false,
       team: false,
       support: false,
@@ -2704,6 +2639,16 @@ __webpack_require__.r(__webpack_exports__);
       },
       errors: {}
     };
+  },
+  created: function created() {
+    var _this = this;
+
+    axios.get('/api/palettes').then(function (response) {
+      console.log(response.data.artists);
+      _this.artists = response.data.artists;
+    })["catch"](function (error) {
+      return console.log(error.response.data);
+    });
   },
   methods: {
     activate: function activate(el) {
@@ -3154,38 +3099,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      arts: [],
+      palettes: [],
       show: false,
       size: false,
       details: false,
@@ -3195,9 +3112,9 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    axios.get('/palettes').then(function (response) {
-      //    console.log(response.data.arts);
-      _this.arts = response.data.arts;
+    axios.get('/api/palettes').then(function (response) {
+      console.log(response.data.palettes);
+      _this.palettes = response.data.palettes;
     })["catch"](function (error) {
       return console.log(error.response.data);
     });
@@ -7901,7 +7818,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n@media(max-width:991px){\n#carouselExampleCaptions[data-v-266b1872]{\n        display: none;\n}\n}\n.header_sm[data-v-266b1872]{\n    background-image: url('https://cdn.shopify.com/s/files/1/3000/4362/files/turrell_mobile_final_post_3_2048x.jpg?v=1565189502');\n    background-size: cover;\n    height: 300px;\n    background-position: center;\n    position: relative;\n    display: none;\n}\n@media(max-width:991px){\n.header_sm[data-v-266b1872]{\n        display: block;\n}\n}\n.wrapper[data-v-266b1872]{\n    position: absolute;\n    top: 12%;\n    left: 32%;\n}\n.details[data-v-266b1872]{\nwidth: 16%;\ndisplay: inline-block;\nmargin: 15px;\ncolor: #fff;\n}\n.details img[data-v-266b1872]{\n    width: 100%;\n    transition: all 1s;\n    /* height: 200px; */\n}\n.wrapper .details .content[data-v-266b1872]{\n    font-size: 14px;\n    width: 100%;\n    margin: 16px auto 0;\n    padding: 6px 5px;\n    transition: all .5s;\n    color: #fff;\n    border-radius: 10px;\n    background-color: rgba(0,0,0,.75);\n    background-repeat: no-repeat;\n    background-position: 50%;\n    background-size: 100%;\n}\n.wrapper .details .content[data-v-266b1872]:hover{\n    border: 2px solid #00a4ee;\n}\n.details:hover img[data-v-266b1872]{\n    transform: scale(1.1);\n}\n.add-cart div span[data-v-266b1872]{\n    font-size: 15px;\n    font-weight: 400;\n    line-height: 22px;\n    display: inline-block;\n    margin-right: 5px;\n    padding: 0 10px;\n    text-transform: lowercase;\n    color: #fff;\n    border-radius: 999px;\n    background-color: #000;\n}\n.add-cart p[data-v-266b1872]{\n    font-size: 20px;\n}\n.add-cart .add-button[data-v-266b1872]{\n    font-size: 20px;\n    font-weight: 700;\n    line-height: 70px;\n    display: block;\n    width: 100%;\n    margin-bottom: 10px;\n    cursor: pointer;\n    text-align: center;\n    text-decoration: none;\n    color: #fff;\n    border: none;\n    background-color: #000;\n}\n.add-cart .more[data-v-266b1872]{\n    outline: none;\n}\n.list-group .list-group-item[data-v-266b1872]{\n    cursor: pointer;\n}\n", ""]);
+exports.push([module.i, "\n@media(max-width:991px){\n.wrapper[data-v-266b1872]{\n        display: none;\n}\n}\n.header_sm[data-v-266b1872]{\n    background-image: url('https://cdn.shopify.com/s/files/1/3000/4362/files/turrell_mobile_final_post_3_2048x.jpg?v=1565189502');\n    background-size: cover;\n    height: 300px;\n    background-position: center;\n    position: relative;\n    display: none;\n}\n@media(max-width:991px){\n.header_sm[data-v-266b1872]{\n        display: none;\n}\n}\n.wrapper[data-v-266b1872]{\n    position: absolute;\n    top: 7%;\n    left: 32%;\n}\n.details[data-v-266b1872]{\nwidth: 16%;\ndisplay: inline-block;\nmargin: 15px;\ncolor: #fff;\n}\n.details img[data-v-266b1872]{\n    width: 100%;\n    transition: all 1s;\n    /* height: 200px; */\n}\n.wrapper .details .content[data-v-266b1872]{\n    font-size: 14px;\n    width: 100%;\n    margin: 16px auto 0;\n    padding: 6px 5px;\n    transition: all .5s;\n    color: #fff;\n    border-radius: 10px;\n    background-color: rgba(0,0,0,.75);\n    background-repeat: no-repeat;\n    background-position: 50%;\n    background-size: 100%;\n}\n.wrapper .details .content[data-v-266b1872]:hover{\n    border: 2px solid #00a4ee;\n}\n.details:hover img[data-v-266b1872]{\n    transform: scale(1.1);\n}\n.add-cart div span[data-v-266b1872]{\n    font-size: 15px;\n    font-weight: 400;\n    line-height: 22px;\n    display: inline-block;\n    margin-right: 5px;\n    padding: 0 10px;\n    text-transform: lowercase;\n    color: #fff;\n    border-radius: 999px;\n    background-color: #000;\n}\n.add-cart p[data-v-266b1872]{\n    font-size: 20px;\n}\n.add-cart .add-button[data-v-266b1872]{\n    font-size: 20px;\n    font-weight: 700;\n    line-height: 70px;\n    display: block;\n    width: 100%;\n    margin-bottom: 10px;\n    cursor: pointer;\n    text-align: center;\n    text-decoration: none;\n    color: #fff;\n    border: none;\n    background-color: #000;\n}\n.add-cart .more[data-v-266b1872]{\n    outline: none;\n}\n.list-group .list-group-item[data-v-266b1872]{\n    cursor: pointer;\n}\n.carousel-control-prev[data-v-266b1872]{\n    left: -50%;\n}\n\n", ""]);
 
 // exports
 
@@ -40851,7 +40768,40 @@ var render = function() {
           ),
       _vm._v(" "),
       _vm.artist
-        ? _c("div", { staticClass: " mt-5 text-center" }, [_vm._m(20)])
+        ? _c("div", { staticClass: " mt-5 text-center" }, [
+            _c("div", { staticClass: "row" }, [
+              _vm._m(20),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-12" }, [
+                _c(
+                  "div",
+                  { staticClass: "row" },
+                  _vm._l(_vm.artists, function(artist) {
+                    return _c(
+                      "div",
+                      {
+                        key: artist.id,
+                        staticClass: "col-sm-4 col-md-3 col-lg-2"
+                      },
+                      [
+                        _c("div", { staticClass: "about-team__people" }, [
+                          _c("img", {
+                            staticStyle: { "border-radius": "28%" },
+                            attrs: { src: artist.artist_img, alt: "" }
+                          }),
+                          _vm._v(" "),
+                          _c("h3", { staticClass: "about-team__name" }, [
+                            _vm._v(_vm._s(artist.name))
+                          ])
+                        ])
+                      ]
+                    )
+                  }),
+                  0
+                )
+              ])
+            ])
+          ])
         : _vm._e()
     ]),
     _vm._v(" "),
@@ -41651,209 +41601,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-sm-12" }, [
-        _c("p", { staticClass: "text-center" }, [
-          _vm._v(
-            "\n                        Behind every artwork we sell, there are ideas, visions, amazing artists and great stories.\n                        On this page we highlight some of that. If you want to learn more about an artwork you are\n                        about to buy, but the artist is not listed on this page, click on their name during shopping\n                        and you will get redirected straight to their most important social media account or website.\n                    "
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-sm-12" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-sm-4 col-md-3 col-lg-2" }, [
-            _c("div", { staticClass: "about-team__people" }, [
-              _c("img", {
-                attrs: {
-                  src:
-                    "//cdn.shopify.com/s/files/1/3000/4362/files/artists_0009_Justin-vangenderen_400x.png?v=1565176647",
-                  alt: ""
-                }
-              }),
-              _vm._v(" "),
-              _c("h3", { staticClass: "about-team__name" }, [
-                _vm._v("Justin vanGenderenr")
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-4 col-md-3 col-lg-2" }, [
-            _c("div", { staticClass: "about-team__people" }, [
-              _c("img", {
-                attrs: {
-                  src:
-                    "//cdn.shopify.com/s/files/1/3000/4362/files/Untitled-1_9a196293-547f-4fab-badb-dbc38cc8d9e3_400x.jpg?v=1583776217",
-                  alt: ""
-                }
-              }),
-              _vm._v(" "),
-              _c("h3", { staticClass: "about-team__name" }, [
-                _vm._v("Justin vanGenderenr")
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-4 col-md-3 col-lg-2" }, [
-            _c("div", { staticClass: "about-team__people" }, [
-              _c("img", {
-                attrs: {
-                  src:
-                    "//cdn.shopify.com/s/files/1/3000/4362/files/SwadeProfile1_400x.jpg?v=1584779828",
-                  alt: ""
-                }
-              }),
-              _vm._v(" "),
-              _c("h3", { staticClass: "about-team__name" }, [
-                _vm._v("Justin vanGenderenr")
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-4 col-md-3 col-lg-2" }, [
-            _c("div", { staticClass: "about-team__people" }, [
-              _c("img", {
-                attrs: {
-                  src:
-                    "//cdn.shopify.com/s/files/1/3000/4362/files/Icon2_400x.jpg?v=1589612708",
-                  alt: ""
-                }
-              }),
-              _vm._v(" "),
-              _c("h3", { staticClass: "about-team__name" }, [
-                _vm._v("Justin vanGenderenr")
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-4 col-md-3 col-lg-2" }, [
-            _c("div", { staticClass: "about-team__people" }, [
-              _c("img", {
-                attrs: {
-                  src:
-                    "//cdn.shopify.com/s/files/1/3000/4362/files/artists_0006_Daniel-Ignacio_400x.png?v=1565176694",
-                  alt: ""
-                }
-              }),
-              _vm._v(" "),
-              _c("h3", { staticClass: "about-team__name" }, [
-                _vm._v("Justin vanGenderenr")
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-4 col-md-3 col-lg-2" }, [
-            _c("div", { staticClass: "about-team__people" }, [
-              _c("img", {
-                attrs: {
-                  src:
-                    "//cdn.shopify.com/s/files/1/3000/4362/files/artists_0005_Dorian-Legret_400x.png?v=1565176708",
-                  alt: ""
-                }
-              }),
-              _vm._v(" "),
-              _c("h3", { staticClass: "about-team__name" }, [
-                _vm._v("Justin vanGenderenr")
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-4 col-md-3 col-lg-2" }, [
-            _c("div", { staticClass: "about-team__people" }, [
-              _c("img", {
-                attrs: {
-                  src:
-                    "//cdn.shopify.com/s/files/1/3000/4362/files/artists_0004_Seamless_400x.png?v=1565176729",
-                  alt: ""
-                }
-              }),
-              _vm._v(" "),
-              _c("h3", { staticClass: "about-team__name" }, [
-                _vm._v("Justin vanGenderenr")
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-4 col-md-3 col-lg-2" }, [
-            _c("div", { staticClass: "about-team__people" }, [
-              _c("img", {
-                attrs: {
-                  src:
-                    "//cdn.shopify.com/s/files/1/3000/4362/files/new_profile_pic_2019_smaller---Justin-Johnson1_400x.jpg?v=1573648691",
-                  alt: ""
-                }
-              }),
-              _vm._v(" "),
-              _c("h3", { staticClass: "about-team__name" }, [
-                _vm._v("Justin vanGenderenr")
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-4 col-md-3 col-lg-2" }, [
-            _c("div", { staticClass: "about-team__people" }, [
-              _c("img", {
-                attrs: {
-                  src:
-                    "//cdn.shopify.com/s/files/1/3000/4362/files/Untitled-2_400x.jpg?v=1578046949",
-                  alt: ""
-                }
-              }),
-              _vm._v(" "),
-              _c("h3", { staticClass: "about-team__name" }, [
-                _vm._v("Justin vanGenderenr")
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-4 col-md-3 col-lg-2" }, [
-            _c("div", { staticClass: "about-team__people" }, [
-              _c("img", {
-                attrs: {
-                  src:
-                    "//cdn.shopify.com/s/files/1/3000/4362/files/artists_0007_Zach-Doehler_400x.png?v=1565176681",
-                  alt: ""
-                }
-              }),
-              _vm._v(" "),
-              _c("h3", { staticClass: "about-team__name" }, [
-                _vm._v("Justin vanGenderenr")
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-4 col-md-3 col-lg-2" }, [
-            _c("div", { staticClass: "about-team__people" }, [
-              _c("img", {
-                attrs: {
-                  src:
-                    "//cdn.shopify.com/s/files/1/3000/4362/files/artists_0003_Mooncrab_400x.png?v=1565176751",
-                  alt: ""
-                }
-              }),
-              _vm._v(" "),
-              _c("h3", { staticClass: "about-team__name" }, [
-                _vm._v("Justin vanGenderenr")
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-4 col-md-3 col-lg-2" }, [
-            _c("div", { staticClass: "about-team__people" }, [
-              _c("img", {
-                attrs: {
-                  src:
-                    "//cdn.shopify.com/s/files/1/3000/4362/files/artists_0008_Rannva-Joenssen_400x.png?v=1565176666",
-                  alt: ""
-                }
-              }),
-              _vm._v(" "),
-              _c("h3", { staticClass: "about-team__name" }, [
-                _vm._v("Justin vanGenderenr")
-              ])
-            ])
-          ])
-        ])
+    return _c("div", { staticClass: "col-sm-12" }, [
+      _c("p", { staticClass: "text-center" }, [
+        _vm._v(
+          "\n                        Behind every artwork we sell, there are ideas, visions, amazing artists and great stories.\n                        On this page we highlight some of that. If you want to learn more about an artwork you are\n                        about to buy, but the artist is not listed on this page, click on their name during shopping\n                        and you will get redirected straight to their most important social media account or website.\n                    "
+        )
       ])
     ])
   }
@@ -42384,7 +42136,88 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("section", [
-    _vm._m(0),
+    _c(
+      "div",
+      {
+        staticClass: "carousel slide",
+        attrs: { id: "carouselExampleCaptions", "data-interval": "false" }
+      },
+      [
+        _c(
+          "ol",
+          { staticClass: "carousel-indicators" },
+          _vm._l(_vm.palettes, function(palette) {
+            return _c("li", {
+              key: palette.id,
+              staticClass: "active",
+              attrs: {
+                "data-target": "#carouselExampleCaptions",
+                "data-slide-to": "palette.id"
+              }
+            })
+          }),
+          0
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "carousel-inner" },
+          _vm._l(_vm.palettes, function(palette, index) {
+            return _c(
+              "div",
+              {
+                key: palette.id,
+                staticClass: "carousel-item",
+                class: { active: index === 0 }
+              },
+              [
+                _c("img", {
+                  staticClass: "d-block w-100",
+                  attrs: { src: palette.img, alt: "..." }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "wrapper" }, [
+                  _c("div", { staticClass: "details" }, [
+                    _c("img", {
+                      staticClass: "w-30",
+                      attrs: {
+                        src:
+                          "//cdn.shopify.com/s/files/1/3000/4362/products/Cosmic_Skies_Room_Image_400x.jpg?v=1583329073",
+                        alt: "..."
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "content" }, [
+                      _c("h6", [
+                        _vm._v("Summer | " + _vm._s(palette.L_price) + "$")
+                      ]),
+                      _vm._v(" "),
+                      _c("span", [
+                        _vm._v(
+                          _vm._s(palette.L_copies) +
+                            "/" +
+                            _vm._s(palette.L_avalible) +
+                            " left"
+                        )
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(0, true),
+                  _vm._v(" "),
+                  _vm._m(1, true),
+                  _vm._v(" "),
+                  _vm._m(2, true),
+                  _vm._v(" "),
+                  _vm._m(3, true)
+                ])
+              ]
+            )
+          }),
+          0
+        )
+      ]
+    ),
     _vm._v(" "),
     _c("div", { staticClass: "header_sm mb-2" }),
     _vm._v(" "),
@@ -42400,7 +42233,7 @@ var render = function() {
       },
       [
         _c("div", { staticClass: "row" }, [
-          _vm._m(1),
+          _vm._m(4),
           _vm._v(" "),
           _c("div", { staticClass: "col-lg-5" }, [
             _c("div", { staticClass: "add-cart p-3" }, [
@@ -42414,10 +42247,10 @@ var render = function() {
                 _vm._v("Synthetic II 70$")
               ]),
               _vm._v(" "),
-              _vm._m(2),
+              _vm._m(5),
               _vm._v(" "),
               _c("button", { staticClass: "btn add-button " }, [
-                _vm._v("70$ - Add To Cart")
+                _vm._v("5$ - Add To Cart")
               ]),
               _vm._v(" "),
               _c(
@@ -42589,206 +42422,89 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "details" }, [
+      _c("img", {
+        staticClass: "w-30",
+        attrs: {
+          src:
+            "//cdn.shopify.com/s/files/1/3000/4362/products/Castle_in_the_Sky_Room_Image_400x.jpg?v=1582895597",
+          alt: "..."
+        }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "content" }, [
+        _c("h6", [_vm._v("Summer | 50$")]),
+        _vm._v(" "),
+        _c("span", [_vm._v("25/80 left")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "details" }, [
+      _c("img", {
+        staticClass: "w-30",
+        attrs: {
+          src:
+            "//cdn.shopify.com/s/files/1/3000/4362/products/Summer_sPassingRoomImage_400x.jpg?v=1590398816",
+          alt: "..."
+        }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "content" }, [
+        _c("h6", [_vm._v("Summer | 50$")]),
+        _vm._v(" "),
+        _c("span", [_vm._v("25/80 left")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c(
-      "div",
+      "a",
       {
-        staticClass: "carousel slide",
-        attrs: { id: "carouselExampleCaptions", "data-interval": "false" }
+        staticClass: "carousel-control-next",
+        attrs: {
+          href: "#carouselExampleCaptions",
+          role: "button",
+          "data-slide": "next"
+        }
       },
       [
-        _c("ol", { staticClass: "carousel-indicators" }, [
-          _c("li", {
-            staticClass: "active",
-            attrs: {
-              "data-target": "#carouselExampleCaptions",
-              "data-slide-to": "0"
-            }
-          }),
-          _vm._v(" "),
-          _c("li", {
-            attrs: {
-              "data-target": "#carouselExampleCaptions",
-              "data-slide-to": "1"
-            }
-          }),
-          _vm._v(" "),
-          _c("li", {
-            attrs: {
-              "data-target": "#carouselExampleCaptions",
-              "data-slide-to": "2"
-            }
-          })
-        ]),
+        _c("span", {
+          staticClass: "carousel-control-next-icon",
+          attrs: { "aria-hidden": "true" }
+        }),
         _vm._v(" "),
-        _c("div", { staticClass: "carousel-inner" }, [
-          _c("div", { staticClass: "carousel-item active" }, [
-            _c("img", {
-              staticClass: "d-block w-100",
-              attrs: {
-                src:
-                  "//cdn.shopify.com/s/files/1/3000/4362/files/dusk_dekstop_final_post_2048x.jpg?v=1565183412",
-                alt: "..."
-              }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "wrapper" }, [
-              _c("div", { staticClass: "details" }, [
-                _c("img", {
-                  staticClass: "w-30",
-                  attrs: {
-                    src:
-                      "//cdn.shopify.com/s/files/1/3000/4362/products/Cosmic_Skies_Room_Image_400x.jpg?v=1583329073",
-                    alt: "..."
-                  }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "content" }, [
-                  _c("h6", [_vm._v("Summer | 50$")]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("25/80 left")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "details" }, [
-                _c("img", {
-                  staticClass: "w-30",
-                  attrs: {
-                    src:
-                      "//cdn.shopify.com/s/files/1/3000/4362/products/Castle_in_the_Sky_Room_Image_400x.jpg?v=1582895597",
-                    alt: "..."
-                  }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "content" }, [
-                  _c("h6", [_vm._v("Summer | 50$")]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("25/80 left")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "details" }, [
-                _c("img", {
-                  staticClass: "w-30",
-                  attrs: {
-                    src:
-                      "//cdn.shopify.com/s/files/1/3000/4362/products/Summer_sPassingRoomImage_400x.jpg?v=1590398816",
-                    alt: "..."
-                  }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "content" }, [
-                  _c("h6", [_vm._v("Summer | 50$")]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("25/80 left")])
-                ])
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "carousel-item " }, [
-            _c("img", {
-              staticClass: "d-block w-100",
-              attrs: {
-                src:
-                  "//cdn.shopify.com/s/files/1/3000/4362/files/dusk_dekstop_final_post_2048x.jpg?v=1565183412",
-                alt: "..."
-              }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "wrapper" }, [
-              _c("div", { staticClass: "details" }, [
-                _c("img", {
-                  staticClass: "w-30",
-                  attrs: {
-                    src:
-                      "//cdn.shopify.com/s/files/1/3000/4362/products/Cosmic_Skies_Room_Image_400x.jpg?v=1583329073",
-                    alt: "..."
-                  }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "content" }, [
-                  _c("h6", [_vm._v("Summer | 50$")]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("25/80 left")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "details" }, [
-                _c("img", {
-                  staticClass: "w-30",
-                  attrs: {
-                    src:
-                      "//cdn.shopify.com/s/files/1/3000/4362/products/Castle_in_the_Sky_Room_Image_400x.jpg?v=1582895597",
-                    alt: "..."
-                  }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "content" }, [
-                  _c("h6", [_vm._v("Summer | 50$")]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("25/80 left")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "details" }, [
-                _c("img", {
-                  staticClass: "w-30",
-                  attrs: {
-                    src:
-                      "//cdn.shopify.com/s/files/1/3000/4362/products/Summer_sPassingRoomImage_400x.jpg?v=1590398816",
-                    alt: "..."
-                  }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "content" }, [
-                  _c("h6", [_vm._v("Summer | 50$")]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("25/80 left")])
-                ])
-              ])
-            ])
-          ])
-        ]),
+        _c("span", { staticClass: "sr-only" }, [_vm._v("Next")])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "carousel-control-prev",
+        attrs: {
+          href: "#carouselExampleCaptions",
+          role: "button",
+          "data-slide": "prev"
+        }
+      },
+      [
+        _c("span", {
+          staticClass: "carousel-control-prev-icon",
+          attrs: { "aria-hidden": "true" }
+        }),
         _vm._v(" "),
-        _c(
-          "a",
-          {
-            staticClass: "carousel-control-prev",
-            attrs: {
-              href: "#carouselExampleCaptions",
-              role: "button",
-              "data-slide": "prev"
-            }
-          },
-          [
-            _c("span", {
-              staticClass: "carousel-control-prev-icon",
-              attrs: { "aria-hidden": "true" }
-            }),
-            _vm._v(" "),
-            _c("span", { staticClass: "sr-only" }, [_vm._v("Previous")])
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "a",
-          {
-            staticClass: "carousel-control-next",
-            attrs: {
-              href: "#carouselExampleCaptions",
-              role: "button",
-              "data-slide": "next"
-            }
-          },
-          [
-            _c("span", {
-              staticClass: "carousel-control-next-icon",
-              attrs: { "aria-hidden": "true" }
-            }),
-            _vm._v(" "),
-            _c("span", { staticClass: "sr-only" }, [_vm._v("Next")])
-          ]
-        )
+        _c("span", { staticClass: "sr-only" }, [_vm._v("Previous")])
       ]
     )
   },
@@ -103623,8 +103339,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/yassmin/Downloads/ArtWork/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/yassmin/Downloads/ArtWork/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/mohamed/Desktop/Project_yasmeen/ARTWORKS/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/mohamed/Desktop/Project_yasmeen/ARTWORKS/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

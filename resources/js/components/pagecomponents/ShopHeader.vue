@@ -1,20 +1,19 @@
 <template>
     <section>
+
         <div id="carouselExampleCaptions" class="carousel slide" data-interval="false">
             <ol class="carousel-indicators">
-                <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
-                <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-                <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+                <li data-target="#carouselExampleCaptions" v-for="palette in palettes" class="active" :key="palette.id" data-slide-to="palette.id" ></li>
             </ol>
             <div class="carousel-inner">
-                <div class="carousel-item active">
-                <img src="//cdn.shopify.com/s/files/1/3000/4362/files/dusk_dekstop_final_post_2048x.jpg?v=1565183412" class="d-block w-100" alt="...">
+                <div class="carousel-item" v-for="(palette , index) in palettes" :class="{ 'active': index === 0 }" :key="palette.id">
+                <img :src="palette.img" class="d-block w-100" alt="...">
                     <div class="wrapper">
                         <div class="details">
                             <img src="//cdn.shopify.com/s/files/1/3000/4362/products/Cosmic_Skies_Room_Image_400x.jpg?v=1583329073" class="w-30" alt="...">
                             <div class="content">
-                                <h6>Summer | 50$</h6>
-                                <span>25/80 left</span>
+                                <h6>Summer | {{palette.L_price}}$</h6>
+                                <span>{{palette.L_copies}}/{{palette.L_avalible}} left</span>
                             </div>
                         </div>
                         <div class="details">
@@ -31,49 +30,23 @@
                                 <span>25/80 left</span>
                             </div>
                         </div>
+
+                        <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                        <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
                     </div>
 
                 </div>
-                <div class="carousel-item ">
-                <img src="//cdn.shopify.com/s/files/1/3000/4362/files/dusk_dekstop_final_post_2048x.jpg?v=1565183412" class="d-block w-100" alt="...">
-                    <div class="wrapper">
-                        <div class="details">
-                            <img src="//cdn.shopify.com/s/files/1/3000/4362/products/Cosmic_Skies_Room_Image_400x.jpg?v=1583329073" class="w-30" alt="...">
-                            <div class="content">
-                                <h6>Summer | 50$</h6>
-                                <span>25/80 left</span>
-                            </div>
-                        </div>
-                        <div class="details">
-                            <img src="//cdn.shopify.com/s/files/1/3000/4362/products/Castle_in_the_Sky_Room_Image_400x.jpg?v=1582895597" class="w-30" alt="...">
-                            <div class="content">
-                                <h6>Summer | 50$</h6>
-                                <span>25/80 left</span>
-                            </div>
-                        </div>
-                        <div class="details">
-                            <img src="//cdn.shopify.com/s/files/1/3000/4362/products/Summer_sPassingRoomImage_400x.jpg?v=1590398816" class="w-30" alt="...">
-                            <div class="content">
-                                <h6>Summer | 50$</h6>
-                                <span>25/80 left</span>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+                
             </div>
-            <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
+
         </div>
-        <div class="header_sm mb-2">
-            
-        </div>
+        <div class="header_sm mb-2"></div>
         <div class="container mt-5" style="padding-left:0 !important ; padding-right:0 !important;max-width:80% !important">
             <div class="row">
                 <div class="col-lg-7">
@@ -103,7 +76,7 @@
                         <p>Art paper framed by a wooden frame and non-reflective glass</p>
                         <h2 class="font-weight-bold ">Synthetic II 70$</h2>
                         <div class="mb-3 mt-2"> <span>silkscreen</span></div>
-                        <button class="btn add-button ">70$ - Add To Cart</button>
+                        <button class="btn add-button ">5$ - Add To Cart</button>
                         <p>
                             <span class="font-weight-bold ">This is the Classic</span>, designed and manufactured by Ecstase,
                             the Classic is made up of a wooden frame, a passe-partout,
@@ -166,7 +139,6 @@
                 </div>
             </div>
         </div>
-
     </section>
 </template>
 
@@ -174,7 +146,7 @@
 export default {
     data(){
         return {
-            arts:[],
+            palettes:[],
             show: false,
             size:false,
             details:false,
@@ -182,10 +154,10 @@ export default {
         }
     },
     created() {
-      axios.get('/palettes')
+      axios.get('/api/palettes')
       .then(response =>{
-        //    console.log(response.data.arts);
-          this.arts = response.data.arts
+         console.log(response.data.palettes);
+          this.palettes = response.data.palettes
     })  
       .catch(error => console.log(error.response.data))
     },
@@ -195,7 +167,7 @@ export default {
 <style scoped>
 
     @media(max-width:991px){
-        #carouselExampleCaptions{
+        .wrapper{
             display: none;
         }
     }
@@ -212,12 +184,12 @@ export default {
     }
         @media(max-width:991px){
         .header_sm{
-            display: block;
+            display: none;
         }
     }
     .wrapper{
         position: absolute;
-        top: 12%;
+        top: 7%;
         left: 32%;
         
     }
@@ -286,4 +258,9 @@ export default {
     .list-group .list-group-item{
         cursor: pointer;
     }
+
+    .carousel-control-prev{
+        left: -50%;
+    }
+
 </style>
