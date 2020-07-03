@@ -9,7 +9,7 @@
                 <h3 class="hero-title">Fine art</h3>
                 <div class="hero-counter">
                     <span class="hero-counter__live">Live</span>
-                    <img class="hero-counter__eye" src="//cdn.shopify.com/s/files/1/3000/4362/t/109/assets/eye.png?v=10839783198912625093">
+                    <img class="hero-counter__eye ml-2 mr-1" src="//cdn.shopify.com/s/files/1/3000/4362/t/109/assets/eye.png?v=10839783198912625093">
                     <span id="hero-counter">408</span>
                     shoppers
                 </div>
