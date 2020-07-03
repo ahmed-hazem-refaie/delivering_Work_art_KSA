@@ -71,4 +71,19 @@ class PaletteRepository extends BaseRepository
 
         return $this->create($input);
     }
+    public function updatePalette(Request $request, $id){
+        $input = $request->all();
+        $file = $request->file('img');
+
+        if($file){
+        $originalName = $file->getClientOriginalName();
+        $extension = $file->getClientOriginalExtension();
+
+        $path = 'images/'.uniqid().'.'.$extension;
+        $img = Image::make($file);
+        $img->save(public_path($path));
+        $input['img'] = $path;
+        }
+        return $this->update($input, $id);
+    }
 }

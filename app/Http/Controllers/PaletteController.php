@@ -143,7 +143,7 @@ class PaletteController extends AppBaseController
             return redirect(route('palettes.index'));
         }
 
-        $palette = $this->paletteRepository->update($request->all(), $id);
+        $palette = $this->paletteRepository->updatePalette($request, $id);
 
         Flash::success('Palette updated successfully.');
 
