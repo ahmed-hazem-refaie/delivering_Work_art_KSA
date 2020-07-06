@@ -40916,8 +40916,12 @@ var render = function() {
                       [
                         _c("div", { staticClass: "about-team__people" }, [
                           _c("img", {
-                            staticStyle: { "border-radius": "28%" },
-                            attrs: { src: artist.artist_img, alt: "" }
+                            staticStyle: {
+                              "border-radius": "28%",
+                              width: "100px",
+                              height: "100px"
+                            },
+                            attrs: { src: artist.artist_img, alt: "artist" }
                           }),
                           _vm._v(" "),
                           _c("h3", { staticClass: "about-team__name" }, [

@@ -324,7 +324,7 @@
                       <div class="row">
                           <div class="col-sm-4 col-md-3 col-lg-2" v-for="artist in artists" :key="artist.id">
                             <div class="about-team__people">
-                                <img :src="artist.artist_img" alt="" style="border-radius:28%">
+                                <img :src="artist.artist_img" alt="artist" style="border-radius:28%;width:100px;height:100px">
                                 <h3 class="about-team__name">{{artist.name}}</h3>
                             </div>
                           </div>
