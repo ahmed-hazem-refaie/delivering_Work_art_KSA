@@ -9,6 +9,7 @@ use App\Repositories\PaletteRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use App\Models\Artist;
+use App\Models\Paletteimage;
 use Response;
 
 /**
@@ -33,11 +34,26 @@ class PaletteAPIController extends AppBaseController
      * @param Request $request
      * @return Response
      */
-    public function index(Request $request)
+    public function index()
     {
         $palettes = Palette::all();
         $artists = Artist::all();
         return response()->json(['palettes' => $palettes,'artists' => $artists]);
+       
+    }
+    public function viewMinPalettes(Request $request){
+        
+        if($request->id == "0"){
+            
+            $minPalettes = Paletteimage::limit(1)->get();
+            $palettesArtists = Palette::limit(1)->get();
+        }
+        else{
+            $minPalettes = Paletteimage::where('palatte_id',$request->id)->get();
+            $palettesArtists = Palette::where('artist_id',$request->id)->limit(3)->get();
+        }
+        
+        return response()->json(['minPalettes' => $minPalettes, 'palettesArtists' =>$palettesArtists]);
     }
 
     /**

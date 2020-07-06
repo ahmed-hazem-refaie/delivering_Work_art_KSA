@@ -3,39 +3,24 @@
 
         <div id="carouselExampleCaptions" class="carousel slide" data-interval="false">
             <ol class="carousel-indicators">
-                <li data-target="#carouselExampleCaptions" v-for="palette in palettes" class="active" :key="palette.id" data-slide-to="palette.id" ></li>
+                <li data-target="#carouselExampleCaptions" v-for="(artist , index) in artists" :class="{ 'active': index === 0 }" @click="getdta(artist.id)" :key="artist.id" data-slide-to="index" >{{artist.name}}</li>
             </ol>
             <div class="carousel-inner">
-                <div class="carousel-item" v-for="(palette , index) in palettes" :class="{ 'active': index === 0 }" :key="palette.id">
-                <img :src="palette.img" class="header" alt="...">
+                <div class="carousel-item" v-for="(artist , index) in artists" :class="{ 'active': index === 0 }" :key="artist.id">
+                <img :src="artist.cover_img" class="header" alt="...">
                     <div class="wrapper">
-                        <div class="details">
-                            <img src="//cdn.shopify.com/s/files/1/3000/4362/products/Cosmic_Skies_Room_Image_400x.jpg?v=1583329073" class="w-30" alt="...">
+                        <div class="details" v-for="palettesArtist in palettesArtists" :key="palettesArtist.id">
+                            <img :src="palettesArtist.img" alt="...">
                             <div class="content">
-                                <h6>Summer | {{palette.L_price}}$</h6>
-                                <span>{{palette.L_copies}}/{{palette.L_avalible}} left</span>
+                                <h6>Summer | {{palettesArtist.L_price}}$</h6>
+                                <span><span class="text-success">{{palettesArtist.L_copies}}</span>/{{palettesArtist.L_avalible}} left</span>
                             </div>
                         </div>
-                        <div class="details">
-                            <img src="//cdn.shopify.com/s/files/1/3000/4362/products/Castle_in_the_Sky_Room_Image_400x.jpg?v=1582895597" class="w-30" alt="...">
-                            <div class="content">
-                                <h6>Summer | 50$</h6>
-                                <span>25/80 left</span>
-                            </div>
-                        </div>
-                        <div class="details">
-                            <img src="//cdn.shopify.com/s/files/1/3000/4362/products/Summer_sPassingRoomImage_400x.jpg?v=1590398816" class="w-30" alt="...">
-                            <div class="content">
-                                <h6>Summer | 50$</h6>
-                                <span>25/80 left</span>
-                            </div>
-                        </div>
-
-                        <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                        <a class="carousel-control-next" href="#carouselExampleCaptions" @click="getdta(artist.id)" role="button" data-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="sr-only">Next</span>
                         </a>
-                        <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                        <a class="carousel-control-prev" href="#carouselExampleCaptions" @click="getdta(artist.id)" role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="sr-only">Previous</span>
                         </a>
@@ -147,20 +132,48 @@ export default {
     data(){
         return {
             palettes:[],
+            minPalettes:[],
+            artists:[],
+            palettesArtists:[],
             show: false,
             size:false,
             details:false,
-            shipping:false
+            shipping:false,
+            id:''
         }
     },
     created() {
+
       axios.get('/api/palettes')
       .then(response =>{
          console.log(response.data.palettes);
           this.palettes = response.data.palettes
-    })  
-      .catch(error => console.log(error.response.data))
+          this.artists = response.data.artists
+    }).catch(error => console.log(error.response.data));
+    axios.get("/api/view?id="+0)
+        .then(response =>{
+            console.log('yes');
+            console.log(response.data.minPalettes);
+            this.minPalettes = response.data.minPalettes
+            this.palettesArtists = response.data.palettesArtists
+        })  
+        .catch(error => console.log(error.response.data))
+        
+      
     },
+    methods:{
+        getdta($id){
+        axios.get("/api/view?id=" + $id)
+        .then(response =>{
+            console.log($id);
+            console.log(response.data.minPalettes);
+            this.minPalettes = response.data.minPalettes
+            this.palettesArtists = response.data.palettesArtists
+        })  
+        .catch(error => console.log(error.response.data))
+        }
+    }
+
 }
 </script>
 
@@ -195,7 +208,7 @@ export default {
     }
     .wrapper{
         position: absolute;
-        top: 7%;
+        top: 15%;
         left: 32%;
         
     }
@@ -208,7 +221,7 @@ export default {
     .details img{
         width: 100%;
         transition: all 1s;
-        /* height: 200px; */
+        height: 200px;
     }
     .wrapper .details .content{
         font-size: 14px;
@@ -272,6 +285,29 @@ export default {
     .carousel-control-prev{
         left: -50%;
     }
-
+.carousel-indicators li {
+    box-sizing: content-box;
+    -ms-flex: 0 1 auto;
+    flex: 0 1 auto;
+    width: 67px;
+    height: 29px;
+    margin-right: 0;
+    margin-left: 0;
+    text-indent: 0;
+    cursor: pointer;
+    color: black;
+    background: none;
+}
+.carousel-indicators{
+    bottom: -8%;
+}
+@media(max-width: 991px){
+    .carousel-indicators{
+        bottom: -15%;
+    }
+}
+.carousel-indicators .active{
+    border-bottom: 2px solid #ccc;
+}
 
 </style>
