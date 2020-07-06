@@ -7,25 +7,25 @@
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item" v-for="(artist , index) in artists" :class="{ 'active': index === 0 }" :key="artist.id">
-                <img :src="artist.cover_img" class="header" alt="...">
+                    <img :src="artist.cover_img" class="header" alt="...">
                     <div class="wrapper">
                         <div class="details" v-for="palettesArtist in palettesArtists" :key="palettesArtist.id">
-                            <img :src="palettesArtist.img" alt="...">
+                            <img :src="palettesArtist.img" class="details_img" alt="...">
                             <div class="content">
                                 <h6>Summer | {{palettesArtist.L_price}}$</h6>
                                 <span><span class="text-success">{{palettesArtist.L_copies}}</span>/{{palettesArtist.L_avalible}} left</span>
                             </div>
                         </div>
-                        <a class="carousel-control-next" href="#carouselExampleCaptions" @click="getdta(artist.id)" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                        <a class="carousel-control-prev" href="#carouselExampleCaptions" @click="getdta(artist.id)" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                    </div>
 
+                    </div>
+                    <a class="carousel-control-next" href="#carouselExampleCaptions" @click="getdta(artist.id)" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                    <a class="carousel-control-prev" href="#carouselExampleCaptions" @click="getdta(artist.id)" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
                 </div>
                 
             </div>
@@ -61,6 +61,13 @@
                         <p>Art paper framed by a wooden frame and non-reflective glass</p>
                         <h2 class="font-weight-bold ">Synthetic II 70$</h2>
                         <div class="mb-3 mt-2"> <span>silkscreen</span></div>
+                        <div>
+                            <v-btn class="mb-2 small" @click="small">S</v-btn>
+                            <v-btn class="mb-2 medium" @click="medium">M</v-btn>
+                            <v-btn class="mb-2 larg" @click="larg">L</v-btn>
+                            <h3 class="mt-4 mb-4">70x93.5cm (28x37") <strong style="float:right">21/32 left</strong></h3>
+                            <div style="clear:both"></div>
+                        </div>
                         <button class="btn add-button ">5$ - Add To Cart</button>
                         <p>
                             <span class="font-weight-bold ">This is the Classic</span>, designed and manufactured by Ecstase,
@@ -171,6 +178,15 @@ export default {
             this.palettesArtists = response.data.palettesArtists
         })  
         .catch(error => console.log(error.response.data))
+        },
+        small(){
+            $(".details_img").css({width:"78%",height:"100px"})
+        },
+        medium(){
+            $(".details_img").css({width:"88%",height:"150px"})
+        },
+        larg(){
+            $(".details_img").css({width:"100%",height:"200px"})
         }
     }
 
@@ -281,17 +297,17 @@ export default {
         padding-left: 10px;
         padding-right: 10px;
     }
-
+/* 
     .carousel-control-prev{
         left: -50%;
-    }
+    } */
 .carousel-indicators li {
     box-sizing: content-box;
     -ms-flex: 0 1 auto;
     flex: 0 1 auto;
     width: 67px;
     height: 29px;
-    margin-right: 0;
+    margin-right: 14px;
     margin-left: 0;
     text-indent: 0;
     cursor: pointer;
@@ -299,7 +315,11 @@ export default {
     background: none;
 }
 .carousel-indicators{
-    bottom: -8%;
+    bottom: -9%;
+    width: 100%;
+    background-color: #f5f0ed;
+    margin-left: 0;
+    margin-right: 0;
 }
 @media(max-width: 991px){
     .carousel-indicators{
@@ -307,7 +327,11 @@ export default {
     }
 }
 .carousel-indicators .active{
-    border-bottom: 2px solid #ccc;
+    border-bottom: 3px solid #25d1e2;
 }
-
+.small, .medium, .larg{
+    padding: 30px !important;
+    margin-right: 20px !important;
+    font-size: 20px ;
+}
 </style>

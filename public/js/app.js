@@ -3208,6 +3208,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3252,6 +3259,24 @@ __webpack_require__.r(__webpack_exports__);
         _this2.palettesArtists = response.data.palettesArtists;
       })["catch"](function (error) {
         return console.log(error.response.data);
+      });
+    },
+    small: function small() {
+      $(".details_img").css({
+        width: "78%",
+        height: "100px"
+      });
+    },
+    medium: function medium() {
+      $(".details_img").css({
+        width: "88%",
+        height: "150px"
+      });
+    },
+    larg: function larg() {
+      $(".details_img").css({
+        width: "100%",
+        height: "200px"
       });
     }
   }
@@ -7954,7 +7979,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.carousel-item .header[data-v-266b1872]{\n        width: 100%;\n        height: 640px;\n}\n@media(max-width:991px){\n.wrapper[data-v-266b1872]{\n            display: none;\n}\n.carousel-item .header[data-v-266b1872]{\n            height: 300px;\n}\n}\n.header_sm[data-v-266b1872]{\n        background-image: url('https://cdn.shopify.com/s/files/1/3000/4362/files/turrell_mobile_final_post_3_2048x.jpg?v=1565189502');\n        background-size: cover;\n        height: 300px;\n        background-position: center;\n        position: relative;\n        display: none;\n}\n@media(max-width:991px){\n.header_sm[data-v-266b1872]{\n            display: none;\n}\n}\n.wrapper[data-v-266b1872]{\n        position: absolute;\n        top: 15%;\n        left: 32%;\n}\n.details[data-v-266b1872]{\n    width: 16%;\n    display: inline-block;\n    margin: 15px;\n    color: #fff;\n}\n.details img[data-v-266b1872]{\n        width: 100%;\n        transition: all 1s;\n        height: 200px;\n}\n.wrapper .details .content[data-v-266b1872]{\n        font-size: 14px;\n        width: 100%;\n        margin: 16px auto 0;\n        padding: 6px 5px;\n        transition: all .5s;\n        color: #fff;\n        border-radius: 10px;\n        background-color: rgba(0,0,0,.75);\n        background-repeat: no-repeat;\n        background-position: 50%;\n        background-size: 100%;\n}\n.wrapper .details .content[data-v-266b1872]:hover{\n        border: 2px solid #00a4ee;\n}\n.details:hover img[data-v-266b1872]{\n        transform: scale(1.1);\n}\n.add-cart div span[data-v-266b1872]{\n        font-size: 15px;\n        font-weight: 400;\n        line-height: 22px;\n        display: inline-block;\n        margin-right: 5px;\n        padding: 0 10px;\n        text-transform: lowercase;\n        color: #fff;\n        border-radius: 999px;\n        background-color: #000;\n}\n.add-cart p[data-v-266b1872]{\n        font-size: 20px;\n}\n.add-cart .add-button[data-v-266b1872]{\n        font-size: 20px;\n        font-weight: 700;\n        line-height: 70px;\n        display: block;\n        width: 100%;\n        margin-bottom: 10px;\n        cursor: pointer;\n        text-align: center;\n        text-decoration: none;\n        color: #fff;\n        border: none;\n        background-color: #000;\n}\n.add-cart .more[data-v-266b1872]{\n        outline: none;\n}\n.list-group .list-group-item[data-v-266b1872]{\n        cursor: pointer;\n        border-left: none;\n        border-right: none;\n        padding-left: 10px;\n        padding-right: 10px;\n}\n.carousel-control-prev[data-v-266b1872]{\n        left: -50%;\n}\n.carousel-indicators li[data-v-266b1872] {\n    box-sizing: content-box;\n    flex: 0 1 auto;\n    width: 67px;\n    height: 29px;\n    margin-right: 0;\n    margin-left: 0;\n    text-indent: 0;\n    cursor: pointer;\n    color: black;\n    background: none;\n}\n.carousel-indicators[data-v-266b1872]{\n    bottom: -8%;\n}\n@media(max-width: 991px){\n.carousel-indicators[data-v-266b1872]{\n        bottom: -15%;\n}\n}\n.carousel-indicators .active[data-v-266b1872]{\n    border-bottom: 2px solid #ccc;\n}\n\n", ""]);
+exports.push([module.i, "\n.carousel-item .header[data-v-266b1872]{\n        width: 100%;\n        height: 640px;\n}\n@media(max-width:991px){\n.wrapper[data-v-266b1872]{\n            display: none;\n}\n.carousel-item .header[data-v-266b1872]{\n            height: 300px;\n}\n}\n.header_sm[data-v-266b1872]{\n        background-image: url('https://cdn.shopify.com/s/files/1/3000/4362/files/turrell_mobile_final_post_3_2048x.jpg?v=1565189502');\n        background-size: cover;\n        height: 300px;\n        background-position: center;\n        position: relative;\n        display: none;\n}\n@media(max-width:991px){\n.header_sm[data-v-266b1872]{\n            display: none;\n}\n}\n.wrapper[data-v-266b1872]{\n        position: absolute;\n        top: 15%;\n        left: 32%;\n}\n.details[data-v-266b1872]{\n    width: 16%;\n    display: inline-block;\n    margin: 15px;\n    color: #fff;\n}\n.details img[data-v-266b1872]{\n        width: 100%;\n        transition: all 1s;\n        height: 200px;\n}\n.wrapper .details .content[data-v-266b1872]{\n        font-size: 14px;\n        width: 100%;\n        margin: 16px auto 0;\n        padding: 6px 5px;\n        transition: all .5s;\n        color: #fff;\n        border-radius: 10px;\n        background-color: rgba(0,0,0,.75);\n        background-repeat: no-repeat;\n        background-position: 50%;\n        background-size: 100%;\n}\n.wrapper .details .content[data-v-266b1872]:hover{\n        border: 2px solid #00a4ee;\n}\n.details:hover img[data-v-266b1872]{\n        transform: scale(1.1);\n}\n.add-cart div span[data-v-266b1872]{\n        font-size: 15px;\n        font-weight: 400;\n        line-height: 22px;\n        display: inline-block;\n        margin-right: 5px;\n        padding: 0 10px;\n        text-transform: lowercase;\n        color: #fff;\n        border-radius: 999px;\n        background-color: #000;\n}\n.add-cart p[data-v-266b1872]{\n        font-size: 20px;\n}\n.add-cart .add-button[data-v-266b1872]{\n        font-size: 20px;\n        font-weight: 700;\n        line-height: 70px;\n        display: block;\n        width: 100%;\n        margin-bottom: 10px;\n        cursor: pointer;\n        text-align: center;\n        text-decoration: none;\n        color: #fff;\n        border: none;\n        background-color: #000;\n}\n.add-cart .more[data-v-266b1872]{\n        outline: none;\n}\n.list-group .list-group-item[data-v-266b1872]{\n        cursor: pointer;\n        border-left: none;\n        border-right: none;\n        padding-left: 10px;\n        padding-right: 10px;\n}\n/* \n    .carousel-control-prev{\n        left: -50%;\n    } */\n.carousel-indicators li[data-v-266b1872] {\n    box-sizing: content-box;\n    flex: 0 1 auto;\n    width: 67px;\n    height: 29px;\n    margin-right: 14px;\n    margin-left: 0;\n    text-indent: 0;\n    cursor: pointer;\n    color: black;\n    background: none;\n}\n.carousel-indicators[data-v-266b1872]{\n    bottom: -9%;\n    width: 100%;\n    background-color: #f5f0ed;\n    margin-left: 0;\n    margin-right: 0;\n}\n@media(max-width: 991px){\n.carousel-indicators[data-v-266b1872]{\n        bottom: -15%;\n}\n}\n.carousel-indicators .active[data-v-266b1872]{\n    border-bottom: 3px solid #25d1e2;\n}\n.small[data-v-266b1872], .medium[data-v-266b1872], .larg[data-v-266b1872]{\n    padding: 30px !important;\n    margin-right: 20px !important;\n    font-size: 20px ;\n}\n", ""]);
 
 // exports
 
@@ -42550,93 +42575,86 @@ var render = function() {
                 _c(
                   "div",
                   { staticClass: "wrapper" },
-                  [
-                    _vm._l(_vm.palettesArtists, function(palettesArtist) {
-                      return _c(
-                        "div",
-                        { key: palettesArtist.id, staticClass: "details" },
-                        [
-                          _c("img", {
-                            attrs: { src: palettesArtist.img, alt: "..." }
-                          }),
+                  _vm._l(_vm.palettesArtists, function(palettesArtist) {
+                    return _c(
+                      "div",
+                      { key: palettesArtist.id, staticClass: "details" },
+                      [
+                        _c("img", {
+                          staticClass: "details_img",
+                          attrs: { src: palettesArtist.img, alt: "..." }
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "content" }, [
+                          _c("h6", [
+                            _vm._v(
+                              "Summer | " + _vm._s(palettesArtist.L_price) + "$"
+                            )
+                          ]),
                           _vm._v(" "),
-                          _c("div", { staticClass: "content" }, [
-                            _c("h6", [
-                              _vm._v(
-                                "Summer | " +
-                                  _vm._s(palettesArtist.L_price) +
-                                  "$"
-                              )
+                          _c("span", [
+                            _c("span", { staticClass: "text-success" }, [
+                              _vm._v(_vm._s(palettesArtist.L_copies))
                             ]),
-                            _vm._v(" "),
-                            _c("span", [
-                              _c("span", { staticClass: "text-success" }, [
-                                _vm._v(_vm._s(palettesArtist.L_copies))
-                              ]),
-                              _vm._v(
-                                "/" +
-                                  _vm._s(palettesArtist.L_avalible) +
-                                  " left"
-                              )
-                            ])
+                            _vm._v(
+                              "/" + _vm._s(palettesArtist.L_avalible) + " left"
+                            )
                           ])
-                        ]
-                      )
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      {
-                        staticClass: "carousel-control-next",
-                        attrs: {
-                          href: "#carouselExampleCaptions",
-                          role: "button",
-                          "data-slide": "next"
-                        },
-                        on: {
-                          click: function($event) {
-                            return _vm.getdta(artist.id)
-                          }
-                        }
-                      },
-                      [
-                        _c("span", {
-                          staticClass: "carousel-control-next-icon",
-                          attrs: { "aria-hidden": "true" }
-                        }),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "sr-only" }, [_vm._v("Next")])
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      {
-                        staticClass: "carousel-control-prev",
-                        attrs: {
-                          href: "#carouselExampleCaptions",
-                          role: "button",
-                          "data-slide": "prev"
-                        },
-                        on: {
-                          click: function($event) {
-                            return _vm.getdta(artist.id)
-                          }
-                        }
-                      },
-                      [
-                        _c("span", {
-                          staticClass: "carousel-control-prev-icon",
-                          attrs: { "aria-hidden": "true" }
-                        }),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "sr-only" }, [
-                          _vm._v("Previous")
                         ])
                       ]
                     )
-                  ],
-                  2
+                  }),
+                  0
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "carousel-control-next",
+                    attrs: {
+                      href: "#carouselExampleCaptions",
+                      role: "button",
+                      "data-slide": "next"
+                    },
+                    on: {
+                      click: function($event) {
+                        return _vm.getdta(artist.id)
+                      }
+                    }
+                  },
+                  [
+                    _c("span", {
+                      staticClass: "carousel-control-next-icon",
+                      attrs: { "aria-hidden": "true" }
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "sr-only" }, [_vm._v("Next")])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "carousel-control-prev",
+                    attrs: {
+                      href: "#carouselExampleCaptions",
+                      role: "button",
+                      "data-slide": "prev"
+                    },
+                    on: {
+                      click: function($event) {
+                        return _vm.getdta(artist.id)
+                      }
+                    }
+                  },
+                  [
+                    _c("span", {
+                      staticClass: "carousel-control-prev-icon",
+                      attrs: { "aria-hidden": "true" }
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "sr-only" }, [_vm._v("Previous")])
+                  ]
                 )
               ]
             )
@@ -42675,6 +42693,34 @@ var render = function() {
               ]),
               _vm._v(" "),
               _vm._m(1),
+              _vm._v(" "),
+              _c(
+                "div",
+                [
+                  _c(
+                    "v-btn",
+                    { staticClass: "mb-2 small", on: { click: _vm.small } },
+                    [_vm._v("S")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    { staticClass: "mb-2 medium", on: { click: _vm.medium } },
+                    [_vm._v("M")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    { staticClass: "mb-2 larg", on: { click: _vm.larg } },
+                    [_vm._v("L")]
+                  ),
+                  _vm._v(" "),
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _c("div", { staticStyle: { clear: "both" } })
+                ],
+                1
+              ),
               _vm._v(" "),
               _c("button", { staticClass: "btn add-button " }, [
                 _vm._v("5$ - Add To Cart")
@@ -42925,6 +42971,15 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "mb-3 mt-2" }, [
       _c("span", [_vm._v("silkscreen")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h3", { staticClass: "mt-4 mb-4" }, [
+      _vm._v('70x93.5cm (28x37") '),
+      _c("strong", { staticStyle: { float: "right" } }, [_vm._v("21/32 left")])
     ])
   }
 ]
