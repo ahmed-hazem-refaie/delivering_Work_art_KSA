@@ -3262,21 +3262,36 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     small: function small() {
-      $(".details_img").css({
+      $(".active>.details_img").css({
         width: "78%",
-        height: "100px"
+        height: "130px"
+      });
+      $(".active>.content").css({
+        width: "78%",
+        margin: "7px 0"
       });
     },
     medium: function medium() {
-      $(".details_img").css({
+      $(".active>.details_img").css({
         width: "88%",
-        height: "150px"
+        height: "170px"
+      });
+      $(".active>.content").css({
+        width: "88%"
       });
     },
     larg: function larg() {
-      $(".details_img").css({
+      $(".active>.details_img").css({
         width: "100%",
         height: "200px"
+      });
+      $(".active>.content").css({
+        width: "100%"
+      });
+    },
+    addActive: function addActive() {
+      $('.details').on('click', function () {
+        $(this).addClass('active').siblings().removeClass('active');
       });
     }
   }
@@ -7979,7 +7994,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.carousel-item .header[data-v-266b1872]{\n        width: 100%;\n        height: 640px;\n}\n@media(max-width:991px){\n.wrapper[data-v-266b1872]{\n            display: none;\n}\n.carousel-item .header[data-v-266b1872]{\n            height: 300px;\n}\n}\n.header_sm[data-v-266b1872]{\n        background-image: url('https://cdn.shopify.com/s/files/1/3000/4362/files/turrell_mobile_final_post_3_2048x.jpg?v=1565189502');\n        background-size: cover;\n        height: 300px;\n        background-position: center;\n        position: relative;\n        display: none;\n}\n@media(max-width:991px){\n.header_sm[data-v-266b1872]{\n            display: none;\n}\n}\n.wrapper[data-v-266b1872]{\n        position: absolute;\n        top: 15%;\n        left: 32%;\n}\n.details[data-v-266b1872]{\n    width: 16%;\n    display: inline-block;\n    margin: 15px;\n    color: #fff;\n}\n.details img[data-v-266b1872]{\n        width: 100%;\n        transition: all 1s;\n        height: 200px;\n}\n.wrapper .details .content[data-v-266b1872]{\n        font-size: 14px;\n        width: 100%;\n        margin: 16px auto 0;\n        padding: 6px 5px;\n        transition: all .5s;\n        color: #fff;\n        border-radius: 10px;\n        background-color: rgba(0,0,0,.75);\n        background-repeat: no-repeat;\n        background-position: 50%;\n        background-size: 100%;\n}\n.wrapper .details .content[data-v-266b1872]:hover{\n        border: 2px solid #00a4ee;\n}\n.details:hover img[data-v-266b1872]{\n        transform: scale(1.1);\n}\n.add-cart div span[data-v-266b1872]{\n        font-size: 15px;\n        font-weight: 400;\n        line-height: 22px;\n        display: inline-block;\n        margin-right: 5px;\n        padding: 0 10px;\n        text-transform: lowercase;\n        color: #fff;\n        border-radius: 999px;\n        background-color: #000;\n}\n.add-cart p[data-v-266b1872]{\n        font-size: 20px;\n}\n.add-cart .add-button[data-v-266b1872]{\n        font-size: 20px;\n        font-weight: 700;\n        line-height: 70px;\n        display: block;\n        width: 100%;\n        margin-bottom: 10px;\n        cursor: pointer;\n        text-align: center;\n        text-decoration: none;\n        color: #fff;\n        border: none;\n        background-color: #000;\n}\n.add-cart .more[data-v-266b1872]{\n        outline: none;\n}\n.list-group .list-group-item[data-v-266b1872]{\n        cursor: pointer;\n        border-left: none;\n        border-right: none;\n        padding-left: 10px;\n        padding-right: 10px;\n}\n/* \n    .carousel-control-prev{\n        left: -50%;\n    } */\n.carousel-indicators li[data-v-266b1872] {\n    box-sizing: content-box;\n    flex: 0 1 auto;\n    width: 67px;\n    height: 29px;\n    margin-right: 14px;\n    margin-left: 0;\n    text-indent: 0;\n    cursor: pointer;\n    color: black;\n    background: none;\n}\n.carousel-indicators[data-v-266b1872]{\n    bottom: -9%;\n    width: 100%;\n    background-color: #f5f0ed;\n    margin-left: 0;\n    margin-right: 0;\n}\n@media(max-width: 991px){\n.carousel-indicators[data-v-266b1872]{\n        bottom: -15%;\n}\n}\n.carousel-indicators .active[data-v-266b1872]{\n    border-bottom: 3px solid #25d1e2;\n}\n.small[data-v-266b1872], .medium[data-v-266b1872], .larg[data-v-266b1872]{\n    padding: 30px !important;\n    margin-right: 20px !important;\n    font-size: 20px ;\n}\n", ""]);
+exports.push([module.i, "\n.carousel-item .header[data-v-266b1872]{\n        width: 100%;\n        height: 640px;\n}\n@media(max-width:991px){\n.wrapper[data-v-266b1872]{\n            display: none;\n}\n.carousel-item .header[data-v-266b1872]{\n            height: 300px;\n}\n}\n.header_sm[data-v-266b1872]{\n        background-image: url('https://cdn.shopify.com/s/files/1/3000/4362/files/turrell_mobile_final_post_3_2048x.jpg?v=1565189502');\n        background-size: cover;\n        height: 300px;\n        background-position: center;\n        position: relative;\n        display: none;\n}\n@media(max-width:991px){\n.header_sm[data-v-266b1872]{\n            display: none;\n}\n}\n.wrapper[data-v-266b1872]{\n        position: absolute;\n        top: 15%;\n        left: 32%;\n}\n.details[data-v-266b1872]{\n    width: 16%;\n    display: inline-block;\n    margin: 15px;\n    color: #fff;\n}\n.details img[data-v-266b1872]{\n        width: 100%;\n        transition: all 1s;\n        height: 200px;\n}\n.wrapper .details .content[data-v-266b1872]{\n        font-size: 14px;\n        width: 100%;\n        margin: 16px auto 0;\n        padding: 6px 5px;\n        transition: all .5s;\n        color: #fff;\n        border-radius: 10px;\n        background-color: rgba(0,0,0,.75);\n        background-repeat: no-repeat;\n        background-position: 50%;\n        background-size: 100%;\n}\n.wrapper .details .content[data-v-266b1872]:hover{\n        border: 2px solid #00a4ee;\n}\n.details:hover img[data-v-266b1872]{\n        transform: scale(1.1);\n}\n.add-cart div span[data-v-266b1872]{\n        font-size: 15px;\n        font-weight: 400;\n        line-height: 22px;\n        display: inline-block;\n        margin-right: 5px;\n        padding: 0 10px;\n        text-transform: lowercase;\n        color: #fff;\n        border-radius: 999px;\n        background-color: #000;\n}\n.add-cart p[data-v-266b1872]{\n        font-size: 20px;\n}\n.add-cart .add-button[data-v-266b1872]{\n        font-size: 20px;\n        font-weight: 700;\n        line-height: 70px;\n        display: block;\n        width: 100%;\n        margin-bottom: 10px;\n        cursor: pointer;\n        text-align: center;\n        text-decoration: none;\n        color: #fff;\n        border: none;\n        background-color: #000;\n}\n.add-cart .more[data-v-266b1872]{\n        outline: none;\n}\n.list-group .list-group-item[data-v-266b1872]{\n        cursor: pointer;\n        border-left: none;\n        border-right: none;\n        padding-left: 10px;\n        padding-right: 10px;\n}\n/* \n    .carousel-control-prev{\n        left: -50%;\n    } */\n.carousel-indicators li[data-v-266b1872] {\n    box-sizing: content-box;\n    flex: 0 1 auto;\n    width: 67px;\n    height: 29px;\n    margin-right: 14px;\n    margin-left: 0;\n    text-indent: 0;\n    cursor: pointer;\n    color: black;\n    background: none;\n}\n.carousel-indicators[data-v-266b1872]{\n    bottom: -9%;\n    width: 100%;\n    background-color: #f5f0ed;\n    margin-left: 0;\n    margin-right: 0;\n}\n@media(max-width: 991px){\n.carousel-indicators[data-v-266b1872]{\n        bottom: -15%;\n}\n}\n.carousel-indicators .active[data-v-266b1872]{\n    border-bottom: 3px solid #25d1e2;\n}\n.small[data-v-266b1872], .medium[data-v-266b1872], .larg[data-v-266b1872]{\n    padding: 30px !important;\n    margin-right: 20px !important;\n    font-size: 20px ;\n}\n.active>.content[data-v-266b1872] {\n    border: 2px solid #00a4ee;\n}\n.active_btn[data-v-266b1872]{\n    border: 2px solid #00a4ee;\n}\n", ""]);
 
 // exports
 
@@ -42575,10 +42590,15 @@ var render = function() {
                 _c(
                   "div",
                   { staticClass: "wrapper" },
-                  _vm._l(_vm.palettesArtists, function(palettesArtist) {
+                  _vm._l(_vm.palettesArtists, function(palettesArtist, index) {
                     return _c(
                       "div",
-                      { key: palettesArtist.id, staticClass: "details" },
+                      {
+                        key: palettesArtist.id,
+                        staticClass: "details",
+                        class: { active: index === 0 },
+                        on: { click: _vm.addActive }
+                      },
                       [
                         _c("img", {
                           staticClass: "details_img",
@@ -42699,19 +42719,28 @@ var render = function() {
                 [
                   _c(
                     "v-btn",
-                    { staticClass: "mb-2 small", on: { click: _vm.small } },
+                    {
+                      staticClass: "mb-2 size_btn small",
+                      on: { click: _vm.small }
+                    },
                     [_vm._v("S")]
                   ),
                   _vm._v(" "),
                   _c(
                     "v-btn",
-                    { staticClass: "mb-2 medium", on: { click: _vm.medium } },
+                    {
+                      staticClass: "mb-2 size_btn medium",
+                      on: { click: _vm.medium }
+                    },
                     [_vm._v("M")]
                   ),
                   _vm._v(" "),
                   _c(
                     "v-btn",
-                    { staticClass: "mb-2 larg", on: { click: _vm.larg } },
+                    {
+                      staticClass: "mb-2 size_btn larg",
+                      on: { click: _vm.larg }
+                    },
                     [_vm._v("L")]
                   ),
                   _vm._v(" "),

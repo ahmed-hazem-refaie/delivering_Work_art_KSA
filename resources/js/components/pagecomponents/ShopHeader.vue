@@ -9,9 +9,9 @@
                 <div class="carousel-item" v-for="(artist , index) in artists" :class="{ 'active': index === 0 }" :key="artist.id">
                     <img :src="artist.cover_img" class="header" alt="...">
                     <div class="wrapper">
-                        <div class="details" v-for="palettesArtist in palettesArtists" :key="palettesArtist.id">
+                        <div class="details" v-for="(palettesArtist , index) in palettesArtists" @click="addActive" :class="{ 'active': index === 0 }"  :key="palettesArtist.id">
                             <img :src="palettesArtist.img" class="details_img" alt="...">
-                            <div class="content">
+                            <div class="content" >
                                 <h6>Summer | {{palettesArtist.L_price}}$</h6>
                                 <span><span class="text-success">{{palettesArtist.L_copies}}</span>/{{palettesArtist.L_avalible}} left</span>
                             </div>
@@ -62,9 +62,9 @@
                         <h2 class="font-weight-bold ">Synthetic II 70$</h2>
                         <div class="mb-3 mt-2"> <span>silkscreen</span></div>
                         <div>
-                            <v-btn class="mb-2 small" @click="small">S</v-btn>
-                            <v-btn class="mb-2 medium" @click="medium">M</v-btn>
-                            <v-btn class="mb-2 larg" @click="larg">L</v-btn>
+                            <v-btn class="mb-2 size_btn small" @click="small">S</v-btn>
+                            <v-btn class="mb-2 size_btn medium" @click="medium">M</v-btn>
+                            <v-btn class="mb-2 size_btn larg" @click="larg">L</v-btn>
                             <h3 class="mt-4 mb-4">70x93.5cm (28x37") <strong style="float:right">21/32 left</strong></h3>
                             <div style="clear:both"></div>
                         </div>
@@ -180,14 +180,24 @@ export default {
         .catch(error => console.log(error.response.data))
         },
         small(){
-            $(".details_img").css({width:"78%",height:"100px"})
+            $(".active>.details_img").css({width:"78%",height:"130px"})
+            $(".active>.content").css({width:"78%",margin:"7px 0"})
         },
         medium(){
-            $(".details_img").css({width:"88%",height:"150px"})
+            $(".active>.details_img").css({width:"88%",height:"170px"})
+            $(".active>.content").css({width:"88%"})
         },
         larg(){
-            $(".details_img").css({width:"100%",height:"200px"})
+            $(".active>.details_img").css({width:"100%",height:"200px"})
+            $(".active>.content").css({width:"100%"})
+        },
+        addActive(){
+            $('.details').on('click', function () {
+                
+                $(this).addClass('active').siblings().removeClass('active');
+            });
         }
+
     }
 
 }
@@ -333,5 +343,11 @@ export default {
     padding: 30px !important;
     margin-right: 20px !important;
     font-size: 20px ;
+}
+.active>.content {
+    border: 2px solid #00a4ee;
+}
+.active_btn{
+    border: 2px solid #00a4ee;
 }
 </style>
