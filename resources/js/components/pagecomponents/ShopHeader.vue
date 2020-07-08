@@ -3,13 +3,13 @@
 
         <div id="carouselExampleCaptions" class="carousel slide" data-interval="false">
             <ol class="carousel-indicators">
-                <li data-target="#carouselExampleCaptions" v-for="(artist , index) in artists" :class="{ 'active': index === 0 }" @click="getdta(artist.id)" :key="artist.id" data-slide-to="index" >{{artist.name}}</li>
+                <li data-target="#carouselExampleCaptions" v-for="(artist , index) in artists" :class="{ 'active': index === 0 }" @click="getdata(artist.id)" :key="artist.id" data-slide-to="artist.id" >{{artist.name}}</li>
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item" v-for="(artist , index) in artists" :class="{ 'active': index === 0 }" :key="artist.id">
                     <img :src="artist.cover_img" class="header" alt="...">
                     <div class="wrapper">
-                        <div class="details" v-for="(palettesArtist , index) in palettesArtists" @click="addActive" :class="{ 'active': index === 0 }"  :key="palettesArtist.id">
+                        <div class="details" v-for="(palettesArtist , index) in palettesArtists" @click="addActive(palettesArtist.id)" :class="{ 'active': index === 0 }"  :key="palettesArtist.id">
                             <img :src="palettesArtist.img" class="details_img" alt="...">
                             <div class="content" >
                                 <h6>Summer | {{palettesArtist.L_price}}$</h6>
@@ -18,11 +18,11 @@
                         </div>
 
                     </div>
-                    <a class="carousel-control-next" href="#carouselExampleCaptions" @click="getdta(artist.id)" role="button" data-slide="next">
+                    <a class="carousel-control-next" href="#carouselExampleCaptions" @click="getdata(artist.id)" role="button" data-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="sr-only">Next</span>
                     </a>
-                    <a class="carousel-control-prev" href="#carouselExampleCaptions" @click="getdta(artist.id)" role="button" data-slide="prev">
+                    <a class="carousel-control-prev" href="#carouselExampleCaptions" @click="getdata(artist.id)" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="sr-only">Previous</span>
                     </a>
@@ -32,34 +32,19 @@
 
         </div>
         <div class="header_sm mb-2"></div>
-        <div class="container mt-5" style="padding-left:0 !important ; padding-right:0 !important;max-width:80% !important">
+        <div class="container mt-5" style="padding-left:0 !important ; padding-right:0 !important;max-width:80% !important" >
             <div class="row">
-                <div class="col-lg-7">
+                <div class="col-lg-7" >
                     <div class="row">
-                        <div class="col-md-6 mb-3 pl-1">
-                            <img src="//cdn.shopify.com/s/files/1/3000/4362/products/Ehmiyat_Walltones_Product_Image_1.jpg?v=1581337922" class="w-100" alt="...">
-                        </div>
-                        <div class="col-md-6 mb-3 pl-1">
-                            <img src="//cdn.shopify.com/s/files/1/3000/4362/products/Sight_of_Hope_Walltones_Product_Image_1.jpg?v=1577728942" class="w-100" alt="...">            
-                        </div>
-                        <div class="col-md-6 mb-3 pl-1">
-                            <img src="//cdn.shopify.com/s/files/1/3000/4362/products/Summer_sPassingWalltones_Product_Image_1.jpg?v=1590398788" class="w-100" alt="...">
-                        </div>
-                        <div class="col-md-6 mb-3 pl-1">
-                            <img src="//cdn.shopify.com/s/files/1/3000/4362/products/RodeoDriveProductimage1.jpg?v=1586245746" class="w-100" alt="...">            
-                        </div>
-                        <div class="col-md-6 mb-3 pl-1">
-                            <img src="//cdn.shopify.com/s/files/1/3000/4362/products/AloneWalltones_Product_Image_1.jpg?v=1587117364" class="w-100" alt="...">
-                        </div>
-                        <div class="col-md-6 mb-3 pl-1">
-                            <img src="//cdn.shopify.com/s/files/1/3000/4362/products/SaturnWalltones_Product_Image_1.jpg?v=1588159688" class="w-100" alt="...">            
+                        <div class="col-md-6 mb-3 pl-1" v-for="minPalette in minPalettes" :key="minPalette.id" >
+                            <img :src="minPalette.img" style="height:400px" class="w-100" alt="...">
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-5">
                     <div class="add-cart p-3">
                         <p>Art paper framed by a wooden frame and non-reflective glass</p>
-                        <h2 class="font-weight-bold ">Synthetic II 70$</h2>
+                        <h2 class="font-weight-bold ">Synthetic II $ </h2>
                         <div class="mb-3 mt-2"> <span>silkscreen</span></div>
                         <div>
                             <v-btn class="mb-2 size_btn small" @click="small">S</v-btn>
@@ -131,11 +116,18 @@
                 </div>
             </div>
         </div>
+        <appvideo></appvideo>
+        <review></review>
+        <appslider :data="palettes"></appslider>
     </section>
 </template>
 
 <script>
+import appslider from '../pagecomponents/ShopSlider';
+import appvideo from '../pagecomponents/ShopVideo';
+import review from '../pagecomponents/Review';
 export default {
+    components:{appslider,appvideo,review},
     data(){
         return {
             palettes:[],
@@ -146,35 +138,35 @@ export default {
             size:false,
             details:false,
             shipping:false,
-            id:''
+            id:'',
+            minPalette_id:'',
         }
     },
     created() {
 
       axios.get('/api/palettes')
-      .then(response =>{
-         console.log(response.data.palettes);
-          this.palettes = response.data.palettes
+      .then(response =>
           this.artists = response.data.artists
-    }).catch(error => console.log(error.response.data));
-    axios.get("/api/view?id="+0)
+    ).catch(error => console.log(error.response.data));
+    axios.get("/api/view?id="+ 1)
         .then(response =>{
-            console.log('yes');
-            console.log(response.data.minPalettes);
-            this.minPalettes = response.data.minPalettes
+            this.palettes = response.data.palettes
             this.palettesArtists = response.data.palettesArtists
         })  
         .catch(error => console.log(error.response.data))
+        axios.get("/api/viewMinPalettes?id=" + 2)
+            .then(response =>{
+                this.minPalettes = response.data.minPalettes
+                })  
+            .catch(error => console.log(error.response.data))
         
       
     },
     methods:{
-        getdta($id){
+        getdata($id){
         axios.get("/api/view?id=" + $id)
         .then(response =>{
-            console.log($id);
-            console.log(response.data.minPalettes);
-            this.minPalettes = response.data.minPalettes
+            this.palettes = response.data.palettes
             this.palettesArtists = response.data.palettesArtists
         })  
         .catch(error => console.log(error.response.data))
@@ -191,7 +183,12 @@ export default {
             $(".active>.details_img").css({width:"100%",height:"200px"})
             $(".active>.content").css({width:"100%"})
         },
-        addActive(){
+        addActive($minPalette_id){
+                axios.get("/api/viewMinPalettes?id=" + $minPalette_id)
+                .then(response =>{
+                    this.minPalettes = response.data.minPalettes
+                    })  
+                .catch(error => console.log(error.response.data))
             $('.details').on('click', function () {
                 
                 $(this).addClass('active').siblings().removeClass('active');
@@ -243,6 +240,7 @@ export default {
     display: inline-block;
     margin: 15px;
     color: #fff;
+    cursor: pointer;
     }
     .details img{
         width: 100%;

@@ -1,5 +1,5 @@
 <template>
-    <div class="container mt-4" style="max-width:1462px">
+    <div class="container mt-5" style="max-width:1462px">
         <h2>Customer Reviews</h2>
         <hr>
         <div class="rating">
