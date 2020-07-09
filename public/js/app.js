@@ -3312,25 +3312,29 @@ __webpack_require__.r(__webpack_exports__);
       details: false,
       shipping: false,
       id: '',
-      minPalette_id: ''
+      minPalette_id: '',
+      first: null,
+      firstpalettesArtists: null
     };
   },
   created: function created() {
     var _this = this;
 
     axios.get('/api/palettes').then(function (response) {
-      return _this.artists = response.data.artists;
-    })["catch"](function (error) {
-      return console.log(error.response.data);
-    });
-    axios.get("/api/view?id=" + 1).then(function (response) {
-      _this.palettes = response.data.palettes;
-      _this.palettesArtists = response.data.palettesArtists;
-    })["catch"](function (error) {
-      return console.log(error.response.data);
-    });
-    axios.get("/api/viewMinPalettes?id=" + 2).then(function (response) {
-      _this.minPalettes = response.data.minPalettes;
+      _this.artists = response.data.artists;
+      _this.first = response.data.artists[0].id;
+      axios.get("/api/view?id=" + _this.first).then(function (response) {
+        _this.palettes = response.data.palettes;
+        _this.palettesArtists = response.data.palettesArtists;
+        _this.firstpalettesArtists = response.data.palettesArtists[0].id;
+        axios.get("/api/viewMinPalettes?id=" + _this.firstpalettesArtists).then(function (response) {
+          _this.minPalettes = response.data.minPalettes;
+        })["catch"](function (error) {
+          return console.log(error.response.data);
+        });
+      })["catch"](function (error) {
+        return console.log(error.response.data);
+      });
     })["catch"](function (error) {
       return console.log(error.response.data);
     });

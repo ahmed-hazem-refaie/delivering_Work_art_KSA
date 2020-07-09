@@ -140,25 +140,32 @@ export default {
             shipping:false,
             id:'',
             minPalette_id:'',
+            first:null,
+            firstpalettesArtists:null,
         }
     },
     created() {
 
       axios.get('/api/palettes')
-      .then(response =>
+      .then(response =>{
           this.artists = response.data.artists
-    ).catch(error => console.log(error.response.data));
-    axios.get("/api/view?id="+ 1)
+          this.first = response.data.artists[0].id
+        axios.get("/api/view?id="+ this.first)
         .then(response =>{
             this.palettes = response.data.palettes
             this.palettesArtists = response.data.palettesArtists
-        })  
-        .catch(error => console.log(error.response.data))
-        axios.get("/api/viewMinPalettes?id=" + 2)
+            this.firstpalettesArtists = response.data.palettesArtists[0].id
+            axios.get("/api/viewMinPalettes?id=" + this.firstpalettesArtists)
             .then(response =>{
                 this.minPalettes = response.data.minPalettes
                 })  
             .catch(error => console.log(error.response.data))
+        })  
+        .catch(error => console.log(error.response.data))          
+      }
+
+    ).catch(error => console.log(error.response.data));
+
         
       
     },
