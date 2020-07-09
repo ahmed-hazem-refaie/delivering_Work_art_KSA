@@ -47,10 +47,12 @@
                         <h2 class="font-weight-bold ">Synthetic II $ </h2>
                         <div class="mb-3 mt-2"> <span>silkscreen</span></div>
                         <div>
-                            <v-btn class="mb-2 size_btn small" @click="small">S</v-btn>
-                            <v-btn class="mb-2 size_btn medium" @click="medium">M</v-btn>
-                            <v-btn class="mb-2 size_btn larg" @click="larg">L</v-btn>
-                            <h3 class="mt-4 mb-4">70x93.5cm (28x37") <strong style="float:right">21/32 left</strong></h3>
+                            <v-btn class="mb-2 size_btn small"  :class="{ active_btn : active_el == 1 }"  @click="small(1)">S</v-btn>
+                            <v-btn class="mb-2 size_btn medium" :class="{ active_btn : active_el == 2 }" @click="medium(2)">M</v-btn>
+                            <v-btn class="mb-2 size_btn larg" :class="{ active_btn : active_el == 3 }" @click="larg(3)">L</v-btn>
+                            <h3 class="mt-4 mb-4" v-if="active_el==1">70x93.5cm (28x37") <strong style="float:right">3/32 left</strong></h3>
+                            <h3 class="mt-4 mb-4" v-if="active_el==2">70x93.5cm (28x37") <strong style="float:right">4/32 left</strong></h3>
+                            <h3 class="mt-4 mb-4" v-if="active_el==3">70x93.5cm (28x37") <strong style="float:right">21/32 left</strong></h3>
                             <div style="clear:both"></div>
                         </div>
                         <button class="btn add-button ">5$ - Add To Cart</button>
@@ -142,7 +144,8 @@ export default {
             minPalette_id:'',
             first:null,
             firstpalettesArtists:null,
-            s:null
+            firstminPalettes:null,
+            active_el:3,
         }
     },
     created() {
@@ -177,12 +180,12 @@ export default {
             this.palettes = response.data.palettes
             this.palettesArtists = response.data.palettesArtists
             if(response.data.palettesArtists.length>0){
-                this.s = response.data.palettesArtists[0].id
+                this.firstminPalettes = response.data.palettesArtists[0].id
             } else {
-                this.s = null
+                this.firstminPalettes = null
             }
             
-            axios.get("/api/viewMinPalettes?id=" + this.s)
+            axios.get("/api/viewMinPalettes?id=" + this.firstminPalettes)
                 .then(response =>{
                     this.minPalettes = response.data.minPalettes
                     })  
@@ -190,15 +193,19 @@ export default {
         })  
         .catch(error => console.log(error.response.data))
         },
-        small(){
+        small(el){
+            this.active_el = el;
             $(".active>.details_img").css({width:"78%",height:"130px"})
             $(".active>.content").css({width:"78%",margin:"7px 0"})
+
         },
-        medium(){
+        medium(el){
+            this.active_el = el;
             $(".active>.details_img").css({width:"88%",height:"170px"})
             $(".active>.content").css({width:"88%"})
         },
-        larg(){
+        larg(el){
+            this.active_el = el;
             $(".active>.details_img").css({width:"100%",height:"200px"})
             $(".active>.content").css({width:"100%"})
         },

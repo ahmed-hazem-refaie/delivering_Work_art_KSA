@@ -3292,6 +3292,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -3315,7 +3317,8 @@ __webpack_require__.r(__webpack_exports__);
       minPalette_id: '',
       first: null,
       firstpalettesArtists: null,
-      s: null
+      firstminPalettes: null,
+      active_el: 3
     };
   },
   created: function created() {
@@ -3349,12 +3352,12 @@ __webpack_require__.r(__webpack_exports__);
         _this2.palettesArtists = response.data.palettesArtists;
 
         if (response.data.palettesArtists.length > 0) {
-          _this2.s = response.data.palettesArtists[0].id;
+          _this2.firstminPalettes = response.data.palettesArtists[0].id;
         } else {
-          _this2.s = null;
+          _this2.firstminPalettes = null;
         }
 
-        axios.get("/api/viewMinPalettes?id=" + _this2.s).then(function (response) {
+        axios.get("/api/viewMinPalettes?id=" + _this2.firstminPalettes).then(function (response) {
           _this2.minPalettes = response.data.minPalettes;
         })["catch"](function (error) {
           return console.log(error.response.data);
@@ -3363,7 +3366,8 @@ __webpack_require__.r(__webpack_exports__);
         return console.log(error.response.data);
       });
     },
-    small: function small() {
+    small: function small(el) {
+      this.active_el = el;
       $(".active>.details_img").css({
         width: "78%",
         height: "130px"
@@ -3373,7 +3377,8 @@ __webpack_require__.r(__webpack_exports__);
         margin: "7px 0"
       });
     },
-    medium: function medium() {
+    medium: function medium(el) {
+      this.active_el = el;
       $(".active>.details_img").css({
         width: "88%",
         height: "170px"
@@ -3382,7 +3387,8 @@ __webpack_require__.r(__webpack_exports__);
         width: "88%"
       });
     },
-    larg: function larg() {
+    larg: function larg(el) {
+      this.active_el = el;
       $(".active>.details_img").css({
         width: "100%",
         height: "200px"
@@ -43317,7 +43323,12 @@ var render = function() {
                       "v-btn",
                       {
                         staticClass: "mb-2 size_btn small",
-                        on: { click: _vm.small }
+                        class: { active_btn: _vm.active_el == 1 },
+                        on: {
+                          click: function($event) {
+                            return _vm.small(1)
+                          }
+                        }
                       },
                       [_vm._v("S")]
                     ),
@@ -43326,7 +43337,12 @@ var render = function() {
                       "v-btn",
                       {
                         staticClass: "mb-2 size_btn medium",
-                        on: { click: _vm.medium }
+                        class: { active_btn: _vm.active_el == 2 },
+                        on: {
+                          click: function($event) {
+                            return _vm.medium(2)
+                          }
+                        }
                       },
                       [_vm._v("M")]
                     ),
@@ -43335,12 +43351,42 @@ var render = function() {
                       "v-btn",
                       {
                         staticClass: "mb-2 size_btn larg",
-                        on: { click: _vm.larg }
+                        class: { active_btn: _vm.active_el == 3 },
+                        on: {
+                          click: function($event) {
+                            return _vm.larg(3)
+                          }
+                        }
                       },
                       [_vm._v("L")]
                     ),
                     _vm._v(" "),
-                    _vm._m(1),
+                    _vm.active_el == 1
+                      ? _c("h3", { staticClass: "mt-4 mb-4" }, [
+                          _vm._v('70x93.5cm (28x37") '),
+                          _c("strong", { staticStyle: { float: "right" } }, [
+                            _vm._v("3/32 left")
+                          ])
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.active_el == 2
+                      ? _c("h3", { staticClass: "mt-4 mb-4" }, [
+                          _vm._v('70x93.5cm (28x37") '),
+                          _c("strong", { staticStyle: { float: "right" } }, [
+                            _vm._v("4/32 left")
+                          ])
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.active_el == 3
+                      ? _c("h3", { staticClass: "mt-4 mb-4" }, [
+                          _vm._v('70x93.5cm (28x37") '),
+                          _c("strong", { staticStyle: { float: "right" } }, [
+                            _vm._v("21/32 left")
+                          ])
+                        ])
+                      : _vm._e(),
                     _vm._v(" "),
                     _c("div", { staticStyle: { clear: "both" } })
                   ],
@@ -43530,15 +43576,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "mb-3 mt-2" }, [
       _c("span", [_vm._v("silkscreen")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("h3", { staticClass: "mt-4 mb-4" }, [
-      _vm._v('70x93.5cm (28x37") '),
-      _c("strong", { staticStyle: { float: "right" } }, [_vm._v("21/32 left")])
     ])
   }
 ]
