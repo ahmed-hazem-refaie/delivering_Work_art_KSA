@@ -142,6 +142,7 @@ export default {
             minPalette_id:'',
             first:null,
             firstpalettesArtists:null,
+            s:null
         }
     },
     created() {
@@ -175,6 +176,17 @@ export default {
         .then(response =>{
             this.palettes = response.data.palettes
             this.palettesArtists = response.data.palettesArtists
+            if(response.data.palettesArtists.length>0){
+                this.s = response.data.palettesArtists[0].id
+            } else {
+                this.s = null
+            }
+            
+            axios.get("/api/viewMinPalettes?id=" + this.s)
+                .then(response =>{
+                    this.minPalettes = response.data.minPalettes
+                    })  
+                .catch(error => console.log(error.response.data))
         })  
         .catch(error => console.log(error.response.data))
         },

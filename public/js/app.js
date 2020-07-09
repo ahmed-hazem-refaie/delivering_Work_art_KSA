@@ -3314,7 +3314,8 @@ __webpack_require__.r(__webpack_exports__);
       id: '',
       minPalette_id: '',
       first: null,
-      firstpalettesArtists: null
+      firstpalettesArtists: null,
+      s: null
     };
   },
   created: function created() {
@@ -3346,6 +3347,18 @@ __webpack_require__.r(__webpack_exports__);
       axios.get("/api/view?id=" + $id).then(function (response) {
         _this2.palettes = response.data.palettes;
         _this2.palettesArtists = response.data.palettesArtists;
+
+        if (response.data.palettesArtists.length > 0) {
+          _this2.s = response.data.palettesArtists[0].id;
+        } else {
+          _this2.s = null;
+        }
+
+        axios.get("/api/viewMinPalettes?id=" + _this2.s).then(function (response) {
+          _this2.minPalettes = response.data.minPalettes;
+        })["catch"](function (error) {
+          return console.log(error.response.data);
+        });
       })["catch"](function (error) {
         return console.log(error.response.data);
       });
