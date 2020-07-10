@@ -75022,7 +75022,11 @@ var __assign = undefined && undefined.__assign || function () {
       type: [Number, String]
     },
     inset: Boolean,
-    padless: Boolean
+    padless: Boolean,
+    tag: {
+      type: String,
+      default: 'footer'
+    }
   },
   computed: {
     applicationProperty: function applicationProperty() {
@@ -75073,7 +75077,7 @@ var __assign = undefined && undefined.__assign || function () {
       class: this.classes,
       style: this.styles
     });
-    return h('footer', data, this.$slots.default);
+    return h(this.tag, data, this.$slots.default);
   }
 }));
 
@@ -92868,7 +92872,7 @@ function () {
 
   Vuetify.install = _install__WEBPACK_IMPORTED_MODULE_0__["install"];
   Vuetify.installed = false;
-  Vuetify.version = "2.3.3";
+  Vuetify.version = "2.3.4";
   Vuetify.config = {
     silent: false
   };
@@ -104693,8 +104697,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/mohamed/Desktop/Project_yasmeen/ARTWORKS/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/mohamed/Desktop/Project_yasmeen/ARTWORKS/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/macbookair/Desktop/yassmin/ARTWORKS/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/macbookair/Desktop/yassmin/ARTWORKS/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
