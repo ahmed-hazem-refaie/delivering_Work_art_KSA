@@ -340,27 +340,29 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="artists mt-4">
-      <h3 class="title" @click="artist = !artist" v-if="!artist">Artists +</h3>
-      <h3 class="title" @click="artist = !artist" v-else>Artists -</h3>
-      <div class="mt-5 text-center" v-if="artist">
-        <div class="row">
-          <div class="col-sm-12">
-            <p class="text-center">
-              Behind every artwork we sell, there are ideas, visions, amazing artists and great stories.
-              On this page we highlight some of that. If you want to learn more about an artwork you are
-              about to buy, but the artist is not listed on this page, click on their name during shopping
-              and you will get redirected straight to their most important social media account or website.
-            </p>
-          </div>
-          <div class="col-sm-12">
-            <div class="row">
-              <div class="col-sm-4 col-md-3 col-lg-2" v-for="artist in artists" :key="artist.id">
-                <div class="about-team__people">
-                  <img :src="artist.artist_img" alt style="border-radius:28%" />
-                  <h3 class="about-team__name">{{artist.name}}</h3>
-                </div>
+      <div class="artists mt-4">
+          <h3 class="title" @click="artist = !artist" v-if="!artist">Artists +</h3>
+          <h3 class="title" @click="artist = !artist" v-else>Artists -</h3>
+          <div class=" mt-5 text-center" v-if="artist">
+              <div class="row">
+                  <div class="col-sm-12">
+                      <p class="text-center">
+                          Behind every artwork we sell, there are ideas, visions, amazing artists and great stories.
+                          On this page we highlight some of that. If you want to learn more about an artwork you are
+                          about to buy, but the artist is not listed on this page, click on their name during shopping
+                          and you will get redirected straight to their most important social media account or website.
+                      </p>
+                  </div>
+                  <div class="col-sm-12">
+                      <div class="row">
+                          <div class="col-sm-4 col-md-3 col-lg-2" v-for="artist in artists" :key="artist.id">
+                            <div class="about-team__people">
+                                <img :src="artist.artist_img" alt="artist" style="border-radius:28%;width:100px;height:100px">
+                                <h3 class="about-team__name">{{artist.name}}</h3>
+                            </div>
+                          </div>
+                      </div>
+                  </div>
               </div>
             </div>
           </div>

@@ -9,6 +9,7 @@ use App\Repositories\PaletteRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use App\Models\Artist;
+use App\Models\Paletteimage;
 use Response;
 
 /**
@@ -33,11 +34,24 @@ class PaletteAPIController extends AppBaseController
      * @param Request $request
      * @return Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $palettes = Palette::all();
         $artists = Artist::all();
-        return response()->json(['palettes' => $palettes,'artists' => $artists]);
+        return response()->json(['artists' => $artists]);
+       
+    }
+    public function Palettes(Request $request){
+        
+
+        $palettesArtists = Palette::where('artist_id',$request->id)->limit(3)->get();
+        $palettes = Palette::where('artist_id',$request->id)->limit(6)->get();     
+        return response()->json([ 'palettesArtists' =>$palettesArtists,'palettes' =>$palettes]);
+    }
+    public function viewMinPalettes(Request $request){
+        
+
+        $minPalettes = Paletteimage::where('palatte_id',$request->id)->limit(6)->get();    
+        return response()->json(['minPalettes' => $minPalettes]);
     }
 
     /**
@@ -65,16 +79,10 @@ class PaletteAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        /** @var Palette $palette */
-        $palette = $this->paletteRepository->find($id);
-
-        if (empty($palette)) {
-            return $this->sendError('Palette not found');
-        }
-
-        return $this->sendResponse($palette->toArray(), 'Palette retrieved successfully');
+        $palettes = Palette::where('artist_id',$request->id)->get();     
+        return response()->json(['palettes' =>$palettes]);        
     }
 
     /**

@@ -3,79 +3,56 @@
 
         <div id="carouselExampleCaptions" class="carousel slide" data-interval="false">
             <ol class="carousel-indicators">
-                <li data-target="#carouselExampleCaptions" v-for="palette in palettes" class="active" :key="palette.id" data-slide-to="palette.id" ></li>
+                <li data-target="#carouselExampleCaptions" v-for="(artist , index) in artists" :class="{ 'active': index === 0 }" @click="getdata(artist.id)" :key="artist.id" data-slide-to="artist.id" >{{artist.name}}</li>
             </ol>
             <div class="carousel-inner">
-                <div class="carousel-item" v-for="(palette , index) in palettes" :class="{ 'active': index === 0 }" :key="palette.id">
-                <img :src="palette.img" class="header" alt="...">
+                <div class="carousel-item" v-for="(artist , index) in artists" :class="{ 'active': index === 0 }" :key="artist.id">
+                    <img :src="artist.cover_img" class="header" alt="...">
                     <div class="wrapper">
-                        <div class="details">
-                            <img src="//cdn.shopify.com/s/files/1/3000/4362/products/Cosmic_Skies_Room_Image_400x.jpg?v=1583329073" class="w-30" alt="...">
-                            <div class="content">
-                                <h6>Summer | {{palette.L_price}}$</h6>
-                                <span>{{palette.L_copies}}/{{palette.L_avalible}} left</span>
-                            </div>
-                        </div>
-                        <div class="details">
-                            <img src="//cdn.shopify.com/s/files/1/3000/4362/products/Castle_in_the_Sky_Room_Image_400x.jpg?v=1582895597" class="w-30" alt="...">
-                            <div class="content">
-                                <h6>Summer | 50$</h6>
-                                <span>25/80 left</span>
-                            </div>
-                        </div>
-                        <div class="details">
-                            <img src="//cdn.shopify.com/s/files/1/3000/4362/products/Summer_sPassingRoomImage_400x.jpg?v=1590398816" class="w-30" alt="...">
-                            <div class="content">
-                                <h6>Summer | 50$</h6>
-                                <span>25/80 left</span>
+                        <div class="details" v-for="(palettesArtist , index) in palettesArtists" @click="addActive(palettesArtist.id)" :class="{ 'active': index === 0 }"  :key="palettesArtist.id">
+                            <img :src="palettesArtist.img" class="details_img" alt="...">
+                            <div class="content" >
+                                <h6>Summer | {{palettesArtist.L_price}}$</h6>
+                                <span><span class="text-success">{{palettesArtist.L_copies}}</span>/{{palettesArtist.L_avalible}} left</span>
                             </div>
                         </div>
 
-                        <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                        <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
                     </div>
-
+                    <a class="carousel-control-next" href="#carouselExampleCaptions" @click="getdata(artist.id)" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                    <a class="carousel-control-prev" href="#carouselExampleCaptions" @click="getdata(artist.id)" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
                 </div>
                 
             </div>
 
         </div>
         <div class="header_sm mb-2"></div>
-        <div class="container mt-5" style="padding-left:0 !important ; padding-right:0 !important;max-width:80% !important">
+        <div class="container mt-5" style="padding-left:0 !important ; padding-right:0 !important;max-width:80% !important" >
             <div class="row">
-                <div class="col-lg-7">
+                <div class="col-lg-7" >
                     <div class="row">
-                        <div class="col-md-6 mb-3 pl-1">
-                            <img src="//cdn.shopify.com/s/files/1/3000/4362/products/Ehmiyat_Walltones_Product_Image_1.jpg?v=1581337922" class="w-100" alt="...">
-                        </div>
-                        <div class="col-md-6 mb-3 pl-1">
-                            <img src="//cdn.shopify.com/s/files/1/3000/4362/products/Sight_of_Hope_Walltones_Product_Image_1.jpg?v=1577728942" class="w-100" alt="...">            
-                        </div>
-                        <div class="col-md-6 mb-3 pl-1">
-                            <img src="//cdn.shopify.com/s/files/1/3000/4362/products/Summer_sPassingWalltones_Product_Image_1.jpg?v=1590398788" class="w-100" alt="...">
-                        </div>
-                        <div class="col-md-6 mb-3 pl-1">
-                            <img src="//cdn.shopify.com/s/files/1/3000/4362/products/RodeoDriveProductimage1.jpg?v=1586245746" class="w-100" alt="...">            
-                        </div>
-                        <div class="col-md-6 mb-3 pl-1">
-                            <img src="//cdn.shopify.com/s/files/1/3000/4362/products/AloneWalltones_Product_Image_1.jpg?v=1587117364" class="w-100" alt="...">
-                        </div>
-                        <div class="col-md-6 mb-3 pl-1">
-                            <img src="//cdn.shopify.com/s/files/1/3000/4362/products/SaturnWalltones_Product_Image_1.jpg?v=1588159688" class="w-100" alt="...">            
+                        <div class="col-md-6 mb-3 pl-1" v-for="minPalette in minPalettes" :key="minPalette.id" >
+                            <img :src="minPalette.img" style="height:400px" class="w-100" alt="...">
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-5">
                     <div class="add-cart p-3">
                         <p>Art paper framed by a wooden frame and non-reflective glass</p>
-                        <h2 class="font-weight-bold ">Synthetic II 70$</h2>
+                        <h2 class="font-weight-bold ">Synthetic II $ </h2>
                         <div class="mb-3 mt-2"> <span>silkscreen</span></div>
+                        <div>
+                            <v-btn class="mb-2 size_btn small" @click="small">S</v-btn>
+                            <v-btn class="mb-2 size_btn medium" @click="medium">M</v-btn>
+                            <v-btn class="mb-2 size_btn larg" @click="larg">L</v-btn>
+                            <h3 class="mt-4 mb-4">70x93.5cm (28x37") <strong style="float:right">21/32 left</strong></h3>
+                            <div style="clear:both"></div>
+                        </div>
                         <button class="btn add-button ">5$ - Add To Cart</button>
                         <p>
                             <span class="font-weight-bold ">This is the Classic</span>, designed and manufactured by Ecstase,
@@ -139,28 +116,87 @@
                 </div>
             </div>
         </div>
+        <appvideo></appvideo>
+        <review></review>
+        <appslider :data="palettes"></appslider>
     </section>
 </template>
 
 <script>
+import appslider from '../pagecomponents/ShopSlider';
+import appvideo from '../pagecomponents/ShopVideo';
+import review from '../pagecomponents/Review';
 export default {
+    components:{appslider,appvideo,review},
     data(){
         return {
             palettes:[],
+            minPalettes:[],
+            artists:[],
+            palettesArtists:[],
             show: false,
             size:false,
             details:false,
-            shipping:false
+            shipping:false,
+            id:'',
+            minPalette_id:'',
         }
     },
     created() {
+
       axios.get('/api/palettes')
-      .then(response =>{
-         console.log(response.data.palettes);
-          this.palettes = response.data.palettes
-    })  
-      .catch(error => console.log(error.response.data))
+      .then(response =>
+          this.artists = response.data.artists
+    ).catch(error => console.log(error.response.data));
+    axios.get("/api/view?id="+ 1)
+        .then(response =>{
+            this.palettes = response.data.palettes
+            this.palettesArtists = response.data.palettesArtists
+        })  
+        .catch(error => console.log(error.response.data))
+        axios.get("/api/viewMinPalettes?id=" + 2)
+            .then(response =>{
+                this.minPalettes = response.data.minPalettes
+                })  
+            .catch(error => console.log(error.response.data))
+        
+      
     },
+    methods:{
+        getdata($id){
+        axios.get("/api/view?id=" + $id)
+        .then(response =>{
+            this.palettes = response.data.palettes
+            this.palettesArtists = response.data.palettesArtists
+        })  
+        .catch(error => console.log(error.response.data))
+        },
+        small(){
+            $(".active>.details_img").css({width:"78%",height:"130px"})
+            $(".active>.content").css({width:"78%",margin:"7px 0"})
+        },
+        medium(){
+            $(".active>.details_img").css({width:"88%",height:"170px"})
+            $(".active>.content").css({width:"88%"})
+        },
+        larg(){
+            $(".active>.details_img").css({width:"100%",height:"200px"})
+            $(".active>.content").css({width:"100%"})
+        },
+        addActive($minPalette_id){
+                axios.get("/api/viewMinPalettes?id=" + $minPalette_id)
+                .then(response =>{
+                    this.minPalettes = response.data.minPalettes
+                    })  
+                .catch(error => console.log(error.response.data))
+            $('.details').on('click', function () {
+                
+                $(this).addClass('active').siblings().removeClass('active');
+            });
+        }
+
+    }
+
 }
 </script>
 
@@ -195,7 +231,7 @@ export default {
     }
     .wrapper{
         position: absolute;
-        top: 7%;
+        top: 15%;
         left: 32%;
         
     }
@@ -204,11 +240,12 @@ export default {
     display: inline-block;
     margin: 15px;
     color: #fff;
+    cursor: pointer;
     }
     .details img{
         width: 100%;
         transition: all 1s;
-        /* height: 200px; */
+        height: 200px;
     }
     .wrapper .details .content{
         font-size: 14px;
@@ -268,10 +305,47 @@ export default {
         padding-left: 10px;
         padding-right: 10px;
     }
-
+/* 
     .carousel-control-prev{
         left: -50%;
+    } */
+.carousel-indicators li {
+    box-sizing: content-box;
+    -ms-flex: 0 1 auto;
+    flex: 0 1 auto;
+    width: 67px;
+    height: 29px;
+    margin-right: 14px;
+    margin-left: 0;
+    text-indent: 0;
+    cursor: pointer;
+    color: black;
+    background: none;
+}
+.carousel-indicators{
+    bottom: -9%;
+    width: 100%;
+    background-color: #f5f0ed;
+    margin-left: 0;
+    margin-right: 0;
+}
+@media(max-width: 991px){
+    .carousel-indicators{
+        bottom: -15%;
     }
-
-
+}
+.carousel-indicators .active{
+    border-bottom: 3px solid #25d1e2;
+}
+.small, .medium, .larg{
+    padding: 30px !important;
+    margin-right: 20px !important;
+    font-size: 20px ;
+}
+.active>.content {
+    border: 2px solid #00a4ee;
+}
+.active_btn{
+    border: 2px solid #00a4ee;
+}
 </style>
