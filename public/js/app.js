@@ -2153,6 +2153,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2187,6 +2192,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
 //
 //
 //
@@ -40620,6 +40627,17 @@ var render = function() {
                 ])
               ],
               1
+            ),
+            _vm._v(" "),
+            _c(
+              "li",
+              { staticClass: "nav-item" },
+              [
+                _c("router-link", { attrs: { to: "/payment" } }, [
+                  _c("a", { staticClass: "nav-link" }, [_vm._v("Payment")])
+                ])
+              ],
+              1
             )
           ])
         ]
@@ -41307,76 +41325,76 @@ var render = function() {
                 : _vm._e()
             ])
           ])
-        : _vm._e()
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "artists mt-4" }, [
-      !_vm.artist
-        ? _c(
-            "h3",
-            {
-              staticClass: "title",
-              on: {
-                click: function($event) {
-                  _vm.artist = !_vm.artist
-                }
-              }
-            },
-            [_vm._v("Artists +")]
-          )
-        : _c(
-            "h3",
-            {
-              staticClass: "title",
-              on: {
-                click: function($event) {
-                  _vm.artist = !_vm.artist
-                }
-              }
-            },
-            [_vm._v("Artists -")]
-          ),
+        : _vm._e(),
       _vm._v(" "),
-      _vm.artist
-        ? _c("div", { staticClass: "mt-5 text-center" }, [
-            _c("div", { staticClass: "row" }, [
-              _vm._m(20),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-sm-12" }, [
-                _c(
-                  "div",
-                  { staticClass: "row" },
-                  _vm._l(_vm.artists, function(artist) {
-                    return _c(
-                      "div",
-                      {
-                        key: artist.id,
-                        staticClass: "col-sm-4 col-md-3 col-lg-2"
-                      },
-                      [
-                        _c("div", { staticClass: "about-team__people" }, [
-                          _c("img", {
-                            staticStyle: {
-                              "border-radius": "28%",
-                              width: "100px",
-                              height: "100px"
-                            },
-                            attrs: { src: artist.artist_img, alt: "artist" }
-                          }),
-                          _vm._v(" "),
-                          _c("h3", { staticClass: "about-team__name" }, [
-                            _vm._v(_vm._s(artist.name))
+      _c("div", { staticClass: "artists mt-4" }, [
+        !_vm.artist
+          ? _c(
+              "h3",
+              {
+                staticClass: "title",
+                on: {
+                  click: function($event) {
+                    _vm.artist = !_vm.artist
+                  }
+                }
+              },
+              [_vm._v("Artists +")]
+            )
+          : _c(
+              "h3",
+              {
+                staticClass: "title",
+                on: {
+                  click: function($event) {
+                    _vm.artist = !_vm.artist
+                  }
+                }
+              },
+              [_vm._v("Artists -")]
+            ),
+        _vm._v(" "),
+        _vm.artist
+          ? _c("div", { staticClass: " mt-5 text-center" }, [
+              _c("div", { staticClass: "row" }, [
+                _vm._m(20),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-12" }, [
+                  _c(
+                    "div",
+                    { staticClass: "row" },
+                    _vm._l(_vm.artists, function(artist) {
+                      return _c(
+                        "div",
+                        {
+                          key: artist.id,
+                          staticClass: "col-sm-4 col-md-3 col-lg-2"
+                        },
+                        [
+                          _c("div", { staticClass: "about-team__people" }, [
+                            _c("img", {
+                              staticStyle: {
+                                "border-radius": "28%",
+                                width: "100px",
+                                height: "100px"
+                              },
+                              attrs: { src: artist.artist_img, alt: "artist" }
+                            }),
+                            _vm._v(" "),
+                            _c("h3", { staticClass: "about-team__name" }, [
+                              _vm._v(_vm._s(artist.name))
+                            ])
                           ])
-                        ])
-                      ]
-                    )
-                  }),
-                  0
-                )
+                        ]
+                      )
+                    }),
+                    0
+                  )
+                ])
               ])
             ])
-          ])
-        : _vm._e()
+          : _vm._e()
+      ])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "news mt-4 mb-4" }, [
@@ -42152,7 +42170,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "col-sm-12" }, [
       _c("p", { staticClass: "text-center" }, [
         _vm._v(
-          "\n            Behind every artwork we sell, there are ideas, visions, amazing artists and great stories.\n            On this page we highlight some of that. If you want to learn more about an artwork you are\n            about to buy, but the artist is not listed on this page, click on their name during shopping\n            and you will get redirected straight to their most important social media account or website.\n          "
+          "\n                        Behind every artwork we sell, there are ideas, visions, amazing artists and great stories.\n                        On this page we highlight some of that. If you want to learn more about an artwork you are\n                        about to buy, but the artist is not listed on this page, click on their name during shopping\n                        and you will get redirected straight to their most important social media account or website.\n                    "
         )
       ])
     ])
