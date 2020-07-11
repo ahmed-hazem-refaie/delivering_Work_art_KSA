@@ -23,6 +23,11 @@
                         <a class="nav-link">About Us</a>
                     </router-link>
                 </li>
+                <li class="nav-item">
+                    <router-link to="/payment">
+                        <a class="nav-link">Payment</a>
+                    </router-link>
+                </li>
             </ul>
         </div>
             <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
