@@ -1,14 +1,16 @@
 <template>
   <div>
     <shopHeader></shopHeader>
+    <appslider></appslider>
   </div>
 </template>
 
 <script>
 import shopHeader from "../pagecomponents/ShopHeader";
+import appslider from '../pagecomponents/Slider';
 
 export default {
-  components:{shopHeader}
+  components:{shopHeader,appslider}
 }
 </script>
 

@@ -9,7 +9,7 @@
                 <div class="carousel-item" v-for="(artist , index) in artists" :class="{ 'active': index === 0 }" :key="artist.id">
                     <img :src="artist.cover_img" class="header" alt="...">
                     <div class="wrapper">
-                        <div class="details" v-for="(palettesArtist , index) in palettesArtists" @click="addActive(palettesArtist.id)" :class="{ 'active': index === 0 }"  :key="palettesArtist.id">
+                        <div class="details" v-for="(palettesArtist , index) in palettesArtists" @click="addActive(palettesArtist.id)" :class="{ 'active': index == 0 }"  :key="palettesArtist.id">
                             <img :src="palettesArtist.img" class="details_img" alt="...">
                             <div class="content" >
                                 <h6>Summer | {{palettesArtist.L_price}}$</h6>
@@ -44,18 +44,29 @@
                 <div class="col-lg-5">
                     <div class="add-cart p-3">
                         <p>Art paper framed by a wooden frame and non-reflective glass</p>
-                        <h2 class="font-weight-bold ">Synthetic II $ </h2>
+                        <h2 class="font-weight-bold ">{{name}} II 
+                        <span v-if="active_el==1">${{S_price}}</span>
+                        <span v-if="active_el==2">${{M_price}}</span>
+                        <span v-if="active_el==3">${{L_price}}</span>
+                        
+                        </h2>
                         <div class="mb-3 mt-2"> <span>silkscreen</span></div>
                         <div>
-                            <v-btn class="mb-2 size_btn small"  :class="{ active_btn : active_el == 1 }"  @click="small(1)">S</v-btn>
-                            <v-btn class="mb-2 size_btn medium" :class="{ active_btn : active_el == 2 }" @click="medium(2)">M</v-btn>
-                            <v-btn class="mb-2 size_btn larg" :class="{ active_btn : active_el == 3 }" @click="larg(3)">L</v-btn>
-                            <h3 class="mt-4 mb-4" v-if="active_el==1">70x93.5cm (28x37") <strong style="float:right">3/32 left</strong></h3>
-                            <h3 class="mt-4 mb-4" v-if="active_el==2">70x93.5cm (28x37") <strong style="float:right">4/32 left</strong></h3>
-                            <h3 class="mt-4 mb-4" v-if="active_el==3">70x93.5cm (28x37") <strong style="float:right">21/32 left</strong></h3>
+
+                            <v-btn class="mb-2 size_btn small"  :class="{ active_btn : active_el == 1 }" v-if="S_copies>0"  @click="small(1)">S</v-btn>
+                            <v-btn class="mb-2 size_btn small" style="cursor: not-allowed;background-color:#737373;color:#fff;border:none" v-else >Empty</v-btn>
+                            <v-btn class="mb-2 size_btn medium" :class="{ active_btn : active_el == 2 }" v-if="M_copies>0" @click="medium(2)">M</v-btn>
+                            <v-btn class="mb-2 size_btn small" style="cursor: not-allowed;background-color:#737373;color:#fff;border:none" v-else >Empty</v-btn>
+                            <v-btn class="mb-2 size_btn larg" :class="{ active_btn : active_el == 3 }" v-if="L_copies>0" @click="larg(3)">L</v-btn>
+                            <v-btn class="mb-2 size_btn small" style="cursor: not-allowed;background-color:#737373;color:#fff;border:none" v-else >Empty</v-btn>
+                            <h3 class="mt-4 mb-4" v-if="active_el==1">30x40cm (12x16") <strong style="float:right">{{S_copies}}/{{S_avalible}} left</strong></h3>
+                            <h3 class="mt-4 mb-4" v-if="active_el==2">50x66.5cm (20x26") <strong style="float:right">{{M_copies}}/{{M_avalible}} left</strong></h3>
+                            <h3 class="mt-4 mb-4" v-if="active_el==3">70x93.5cm (28x37") <strong style="float:right">{{L_copies}}/{{L_avalible}} left</strong></h3>
                             <div style="clear:both"></div>
                         </div>
-                        <button class="btn add-button ">5$ - Add To Cart</button>
+                        <button class="btn add-button "><span v-if="active_el==1">${{S_price}}</span>
+                        <span v-if="active_el==2">${{M_price}}</span>
+                        <span v-if="active_el==3">${{L_price}}</span> - Add To Cart</button>
                         <p>
                             <span class="font-weight-bold ">This is the Classic</span>, designed and manufactured by Ecstase,
                             the Classic is made up of a wooden frame, a passe-partout,
@@ -120,16 +131,14 @@
         </div>
         <appvideo></appvideo>
         <review></review>
-        <appslider :data="palettes"></appslider>
     </section>
 </template>
 
 <script>
-import appslider from '../pagecomponents/ShopSlider';
 import appvideo from '../pagecomponents/ShopVideo';
 import review from '../pagecomponents/Review';
 export default {
-    components:{appslider,appvideo,review},
+    components:{appvideo,review},
     data(){
         return {
             palettes:[],
@@ -146,6 +155,19 @@ export default {
             firstpalettesArtists:null,
             firstminPalettes:null,
             active_el:3,
+            S_copies:'',
+            S_avalible:'',
+            S_price:'',
+            M_copies:'',
+            M_avalible:'',
+            M_price:'',
+            L_copies:'',
+            L_avalible:'',
+            L_price:'',
+            sizing_details:'',
+            name:''
+
+            
         }
     },
     created() {
@@ -157,7 +179,19 @@ export default {
         axios.get("/api/view?id="+ this.first)
         .then(response =>{
             this.palettes = response.data.palettes
+            this.name=response.data.palettes[0].name,
+            this.S_copies=response.data.palettes[0].S_copies,
+            this.S_avalible=response.data.palettes[0].S_avalible,
+            this.S_price=response.data.palettes[0].S_price,
+            this.M_copies=response.data.palettes[0].M_copies,
+            this.M_avalible=response.data.palettes[0].M_avalible,
+            this.M_price=response.data.palettes[0].M_price,
+            this.L_copies=response.data.palettes[0].L_copies,
+            this.L_avalible=response.data.palettes[0].L_avalible,
+            this.L_price=response.data.palettes[0].L_price,
+            this.sizing_details=response.data.palettes[0].sizing_details
             this.palettesArtists = response.data.palettesArtists
+           
             this.firstpalettesArtists = response.data.palettesArtists[0].id
             axios.get("/api/viewMinPalettes?id=" + this.firstpalettesArtists)
             .then(response =>{
@@ -195,24 +229,35 @@ export default {
         },
         small(el){
             this.active_el = el;
-            $(".active>.details_img").css({width:"78%",height:"130px"})
+            $(".active>.details_img").css({width:"78%",height:"160px"})
             $(".active>.content").css({width:"78%",margin:"7px 0"})
 
         },
         medium(el){
             this.active_el = el;
-            $(".active>.details_img").css({width:"88%",height:"170px"})
+            $(".active>.details_img").css({width:"88%",height:"200px"})
             $(".active>.content").css({width:"88%"})
         },
         larg(el){
             this.active_el = el;
-            $(".active>.details_img").css({width:"100%",height:"200px"})
+            $(".active>.details_img").css({width:"100%",height:"250px"})
             $(".active>.content").css({width:"100%"})
         },
         addActive($minPalette_id){
                 axios.get("/api/viewMinPalettes?id=" + $minPalette_id)
                 .then(response =>{
                     this.minPalettes = response.data.minPalettes
+                    this.name=response.data.palettes[0].name,
+                    this.S_copies=response.data.palettes[0].S_copies,
+                    this.S_avalible=response.data.palettes[0].S_avalible,
+                    this.S_price=response.data.palettes[0].S_price,
+                    this.M_copies=response.data.palettes[0].M_copies,
+                    this.M_avalibles=response.data.palettes[0].M_avalible,
+                    this.M_price=response.data.palettes[0].M_price,
+                    this.L_copies=response.data.palettes[0].L_copies,
+                    this.L_avalibles=response.data.palettes[0].L_avalible,
+                    this.L_price=response.data.palettes[0].L_price,
+                    this.sizing_details=response.data.palettes[0].sizing_details
                     })  
                 .catch(error => console.log(error.response.data))
             $('.details').on('click', function () {
@@ -271,7 +316,7 @@ export default {
     .details img{
         width: 100%;
         transition: all 1s;
-        height: 200px;
+        height: 250px;
     }
     .wrapper .details .content{
         font-size: 14px;
