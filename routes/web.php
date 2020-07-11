@@ -16,8 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes(['verify' => true]);
-// Route::view('/','userLayout.home');
-// Route::view('/{any}','userLayout.home');
+Route::view('/','userLayout.home');
+Route::view('/{any}','userLayout.home');
 // Route::get('/home', 'HomeController@index')->middleware('verified')->name("home.index");
 Route::get('/', 'HomeController@index');
 Route::get('/admin', 'AdminController@index')->middleware('verified')->name("admin.index");
