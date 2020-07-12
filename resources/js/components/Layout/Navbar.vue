@@ -11,7 +11,7 @@
                     <router-link to="/">
                         <a class="nav-link">Home <span class="sr-only">(current)</span></a>
                     </router-link>
-                    
+
                 </li>
                 <li class="nav-item">
                     <router-link to="/shop">
@@ -21,6 +21,11 @@
                 <li class="nav-item">
                     <router-link to="/about">
                         <a class="nav-link">About Us</a>
+                    </router-link>
+                </li>
+                <li class="nav-item">
+                    <router-link to="/payment">
+                        <a class="nav-link">Payment</a>
                     </router-link>
                 </li>
             </ul>
@@ -47,25 +52,26 @@
                                 <div class="col-md-sm-8 ml-3">
                                     <span>All I Ever Wanted Was Everything</span>
                                     <h6 >70x93.5cm (28x37")</h6>
-                                    <h6>$70.00</h6>                         
+                                    <h6>$70.00</h6>
                                 </div>
                             </div>
+
                             <div>
                                 <v-form style="width:50%;display:inline-block">
                                     <v-text-field  v-model="value">
-                                        
+
                                         <v-icon slot="append" @click="plus">mdi-plus</v-icon>
                                         <v-icon slot="prepend" @click="minus">mdi-minus</v-icon>
                                     </v-text-field>
                                 </v-form>
                                 <v-btn class="ml-3">Remove</v-btn>
-                            </div>   
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <router-link style="margin: auto;color: #fff;" to="/payment">
                                 <button type="button" class="btn btn-dark" style="font-size: 18px;">$890 &nbsp;  <strong>.</strong> &nbsp; Checkout</button>
                             </router-link>
-                            
+
                         </div>
                         </div>
                     </div>

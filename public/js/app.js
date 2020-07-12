@@ -2153,6 +2153,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2674,6 +2680,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2697,7 +2717,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    axios.get('/api/palettes').then(function (response) {
+    axios.get("/api/palettes").then(function (response) {
       console.log(response.data.artists);
       _this.artists = response.data.artists;
     })["catch"](function (error) {
@@ -8188,7 +8208,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.row[data-v-2fea7dd6]{\n    margin: 0;\n    padding: 0;\n}\n.title[data-v-2fea7dd6]{\n    font-size: 34px;\n    font-weight: bold;\n    line-height: 60px;\n    margin: 0;\n    margin-bottom: 1px;\n    cursor: pointer;\n    transition: all .4s;\n    text-align: center;\n    background: #f2efeb;\n}\n.title[data-v-2fea7dd6]:hover{\n    background: #e6e1da;\n}\n.about-team__people[data-v-2fea7dd6]{\n    margin: 0 20px 30px;\n}\n.about-team__people img[data-v-2fea7dd6]{\n    width: 120px;\n}\n.topteam[data-v-2fea7dd6]{\n    margin-bottom: 30px;\n    border-bottom: 2px solid #eee;\n    width: 70%;\n    margin-left: auto;\n    margin-right: auto;\n}\n.support_div .content[data-v-2fea7dd6]{\n    color:grey;\n    cursor: pointer;\n}\n.support_div .active[data-v-2fea7dd6]{\n    color: black;\n    font-weight: bold;\n}\n.left[data-v-2fea7dd6]{\n    border-right:2px solid #000;padding-left:300px\n}\n@media (max-width: 991px){\n.left[data-v-2fea7dd6]{\n        border-right:none ;\n        padding-left: 0;\n}\n}\n@media (min-width: 992px) and (max-width:1999px){\n.left[data-v-2fea7dd6]{\n        padding-left: 150px;\n}\n}\n.form[data-v-2fea7dd6]{\n    width: 50%;\n    margin: auto;\n}\n", ""]);
+exports.push([module.i, "\n.row[data-v-2fea7dd6] {\n  margin: 0;\n  padding: 0;\n}\n.title[data-v-2fea7dd6] {\n  font-size: 34px;\n  font-weight: bold;\n  line-height: 60px;\n  margin: 0;\n  margin-bottom: 1px;\n  cursor: pointer;\n  transition: all 0.4s;\n  text-align: center;\n  background: #f2efeb;\n}\n.title[data-v-2fea7dd6]:hover {\n  background: #e6e1da;\n}\n.about-team__people[data-v-2fea7dd6] {\n  margin: 0 20px 30px;\n}\n.about-team__people img[data-v-2fea7dd6] {\n  width: 120px;\n}\n.topteam[data-v-2fea7dd6] {\n  margin-bottom: 30px;\n  border-bottom: 2px solid #eee;\n  width: 70%;\n  margin-left: auto;\n  margin-right: auto;\n}\n.support_div .content[data-v-2fea7dd6] {\n  color: grey;\n  cursor: pointer;\n}\n.support_div .active[data-v-2fea7dd6] {\n  color: black;\n  font-weight: bold;\n}\n.left[data-v-2fea7dd6] {\n  border-right: 2px solid #000;\n  padding-left: 300px;\n}\n@media (max-width: 991px) {\n.left[data-v-2fea7dd6] {\n    border-right: none;\n    padding-left: 0;\n}\n}\n@media (min-width: 992px) and (max-width: 1999px) {\n.left[data-v-2fea7dd6] {\n    padding-left: 150px;\n}\n}\n.form[data-v-2fea7dd6] {\n  width: 50%;\n  margin: auto;\n}\n", ""]);
 
 // exports
 
@@ -40608,6 +40628,17 @@ var render = function() {
                 ])
               ],
               1
+            ),
+            _vm._v(" "),
+            _c(
+              "li",
+              { staticClass: "nav-item" },
+              [
+                _c("router-link", { attrs: { to: "/payment" } }, [
+                  _c("a", { staticClass: "nav-link" }, [_vm._v("Payment")])
+                ])
+              ],
+              1
             )
           ])
         ]
@@ -40906,32 +40937,6 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "ourteam mt-4" }, [
-      !_vm.team
-        ? _c(
-            "h3",
-            {
-              staticClass: "title",
-              on: {
-                click: function($event) {
-                  _vm.team = !_vm.team
-                }
-              }
-            },
-            [_vm._v("The team +")]
-          )
-        : _c(
-            "h3",
-            {
-              staticClass: "title",
-              on: {
-                click: function($event) {
-                  _vm.team = !_vm.team
-                }
-              }
-            },
-            [_vm._v("The team -")]
-          ),
-      _vm._v(" "),
       _vm.team
         ? _c("div", { staticClass: "row text-center mt-5 topteam" }, [
             _vm._m(2),
@@ -40997,7 +41002,7 @@ var render = function() {
           ),
       _vm._v(" "),
       _vm.support
-        ? _c("div", { staticClass: " mt-5" }, [
+        ? _c("div", { staticClass: "mt-5" }, [
             _c("p", { staticClass: "text-center" }, [
               _vm._v(
                 "Do you have any questions? Have a look at the categories below, and if these don't include the answer you were looking for, please feel free to shoot us an email."
@@ -41014,7 +41019,7 @@ var render = function() {
                 _c(
                   "div",
                   {
-                    staticClass: "col-md-2 content ",
+                    staticClass: "col-md-2 content",
                     class: { active: _vm.active_el == 1 },
                     on: {
                       click: function($event) {
@@ -41133,7 +41138,7 @@ var render = function() {
               ]
             ),
             _vm._v(" "),
-            _c("div", { staticClass: "row mt-5 " }, [
+            _c("div", { staticClass: "row mt-5" }, [
               _vm.active_el == 1
                 ? _c("div", { staticClass: "col-sm-12" }, [_vm._m(16)])
                 : _vm._e(),
@@ -41148,7 +41153,7 @@ var render = function() {
               _vm._v(" "),
               _vm.active_el == 4
                 ? _c("div", { staticClass: "col-sm-12" }, [
-                    _c("div", { staticClass: "row " }, [
+                    _c("div", { staticClass: "row" }, [
                       _vm._m(19),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-sm-7" }, [
@@ -41156,14 +41161,12 @@ var render = function() {
                           "p",
                           [
                             _vm._v(
-                              "\n                                  Read our terms "
+                              "\n                Read our terms\n                "
                             ),
                             _c("router-link", { attrs: { to: "/terms" } }, [
-                              _vm._v(" here")
+                              _vm._v("here")
                             ]),
-                            _vm._v(
-                              " .                            \n                              "
-                            )
+                            _vm._v(".\n              ")
                           ],
                           1
                         ),
@@ -41172,12 +41175,12 @@ var render = function() {
                           "p",
                           [
                             _vm._v(
-                              "\n                                  Read our Privacy Policy "
+                              "\n                Read our Privacy Policy\n                "
                             ),
                             _c("router-link", { attrs: { to: "/privacy" } }, [
-                              _vm._v(" here")
+                              _vm._v("here")
                             ]),
-                            _vm._v(" .\n                              ")
+                            _vm._v(".\n              ")
                           ],
                           1
                         ),
@@ -41186,12 +41189,12 @@ var render = function() {
                           "p",
                           [
                             _vm._v(
-                              "\n                                  Read our Refund Policy "
+                              "\n                Read our Refund Policy\n                "
                             ),
                             _c("router-link", { attrs: { to: "/refund" } }, [
-                              _vm._v(" here")
+                              _vm._v("here")
                             ]),
-                            _vm._v(" .\n                              ")
+                            _vm._v(".\n              ")
                           ],
                           1
                         )
@@ -41323,107 +41326,81 @@ var render = function() {
                 : _vm._e()
             ])
           ])
-        : _vm._e()
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "artists mt-4" }, [
-      !_vm.artist
-        ? _c(
-            "h3",
-            {
-              staticClass: "title",
-              on: {
-                click: function($event) {
-                  _vm.artist = !_vm.artist
-                }
-              }
-            },
-            [_vm._v("Artists +")]
-          )
-        : _c(
-            "h3",
-            {
-              staticClass: "title",
-              on: {
-                click: function($event) {
-                  _vm.artist = !_vm.artist
-                }
-              }
-            },
-            [_vm._v("Artists -")]
-          ),
+        : _vm._e(),
       _vm._v(" "),
-      _vm.artist
-        ? _c("div", { staticClass: " mt-5 text-center" }, [
-            _c("div", { staticClass: "row" }, [
-              _vm._m(20),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-sm-12" }, [
-                _c(
-                  "div",
-                  { staticClass: "row" },
-                  _vm._l(_vm.artists, function(artist) {
-                    return _c(
-                      "div",
-                      {
-                        key: artist.id,
-                        staticClass: "col-sm-4 col-md-3 col-lg-2"
-                      },
-                      [
-                        _c("div", { staticClass: "about-team__people" }, [
-                          _c("img", {
-                            staticStyle: {
-                              "border-radius": "28%",
-                              width: "100px",
-                              height: "100px"
-                            },
-                            attrs: { src: artist.artist_img, alt: "artist" }
-                          }),
-                          _vm._v(" "),
-                          _c("h3", { staticClass: "about-team__name" }, [
-                            _vm._v(_vm._s(artist.name))
+      _c("div", { staticClass: "artists mt-4" }, [
+        !_vm.artist
+          ? _c(
+              "h3",
+              {
+                staticClass: "title",
+                on: {
+                  click: function($event) {
+                    _vm.artist = !_vm.artist
+                  }
+                }
+              },
+              [_vm._v("Artists +")]
+            )
+          : _c(
+              "h3",
+              {
+                staticClass: "title",
+                on: {
+                  click: function($event) {
+                    _vm.artist = !_vm.artist
+                  }
+                }
+              },
+              [_vm._v("Artists -")]
+            ),
+        _vm._v(" "),
+        _vm.artist
+          ? _c("div", { staticClass: " mt-5 text-center" }, [
+              _c("div", { staticClass: "row" }, [
+                _vm._m(20),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-12" }, [
+                  _c(
+                    "div",
+                    { staticClass: "row" },
+                    _vm._l(_vm.artists, function(artist) {
+                      return _c(
+                        "div",
+                        {
+                          key: artist.id,
+                          staticClass: "col-sm-4 col-md-3 col-lg-2"
+                        },
+                        [
+                          _c("div", { staticClass: "about-team__people" }, [
+                            _c("img", {
+                              staticStyle: {
+                                "border-radius": "28%",
+                                width: "100px",
+                                height: "100px"
+                              },
+                              attrs: { src: artist.artist_img, alt: "artist" }
+                            }),
+                            _vm._v(" "),
+                            _c("h3", { staticClass: "about-team__name" }, [
+                              _vm._v(_vm._s(artist.name))
+                            ])
                           ])
-                        ])
-                      ]
-                    )
-                  }),
-                  0
-                )
+                        ]
+                      )
+                    }),
+                    0
+                  )
+                ])
               ])
             ])
-          ])
-        : _vm._e()
+          : _vm._e()
+      ])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "news mt-4 mb-4" }, [
-      !_vm.news
-        ? _c(
-            "h3",
-            {
-              staticClass: "title",
-              on: {
-                click: function($event) {
-                  _vm.news = !_vm.news
-                }
-              }
-            },
-            [_vm._v("News +")]
-          )
-        : _c(
-            "h3",
-            {
-              staticClass: "title",
-              on: {
-                click: function($event) {
-                  _vm.news = !_vm.news
-                }
-              }
-            },
-            [_vm._v("News -")]
-          ),
-      _vm._v(" "),
       _vm.news
-        ? _c("div", { staticClass: " mt-5 text-center" }, [
+        ? _c("div", { staticClass: "mt-5 text-center" }, [
             _c("div", { staticClass: "row" }, [
               _c(
                 "div",
@@ -41718,13 +41695,13 @@ var staticRenderFns = [
     return _c("div", { staticClass: "col-md-8" }, [
       _c("p", [
         _vm._v(
-          "\n                      You, like everyone else on this planet, were born a creative\n                      person with good intentions. Able to change the world in ways\n                      so much bigger than you probably can imagine right now. All\n                      the rules of society then programmed you to think and calculate\n                      yourself through life in a way that is useful and not disturbing\n                      anyone else. Conforming to this norm made you fit in, but also\n                      stripped you of your boundless childlike creativity, imagination and lust for exploration.\n                  "
+          "\n          You, like everyone else on this planet, were born a creative\n          person with good intentions. Able to change the world in ways\n          so much bigger than you probably can imagine right now. All\n          the rules of society then programmed you to think and calculate\n          yourself through life in a way that is useful and not disturbing\n          anyone else. Conforming to this norm made you fit in, but also\n          stripped you of your boundless childlike creativity, imagination and lust for exploration.\n        "
         )
       ]),
       _vm._v(" "),
       _c("p", [
         _vm._v(
-          "\n                      Right now, what the world needs most, is people who find that\n                      version of themselves back again. People who come alive again.\n                      People who wonder, can be amazed and feel ecstatic like they\n                      did when they were little kids. Bringing you alive again, and\n                      reminding you of the version of yourself that can do anything, that is our mission. \n                  "
+          "\n          Right now, what the world needs most, is people who find that\n          version of themselves back again. People who come alive again.\n          People who wonder, can be amazed and feel ecstatic like they\n          did when they were little kids. Bringing you alive again, and\n          reminding you of the version of yourself that can do anything, that is our mission. \n        "
         )
       ])
     ])
@@ -42043,7 +42020,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row " }, [
+    return _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-sm-5 text-center left" }, [
         _c("p", { staticClass: "font-weight-bold mb-5" }, [
           _vm._v("What are Walltones?")
@@ -42066,26 +42043,26 @@ var staticRenderFns = [
         ]),
         _vm._v(" "),
         _c("p", { staticClass: "font-weight-bold mb-4" }, [
-          _vm._v(" I need any tools to hang my artwork?")
+          _vm._v("I need any tools to hang my artwork?")
         ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-sm-7" }, [
         _c("p", [
           _vm._v(
-            "\n                                  Walltones are our affordable and easy to hang canvas posters.\n                                  They come in three different sizes, always complete with a special magnetic frame. Each Walltone is part of a limited edition.\n                              "
+            "\n                Walltones are our affordable and easy to hang canvas posters.\n                They come in three different sizes, always complete with a special magnetic frame. Each Walltone is part of a limited edition.\n              "
           )
         ]),
         _vm._v(" "),
         _c("p", [
           _vm._v(
-            "\n                                  Knitworks are luxurious artworks on fabric, often using a combination of printing and painting techniques. The fabric is stretched\n                                  into a sturdy metal frame. Like Walltones, they are always part of a limited edition.\n                              "
+            "\n                Knitworks are luxurious artworks on fabric, often using a combination of printing and painting techniques. The fabric is stretched\n                into a sturdy metal frame. Like Walltones, they are always part of a limited edition.\n              "
           )
         ]),
         _vm._v(" "),
         _c("p", [
           _vm._v(
-            "\n                                  Align the pairs of magnetic frames with the top and bottom of your artwork.\n                                  The included adhesive strips or screw can be used to stick only the top frame, or both frames to your wall.\n                              "
+            "\n                Align the pairs of magnetic frames with the top and bottom of your artwork.\n                The included adhesive strips or screw can be used to stick only the top frame, or both frames to your wall.\n              "
           )
         ]),
         _vm._v(" "),
@@ -42097,13 +42074,13 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("p", [
           _vm._v(
-            "\n                                  When you buy an artwork, you can find the specifications in the dropdown menus underneath the product description.\n                                  If you have any questions not answered in there, feel free to ask us.\n                              "
+            "\n                When you buy an artwork, you can find the specifications in the dropdown menus underneath the product description.\n                If you have any questions not answered in there, feel free to ask us.\n              "
           )
         ]),
         _vm._v(" "),
         _c("p", [
           _vm._v(
-            "\n                                  If the included adhesive strips are not suitable for your wall,\n                                  you can use the included screw and plug. Only when using the screw and plug you will need a drill and screwdriver.\n                              "
+            "\n                If the included adhesive strips are not suitable for your wall,\n                you can use the included screw and plug. Only when using the screw and plug you will need a drill and screwdriver.\n              "
           )
         ])
       ])
@@ -42113,7 +42090,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row " }, [
+    return _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-sm-5 text-center left" }, [
         _c("p", { staticClass: "font-weight-bold mb-5" }, [
           _vm._v("Do you ship to my country?")
@@ -42127,13 +42104,13 @@ var staticRenderFns = [
       _c("div", { staticClass: "col-sm-7" }, [
         _c("p", [
           _vm._v(
-            "\n                                  We ship worldwide. If you are worried that your country might not accept our products because\n                                  of regulation or customs policies, please send us an email explaining the situation and we will\n                                  try to find out what is the best solution.                                \n                              "
+            "\n                We ship worldwide. If you are worried that your country might not accept our products because\n                of regulation or customs policies, please send us an email explaining the situation and we will\n                try to find out what is the best solution.\n              "
           )
         ]),
         _vm._v(" "),
         _c("p", [
           _vm._v(
-            "\n                                  After placing your order, the whole process of preparing, packing and shipping\n                                  to your doorstep can take approximately 15 business days depending on your location.\n                                  Orders get sent out within 24 hours on average, after which you won't be able to cancel\n                                  our order since the package will already be in transit. You can however, return your\n                                  package for a full refund within 30 days.\n                              "
+            "\n                After placing your order, the whole process of preparing, packing and shipping\n                to your doorstep can take approximately 15 business days depending on your location.\n                Orders get sent out within 24 hours on average, after which you won't be able to cancel\n                our order since the package will already be in transit. You can however, return your\n                package for a full refund within 30 days.\n              "
           )
         ])
       ])
@@ -42143,13 +42120,13 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row " }, [
+    return _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-sm-5 text-center left" }, [
         _c("p", { staticClass: "font-weight-bold mb-4" }, [
           _vm._v("I'm an artist, how can we work together?")
         ]),
         _vm._v(" "),
-        _c("p", { staticClass: "font-weight-bold " }, [
+        _c("p", { staticClass: "font-weight-bold" }, [
           _vm._v("I'm an influencer, how can we work together?")
         ])
       ]),
@@ -42157,13 +42134,13 @@ var staticRenderFns = [
       _c("div", { staticClass: "col-sm-7" }, [
         _c("p", [
           _vm._v(
-            "\n                                  Awesome! Please send us an email with a link to your portfolio, instagram,\n                                  or any other media you want us to review. We'll be happy to take a look.                               \n                              "
+            "\n                Awesome! Please send us an email with a link to your portfolio, instagram,\n                or any other media you want us to review. We'll be happy to take a look.\n              "
           )
         ]),
         _vm._v(" "),
         _c("p", [
           _vm._v(
-            "\n                                  We don't work with a lot of influencers, but if you connect with an audience\n                                  that you think would love our brand, we're very open to talk about it. Please shoot us an email!\n                              "
+            "\n                We don't work with a lot of influencers, but if you connect with an audience\n                that you think would love our brand, we're very open to talk about it. Please shoot us an email!\n              "
           )
         ])
       ])
@@ -42174,7 +42151,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-sm-5 text-center left" }, [
-      _c("p", { staticClass: "font-weight-bold mb-3 " }, [
+      _c("p", { staticClass: "font-weight-bold mb-3" }, [
         _vm._v("What are the terms of this website?")
       ]),
       _vm._v(" "),
@@ -42182,7 +42159,7 @@ var staticRenderFns = [
         _vm._v("How do you treat my privacy?")
       ]),
       _vm._v(" "),
-      _c("p", { staticClass: "font-weight-bold " }, [
+      _c("p", { staticClass: "font-weight-bold" }, [
         _vm._v("How can I get a refund?")
       ])
     ])
