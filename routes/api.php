@@ -22,7 +22,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::resource('palettes', 'PaletteAPIController');
 Route::get('/view' ,'PaletteAPIController@Palettes');
 Route::get('/viewMinPalettes' ,'PaletteAPIController@viewMinPalettes');
-Route::group(['prefix' => 'Api','middleware'=>['api']], function () {
+
+Route::group(['middleware'=>['api']], function () {
+    Route::post('add-order' ,'OrderController@store');
 
 });
-Route::post('/viewMinPalettes' ,'PaletteAPIController@viewMinPalettes');
