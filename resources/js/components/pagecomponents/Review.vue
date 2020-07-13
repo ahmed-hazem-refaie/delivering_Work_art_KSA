@@ -13,7 +13,7 @@
             <h6 style="color:#b2b8bd" class="mb-4">Write Review</h6>
             <h6 class="mb-4">Indicates a required field</h6>
             <h6 class="mb-4">Score</h6>
-            <v-rating v-model="rating" medium></v-rating>
+            <v-rating v-model="rating" color="orange" medium></v-rating>
             <v-form class="form">
                 <v-row>
                     <v-col
@@ -66,7 +66,7 @@
                 <span class="fa fa-star text-warning ml-1" v-for="i in 5" :key="i.id"></span>
             </span>
             <v-card-text class="text--primary">
-            <div>Love my new artwork! I</div>
+            <h5 style="font-weight:bold;color:#000">Love my new artwork! I</h5>
 
             <div>Love my new artwork! I had no instructions included, so I had to wing it. It was a bit difficult to get everything
                  aligned properly, but it's aligned enough now. Other than that, awesome support and awesome artworks!</div>
@@ -74,7 +74,6 @@
 
             <v-card-actions style="display:block">
             <v-btn
-                color="orange"
                 text
             >
                <i class="fa fa-share-square"></i> Share

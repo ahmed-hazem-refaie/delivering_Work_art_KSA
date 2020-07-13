@@ -2974,6 +2974,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pagecomponents_ShopHeader__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../pagecomponents/ShopHeader */ "./resources/js/components/pagecomponents/ShopHeader.vue");
+/* harmony import */ var _pagecomponents_Slider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../pagecomponents/Slider */ "./resources/js/components/pagecomponents/Slider.vue");
+//
 //
 //
 //
@@ -2981,9 +2983,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    shopHeader: _pagecomponents_ShopHeader__WEBPACK_IMPORTED_MODULE_0__["default"]
+    shopHeader: _pagecomponents_ShopHeader__WEBPACK_IMPORTED_MODULE_0__["default"],
+    appslider: _pagecomponents_Slider__WEBPACK_IMPORTED_MODULE_1__["default"]
   }
 });
 
@@ -3158,7 +3162,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3185,9 +3188,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _pagecomponents_ShopSlider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../pagecomponents/ShopSlider */ "./resources/js/components/pagecomponents/ShopSlider.vue");
-/* harmony import */ var _pagecomponents_ShopVideo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../pagecomponents/ShopVideo */ "./resources/js/components/pagecomponents/ShopVideo.vue");
-/* harmony import */ var _pagecomponents_Review__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../pagecomponents/Review */ "./resources/js/components/pagecomponents/Review.vue");
+/* harmony import */ var _pagecomponents_ShopVideo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../pagecomponents/ShopVideo */ "./resources/js/components/pagecomponents/ShopVideo.vue");
+/* harmony import */ var _pagecomponents_Review__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../pagecomponents/Review */ "./resources/js/components/pagecomponents/Review.vue");
 //
 //
 //
@@ -3314,14 +3316,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    appslider: _pagecomponents_ShopSlider__WEBPACK_IMPORTED_MODULE_0__["default"],
-    appvideo: _pagecomponents_ShopVideo__WEBPACK_IMPORTED_MODULE_1__["default"],
-    review: _pagecomponents_Review__WEBPACK_IMPORTED_MODULE_2__["default"]
+    appvideo: _pagecomponents_ShopVideo__WEBPACK_IMPORTED_MODULE_0__["default"],
+    review: _pagecomponents_Review__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
@@ -3338,7 +3348,18 @@ __webpack_require__.r(__webpack_exports__);
       first: null,
       firstpalettesArtists: null,
       firstminPalettes: null,
-      active_el: 3
+      active_el: 3,
+      S_copies: '',
+      S_avalible: '',
+      S_price: '',
+      M_copies: '',
+      M_avalible: '',
+      M_price: '',
+      L_copies: '',
+      L_avalible: '',
+      L_price: '',
+      sizing_details: '',
+      name: ''
     };
   },
   created: function created() {
@@ -3349,6 +3370,7 @@ __webpack_require__.r(__webpack_exports__);
       _this.first = response.data.artists[0].id;
       axios.get("/api/view?id=" + _this.first).then(function (response) {
         _this.palettes = response.data.palettes;
+        _this.name = response.data.palettes[0].name, _this.S_copies = response.data.palettes[0].S_copies, _this.S_avalible = response.data.palettes[0].S_avalible, _this.S_price = response.data.palettes[0].S_price, _this.M_copies = response.data.palettes[0].M_copies, _this.M_avalible = response.data.palettes[0].M_avalible, _this.M_price = response.data.palettes[0].M_price, _this.L_copies = response.data.palettes[0].L_copies, _this.L_avalible = response.data.palettes[0].L_avalible, _this.L_price = response.data.palettes[0].L_price, _this.sizing_details = response.data.palettes[0].sizing_details;
         _this.palettesArtists = response.data.palettesArtists;
         _this.firstpalettesArtists = response.data.palettesArtists[0].id;
         axios.get("/api/viewMinPalettes?id=" + _this.firstpalettesArtists).then(function (response) {
@@ -3390,7 +3412,7 @@ __webpack_require__.r(__webpack_exports__);
       this.active_el = el;
       $(".active>.details_img").css({
         width: "78%",
-        height: "130px"
+        height: "160px"
       });
       $(".active>.content").css({
         width: "78%",
@@ -3401,7 +3423,7 @@ __webpack_require__.r(__webpack_exports__);
       this.active_el = el;
       $(".active>.details_img").css({
         width: "88%",
-        height: "170px"
+        height: "200px"
       });
       $(".active>.content").css({
         width: "88%"
@@ -3411,7 +3433,7 @@ __webpack_require__.r(__webpack_exports__);
       this.active_el = el;
       $(".active>.details_img").css({
         width: "100%",
-        height: "200px"
+        height: "250px"
       });
       $(".active>.content").css({
         width: "100%"
@@ -3422,6 +3444,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get("/api/viewMinPalettes?id=" + $minPalette_id).then(function (response) {
         _this3.minPalettes = response.data.minPalettes;
+        _this3.name = response.data.palettes[0].name, _this3.S_copies = response.data.palettes[0].S_copies, _this3.S_avalible = response.data.palettes[0].S_avalible, _this3.S_price = response.data.palettes[0].S_price, _this3.M_copies = response.data.palettes[0].M_copies, _this3.M_avalibles = response.data.palettes[0].M_avalible, _this3.M_price = response.data.palettes[0].M_price, _this3.L_copies = response.data.palettes[0].L_copies, _this3.L_avalibles = response.data.palettes[0].L_avalible, _this3.L_price = response.data.palettes[0].L_price, _this3.sizing_details = response.data.palettes[0].sizing_details;
       })["catch"](function (error) {
         return console.log(error.response.data);
       });
@@ -3429,85 +3452,6 @@ __webpack_require__.r(__webpack_exports__);
         $(this).addClass('active').siblings().removeClass('active');
       });
     }
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pagecomponents/ShopSlider.vue?vue&type=script&lang=js&":
-/*!************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pagecomponents/ShopSlider.vue?vue&type=script&lang=js& ***!
-  \************************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['data'],
-  mounted: function mounted() {
-    var swiper = new Swiper('.swiper-container', {
-      slidesPerView: 3,
-      spaceBetween: 30,
-      freeMode: true,
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true
-      }
-    });
   }
 });
 
@@ -3609,110 +3553,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      sliderPalettes: []
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    axios.get('/api/palettes').then(function (response) {
+      _this.artists = response.data.artists;
+      _this.sliderPalettes = response.data.palettesSlider;
+    })["catch"](function (error) {
+      return console.log(error.response.data);
+    });
+  },
   mounted: function mounted() {
     var swiper = new Swiper('.swiper-container', {
       slidesPerView: 3,
@@ -8246,7 +8102,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.carousel-item .header[data-v-266b1872]{\n        width: 100%;\n        height: 640px;\n}\n@media(max-width:991px){\n.wrapper[data-v-266b1872]{\n            display: none;\n}\n.carousel-item .header[data-v-266b1872]{\n            height: 300px;\n}\n}\n.header_sm[data-v-266b1872]{\n        background-image: url('https://cdn.shopify.com/s/files/1/3000/4362/files/turrell_mobile_final_post_3_2048x.jpg?v=1565189502');\n        background-size: cover;\n        height: 300px;\n        background-position: center;\n        position: relative;\n        display: none;\n}\n@media(max-width:991px){\n.header_sm[data-v-266b1872]{\n            display: none;\n}\n}\n.wrapper[data-v-266b1872]{\n        position: absolute;\n        top: 15%;\n        left: 32%;\n}\n.details[data-v-266b1872]{\n    width: 16%;\n    display: inline-block;\n    margin: 15px;\n    color: #fff;\n    cursor: pointer;\n}\n.details img[data-v-266b1872]{\n        width: 100%;\n        transition: all 1s;\n        height: 200px;\n}\n.wrapper .details .content[data-v-266b1872]{\n        font-size: 14px;\n        width: 100%;\n        margin: 16px auto 0;\n        padding: 6px 5px;\n        transition: all .5s;\n        color: #fff;\n        border-radius: 10px;\n        background-color: rgba(0,0,0,.75);\n        background-repeat: no-repeat;\n        background-position: 50%;\n        background-size: 100%;\n}\n.wrapper .details .content[data-v-266b1872]:hover{\n        border: 2px solid #00a4ee;\n}\n.details:hover img[data-v-266b1872]{\n        transform: scale(1.1);\n}\n.add-cart div span[data-v-266b1872]{\n        font-size: 15px;\n        font-weight: 400;\n        line-height: 22px;\n        display: inline-block;\n        margin-right: 5px;\n        padding: 0 10px;\n        text-transform: lowercase;\n        color: #fff;\n        border-radius: 999px;\n        background-color: #000;\n}\n.add-cart p[data-v-266b1872]{\n        font-size: 20px;\n}\n.add-cart .add-button[data-v-266b1872]{\n        font-size: 20px;\n        font-weight: 700;\n        line-height: 70px;\n        display: block;\n        width: 100%;\n        margin-bottom: 10px;\n        cursor: pointer;\n        text-align: center;\n        text-decoration: none;\n        color: #fff;\n        border: none;\n        background-color: #000;\n}\n.add-cart .more[data-v-266b1872]{\n        outline: none;\n}\n.list-group .list-group-item[data-v-266b1872]{\n        cursor: pointer;\n        border-left: none;\n        border-right: none;\n        padding-left: 10px;\n        padding-right: 10px;\n}\n/* \n    .carousel-control-prev{\n        left: -50%;\n    } */\n.carousel-indicators li[data-v-266b1872] {\n    box-sizing: content-box;\n    flex: 0 1 auto;\n    width: 67px;\n    height: 29px;\n    margin-right: 14px;\n    margin-left: 0;\n    text-indent: 0;\n    cursor: pointer;\n    color: black;\n    background: none;\n}\n.carousel-indicators[data-v-266b1872]{\n    bottom: -9%;\n    width: 100%;\n    background-color: #f5f0ed;\n    margin-left: 0;\n    margin-right: 0;\n}\n@media(max-width: 991px){\n.carousel-indicators[data-v-266b1872]{\n        bottom: -15%;\n}\n}\n.carousel-indicators .active[data-v-266b1872]{\n    border-bottom: 3px solid #25d1e2;\n}\n.small[data-v-266b1872], .medium[data-v-266b1872], .larg[data-v-266b1872]{\n    padding: 30px !important;\n    margin-right: 20px !important;\n    font-size: 20px ;\n}\n.active>.content[data-v-266b1872] {\n    border: 2px solid #00a4ee;\n}\n.active_btn[data-v-266b1872]{\n    border: 2px solid #00a4ee;\n}\n", ""]);
+exports.push([module.i, "\n.carousel-item .header[data-v-266b1872]{\n        width: 100%;\n        height: 640px;\n}\n@media(max-width:991px){\n.wrapper[data-v-266b1872]{\n            display: none;\n}\n.carousel-item .header[data-v-266b1872]{\n            height: 300px;\n}\n}\n.header_sm[data-v-266b1872]{\n        background-image: url('https://cdn.shopify.com/s/files/1/3000/4362/files/turrell_mobile_final_post_3_2048x.jpg?v=1565189502');\n        background-size: cover;\n        height: 300px;\n        background-position: center;\n        position: relative;\n        display: none;\n}\n@media(max-width:991px){\n.header_sm[data-v-266b1872]{\n            display: none;\n}\n}\n.wrapper[data-v-266b1872]{\n        position: absolute;\n        top: 15%;\n        left: 32%;\n}\n.details[data-v-266b1872]{\n    width: 16%;\n    display: inline-block;\n    margin: 15px;\n    color: #fff;\n    cursor: pointer;\n}\n.details img[data-v-266b1872]{\n        width: 100%;\n        transition: all 1s;\n        height: 250px;\n}\n.wrapper .details .content[data-v-266b1872]{\n        font-size: 14px;\n        width: 100%;\n        margin: 16px auto 0;\n        padding: 6px 5px;\n        transition: all .5s;\n        color: #fff;\n        border-radius: 10px;\n        background-color: rgba(0,0,0,.75);\n        background-repeat: no-repeat;\n        background-position: 50%;\n        background-size: 100%;\n}\n.wrapper .details .content[data-v-266b1872]:hover{\n        border: 2px solid #00a4ee;\n}\n.details:hover img[data-v-266b1872]{\n        transform: scale(1.1);\n}\n.add-cart div span[data-v-266b1872]{\n        font-size: 15px;\n        font-weight: 400;\n        line-height: 22px;\n        display: inline-block;\n        margin-right: 5px;\n        padding: 0 10px;\n        text-transform: lowercase;\n        color: #fff;\n        border-radius: 999px;\n        background-color: #000;\n}\n.add-cart p[data-v-266b1872]{\n        font-size: 20px;\n}\n.add-cart .add-button[data-v-266b1872]{\n        font-size: 20px;\n        font-weight: 700;\n        line-height: 70px;\n        display: block;\n        width: 100%;\n        margin-bottom: 10px;\n        cursor: pointer;\n        text-align: center;\n        text-decoration: none;\n        color: #fff;\n        border: none;\n        background-color: #000;\n}\n.add-cart .more[data-v-266b1872]{\n        outline: none;\n}\n.list-group .list-group-item[data-v-266b1872]{\n        cursor: pointer;\n        border-left: none;\n        border-right: none;\n        padding-left: 10px;\n        padding-right: 10px;\n}\n/* \n    .carousel-control-prev{\n        left: -50%;\n    } */\n.carousel-indicators li[data-v-266b1872] {\n    box-sizing: content-box;\n    flex: 0 1 auto;\n    width: 67px;\n    height: 29px;\n    margin-right: 14px;\n    margin-left: 0;\n    text-indent: 0;\n    cursor: pointer;\n    color: black;\n    background: none;\n}\n.carousel-indicators[data-v-266b1872]{\n    bottom: -9%;\n    width: 100%;\n    background-color: #f5f0ed;\n    margin-left: 0;\n    margin-right: 0;\n}\n@media(max-width: 991px){\n.carousel-indicators[data-v-266b1872]{\n        bottom: -15%;\n}\n}\n.carousel-indicators .active[data-v-266b1872]{\n    border-bottom: 3px solid #25d1e2;\n}\n.small[data-v-266b1872], .medium[data-v-266b1872], .larg[data-v-266b1872]{\n    padding: 30px !important;\n    margin-right: 20px !important;\n    font-size: 20px ;\n}\n.active>.content[data-v-266b1872] {\n    border: 2px solid #00a4ee;\n}\n.active_btn[data-v-266b1872]{\n    border: 2px solid #00a4ee;\n}\n", ""]);
 
 // exports
 
@@ -40162,7 +40018,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
+    "v-app",
     [
       _c("appnavbar"),
       _vm._v(" "),
@@ -42632,7 +42488,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_c("shopHeader")], 1)
+  return _c("div", [_c("shopHeader"), _vm._v(" "), _c("appslider")], 1)
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -42870,7 +42726,7 @@ var render = function() {
               _c("h6", { staticClass: "mb-4" }, [_vm._v("Score")]),
               _vm._v(" "),
               _c("v-rating", {
-                attrs: { medium: "" },
+                attrs: { color: "orange", medium: "" },
                 model: {
                   value: _vm.rating,
                   callback: function($$v) {
@@ -43007,7 +42863,11 @@ var render = function() {
           ),
           _vm._v(" "),
           _c("v-card-text", { staticClass: "text--primary" }, [
-            _c("div", [_vm._v("Love my new artwork! I")]),
+            _c(
+              "h5",
+              { staticStyle: { "font-weight": "bold", color: "#000" } },
+              [_vm._v("Love my new artwork! I")]
+            ),
             _vm._v(" "),
             _c("div", [
               _vm._v(
@@ -43020,7 +42880,7 @@ var render = function() {
             "v-card-actions",
             { staticStyle: { display: "block" } },
             [
-              _c("v-btn", { attrs: { color: "orange", text: "" } }, [
+              _c("v-btn", { attrs: { text: "" } }, [
                 _c("i", { staticClass: "fa fa-share-square" }),
                 _vm._v(" Share\n        ")
               ]),
@@ -43146,7 +43006,7 @@ var render = function() {
                         {
                           key: palettesArtist.id,
                           staticClass: "details",
-                          class: { active: index === 0 },
+                          class: { active: index == 0 },
                           on: {
                             click: function($event) {
                               return _vm.addActive(palettesArtist.id)
@@ -43288,7 +43148,18 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("h2", { staticClass: "font-weight-bold " }, [
-                  _vm._v("Synthetic II $ ")
+                  _vm._v(_vm._s(_vm.name) + " II \n                    "),
+                  _vm.active_el == 1
+                    ? _c("span", [_vm._v("$" + _vm._s(_vm.S_price))])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.active_el == 2
+                    ? _c("span", [_vm._v("$" + _vm._s(_vm.M_price))])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.active_el == 3
+                    ? _c("span", [_vm._v("$" + _vm._s(_vm.L_price))])
+                    : _vm._e()
                 ]),
                 _vm._v(" "),
                 _vm._m(0),
@@ -43296,62 +43167,114 @@ var render = function() {
                 _c(
                   "div",
                   [
-                    _c(
-                      "v-btn",
-                      {
-                        staticClass: "mb-2 size_btn small",
-                        class: { active_btn: _vm.active_el == 1 },
-                        on: {
-                          click: function($event) {
-                            return _vm.small(1)
-                          }
-                        }
-                      },
-                      [_vm._v("S")]
-                    ),
+                    _vm.S_copies > 0
+                      ? _c(
+                          "v-btn",
+                          {
+                            staticClass: "mb-2 size_btn small",
+                            class: { active_btn: _vm.active_el == 1 },
+                            on: {
+                              click: function($event) {
+                                return _vm.small(1)
+                              }
+                            }
+                          },
+                          [_vm._v("S")]
+                        )
+                      : _c(
+                          "v-btn",
+                          {
+                            staticClass: "mb-2 size_btn small",
+                            staticStyle: {
+                              cursor: "not-allowed",
+                              "background-color": "#737373",
+                              color: "#fff",
+                              border: "none"
+                            }
+                          },
+                          [_vm._v("Empty")]
+                        ),
                     _vm._v(" "),
-                    _c(
-                      "v-btn",
-                      {
-                        staticClass: "mb-2 size_btn medium",
-                        class: { active_btn: _vm.active_el == 2 },
-                        on: {
-                          click: function($event) {
-                            return _vm.medium(2)
-                          }
-                        }
-                      },
-                      [_vm._v("M")]
-                    ),
+                    _vm.M_copies > 0
+                      ? _c(
+                          "v-btn",
+                          {
+                            staticClass: "mb-2 size_btn medium",
+                            class: { active_btn: _vm.active_el == 2 },
+                            on: {
+                              click: function($event) {
+                                return _vm.medium(2)
+                              }
+                            }
+                          },
+                          [_vm._v("M")]
+                        )
+                      : _c(
+                          "v-btn",
+                          {
+                            staticClass: "mb-2 size_btn small",
+                            staticStyle: {
+                              cursor: "not-allowed",
+                              "background-color": "#737373",
+                              color: "#fff",
+                              border: "none"
+                            }
+                          },
+                          [_vm._v("Empty")]
+                        ),
                     _vm._v(" "),
-                    _c(
-                      "v-btn",
-                      {
-                        staticClass: "mb-2 size_btn larg",
-                        class: { active_btn: _vm.active_el == 3 },
-                        on: {
-                          click: function($event) {
-                            return _vm.larg(3)
-                          }
-                        }
-                      },
-                      [_vm._v("L")]
-                    ),
+                    _vm.L_copies > 0
+                      ? _c(
+                          "v-btn",
+                          {
+                            staticClass: "mb-2 size_btn larg",
+                            class: { active_btn: _vm.active_el == 3 },
+                            on: {
+                              click: function($event) {
+                                return _vm.larg(3)
+                              }
+                            }
+                          },
+                          [_vm._v("L")]
+                        )
+                      : _c(
+                          "v-btn",
+                          {
+                            staticClass: "mb-2 size_btn small",
+                            staticStyle: {
+                              cursor: "not-allowed",
+                              "background-color": "#737373",
+                              color: "#fff",
+                              border: "none"
+                            }
+                          },
+                          [_vm._v("Empty")]
+                        ),
                     _vm._v(" "),
                     _vm.active_el == 1
                       ? _c("h3", { staticClass: "mt-4 mb-4" }, [
-                          _vm._v('70x93.5cm (28x37") '),
+                          _vm._v('30x40cm (12x16") '),
                           _c("strong", { staticStyle: { float: "right" } }, [
-                            _vm._v("3/32 left")
+                            _vm._v(
+                              _vm._s(_vm.S_copies) +
+                                "/" +
+                                _vm._s(_vm.S_avalible) +
+                                " left"
+                            )
                           ])
                         ])
                       : _vm._e(),
                     _vm._v(" "),
                     _vm.active_el == 2
                       ? _c("h3", { staticClass: "mt-4 mb-4" }, [
-                          _vm._v('70x93.5cm (28x37") '),
+                          _vm._v('50x66.5cm (20x26") '),
                           _c("strong", { staticStyle: { float: "right" } }, [
-                            _vm._v("4/32 left")
+                            _vm._v(
+                              _vm._s(_vm.M_copies) +
+                                "/" +
+                                _vm._s(_vm.M_avalible) +
+                                " left"
+                            )
                           ])
                         ])
                       : _vm._e(),
@@ -43360,7 +43283,12 @@ var render = function() {
                       ? _c("h3", { staticClass: "mt-4 mb-4" }, [
                           _vm._v('70x93.5cm (28x37") '),
                           _c("strong", { staticStyle: { float: "right" } }, [
-                            _vm._v("21/32 left")
+                            _vm._v(
+                              _vm._s(_vm.L_copies) +
+                                "/" +
+                                _vm._s(_vm.L_avalible) +
+                                " left"
+                            )
                           ])
                         ])
                       : _vm._e(),
@@ -43371,7 +43299,18 @@ var render = function() {
                 ),
                 _vm._v(" "),
                 _c("button", { staticClass: "btn add-button " }, [
-                  _vm._v("5$ - Add To Cart")
+                  _vm.active_el == 1
+                    ? _c("span", [_vm._v("$" + _vm._s(_vm.S_price))])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.active_el == 2
+                    ? _c("span", [_vm._v("$" + _vm._s(_vm.M_price))])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.active_el == 3
+                    ? _c("span", [_vm._v("$" + _vm._s(_vm.L_price))])
+                    : _vm._e(),
+                  _vm._v(" - Add To Cart")
                 ]),
                 _vm._v(" "),
                 _c(
@@ -43539,9 +43478,7 @@ var render = function() {
       _vm._v(" "),
       _c("appvideo"),
       _vm._v(" "),
-      _c("review"),
-      _vm._v(" "),
-      _c("appslider", { attrs: { data: _vm.palettes } })
+      _c("review")
     ],
     1
   )
@@ -43553,198 +43490,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "mb-3 mt-2" }, [
       _c("span", [_vm._v("silkscreen")])
-    ])
-  }
-]
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pagecomponents/ShopSlider.vue?vue&type=template&id=1b093674&scoped=true&":
-/*!****************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/pagecomponents/ShopSlider.vue?vue&type=template&id=1b093674&scoped=true& ***!
-  \****************************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "mt-5" }, [
-    _c("div", { staticClass: "container-fluid" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c("div", { staticClass: "swiper-container mt-5" }, [
-        _c(
-          "div",
-          { staticClass: "swiper-wrapper" },
-          _vm._l(_vm.data, function(data) {
-            return _c(
-              "div",
-              { key: data.id, staticClass: "swiper-slide ml-1" },
-              [
-                _c("div", { staticClass: "product-grid-item" }, [
-                  _c("div", { staticClass: "product-grid-item__image" }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "product-grid-item__imagewrapper",
-                        attrs: {
-                          href: "/products/son-this-is-the-universe",
-                          "data-product-handle": "son-this-is-the-universe",
-                          "data-product-quantity": "48"
-                        }
-                      },
-                      [
-                        _c("img", {
-                          staticClass: "front",
-                          staticStyle: { height: "100%" },
-                          attrs: { src: data.img }
-                        }),
-                        _vm._v(" "),
-                        _c("img", {
-                          staticClass: "back",
-                          attrs: {
-                            src:
-                              "//cdn.shopify.com/s/files/1/3000/4362/products/Son-this-is-the-Universe-DD-1_1024x1024.jpg?v=1592233469"
-                          }
-                        })
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _vm._m(1, true),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "product-grid-item__tags" }, [
-                      _c("div", { staticClass: "cms-special-description" }, [
-                        _c(
-                          "span",
-                          { staticClass: "cms-special-label color-4" },
-                          [_vm._v(_vm._s(data.name))]
-                        ),
-                        _vm._v(" "),
-                        _c("p", [
-                          _vm._v(
-                            "Walltones-studio added diamond dust to this print for a glittering effect that makes the artwork even more enticing. Additionally, keep in mind that each artwork is done by hand and therefore may slightly vary from the exemplary product images."
-                          )
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _vm._m(2, true)
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "product-grid-item__info" }, [
-                    _c("div", { staticClass: "product-grid-item__title" }, [
-                      _c("h3", { staticClass: "product-grid-item__name" }, [
-                        _c(
-                          "a",
-                          {
-                            attrs: {
-                              href: "/products/son-this-is-the-universe",
-                              "data-product-handle": "son-this-is-the-universe",
-                              "data-product-quantity": "48"
-                            }
-                          },
-                          [_vm._v(_vm._s(data.name))]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "product-grid-item__price" }, [
-                        _vm._v("from $" + _vm._s(data.L_price))
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "product-grid-item__qty" }, [
-                      _c("span", { staticClass: "prints-times text-success" }, [
-                        _vm._v(_vm._s(data.palette_copies) + " / ")
-                      ]),
-                      _c("span", { staticClass: "black" }, [
-                        _vm._v(_vm._s(data.avalible_copies) + " left")
-                      ])
-                    ])
-                  ])
-                ])
-              ]
-            )
-          }),
-          0
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "swiper-pagination" })
-      ])
-    ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "h2",
-      { staticClass: "home-products-slider__title section-title" },
-      [
-        _c("span", [_vm._v("New Release")]),
-        _vm._v(" "),
-        _c("span", { staticClass: "sTitle" }, [
-          _vm._v("THIS WEEK’S RELEASE OF LIMITED ARTWORKS")
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "product-grid-item__variants" }, [
-      _c("span", [_vm._v("Size")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "product-grid-item__variants--content" }, [
-        _c(
-          "a",
-          {
-            staticClass: "soldout",
-            attrs: { href: "#", "data-cart-add": "32583351238759" }
-          },
-          [_vm._v("L")]
-        ),
-        _vm._v(" "),
-        _c(
-          "a",
-          {
-            staticClass: "soldout",
-            attrs: { href: "#", "data-cart-add": "32583351337063" }
-          },
-          [_vm._v("M")]
-        ),
-        _vm._v(" "),
-        _c("a", { attrs: { href: "#", "data-cart-add": "32583351402599" } }, [
-          _vm._v("S")
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "cms-special-description" }, [
-      _c("span", { staticClass: "cms-special-label color-7" }, [
-        _vm._v("NEW RELEASE")
-      ]),
-      _vm._v(" "),
-      _c("p", [
-        _vm._v(
-          "This artwork was added recently (but will likely be sold out soon)"
-        )
-      ])
     ])
   }
 ]
@@ -43862,568 +43607,173 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "mt-5" }, [
+    _c("div", { staticClass: "container-fluid" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "swiper-container mt-5" }, [
+        _c(
+          "div",
+          { staticClass: "swiper-wrapper" },
+          _vm._l(_vm.sliderPalettes, function(data) {
+            return _c(
+              "div",
+              { key: data.id, staticClass: "swiper-slide ml-1" },
+              [
+                _c("div", { staticClass: "product-grid-item" }, [
+                  _c("div", { staticClass: "product-grid-item__image" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "product-grid-item__imagewrapper",
+                        attrs: {
+                          href: "/products/son-this-is-the-universe",
+                          "data-product-handle": "son-this-is-the-universe",
+                          "data-product-quantity": "48"
+                        }
+                      },
+                      [
+                        _c("img", {
+                          staticClass: "front",
+                          staticStyle: { height: "100%" },
+                          attrs: { src: data.img }
+                        }),
+                        _vm._v(" "),
+                        _c("img", {
+                          staticClass: "back",
+                          attrs: {
+                            src:
+                              "//cdn.shopify.com/s/files/1/3000/4362/products/Son-this-is-the-Universe-DD-1_1024x1024.jpg?v=1592233469"
+                          }
+                        })
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm._m(1, true),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "product-grid-item__tags" }, [
+                      _c("div", { staticClass: "cms-special-description" }, [
+                        _c(
+                          "span",
+                          { staticClass: "cms-special-label color-4" },
+                          [_vm._v(_vm._s(data.name))]
+                        ),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "Walltones-studio added diamond dust to this print for a glittering effect that makes the artwork even more enticing. Additionally, keep in mind that each artwork is done by hand and therefore may slightly vary from the exemplary product images."
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(2, true)
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "product-grid-item__info" }, [
+                    _c("div", { staticClass: "product-grid-item__title" }, [
+                      _c("h3", { staticClass: "product-grid-item__name" }, [
+                        _c(
+                          "a",
+                          {
+                            attrs: {
+                              href: "/products/son-this-is-the-universe",
+                              "data-product-handle": "son-this-is-the-universe",
+                              "data-product-quantity": "48"
+                            }
+                          },
+                          [_vm._v(_vm._s(data.name))]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "product-grid-item__price" }, [
+                        _vm._v("from $" + _vm._s(data.L_price))
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "product-grid-item__qty" }, [
+                      _c("span", { staticClass: "prints-times text-success" }, [
+                        _vm._v(_vm._s(data.palette_copies) + " / ")
+                      ]),
+                      _c("span", [
+                        _vm._v(_vm._s(data.avalible_copies) + " left")
+                      ])
+                    ])
+                  ])
+                ])
+              ]
+            )
+          }),
+          0
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "swiper-pagination" })
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("div", { staticClass: "container-fluid" }, [
-        _c("h2", { staticClass: "home-products-slider__title section-title" }, [
-          _c("span", [_vm._v("New Release")]),
-          _vm._v(" "),
-          _c("span", { staticClass: "sTitle" }, [
-            _vm._v("THIS WEEK’S RELEASE OF LIMITED ARTWORKS")
-          ])
-        ]),
+    return _c(
+      "h2",
+      { staticClass: "home-products-slider__title section-title" },
+      [
+        _c("span", [_vm._v("New Release")]),
         _vm._v(" "),
-        _c("div", { staticClass: "swiper-container mt-5" }, [
-          _c("div", { staticClass: "swiper-wrapper" }, [
-            _c("div", { staticClass: "swiper-slide" }, [
-              _c("div", { staticClass: "product-grid-item" }, [
-                _c("div", { staticClass: "product-grid-item__image" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "product-grid-item__imagewrapper",
-                      attrs: {
-                        href: "/products/son-this-is-the-universe",
-                        "data-product-handle": "son-this-is-the-universe",
-                        "data-product-quantity": "48"
-                      }
-                    },
-                    [
-                      _c("img", {
-                        staticClass: "front",
-                        attrs: {
-                          src:
-                            "//cdn.shopify.com/s/files/1/3000/4362/products/SonthisistheUniverseEditions_Product_Image_1_1024x1024.jpg?v=1592233374"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("img", {
-                        staticClass: "back",
-                        attrs: {
-                          src:
-                            "//cdn.shopify.com/s/files/1/3000/4362/products/Son-this-is-the-Universe-DD-1_1024x1024.jpg?v=1592233469"
-                        }
-                      })
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "product-grid-item__variants" }, [
-                    _c("span", [_vm._v("Size")]),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "product-grid-item__variants--content" },
-                      [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "soldout",
-                            attrs: {
-                              href: "#",
-                              "data-cart-add": "32583351238759"
-                            }
-                          },
-                          [_vm._v("L")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            staticClass: "soldout",
-                            attrs: {
-                              href: "#",
-                              "data-cart-add": "32583351337063"
-                            }
-                          },
-                          [_vm._v("M")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            attrs: {
-                              href: "#",
-                              "data-cart-add": "32583351402599"
-                            }
-                          },
-                          [_vm._v("S")]
-                        )
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "product-grid-item__tags" }, [
-                    _c("div", { staticClass: "cms-special-description" }, [
-                      _c("span", { staticClass: "cms-special-label color-4" }, [
-                        _vm._v("DIAMOND DUST")
-                      ]),
-                      _vm._v(" "),
-                      _c("p", [
-                        _vm._v(
-                          "Walltones-studio added diamond dust to this print for a glittering effect that makes the artwork even more enticing. Additionally, keep in mind that each artwork is done by hand and therefore may slightly vary from the exemplary product images."
-                        )
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "cms-special-description" }, [
-                      _c("span", { staticClass: "cms-special-label color-7" }, [
-                        _vm._v("NEW RELEASE")
-                      ]),
-                      _vm._v(" "),
-                      _c("p", [
-                        _vm._v(
-                          "This artwork was added recently (but will likely be sold out soon)"
-                        )
-                      ])
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "product-grid-item__info" }, [
-                  _c("div", { staticClass: "product-grid-item__title" }, [
-                    _c("h3", { staticClass: "product-grid-item__name" }, [
-                      _c(
-                        "a",
-                        {
-                          attrs: {
-                            href: "/products/son-this-is-the-universe",
-                            "data-product-handle": "son-this-is-the-universe",
-                            "data-product-quantity": "48"
-                          }
-                        },
-                        [_vm._v("Son, this is the Universe")]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "product-grid-item__price" }, [
-                      _vm._v("from $199")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "product-grid-item__qty" }, [
-                    _c("span", { staticClass: "prints-times" }, [
-                      _vm._v("edition of 50 - ")
-                    ]),
-                    _c("span", { staticClass: "black" }, [_vm._v("48 left")])
-                  ])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "swiper-slide" }, [
-              _c("div", { staticClass: "product-grid-item" }, [
-                _c("div", { staticClass: "product-grid-item__image" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "product-grid-item__imagewrapper",
-                      attrs: {
-                        href: "/products/son-this-is-the-universe",
-                        "data-product-handle": "son-this-is-the-universe",
-                        "data-product-quantity": "48"
-                      }
-                    },
-                    [
-                      _c("img", {
-                        staticClass: "front",
-                        attrs: {
-                          src:
-                            "//cdn.shopify.com/s/files/1/3000/4362/products/SonthisistheUniverseEditions_Product_Image_1_1024x1024.jpg?v=1592233374"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("img", {
-                        staticClass: "back",
-                        attrs: {
-                          src:
-                            "//cdn.shopify.com/s/files/1/3000/4362/products/Son-this-is-the-Universe-DD-1_1024x1024.jpg?v=1592233469"
-                        }
-                      })
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "product-grid-item__variants" }, [
-                    _c("span", [_vm._v("Size")]),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "product-grid-item__variants--content" },
-                      [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "soldout",
-                            attrs: {
-                              href: "#",
-                              "data-cart-add": "32583351238759"
-                            }
-                          },
-                          [_vm._v("L")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            staticClass: "soldout",
-                            attrs: {
-                              href: "#",
-                              "data-cart-add": "32583351337063"
-                            }
-                          },
-                          [_vm._v("M")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            attrs: {
-                              href: "#",
-                              "data-cart-add": "32583351402599"
-                            }
-                          },
-                          [_vm._v("S")]
-                        )
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "product-grid-item__tags" }, [
-                    _c("div", { staticClass: "cms-special-description" }, [
-                      _c("span", { staticClass: "cms-special-label color-4" }, [
-                        _vm._v("DIAMOND DUST")
-                      ]),
-                      _vm._v(" "),
-                      _c("p", [
-                        _vm._v(
-                          "Walltones-studio added diamond dust to this print for a glittering effect that makes the artwork even more enticing. Additionally, keep in mind that each artwork is done by hand and therefore may slightly vary from the exemplary product images."
-                        )
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "cms-special-description" }, [
-                      _c("span", { staticClass: "cms-special-label color-7" }, [
-                        _vm._v("NEW RELEASE")
-                      ]),
-                      _vm._v(" "),
-                      _c("p", [
-                        _vm._v(
-                          "This artwork was added recently (but will likely be sold out soon)"
-                        )
-                      ])
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "product-grid-item__info" }, [
-                  _c("div", { staticClass: "product-grid-item__title" }, [
-                    _c("h3", { staticClass: "product-grid-item__name" }, [
-                      _c(
-                        "a",
-                        {
-                          attrs: {
-                            href: "/products/son-this-is-the-universe",
-                            "data-product-handle": "son-this-is-the-universe",
-                            "data-product-quantity": "48"
-                          }
-                        },
-                        [_vm._v("Son, this is the Universe")]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "product-grid-item__price" }, [
-                      _vm._v("from $199")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "product-grid-item__qty" }, [
-                    _c("span", { staticClass: "prints-times" }, [
-                      _vm._v("edition of 50 - ")
-                    ]),
-                    _c("span", { staticClass: "black" }, [_vm._v("48 left")])
-                  ])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "swiper-slide" }, [
-              _c("div", { staticClass: "product-grid-item" }, [
-                _c("div", { staticClass: "product-grid-item__image" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "product-grid-item__imagewrapper",
-                      attrs: {
-                        href: "/products/son-this-is-the-universe",
-                        "data-product-handle": "son-this-is-the-universe",
-                        "data-product-quantity": "48"
-                      }
-                    },
-                    [
-                      _c("img", {
-                        staticClass: "front",
-                        attrs: {
-                          src:
-                            "//cdn.shopify.com/s/files/1/3000/4362/products/SonthisistheUniverseEditions_Product_Image_1_1024x1024.jpg?v=1592233374"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("img", {
-                        staticClass: "back",
-                        attrs: {
-                          src:
-                            "//cdn.shopify.com/s/files/1/3000/4362/products/Son-this-is-the-Universe-DD-1_1024x1024.jpg?v=1592233469"
-                        }
-                      })
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "product-grid-item__variants" }, [
-                    _c("span", [_vm._v("Size")]),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "product-grid-item__variants--content" },
-                      [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "soldout",
-                            attrs: {
-                              href: "#",
-                              "data-cart-add": "32583351238759"
-                            }
-                          },
-                          [_vm._v("L")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            staticClass: "soldout",
-                            attrs: {
-                              href: "#",
-                              "data-cart-add": "32583351337063"
-                            }
-                          },
-                          [_vm._v("M")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            attrs: {
-                              href: "#",
-                              "data-cart-add": "32583351402599"
-                            }
-                          },
-                          [_vm._v("S")]
-                        )
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "product-grid-item__tags" }, [
-                    _c("div", { staticClass: "cms-special-description" }, [
-                      _c("span", { staticClass: "cms-special-label color-4" }, [
-                        _vm._v("DIAMOND DUST")
-                      ]),
-                      _vm._v(" "),
-                      _c("p", [
-                        _vm._v(
-                          "Walltones-studio added diamond dust to this print for a glittering effect that makes the artwork even more enticing. Additionally, keep in mind that each artwork is done by hand and therefore may slightly vary from the exemplary product images."
-                        )
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "cms-special-description" }, [
-                      _c("span", { staticClass: "cms-special-label color-7" }, [
-                        _vm._v("NEW RELEASE")
-                      ]),
-                      _vm._v(" "),
-                      _c("p", [
-                        _vm._v(
-                          "This artwork was added recently (but will likely be sold out soon)"
-                        )
-                      ])
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "product-grid-item__info" }, [
-                  _c("div", { staticClass: "product-grid-item__title" }, [
-                    _c("h3", { staticClass: "product-grid-item__name" }, [
-                      _c(
-                        "a",
-                        {
-                          attrs: {
-                            href: "/products/son-this-is-the-universe",
-                            "data-product-handle": "son-this-is-the-universe",
-                            "data-product-quantity": "48"
-                          }
-                        },
-                        [_vm._v("Son, this is the Universe")]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "product-grid-item__price" }, [
-                      _vm._v("from $199")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "product-grid-item__qty" }, [
-                    _c("span", { staticClass: "prints-times" }, [
-                      _vm._v("edition of 50 - ")
-                    ]),
-                    _c("span", { staticClass: "black" }, [_vm._v("48 left")])
-                  ])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "swiper-slide" }, [
-              _c("div", { staticClass: "product-grid-item" }, [
-                _c("div", { staticClass: "product-grid-item__image" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "product-grid-item__imagewrapper",
-                      attrs: {
-                        href: "/products/son-this-is-the-universe",
-                        "data-product-handle": "son-this-is-the-universe",
-                        "data-product-quantity": "48"
-                      }
-                    },
-                    [
-                      _c("img", {
-                        staticClass: "front",
-                        attrs: {
-                          src:
-                            "//cdn.shopify.com/s/files/1/3000/4362/products/SonthisistheUniverseEditions_Product_Image_1_1024x1024.jpg?v=1592233374"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("img", {
-                        staticClass: "back",
-                        attrs: {
-                          src:
-                            "//cdn.shopify.com/s/files/1/3000/4362/products/Son-this-is-the-Universe-DD-1_1024x1024.jpg?v=1592233469"
-                        }
-                      })
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "product-grid-item__variants" }, [
-                    _c("span", [_vm._v("Size")]),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "product-grid-item__variants--content" },
-                      [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "soldout",
-                            attrs: {
-                              href: "#",
-                              "data-cart-add": "32583351238759"
-                            }
-                          },
-                          [_vm._v("L")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            staticClass: "soldout",
-                            attrs: {
-                              href: "#",
-                              "data-cart-add": "32583351337063"
-                            }
-                          },
-                          [_vm._v("M")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            attrs: {
-                              href: "#",
-                              "data-cart-add": "32583351402599"
-                            }
-                          },
-                          [_vm._v("S")]
-                        )
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "product-grid-item__tags" }, [
-                    _c("div", { staticClass: "cms-special-description" }, [
-                      _c("span", { staticClass: "cms-special-label color-4" }, [
-                        _vm._v("DIAMOND DUST")
-                      ]),
-                      _vm._v(" "),
-                      _c("p", [
-                        _vm._v(
-                          "Walltones-studio added diamond dust to this print for a glittering effect that makes the artwork even more enticing. Additionally, keep in mind that each artwork is done by hand and therefore may slightly vary from the exemplary product images."
-                        )
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "cms-special-description" }, [
-                      _c("span", { staticClass: "cms-special-label color-7" }, [
-                        _vm._v("NEW RELEASE")
-                      ]),
-                      _vm._v(" "),
-                      _c("p", [
-                        _vm._v(
-                          "This artwork was added recently (but will likely be sold out soon)"
-                        )
-                      ])
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "product-grid-item__info" }, [
-                  _c("div", { staticClass: "product-grid-item__title" }, [
-                    _c("h3", { staticClass: "product-grid-item__name" }, [
-                      _c(
-                        "a",
-                        {
-                          attrs: {
-                            href: "/products/son-this-is-the-universe",
-                            "data-product-handle": "son-this-is-the-universe",
-                            "data-product-quantity": "48"
-                          }
-                        },
-                        [_vm._v("Son, this is the Universe")]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "product-grid-item__price" }, [
-                      _vm._v("from $199")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "product-grid-item__qty" }, [
-                    _c("span", { staticClass: "prints-times" }, [
-                      _vm._v("edition of 50 - ")
-                    ]),
-                    _c("span", { staticClass: "black" }, [_vm._v("48 left")])
-                  ])
-                ])
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "swiper-pagination" })
+        _c("span", { staticClass: "sTitle" }, [
+          _vm._v("THIS WEEK’S RELEASE OF LIMITED ARTWORKS")
         ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "product-grid-item__variants" }, [
+      _c("span", [_vm._v("Size")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "product-grid-item__variants--content" }, [
+        _c(
+          "a",
+          {
+            staticClass: "soldout",
+            attrs: { href: "#", "data-cart-add": "32583351238759" }
+          },
+          [_vm._v("L")]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "soldout",
+            attrs: { href: "#", "data-cart-add": "32583351337063" }
+          },
+          [_vm._v("M")]
+        ),
+        _vm._v(" "),
+        _c("a", { attrs: { href: "#", "data-cart-add": "32583351402599" } }, [
+          _vm._v("S")
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "cms-special-description" }, [
+      _c("span", { staticClass: "cms-special-label color-7" }, [
+        _vm._v("NEW RELEASE")
+      ]),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v(
+          "This artwork was added recently (but will likely be sold out soon)"
+        )
       ])
     ])
   }
@@ -104426,75 +103776,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ShopHeader_vue_vue_type_template_id_266b1872_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ShopHeader_vue_vue_type_template_id_266b1872_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/components/pagecomponents/ShopSlider.vue":
-/*!***************************************************************!*\
-  !*** ./resources/js/components/pagecomponents/ShopSlider.vue ***!
-  \***************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ShopSlider_vue_vue_type_template_id_1b093674_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ShopSlider.vue?vue&type=template&id=1b093674&scoped=true& */ "./resources/js/components/pagecomponents/ShopSlider.vue?vue&type=template&id=1b093674&scoped=true&");
-/* harmony import */ var _ShopSlider_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ShopSlider.vue?vue&type=script&lang=js& */ "./resources/js/components/pagecomponents/ShopSlider.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _ShopSlider_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ShopSlider_vue_vue_type_template_id_1b093674_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _ShopSlider_vue_vue_type_template_id_1b093674_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  "1b093674",
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/pagecomponents/ShopSlider.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/pagecomponents/ShopSlider.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************!*\
-  !*** ./resources/js/components/pagecomponents/ShopSlider.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ShopSlider_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ShopSlider.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pagecomponents/ShopSlider.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ShopSlider_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/pagecomponents/ShopSlider.vue?vue&type=template&id=1b093674&scoped=true&":
-/*!**********************************************************************************************************!*\
-  !*** ./resources/js/components/pagecomponents/ShopSlider.vue?vue&type=template&id=1b093674&scoped=true& ***!
-  \**********************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ShopSlider_vue_vue_type_template_id_1b093674_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ShopSlider.vue?vue&type=template&id=1b093674&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/pagecomponents/ShopSlider.vue?vue&type=template&id=1b093674&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ShopSlider_vue_vue_type_template_id_1b093674_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ShopSlider_vue_vue_type_template_id_1b093674_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
