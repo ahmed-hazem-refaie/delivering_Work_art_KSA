@@ -34,3 +34,7 @@ Route::resource('paletteimages', 'PaletteimageController');
 Route::get('addpaletteimages/{palette?}/create','PaletteimageController@create')->name("addimgpalette");
 
 Route::resource('discounts', 'DiscountController');
+
+Route::get('payment/{id?}', function ($id=null) {
+
+})->name('payment');
