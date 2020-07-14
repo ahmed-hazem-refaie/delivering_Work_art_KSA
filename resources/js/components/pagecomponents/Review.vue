@@ -25,10 +25,10 @@
             <h6 class="mb-4" v-if="$i18n.locale == 'en'">{{ $t("message.score") }}</h6>
             <h6 class="mb-4" v-else style="float:right">{{ $t("message.score") }}</h6>
             <div style="clear:both"></div>
-            <v-rating v-if="$i18n.locale == 'en'" v-model="form.rating" color="orange" medium></v-rating>
-            <v-rating v-else style="float:right;" dir="rtl" v-model="rating" color="orange" medium></v-rating>
+            <v-rating v-if="$i18n.locale == 'en'" v-model="form.rate" color="orange" medium></v-rating>
+            <v-rating v-else style="float:right;" dir="rtl" v-model="form.rate" color="orange" medium></v-rating>
             <div style="clear:both"></div>
-            <v-form class="form" v-if="$i18n.locale == 'en'">
+            <v-form class="form" v-if="$i18n.locale == 'en'" @submit.prevent="send">
                 <v-row>
                     <v-col
                     cols="12"
@@ -42,7 +42,7 @@
                     </v-col>
                     <v-col cols="12" md="12">
                         <v-textarea
-                        v-model="form.message"
+                        v-model="form.body"
                         outlined
                         required
                         label="Review"
@@ -69,9 +69,9 @@
                     ></v-text-field>
                     </v-col>
                 </v-row>
-                <v-btn color="#f2efeb" style="margin-left:12px" type="submit">Post</v-btn>
+                <v-btn color="#f2efeb" style="margin-left:12px;margin-bottom:10px" type="submit">Post</v-btn>
             </v-form>
-            <v-form class="form" v-else>
+            <v-form class="form" v-else @submit.prevent="send">
                 <v-row>
                     <v-col
                     cols="12"
@@ -86,7 +86,7 @@
                     </v-col>
                     <v-col cols="12" md="12">
                         <v-textarea
-                        v-model="form.message"
+                        v-model="form.body"
                         outlined
                         required
                         dir="rtl"
@@ -116,30 +116,31 @@
                     ></v-text-field>
                     </v-col>
                 </v-row>
-                <v-btn color="#f2efeb" style="margin-left:12px;float:right" type="submit">إرسال</v-btn>
+                <v-btn color="#f2efeb" style="margin-left:12px;float:right;margin-bottom:10px" type="submit">إرسال</v-btn>
                 <div style="clear:both"></div>
             </v-form>
         </div>
-          <v-card class="card">
+          <v-card class="card" v-for="(review,index) in reviews" :key="index">
               
                 <div class="userimg">
                     <div class="userimg2">
-                        <span>{{str.charAt(0).toUpperCase()}}</span>
+                        <span>{{review.name.charAt(0).toUpperCase()}}</span>
                     </div>
                     
                 </div>
                 <div style="width:95%;display:inline-block"> 
-                    <v-card-subtitle class="pb-0">Atabak J.Verified Buyer <span style="float:right">20/7/2020</span></v-card-subtitle>
+                    <v-card-subtitle class="pb-0">{{review.name}} <span style="float:right">{{review.created_at}}</span></v-card-subtitle>
                     <div style="clear:both"></div>
                     <span class="ml-2">
-                        <span class="fa fa-star text-warning ml-1" v-for="i in 5" :key="i.id"></span>
+                        <span class="fa fa-star text-warning ml-1" v-for="i in review.rate" :key="i"></span>
                     </span>
                 </div>
             <v-card-text class="text--primary">
-                <h5 style="font-weight:bold;color:#000">Love my new artwork! I</h5>
+                <h5 style="font-weight:bold;color:#000">{{review.title}}</h5>
 
-                <div>Love my new artwork! I had no instructions included, so I had to wing it. It was a bit difficult to get everything
-                    aligned properly, but it's aligned enough now. Other than that, awesome support and awesome artworks!</div>
+                <div>
+                    {{review.body}}
+                </div>
             </v-card-text>
 
             <v-card-actions style="display:block">
@@ -151,20 +152,20 @@
             <span style="float:right" v-if="$i18n.locale == 'en'">
                 {{ $t("message.checkreview") }}
                 <v-btn class="ma-2" text icon>
-                    <v-icon>mdi-thumb-up</v-icon>
+                    <v-icon>mdi-thumb-up</v-icon>{{review.like_counter}}
                 </v-btn>
 
                 <v-btn class="ma-2" text icon>
-                    <v-icon>mdi-thumb-down</v-icon>
+                    <v-icon>mdi-thumb-down</v-icon> &nbsp;{{review.dislike_counter}}
                 </v-btn>
             </span>
             <span style="float:right" v-else>
                 <v-btn class="ma-2" text icon>
-                    <v-icon>mdi-thumb-up</v-icon>
+                    <v-icon>mdi-thumb-up</v-icon> {{review.like_counter}}
                 </v-btn>
 
                 <v-btn class="ma-2" text icon>
-                    <v-icon>mdi-thumb-down</v-icon>
+                    <v-icon>mdi-thumb-down</v-icon> &nbsp;{{review.dislike_counter}}
                 </v-btn>
                 {{ $t("message.checkreview") }}
             </span>
@@ -177,18 +178,43 @@
 
 <script>
 export default {
-    data: () => ({
-        
-        str:"hello",
+    data: () => ({        
         review:false,
         form:{
-            rating: 0,
+            rate: 0,
             title:null,
             email:null,
             name:null,
-            message:null
+            body:null
         },
+        reviews:[]
     }),
+        methods:{
+        send(){
+            axios.post('/reviews',{
+                rate : this.form.rate,
+                title : this.form.title,
+                name : this.form.name,
+                email : this.form.email,
+                body : this.form.body,
+                like_counter:1,
+                dislike_counter:2
+            })
+            .then(res =>{ 
+                this.review=false
+                this.$router.push({name:'home'})
+            })
+            .catch(error => this.errors = error.response.data.errors)
+        }
+    },
+  created() {
+    axios
+      .get("/api/review")
+      .then(response => {
+        this.reviews = response.data.review;
+      })
+      .catch(error => console.log(error.response.data));
+  },
 }
 </script>
 

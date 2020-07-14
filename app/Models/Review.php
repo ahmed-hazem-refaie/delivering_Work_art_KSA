@@ -52,7 +52,8 @@ class Review extends Model
         'body' => 'string',
         'rate' => 'integer',
         'like_counter' => 'integer',
-        'dislike_counter' => 'integer'
+        'dislike_counter' => 'integer',
+        'created_at'  => 'date:Y/m/d',
     ];
 
     /**

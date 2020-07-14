@@ -6,6 +6,7 @@ use App\Http\Requests\CreateReviewRequest;
 use App\Http\Requests\UpdateReviewRequest;
 use App\Repositories\ReviewRepository;
 use App\Http\Controllers\AppBaseController;
+use App\Models\Review;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
@@ -44,6 +45,7 @@ class ReviewController extends AppBaseController
     {
         return view('reviews.create');
     }
+
 
     /**
      * Store a newly created Review in storage.

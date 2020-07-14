@@ -9,6 +9,7 @@ use App\Repositories\PaletteRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use App\Models\Artist;
+use App\Models\Review;
 use App\Models\Paletteimage;
 use Response;
 
@@ -40,6 +41,10 @@ class PaletteAPIController extends AppBaseController
         $palettesSlider = Palette::all();
         return response()->json(['artists' => $artists,'palettesSlider' =>$palettesSlider]);
        
+    }
+    public function getReviews(){
+        $review = Review::all();
+        return response()->json(['review' => $review]);
     }
     public function Palettes(Request $request){
         
@@ -73,6 +78,7 @@ class PaletteAPIController extends AppBaseController
         return $this->sendResponse($palette->toArray(), 'Palette saved successfully');
     }
 
+    
     /**
      * Display the specified Palette.
      * GET|HEAD /palettes/{id}
@@ -84,7 +90,7 @@ class PaletteAPIController extends AppBaseController
     public function show(Request $request)
     {
         $palettes = Palette::where('artist_id',$request->id)->get();     
-        return response()->json(['palettes' =>$palettes]);        
+        return response()->json(['palettes' =>$palettes]);     
     }
 
     /**

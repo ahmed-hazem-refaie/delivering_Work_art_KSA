@@ -2355,7 +2355,6 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     axios.get("/api/palettes").then(function (response) {
-      console.log(response.data.artists);
       _this.artists = response.data.artists;
     })["catch"](function (error) {
       return console.log(error.response.data);
@@ -2889,19 +2888,52 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      str: "hello",
       review: false,
       form: {
-        rating: 0,
+        rate: 0,
         title: null,
         email: null,
         name: null,
-        message: null
-      }
+        body: null
+      },
+      reviews: []
     };
+  },
+  methods: {
+    send: function send() {
+      var _this = this;
+
+      axios.post('/reviews', {
+        rate: this.form.rate,
+        title: this.form.title,
+        name: this.form.name,
+        email: this.form.email,
+        body: this.form.body,
+        like_counter: 1,
+        dislike_counter: 2
+      }).then(function (res) {
+        _this.review = false;
+
+        _this.$router.push({
+          name: 'home'
+        });
+      })["catch"](function (error) {
+        return _this.errors = error.response.data.errors;
+      });
+    }
+  },
+  created: function created() {
+    var _this2 = this;
+
+    axios.get("/api/review").then(function (response) {
+      _this2.reviews = response.data.review;
+    })["catch"](function (error) {
+      return console.log(error.response.data);
+    });
   }
 });
 
@@ -43859,22 +43891,22 @@ var render = function() {
                 ? _c("v-rating", {
                     attrs: { color: "orange", medium: "" },
                     model: {
-                      value: _vm.form.rating,
+                      value: _vm.form.rate,
                       callback: function($$v) {
-                        _vm.$set(_vm.form, "rating", $$v)
+                        _vm.$set(_vm.form, "rate", $$v)
                       },
-                      expression: "form.rating"
+                      expression: "form.rate"
                     }
                   })
                 : _c("v-rating", {
                     staticStyle: { float: "right" },
                     attrs: { dir: "rtl", color: "orange", medium: "" },
                     model: {
-                      value: _vm.rating,
+                      value: _vm.form.rate,
                       callback: function($$v) {
-                        _vm.rating = $$v
+                        _vm.$set(_vm.form, "rate", $$v)
                       },
-                      expression: "rating"
+                      expression: "form.rate"
                     }
                   }),
               _vm._v(" "),
@@ -43883,7 +43915,15 @@ var render = function() {
               _vm.$i18n.locale == "en"
                 ? _c(
                     "v-form",
-                    { staticClass: "form" },
+                    {
+                      staticClass: "form",
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          return _vm.send($event)
+                        }
+                      }
+                    },
                     [
                       _c(
                         "v-row",
@@ -43917,11 +43957,11 @@ var render = function() {
                                   label: "Review"
                                 },
                                 model: {
-                                  value: _vm.form.message,
+                                  value: _vm.form.body,
                                   callback: function($$v) {
-                                    _vm.$set(_vm.form, "message", $$v)
+                                    _vm.$set(_vm.form, "body", $$v)
                                   },
-                                  expression: "form.message"
+                                  expression: "form.body"
                                 }
                               })
                             ],
@@ -43970,7 +44010,10 @@ var render = function() {
                       _c(
                         "v-btn",
                         {
-                          staticStyle: { "margin-left": "12px" },
+                          staticStyle: {
+                            "margin-left": "12px",
+                            "margin-bottom": "10px"
+                          },
                           attrs: { color: "#f2efeb", type: "submit" }
                         },
                         [_vm._v("Post")]
@@ -43980,7 +44023,15 @@ var render = function() {
                   )
                 : _c(
                     "v-form",
-                    { staticClass: "form" },
+                    {
+                      staticClass: "form",
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          return _vm.send($event)
+                        }
+                      }
+                    },
                     [
                       _c(
                         "v-row",
@@ -44019,11 +44070,11 @@ var render = function() {
                                   label: "أكتب رأيك"
                                 },
                                 model: {
-                                  value: _vm.form.message,
+                                  value: _vm.form.body,
                                   callback: function($$v) {
-                                    _vm.$set(_vm.form, "message", $$v)
+                                    _vm.$set(_vm.form, "body", $$v)
                                   },
-                                  expression: "form.message"
+                                  expression: "form.body"
                                 }
                               })
                             ],
@@ -44082,7 +44133,8 @@ var render = function() {
                         {
                           staticStyle: {
                             "margin-left": "12px",
-                            float: "right"
+                            float: "right",
+                            "margin-bottom": "10px"
                           },
                           attrs: { color: "#f2efeb", type: "submit" }
                         },
@@ -44098,128 +44150,170 @@ var render = function() {
           )
         : _vm._e(),
       _vm._v(" "),
-      _c(
-        "v-card",
-        { staticClass: "card" },
-        [
-          _c("div", { staticClass: "userimg" }, [
-            _c("div", { staticClass: "userimg2" }, [
-              _c("span", [_vm._v(_vm._s(_vm.str.charAt(0).toUpperCase()))])
-            ])
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticStyle: { width: "95%", display: "inline-block" } },
-            [
-              _c("v-card-subtitle", { staticClass: "pb-0" }, [
-                _vm._v("Atabak J.Verified Buyer "),
-                _c("span", { staticStyle: { float: "right" } }, [
-                  _vm._v("20/7/2020")
+      _vm._l(_vm.reviews, function(review, index) {
+        return _c(
+          "v-card",
+          { key: index, staticClass: "card" },
+          [
+            _c("div", { staticClass: "userimg" }, [
+              _c("div", { staticClass: "userimg2" }, [
+                _c("span", [
+                  _vm._v(_vm._s(review.name.charAt(0).toUpperCase()))
                 ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticStyle: { clear: "both" } }),
-              _vm._v(" "),
-              _c(
-                "span",
-                { staticClass: "ml-2" },
-                _vm._l(5, function(i) {
-                  return _c("span", {
-                    key: i.id,
-                    staticClass: "fa fa-star text-warning ml-1"
-                  })
-                }),
-                0
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c("v-card-text", { staticClass: "text--primary" }, [
+              ])
+            ]),
+            _vm._v(" "),
             _c(
-              "h5",
-              { staticStyle: { "font-weight": "bold", color: "#000" } },
-              [_vm._v("Love my new artwork! I")]
+              "div",
+              { staticStyle: { width: "95%", display: "inline-block" } },
+              [
+                _c("v-card-subtitle", { staticClass: "pb-0" }, [
+                  _vm._v(_vm._s(review.name) + " "),
+                  _c("span", { staticStyle: { float: "right" } }, [
+                    _vm._v(_vm._s(review.created_at))
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticStyle: { clear: "both" } }),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  { staticClass: "ml-2" },
+                  _vm._l(review.rate, function(i) {
+                    return _c("span", {
+                      key: i,
+                      staticClass: "fa fa-star text-warning ml-1"
+                    })
+                  }),
+                  0
+                )
+              ],
+              1
             ),
             _vm._v(" "),
-            _c("div", [
-              _vm._v(
-                "Love my new artwork! I had no instructions included, so I had to wing it. It was a bit difficult to get everything\n                aligned properly, but it's aligned enough now. Other than that, awesome support and awesome artworks!"
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c(
-            "v-card-actions",
-            { staticStyle: { display: "block" } },
-            [
-              _c("v-btn", { attrs: { text: "" } }, [
-                _c("i", { staticClass: "fa fa-share-square" }),
-                _vm._v(" " + _vm._s(_vm.$t("message.share")) + "\n        ")
-              ]),
+            _c("v-card-text", { staticClass: "text--primary" }, [
+              _c(
+                "h5",
+                { staticStyle: { "font-weight": "bold", color: "#000" } },
+                [_vm._v(_vm._s(review.title))]
+              ),
               _vm._v(" "),
-              _vm.$i18n.locale == "en"
-                ? _c(
-                    "span",
-                    { staticStyle: { float: "right" } },
-                    [
-                      _vm._v(
-                        "\n            " +
-                          _vm._s(_vm.$t("message.checkreview")) +
-                          "\n            "
-                      ),
-                      _c(
-                        "v-btn",
-                        { staticClass: "ma-2", attrs: { text: "", icon: "" } },
-                        [_c("v-icon", [_vm._v("mdi-thumb-up")])],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-btn",
-                        { staticClass: "ma-2", attrs: { text: "", icon: "" } },
-                        [_c("v-icon", [_vm._v("mdi-thumb-down")])],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                : _c(
-                    "span",
-                    { staticStyle: { float: "right" } },
-                    [
-                      _c(
-                        "v-btn",
-                        { staticClass: "ma-2", attrs: { text: "", icon: "" } },
-                        [_c("v-icon", [_vm._v("mdi-thumb-up")])],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-btn",
-                        { staticClass: "ma-2", attrs: { text: "", icon: "" } },
-                        [_c("v-icon", [_vm._v("mdi-thumb-down")])],
-                        1
-                      ),
-                      _vm._v(
-                        "\n            " +
-                          _vm._s(_vm.$t("message.checkreview")) +
-                          "\n        "
-                      )
-                    ],
-                    1
-                  ),
-              _vm._v(" "),
-              _c("div", { staticStyle: { clear: "both" } })
-            ],
-            1
-          )
-        ],
-        1
-      )
+              _c("div", [
+                _vm._v(
+                  "\n                " + _vm._s(review.body) + "\n            "
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "v-card-actions",
+              { staticStyle: { display: "block" } },
+              [
+                _c("v-btn", { attrs: { text: "" } }, [
+                  _c("i", { staticClass: "fa fa-share-square" }),
+                  _vm._v(" " + _vm._s(_vm.$t("message.share")) + "\n        ")
+                ]),
+                _vm._v(" "),
+                _vm.$i18n.locale == "en"
+                  ? _c(
+                      "span",
+                      { staticStyle: { float: "right" } },
+                      [
+                        _vm._v(
+                          "\n            " +
+                            _vm._s(_vm.$t("message.checkreview")) +
+                            "\n            "
+                        ),
+                        _c(
+                          "v-btn",
+                          {
+                            staticClass: "ma-2",
+                            attrs: { text: "", icon: "" }
+                          },
+                          [
+                            _c("v-icon", [_vm._v("mdi-thumb-up")]),
+                            _vm._v(
+                              _vm._s(review.like_counter) + "\n            "
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "v-btn",
+                          {
+                            staticClass: "ma-2",
+                            attrs: { text: "", icon: "" }
+                          },
+                          [
+                            _c("v-icon", [_vm._v("mdi-thumb-down")]),
+                            _vm._v(
+                              "  " +
+                                _vm._s(review.dislike_counter) +
+                                "\n            "
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  : _c(
+                      "span",
+                      { staticStyle: { float: "right" } },
+                      [
+                        _c(
+                          "v-btn",
+                          {
+                            staticClass: "ma-2",
+                            attrs: { text: "", icon: "" }
+                          },
+                          [
+                            _c("v-icon", [_vm._v("mdi-thumb-up")]),
+                            _vm._v(
+                              " " +
+                                _vm._s(review.like_counter) +
+                                "\n            "
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "v-btn",
+                          {
+                            staticClass: "ma-2",
+                            attrs: { text: "", icon: "" }
+                          },
+                          [
+                            _c("v-icon", [_vm._v("mdi-thumb-down")]),
+                            _vm._v(
+                              "  " +
+                                _vm._s(review.dislike_counter) +
+                                "\n            "
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(
+                          "\n            " +
+                            _vm._s(_vm.$t("message.checkreview")) +
+                            "\n        "
+                        )
+                      ],
+                      1
+                    ),
+                _vm._v(" "),
+                _c("div", { staticStyle: { clear: "both" } })
+              ],
+              1
+            )
+          ],
+          1
+        )
+      })
     ],
-    1
+    2
   )
 }
 var staticRenderFns = []
@@ -104002,10 +104096,12 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
 
 var routes = [{
   path: '/',
-  component: _components_Page_Home__WEBPACK_IMPORTED_MODULE_2__["default"]
+  component: _components_Page_Home__WEBPACK_IMPORTED_MODULE_2__["default"],
+  name: 'home'
 }, {
   path: '/shop',
-  component: _components_Page_ShopArt__WEBPACK_IMPORTED_MODULE_3__["default"]
+  component: _components_Page_ShopArt__WEBPACK_IMPORTED_MODULE_3__["default"],
+  name: 'shop'
 }, {
   path: '/about',
   component: _components_Page_AboutUs__WEBPACK_IMPORTED_MODULE_4__["default"]

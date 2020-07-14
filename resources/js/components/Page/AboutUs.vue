@@ -81,7 +81,6 @@ export default {
     axios
       .get("/api/palettes")
       .then(response => {
-        console.log(response.data.artists);
         this.artists = response.data.artists;
       })
       .catch(error => console.log(error.response.data));

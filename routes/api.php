@@ -22,3 +22,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::resource('palettes', 'PaletteAPIController');
 Route::get('/view' ,'PaletteAPIController@Palettes');
 Route::get('/viewMinPalettes' ,'PaletteAPIController@viewMinPalettes');
+Route::get('review', 'PaletteAPIController@getReviews');
