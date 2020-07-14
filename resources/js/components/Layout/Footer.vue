@@ -17,7 +17,7 @@
                 <div class="col-md-6 col-lg-3 mb-2 pl-5">
                     <ul class="footer-menu">
                         <li class="footer-title">
-                            Limitworks
+                            {{ $t("message.Limitworks") }}
                         </li>
                         <li class="footer-menu-item">
                             <a href="#" class="footer-menu-item-link">Porta ac consectetur ac</a>
@@ -32,7 +32,7 @@
                 <div class="col-md-6 col-lg-3 mb-2 pl-5">
                     <ul class="footer-menu">
                         <li class="footer-title">
-                            Company
+                            {{ $t("message.company") }}
                         </li>
                         <li class="footer-menu-item">
                             <a href="#" class="footer-menu-item-link">Porta ac consectetur ac</a>
@@ -47,7 +47,7 @@
                 <div class="col-md-6 col-lg-3 mb-2 pl-5">
                     <ul class="footer-menu">
                         <li class="footer-title">
-                            Others
+                            {{ $t("message.others") }}
                         </li>
                         <li class="footer-menu-item">
                             <a href="#" class="footer-menu-item-link">Porta ac consectetur ac</a>
@@ -61,9 +61,9 @@
                 </div>
                 <div class="col-md-6 col-lg-3 mb-2 pl-0">
                     <div class="footer-col footer-col-2">
-                        <h3 class="footer-title">Newsletter</h3>
-                        <p >Sign up for a notification email when new limited artworks are released.</p>
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#modalLoginForm">SUBSCRIBE</button>
+                        <h3 class="footer-title">{{ $t("message.Newsletter") }}</h3>
+                        <p >{{ $t("message.signup") }}</p>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#modalLoginForm">{{ $t("message.SUBSCRIBE") }}</button>
                         <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -79,24 +79,38 @@
                     
                                         <div id='consmodal' class="modal-body mx-3 text-dark">
                                             <div class="md-form mb-2">
-                                                <i class="fa fa-user"></i>
-                                                <input  type="text" class="form-control validate" name="username">
-                                                <label data-error="wrong" data-success="right" for="defaultForm-email">Your Name</label>
+                                                <i class="fa fa-user" v-if="$i18n.locale == 'en'"></i>
+                                                <i class="fa fa-user mb-1" v-else style="float:right"></i>
+                                                <div style="clear:both"></div>
+                                                <input  type="text" class="form-control validate" v-if="$i18n.locale == 'en'" name="username">
+                                                <input  type="text" class="form-control validate" v-else dir="rtl" name="username">
+                                                <label data-error="wrong" v-if="$i18n.locale == 'en'" data-success="right" for="defaultForm-email">{{ $t("message.name") }}</label>
+                                                <label data-error="wrong" v-else style="float:right" data-success="right" for="defaultForm-email">{{ $t("message.name") }}</label>
+                                                <div style="clear:both"></div>
                                             </div>
                                             <div class="md-form mb-2">
-                                                <i class="fa fa-user"></i>
-                                                <input  type="email" class="form-control validate" name="email">
-                    
-                                                <label data-error="wrong" data-success="right" for="defaultForm-email">Your Email</label>
+                                                <i class="fa fa-envelope" v-if="$i18n.locale == 'en'"></i>
+                                                <i class="fa fa-envelope mb-1" v-else style="float:right"></i>
+                                                <div style="clear:both"></div>
+                                                <input  type="email" class="form-control validate" v-if="$i18n.locale == 'en'" name="email">
+                                                <input  type="email" class="form-control validate" v-else dir="rtl" name="email">
+                                                <label data-error="wrong" data-success="right" v-if="$i18n.locale == 'en'" for="defaultForm-email">{{ $t("message.email") }}</label>
+                                                <label data-error="wrong" data-success="right" v-else style="float:right" for="defaultForm-email">{{ $t("message.email") }}</label>
+                                                <div style="clear:both"></div>
                                             </div>
                                             <div class="md-form mb-2">
-                                                <i class="fa fa-phone"></i>
-                                                <input  type="text" name="phone" class="form-control validate">
-                                                <label data-error="wrong" data-success="right" for="defaultForm-pass">Your Phone</label>
+                                                <i class="fa fa-phone" v-if="$i18n.locale == 'en'"></i>
+                                                <i class="fa fa-phone mb-1" v-else style="float:right"></i>
+                                                <div style="clear:both"></div>
+                                                <input  type="text" name="phone" v-if="$i18n.locale == 'en'" class="form-control validate">
+                                                <input  type="text" name="phone" v-else dir="rtl" class="form-control validate">
+                                                <label data-error="wrong" data-success="right" v-if="$i18n.locale == 'en'" for="defaultForm-pass">{{ $t("message.phone") }}</label>
+                                                <label data-error="wrong" data-success="right" v-else style="float:right" for="defaultForm-pass">{{ $t("message.phone") }}</label>
+                                                <div style="clear:both"></div>
                                             </div>
                                         </div>
                                         <div class="modal-footer d-flex justify-content-center">
-                                            <button class="btn btn-info btn-block">Submit</button>
+                                            <button class="btn btn-info btn-block">{{ $t("message.submit") }}</button>
                                         </div>
                                     </form>
                     

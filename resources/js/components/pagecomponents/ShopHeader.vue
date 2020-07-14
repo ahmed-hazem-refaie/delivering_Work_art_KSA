@@ -3,10 +3,10 @@
 
         <div id="carouselExampleCaptions" class="carousel slide" data-interval="false">
             <ol class="carousel-indicators">
-                <li data-target="#carouselExampleCaptions" v-for="(artist , index) in artists" :class="{ 'active': index === 0 }" @click="getdata(artist.id)" :key="artist.id" data-slide-to="artist.id" >{{artist.name}}</li>
+                <li data-target="#carouselExampleCaptions" v-for="(artist) in artists" :class="{ 'active': artist.id === 1 }" @click="getdata(artist.id)" :key="artist.id" data-slide-to="artist.id" >{{artist.name}}</li>
             </ol>
             <div class="carousel-inner">
-                <div class="carousel-item" v-for="(artist , index) in artists" :class="{ 'active': index === 0 }" :key="artist.id">
+                <div class="carousel-item" v-for="(artist ) in artists" :class="{ 'active':  artist.id === 1 }" :key="artist.id">
                     <img :src="artist.cover_img" class="header" alt="...">
                     <div class="wrapper">
                         <div class="details" v-for="(palettesArtist , index) in palettesArtists" @click="addActive(palettesArtist.id)" :class="{ 'active': index == 0 }"  :key="palettesArtist.id">
@@ -18,11 +18,11 @@
                         </div>
 
                     </div>
-                    <a class="carousel-control-next" href="#carouselExampleCaptions" @click="getdata(artist.id)" role="button" data-slide="next">
+                    <a class="carousel-control-next" href="#carouselExampleCaptions" @click="getdata(artist.id+1)" role="button" data-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="sr-only">Next</span>
                     </a>
-                    <a class="carousel-control-prev" href="#carouselExampleCaptions" @click="getdata(artist.id)" role="button" data-slide="prev">
+                    <a class="carousel-control-prev" href="#carouselExampleCaptions" @click="getdata(artist.id-1)" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="sr-only">Previous</span>
                     </a>
@@ -36,7 +36,7 @@
             <div class="row">
                 <div class="col-lg-7" >
                     <div class="row">
-                        <div class="col-md-6 mb-3 pl-1" v-for="minPalette in minPalettes" :key="minPalette.id" >
+                        <div class="col-md-6 mb-3 pl-1" v-for="minPalette in minPalettes"  :key="minPalette.id" >
                             <img :src="minPalette.img" style="height:400px" class="w-100" alt="...">
                         </div>
                     </div>
@@ -66,7 +66,7 @@
                         </div>
                         <button class="btn add-button "><span v-if="active_el==1">${{S_price}}</span>
                         <span v-if="active_el==2">${{M_price}}</span>
-                        <span v-if="active_el==3">${{L_price}}</span> - Add To Cart</button>
+                        <span v-if="active_el==3">${{L_price}}</span> - {{ $t("message.cart") }}</button>
                         <p>
                             <span class="font-weight-bold ">This is the Classic</span>, designed and manufactured by Ecstase,
                             the Classic is made up of a wooden frame, a passe-partout,
@@ -209,7 +209,7 @@ export default {
     },
     methods:{
         getdata($id){
-        axios.get("/api/view?id=" + $id)
+        axios.get("/api/view?id=" +$id)
         .then(response =>{
             this.palettes = response.data.palettes
             this.palettesArtists = response.data.palettesArtists
@@ -219,6 +219,33 @@ export default {
                 this.firstminPalettes = null
             }
             
+            if($id > response.data.artists.length){
+                axios.get("/api/view?id=" +1)
+                .then(response =>{
+                    this.palettesArtists = response.data.palettesArtists
+                     this.firstminPalettes = response.data.palettesArtists[0].id
+                    axios.get("/api/viewMinPalettes?id=" + this.firstminPalettes)
+                    .then(response =>{
+                        this.minPalettes = response.data.minPalettes
+                        })  
+                        .catch(error => console.log(error.response.data))
+                    })
+                .catch(error => console.log(error.response.data))
+            } else if($id == 0) {
+                
+                axios.get("/api/view?id=" + response.data.artists.length )
+                .then(response =>{
+                    this.palettesArtists = response.data.palettesArtists
+                     this.firstminPalettes = response.data.palettesArtists[0].id
+                    axios.get("/api/viewMinPalettes?id=" + this.firstminPalettes)
+                    .then(response =>{
+                        this.minPalettes = response.data.minPalettes
+                        })  
+                        .catch(error => console.log(error.response.data))
+                    })
+                .catch(error => console.log(error.response.data))
+            }
+                
             axios.get("/api/viewMinPalettes?id=" + this.firstminPalettes)
                 .then(response =>{
                     this.minPalettes = response.data.minPalettes

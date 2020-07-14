@@ -4,29 +4,43 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <a class="navbar-brand" href="/"><img class="logo-ecs" src="//cdn.shopify.com/s/files/1/3000/4362/t/109/assets/logo-ecs.png?v=2452931808056810559" width="32px" alt=""></a>
-
+        <LanguageDropdown></LanguageDropdown>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-            <ul class="navbar-nav  mx-auto mt-2 mt-lg-0">
+            <ul class="navbar-nav  mx-auto mt-2 mt-lg-0" v-if="$i18n.locale == 'en'">
                 <li class="nav-item active">
                     <router-link to="/">
-                        <a class="nav-link">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link"> {{ $t("message.home") }}<span class="sr-only">(current)</span></a>
                     </router-link>
                     
                 </li>
                 <li class="nav-item">
                     <router-link to="/shop">
-                        <a class="nav-link">Shop Art</a>
+                        <a class="nav-link">{{ $t("message.shopart") }}</a>
                     </router-link>
                 </li>
                 <li class="nav-item">
                     <router-link to="/about">
-                        <a class="nav-link">About Us</a>
+                        <a class="nav-link">{{ $t("message.about") }}</a>
                     </router-link>
                 </li>
+            </ul>
+            <ul class="navbar-nav  mx-auto mt-2 mt-lg-0" v-else>
                 <li class="nav-item">
-                    <router-link to="/payment">
-                        <a class="nav-link">Payment</a>
+                    <router-link to="/about">
+                        <a class="nav-link">{{ $t("message.about") }}</a>
                     </router-link>
+                </li>
+
+                <li class="nav-item">
+                    <router-link to="/shop">
+                        <a class="nav-link">{{ $t("message.shopart") }}</a>
+                    </router-link>
+                </li>
+                <li class="nav-item active">
+                    <router-link to="/">
+                        <a class="nav-link"> {{ $t("message.home") }}<span class="sr-only">(current)</span></a>
+                    </router-link>
+                    
                 </li>
             </ul>
         </div>
@@ -82,7 +96,9 @@
 </template>
 
 <script>
+import LanguageDropdown from './LanguageDropdown';
 export default {
+    components:{LanguageDropdown},
     data(){
         return {
             showModal: false,

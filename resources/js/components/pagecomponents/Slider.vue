@@ -3,8 +3,8 @@
   <div class="mt-5">
     <div class="container-fluid">
         <h2 class="home-products-slider__title section-title">
-            <span>New Release</span>
-            <span class="sTitle">THIS WEEK’S RELEASE OF LIMITED ARTWORKS</span>
+            <span>{{ $t("message.newrelease") }}</span>
+            <span class="sTitle">{{ $t("message.newreleaseheader") }}</span>
         </h2>
         <div class="swiper-container mt-5">
             <div class="swiper-wrapper">
