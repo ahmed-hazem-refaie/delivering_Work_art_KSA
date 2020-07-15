@@ -2889,6 +2889,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2900,7 +2908,9 @@ __webpack_require__.r(__webpack_exports__);
         name: null,
         body: null
       },
-      reviews: []
+      meta: 0,
+      reviews: [],
+      current_page: 0
     };
   },
   methods: {
@@ -2924,13 +2934,26 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         return _this.errors = error.response.data.errors;
       });
+    },
+    changePage: function changePage(page) {
+      var _this2 = this;
+
+      axios.get("/api/review?page=".concat(page)).then(function (response) {
+        _this2.reviews = response.data.data;
+        _this2.meta = response.data.last_page;
+        _this2.current_page = response.data.current_page;
+      })["catch"](function (error) {
+        return console.log(error.response.data);
+      });
     }
   },
   created: function created() {
-    var _this2 = this;
+    var _this3 = this;
 
     axios.get("/api/review").then(function (response) {
-      _this2.reviews = response.data.review;
+      _this3.reviews = response.data.data;
+      _this3.meta = response.data.last_page;
+      _this3.current_page = response.data.current_page;
     })["catch"](function (error) {
       return console.log(error.response.data);
     });
@@ -44311,7 +44334,26 @@ var render = function() {
           ],
           1
         )
-      })
+      }),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "text-center" },
+        [
+          _c("v-pagination", {
+            attrs: { length: _vm.meta, circle: "" },
+            on: { input: _vm.changePage },
+            model: {
+              value: _vm.current_page,
+              callback: function($$v) {
+                _vm.current_page = $$v
+              },
+              expression: "current_page"
+            }
+          })
+        ],
+        1
+      )
     ],
     2
   )

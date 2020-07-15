@@ -172,6 +172,14 @@
             <div style="clear:both"></div>
             </v-card-actions>
         </v-card>
+          <div class="text-center">
+            <v-pagination
+            v-model="current_page"
+            :length="meta"
+            circle
+            @input="changePage"
+            ></v-pagination>
+        </div>
     </div>
   
 </template>
@@ -187,7 +195,9 @@ export default {
             name:null,
             body:null
         },
-        reviews:[]
+        meta:0,
+        reviews:[],
+        current_page:0
     }),
         methods:{
         send(){
@@ -205,13 +215,26 @@ export default {
                 this.$router.push({name:'home'})
             })
             .catch(error => this.errors = error.response.data.errors)
+        },
+        changePage(page){
+            axios
+            .get(`/api/review?page=${page}`)
+            .then(response => {
+                this.reviews = response.data.data;
+                this.meta = response.data.last_page
+                this.current_page = response.data.current_page
+
+            })
+            .catch(error => console.log(error.response.data));
         }
     },
   created() {
     axios
       .get("/api/review")
       .then(response => {
-        this.reviews = response.data.review;
+        this.reviews = response.data.data;
+        this.meta = response.data.last_page
+        this.current_page = response.data.current_page
       })
       .catch(error => console.log(error.response.data));
   },

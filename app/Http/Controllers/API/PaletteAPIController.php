@@ -43,8 +43,8 @@ class PaletteAPIController extends AppBaseController
        
     }
     public function getReviews(){
-        $review = Review::all();
-        return response()->json(['review' => $review]);
+        return Review::latest()->paginate(3);
+        // return response()->json(['review' => $review]);
     }
     public function Palettes(Request $request){
         
