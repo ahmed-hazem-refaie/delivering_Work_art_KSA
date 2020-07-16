@@ -69,7 +69,7 @@ class ReviewController extends AppBaseController
 
         Flash::success('Review saved successfully.');
 
-        return redirect(route('reviews.index'));
+        return response()->json(['review'=>$review]);
     }
 
     /**
@@ -136,7 +136,22 @@ class ReviewController extends AppBaseController
 
         return redirect(route('reviews.index'));
     }
-
+     public function like(Request $request){
+        $review = Review::find($request->id);
+        if($review){
+            $review->like_counter +=1;
+            $review->save();
+            return response()->json(['review' =>$review]);
+        }
+     }
+     public function dislike(Request $request){
+        $review = Review::find($request->id);
+        if($review){
+            $review->dislike_counter +=1;
+            $review->save();
+            return response()->json(['review' =>$review]);
+        }
+     }
     /**
      * Remove the specified Review from storage.
      *

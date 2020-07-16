@@ -2,7 +2,7 @@
     <section>
         <div class="row">
             <div class="col-md-7">
-                  <v-form class="form">
+                  <v-form class="form" @submit.prevent="send">
                     <v-container>
                     <v-row>
                         <h4>Contact information</h4>
@@ -16,12 +16,12 @@
                                 required
                             ></v-text-field>
                         </v-col>
-                        <v-checkbox
+                        <!-- <v-checkbox
                         v-model="form.checkbox"
                         :rules="[v => !!v || 'You must agree to continue!']"
                         label="Keep me up to date on news and exclusive offers"
                         required
-                        ></v-checkbox>
+                        ></v-checkbox> -->
                         
                         <v-col
                         
@@ -29,7 +29,7 @@
                         md="6"
                         >
                         <v-text-field
-                            v-model="form.firstname"
+                            v-model="form.fname"
                             label="First name"
                             required
                         ></v-text-field>
@@ -40,7 +40,7 @@
                         md="6"
                         >
                         <v-text-field
-                            v-model="form.lastname"
+                            v-model="form.lname"
                             label="Last name"
                             required
                         ></v-text-field>
@@ -70,24 +70,24 @@
                         >
                         <v-text-field
                             v-model="form.city"
-                            label="Ciity"
+                            label="City"
                             required
                         ></v-text-field>
                         </v-col>
                         <v-col class="d-flex" cols="12" sm="4">
                             <v-select
-                            v-model="form.select"
-                            :items="items"
+                            v-model="form.country"
+                            :items="item"
                             label="Country/Reagion"
                             outlined
                             ></v-select>
                         </v-col>
                         <v-col class="d-flex" cols="12" sm="4">
                             <v-select
-                            v-model="form.select"
+                            v-model="form.goverment"
                               item-text="name"
                                 item-value="last"
-                            :items="items"
+                            :items="item"
                             label="Governorate"
                             outlined
                             ></v-select>
@@ -167,23 +167,38 @@ export default {
         return {
             form:{
                 email:null,
-                lastname:null,
+                lname:null,
                 address:null,
-                firstname:null,
+                fname:null,
                 apartment:null,
                 city:null,
                 phone:null,
-                select: null,
-                postcode:null
+                country: null,
+                goverment:null,
+                postcode:null,
+                items:[
+                    {
+                        paletteid:1,
+                        palettesize:'medium',
+                        quantity:2
+                    }
+                ],
 
             },
             discount:'',
-            items: ['Egypt', 'Russian', 'Franch', 'Brazil'],
+            item: ['Egypt', 'Russian', 'Franch', 'Brazil'],
             nameRules: [
                 v => !!v || 'Name is required',
             ],
             checkbox:false,
             
+        }
+    },
+    methods:{
+        send(){
+            axios.post('/api/add-order',this.form)
+            .then()
+            .catch(error => this.errors = error.response.data.errors)
         }
     }
 }

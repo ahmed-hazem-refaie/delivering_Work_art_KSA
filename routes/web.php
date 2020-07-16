@@ -28,9 +28,15 @@ Route::resource('artists', 'ArtistController');
 Route::resource('appliedartists', 'AppliedartistController');
 
 Route::resource('reviews', 'ReviewController');
+Route::post('like', 'ReviewController@like');
+Route::post('dislike', 'ReviewController@dislike');
 
 Route::resource('palettes', 'PaletteController');
 Route::resource('paletteimages', 'PaletteimageController');
 Route::get('addpaletteimages/{palette?}/create','PaletteimageController@create')->name("addimgpalette");
 
 Route::resource('discounts', 'DiscountController');
+
+Route::get('payment/{id?}', function ($id=null) {
+
+})->name('payment');

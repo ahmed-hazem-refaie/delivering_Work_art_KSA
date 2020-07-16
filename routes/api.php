@@ -23,3 +23,8 @@ Route::resource('palettes', 'PaletteAPIController');
 Route::get('/view' ,'PaletteAPIController@Palettes');
 Route::get('/viewMinPalettes' ,'PaletteAPIController@viewMinPalettes');
 Route::get('review', 'PaletteAPIController@getReviews');
+
+Route::group(['middleware'=>['api']], function () {
+    Route::post('add-order' ,'OrderController@store');
+
+});

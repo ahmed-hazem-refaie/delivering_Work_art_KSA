@@ -2235,6 +2235,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -2574,22 +2575,37 @@ __webpack_require__.r(__webpack_exports__);
     return {
       form: {
         email: null,
-        lastname: null,
+        lname: null,
         address: null,
-        firstname: null,
+        fname: null,
         apartment: null,
         city: null,
         phone: null,
-        select: null,
-        postcode: null
+        country: null,
+        goverment: null,
+        postcode: null,
+        items: [{
+          paletteid: 1,
+          palettesize: 'medium',
+          quantity: 2
+        }]
       },
       discount: '',
-      items: ['Egypt', 'Russian', 'Franch', 'Brazil'],
+      item: ['Egypt', 'Russian', 'Franch', 'Brazil'],
       nameRules: [function (v) {
         return !!v || 'Name is required';
       }],
       checkbox: false
     };
+  },
+  methods: {
+    send: function send() {
+      var _this = this;
+
+      axios.post('/api/add-order', this.form).then()["catch"](function (error) {
+        return _this.errors = error.response.data.errors;
+      });
+    }
   }
 });
 
@@ -2906,31 +2922,25 @@ __webpack_require__.r(__webpack_exports__);
         title: null,
         email: null,
         name: null,
-        body: null
+        body: null,
+        like_counter: 0,
+        dislike_counter: 0
       },
+      count: 0,
       meta: 0,
       reviews: [],
-      current_page: 0
+      current_page: 0,
+      reviewscount: ''
     };
   },
   methods: {
     send: function send() {
       var _this = this;
 
-      axios.post('/reviews', {
-        rate: this.form.rate,
-        title: this.form.title,
-        name: this.form.name,
-        email: this.form.email,
-        body: this.form.body,
-        like_counter: 1,
-        dislike_counter: 2
-      }).then(function (res) {
+      axios.post('/reviews', this.form).then(function (res) {
         _this.review = false;
 
-        _this.$router.push({
-          name: 'home'
-        });
+        _this.reviews.unshift(res.data.review);
       })["catch"](function (error) {
         return _this.errors = error.response.data.errors;
       });
@@ -2945,15 +2955,36 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         return console.log(error.response.data);
       });
+    },
+    like: function like(id, event) {
+      var _this3 = this;
+
+      axios.post('/like?id=' + id).then(function (res) {
+        $('#' + id)[0].innerText = res.data.review.like_counter;
+        event.target.style.color = "blue";
+      })["catch"](function (error) {
+        return _this3.errors = error.response.data.errors;
+      });
+    },
+    dislike: function dislike(id, event) {
+      var _this4 = this;
+
+      axios.post('/dislike?id=' + id).then(function (res) {
+        $('#' + id + 'd')[0].innerText = res.data.review.dislike_counter;
+        event.target.style.color = "red";
+      })["catch"](function (error) {
+        return _this4.errors = error.response.data.errors;
+      });
     }
   },
   created: function created() {
-    var _this3 = this;
+    var _this5 = this;
 
     axios.get("/api/review").then(function (response) {
-      _this3.reviews = response.data.data;
-      _this3.meta = response.data.last_page;
-      _this3.current_page = response.data.current_page;
+      _this5.reviews = response.data.data;
+      _this5.meta = response.data.last_page;
+      _this5.current_page = response.data.current_page;
+      _this5.reviewscount = response.data.total;
     })["catch"](function (error) {
       return console.log(error.response.data);
     });
@@ -43217,7 +43248,15 @@ var render = function() {
         [
           _c(
             "v-form",
-            { staticClass: "form" },
+            {
+              staticClass: "form",
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.send($event)
+                }
+              }
+            },
             [
               _c(
                 "v-container",
@@ -43245,26 +43284,6 @@ var render = function() {
                         1
                       ),
                       _vm._v(" "),
-                      _c("v-checkbox", {
-                        attrs: {
-                          rules: [
-                            function(v) {
-                              return !!v || "You must agree to continue!"
-                            }
-                          ],
-                          label:
-                            "Keep me up to date on news and exclusive offers",
-                          required: ""
-                        },
-                        model: {
-                          value: _vm.form.checkbox,
-                          callback: function($$v) {
-                            _vm.$set(_vm.form, "checkbox", $$v)
-                          },
-                          expression: "form.checkbox"
-                        }
-                      }),
-                      _vm._v(" "),
                       _c(
                         "v-col",
                         { attrs: { cols: "12", md: "6" } },
@@ -43272,11 +43291,11 @@ var render = function() {
                           _c("v-text-field", {
                             attrs: { label: "First name", required: "" },
                             model: {
-                              value: _vm.form.firstname,
+                              value: _vm.form.fname,
                               callback: function($$v) {
-                                _vm.$set(_vm.form, "firstname", $$v)
+                                _vm.$set(_vm.form, "fname", $$v)
                               },
-                              expression: "form.firstname"
+                              expression: "form.fname"
                             }
                           })
                         ],
@@ -43290,11 +43309,11 @@ var render = function() {
                           _c("v-text-field", {
                             attrs: { label: "Last name", required: "" },
                             model: {
-                              value: _vm.form.lastname,
+                              value: _vm.form.lname,
                               callback: function($$v) {
-                                _vm.$set(_vm.form, "lastname", $$v)
+                                _vm.$set(_vm.form, "lname", $$v)
                               },
-                              expression: "form.lastname"
+                              expression: "form.lname"
                             }
                           })
                         ],
@@ -43344,7 +43363,7 @@ var render = function() {
                         { attrs: { cols: "12", md: "12" } },
                         [
                           _c("v-text-field", {
-                            attrs: { label: "Ciity", required: "" },
+                            attrs: { label: "City", required: "" },
                             model: {
                               value: _vm.form.city,
                               callback: function($$v) {
@@ -43366,16 +43385,16 @@ var render = function() {
                         [
                           _c("v-select", {
                             attrs: {
-                              items: _vm.items,
+                              items: _vm.item,
                               label: "Country/Reagion",
                               outlined: ""
                             },
                             model: {
-                              value: _vm.form.select,
+                              value: _vm.form.country,
                               callback: function($$v) {
-                                _vm.$set(_vm.form, "select", $$v)
+                                _vm.$set(_vm.form, "country", $$v)
                               },
-                              expression: "form.select"
+                              expression: "form.country"
                             }
                           })
                         ],
@@ -43393,16 +43412,16 @@ var render = function() {
                             attrs: {
                               "item-text": "name",
                               "item-value": "last",
-                              items: _vm.items,
+                              items: _vm.item,
                               label: "Governorate",
                               outlined: ""
                             },
                             model: {
-                              value: _vm.form.select,
+                              value: _vm.form.goverment,
                               callback: function($$v) {
-                                _vm.$set(_vm.form, "select", $$v)
+                                _vm.$set(_vm.form, "goverment", $$v)
                               },
-                              expression: "form.select"
+                              expression: "form.goverment"
                             }
                           })
                         ],
@@ -43809,7 +43828,11 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("span", { staticClass: "ml-2" }, [
-                _vm._v("193 " + _vm._s(_vm.$t("message.review")))
+                _vm._v(
+                  _vm._s(_vm.reviewscount) +
+                    " " +
+                    _vm._s(_vm.$t("message.review"))
+                )
               ]),
               _vm._v(" "),
               _c(
@@ -43867,7 +43890,13 @@ var render = function() {
               _c(
                 "span",
                 { staticClass: "mr-2", staticStyle: { float: "right" } },
-                [_vm._v("193 " + _vm._s(_vm.$t("message.review")))]
+                [
+                  _vm._v(
+                    _vm._s(_vm.reviewscount) +
+                      " " +
+                      _vm._s(_vm.$t("message.review"))
+                  )
+                ]
               ),
               _vm._v(" "),
               _c("div", { staticStyle: { clear: "both" } })
@@ -44251,13 +44280,18 @@ var render = function() {
                           "v-btn",
                           {
                             staticClass: "ma-2",
-                            attrs: { text: "", icon: "" }
+                            attrs: { text: "", icon: "" },
+                            on: {
+                              "~click": function($event) {
+                                return _vm.like(review.id, $event)
+                              }
+                            }
                           },
                           [
                             _c("v-icon", [_vm._v("mdi-thumb-up")]),
-                            _vm._v(
-                              _vm._s(review.like_counter) + "\n            "
-                            )
+                            _c("span", { attrs: { id: review.id } }, [
+                              _vm._v(_vm._s(review.like_counter))
+                            ])
                           ],
                           1
                         ),
@@ -44266,15 +44300,19 @@ var render = function() {
                           "v-btn",
                           {
                             staticClass: "ma-2",
-                            attrs: { text: "", icon: "" }
+                            attrs: { text: "", icon: "" },
+                            on: {
+                              "~click": function($event) {
+                                return _vm.dislike(review.id, $event)
+                              }
+                            }
                           },
                           [
                             _c("v-icon", [_vm._v("mdi-thumb-down")]),
-                            _vm._v(
-                              "  " +
-                                _vm._s(review.dislike_counter) +
-                                "\n            "
-                            )
+                            _vm._v("  "),
+                            _c("span", { attrs: { id: review.id + "d" } }, [
+                              _vm._v(_vm._s(review.dislike_counter))
+                            ])
                           ],
                           1
                         )
@@ -44289,15 +44327,18 @@ var render = function() {
                           "v-btn",
                           {
                             staticClass: "ma-2",
-                            attrs: { text: "", icon: "" }
+                            attrs: { text: "", icon: "" },
+                            on: {
+                              "~click": function($event) {
+                                return _vm.like(review.id, $event)
+                              }
+                            }
                           },
                           [
                             _c("v-icon", [_vm._v("mdi-thumb-up")]),
-                            _vm._v(
-                              " " +
-                                _vm._s(review.like_counter) +
-                                "\n            "
-                            )
+                            _c("span", { attrs: { id: review.id } }, [
+                              _vm._v(_vm._s(review.like_counter))
+                            ])
                           ],
                           1
                         ),
@@ -44306,15 +44347,19 @@ var render = function() {
                           "v-btn",
                           {
                             staticClass: "ma-2",
-                            attrs: { text: "", icon: "" }
+                            attrs: { text: "", icon: "" },
+                            on: {
+                              "~click": function($event) {
+                                return _vm.dislike(review.id, $event)
+                              }
+                            }
                           },
                           [
                             _c("v-icon", [_vm._v("mdi-thumb-down")]),
-                            _vm._v(
-                              "  " +
-                                _vm._s(review.dislike_counter) +
-                                "\n            "
-                            )
+                            _vm._v("  "),
+                            _c("span", { attrs: { id: review.id + "d" } }, [
+                              _vm._v(_vm._s(review.dislike_counter))
+                            ])
                           ],
                           1
                         ),

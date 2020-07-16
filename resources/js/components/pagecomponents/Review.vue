@@ -6,14 +6,14 @@
         <hr>
         <div class="rating" v-if="$i18n.locale == 'en'">
             <span class="fa fa-star text-warning" v-for="i in 5" :key="i.id"></span>
-            <span class="ml-2">193 {{ $t("message.review") }}</span>
+            <span class="ml-2">{{reviewscount}} {{ $t("message.review") }}</span>
             <v-btn style="background-color:black;color:#fff;float:right" @click="review = !review"><i class="fa fa-edit mr-2"></i>{{ $t("message.writereview") }}</v-btn>
             <div style="clear:both"></div>
         </div>
         <div class="rating" v-else>
             <v-btn style="background-color:black;color:#fff;" @click="review = !review"><i class="fa fa-edit mr-2"></i>{{ $t("message.writereview") }}</v-btn>
             <span class="fa fa-star text-warning" style="float:right" v-for="i in 5" :key="i.id"></span>
-            <span class="mr-2" style="float:right">193 {{ $t("message.review") }}</span>
+            <span class="mr-2" style="float:right">{{reviewscount}} {{ $t("message.review") }}</span>
             <div style="clear:both"></div>
 
         </div>
@@ -151,21 +151,21 @@
             </v-btn>
             <span style="float:right" v-if="$i18n.locale == 'en'">
                 {{ $t("message.checkreview") }}
-                <v-btn class="ma-2" text icon>
-                    <v-icon>mdi-thumb-up</v-icon>{{review.like_counter}}
+                <v-btn class="ma-2"  text icon @click.once="like(review.id,$event)">
+                    <v-icon >mdi-thumb-up</v-icon><span :id="review.id">{{review.like_counter}}</span>
                 </v-btn>
 
-                <v-btn class="ma-2" text icon>
-                    <v-icon>mdi-thumb-down</v-icon> &nbsp;{{review.dislike_counter}}
+                <v-btn class="ma-2" text icon @click.once="dislike(review.id,$event)">
+                    <v-icon >mdi-thumb-down</v-icon> &nbsp;<span :id="review.id+'d'">{{review.dislike_counter}}</span>
                 </v-btn>
             </span>
             <span style="float:right" v-else>
-                <v-btn class="ma-2" text icon>
-                    <v-icon>mdi-thumb-up</v-icon> {{review.like_counter}}
+                <v-btn class="ma-2" text icon @click.once="like(review.id,$event)">
+                    <v-icon >mdi-thumb-up</v-icon><span :id="review.id">{{review.like_counter}}</span>
                 </v-btn>
 
-                <v-btn class="ma-2" text icon>
-                    <v-icon>mdi-thumb-down</v-icon> &nbsp;{{review.dislike_counter}}
+                <v-btn class="ma-2" text icon @click.once="dislike(review.id,$event)">
+                    <v-icon >mdi-thumb-down</v-icon> &nbsp;<span :id="review.id+'d'">{{review.dislike_counter}}</span>
                 </v-btn>
                 {{ $t("message.checkreview") }}
             </span>
@@ -193,26 +193,22 @@ export default {
             title:null,
             email:null,
             name:null,
-            body:null
+            body:null,
+            like_counter:0,
+            dislike_counter:0,
         },
+        count:0,
         meta:0,
         reviews:[],
-        current_page:0
+        current_page:0,
+        reviewscount:''
     }),
         methods:{
         send(){
-            axios.post('/reviews',{
-                rate : this.form.rate,
-                title : this.form.title,
-                name : this.form.name,
-                email : this.form.email,
-                body : this.form.body,
-                like_counter:1,
-                dislike_counter:2
-            })
+            axios.post('/reviews',this.form)
             .then(res =>{ 
                 this.review=false
-                this.$router.push({name:'home'})
+                this.reviews.unshift(res.data.review)
             })
             .catch(error => this.errors = error.response.data.errors)
         },
@@ -226,7 +222,24 @@ export default {
 
             })
             .catch(error => console.log(error.response.data));
-        }
+        },
+        like(id , event){
+            axios.post('/like?id=' +id)
+            .then(res => {
+                $('#'+id)[0].innerText = res.data.review.like_counter
+                event.target.style.color="blue"               
+            })
+            .catch(error => this.errors = error.response.data.errors)
+        },
+        dislike(id , event){
+            axios.post('/dislike?id=' +id)
+            .then(res => {
+                $('#'+id+'d')[0].innerText = res.data.review.dislike_counter
+                event.target.style.color="red"
+
+            })
+            .catch(error => this.errors = error.response.data.errors)
+        },
     },
   created() {
     axios
@@ -235,9 +248,10 @@ export default {
         this.reviews = response.data.data;
         this.meta = response.data.last_page
         this.current_page = response.data.current_page
+        this.reviewscount = response.data.total
       })
       .catch(error => console.log(error.response.data));
-  },
+    },
 }
 </script>
 
