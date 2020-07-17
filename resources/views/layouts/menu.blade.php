@@ -19,6 +19,11 @@
     <a href="{{ route('appliedartists.index') }}"><i class="fa fa-user-o" aria-hidden="true"></i>
         <span>Artists Requests</span></a>
 </li>
+<br>
+<li class="{{ Request::is('appliedartists*') ? 'active' : '' }}">
+    <a href="/orders"><i class="fa fa-user-o" aria-hidden="true"></i>
+        <span>Orders Requests</span></a>
+</li>
 <br> <br>
 <li class="{{ Request::is('artists*') ? 'active' : '' }}">
     <a href="{{ route('artists.index') }}"><i class="fa fa-plus" aria-hidden="true"></i>

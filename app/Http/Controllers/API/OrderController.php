@@ -6,6 +6,8 @@ use App\Order;
 
 use  App\Models\Palette;
 
+use  App\Models\Discount;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -20,7 +22,11 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        // dd('ssss');
+        $appliedartists = Order::paginate(4);
+
+        return view('orders.index')
+            ->with('appliedartists', $appliedartists);
     }
 
     /**
@@ -41,6 +47,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
             'email' => 'required|email:rfc,dns',
             'fname' => 'required|string|max:100',
@@ -65,12 +72,15 @@ class OrderController extends Controller
         if ( $validator->errors()->count()>0)
         {
             return response()->json(['status'=>false,'errors'=>$validator->errors()->all(),__('orderrequest.failed')]);
-
+            // discount_percentage
         }
-        $totalprice =$this->totalprice($request->items);
+        $totalprice =$this->totalprice($request->items,$request->promocode);
         $request['paymentstatus'] = 'pending';
         $request['totalprice'] = $totalprice['totalprice'];
-        $checkoutid =  $this->get_checkout_id($request['totalprice']);
+        $request['discount'] = $totalprice['discount_amount'];
+
+
+        $checkoutid =  $this->get_checkout_id(floatval(str_replace('.',',',$request['totalprice'])));
         if($checkoutid)
         {
             $request['paymentid']=$checkoutid->id ;
@@ -79,17 +89,17 @@ class OrderController extends Controller
             $request['paymentid']='failed transaction';
             $order = Order::create($request->except('items'));
             $retitems = $this->save_order_items($order,$totalprice['baletteitems']);
-            return response()->json(['status'=>false,'errors'=>['transaction request failed and we calling you shortly'],__('orderrequest.failed')]);
+            return response()->json(['status'=>false,'errors'=>['transaction request failed and we calling you shortly'],__('orderrequest.failed'),$totalprice, floatval( $request['totalprice'])]);
 
         }
 
 
-        $order = Order::create($request->except('items'));
+        $order = Order::create($request->only(['promocode','email','fname','lname','address','apartment','city','postcode','goverment','country','goverment','country','phone','paymentid','paymentstatus','discount','totalprice','payment-transaction-return']));
         $retitems = $this->save_order_items($order,$totalprice['baletteitems']);
         $view = view('ajax.form')->with(['checkoutid' => $checkoutid->id , 'orderid' => $order->id])
         ->renderSections();
 
-        return response()->json(['status'=>true,'data'=>$order,'items'=>$retitems,'view'=>$view]);
+        return response()->json(['status'=>true,'data'=>$order,'items'=>$retitems,'view'=>$view,$totalprice]);
     }
 
     /**
@@ -102,10 +112,11 @@ class OrderController extends Controller
     {
         //
     }
-    public function totalprice($arr=null)
+    public function totalprice($arr=null,$promocode=null)
     {
         $retarr['totalprice']= 0;
         $retarr['items']=[];
+        $retarr['discount_amount']=null;
 
         $retarr['baletteitems']=[];
         $key['small']="S_price";
@@ -131,7 +142,20 @@ class OrderController extends Controller
 
                 }
         }
-        // return $retarr['totalprice'];
+            if($promocode)
+            {
+                $discount = Discount::where('code', '=', $promocode)->first();
+                if($discount)
+                {
+                   $discount =  $discount->discount_percentage;
+                   $discount_amount =  $retarr['totalprice'] * ($discount /100);
+
+                   $retarr['totalprice']=   $retarr['totalprice'] -  $discount_amount ;
+                   $retarr['discount_amount']=  $discount ;
+
+                }
+
+            }
         return $retarr;
         return count($arr);
 
