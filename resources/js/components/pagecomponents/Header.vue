@@ -13,7 +13,10 @@
                     <span id="hero-counter">408</span>
                     {{ $t("message.shoppers") }}
                 </div>
-                <a href="https://ecstase.com/pages/walltones?artwork=synthetic-3" class="hero-btn btn">{{ $t("message.shopnow") }}</a>
+                <router-link to="/shop">
+                    <a class="hero-btn btn">{{ $t("message.shopnow") }}</a>
+                </router-link>
+                
             </div>
         </div>
     </div>
