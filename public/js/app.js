@@ -2244,11 +2244,23 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       showModal: false,
-      value: 1
+      value: 1,
+      pallatecart: [],
+      cartcount: ''
     };
   },
+  created: function created() {
+    var _this = this;
+
+    axios.get('/api/getpallatecart').then(function (res) {
+      _this.cartcount = res.data.palettes.length;
+      _this.pallatecart = res.data.palettes;
+    })["catch"](function (error) {
+      return console.log(error.response.data);
+    });
+  },
   methods: {
-    plus: function plus() {
+    plus: function plus($id) {
       this.value += 1;
     },
     minus: function minus() {
@@ -2257,6 +2269,15 @@ __webpack_require__.r(__webpack_exports__);
       if (this.value <= 0) {
         this.value = 0;
       }
+    },
+    remove: function remove($id) {
+      var _this2 = this;
+
+      axios.post('/api/removefromcart?id=' + $id).then(function (res) {
+        _this2.pallatecart.splice(res.data.paletteCart, 1);
+      })["catch"](function (error) {
+        return console.log(error.response.data);
+      });
     }
   }
 });
@@ -2649,6 +2670,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
 //
 //
 //
@@ -3173,7 +3197,8 @@ __webpack_require__.r(__webpack_exports__);
       L_avalible: '',
       L_price: '',
       sizing_details: '',
-      name: ''
+      name: '',
+      cardId: ''
     };
   },
   created: function created() {
@@ -3184,7 +3209,7 @@ __webpack_require__.r(__webpack_exports__);
       _this.first = response.data.artists[0].id;
       axios.get("/api/view?id=" + _this.first).then(function (response) {
         _this.palettes = response.data.palettes;
-        _this.name = response.data.palettes[0].name, _this.S_copies = response.data.palettes[0].S_copies, _this.S_avalible = response.data.palettes[0].S_avalible, _this.S_price = response.data.palettes[0].S_price, _this.M_copies = response.data.palettes[0].M_copies, _this.M_avalible = response.data.palettes[0].M_avalible, _this.M_price = response.data.palettes[0].M_price, _this.L_copies = response.data.palettes[0].L_copies, _this.L_avalible = response.data.palettes[0].L_avalible, _this.L_price = response.data.palettes[0].L_price, _this.sizing_details = response.data.palettes[0].sizing_details;
+        _this.name = response.data.palettes[0].name, _this.cardId = response.data.palettes[0].id, _this.S_copies = response.data.palettes[0].S_copies, _this.S_avalible = response.data.palettes[0].S_avalible, _this.S_price = response.data.palettes[0].S_price, _this.M_copies = response.data.palettes[0].M_copies, _this.M_avalible = response.data.palettes[0].M_avalible, _this.M_price = response.data.palettes[0].M_price, _this.L_copies = response.data.palettes[0].L_copies, _this.L_avalible = response.data.palettes[0].L_avalible, _this.L_price = response.data.palettes[0].L_price, _this.sizing_details = response.data.palettes[0].sizing_details;
         _this.palettesArtists = response.data.palettesArtists;
         _this.firstpalettesArtists = response.data.palettesArtists[0].id;
         axios.get("/api/viewMinPalettes?id=" + _this.firstpalettesArtists).then(function (response) {
@@ -3284,12 +3309,17 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get("/api/viewMinPalettes?id=" + $minPalette_id).then(function (response) {
         _this3.minPalettes = response.data.minPalettes;
-        _this3.name = response.data.palettes[0].name, _this3.S_copies = response.data.palettes[0].S_copies, _this3.S_avalible = response.data.palettes[0].S_avalible, _this3.S_price = response.data.palettes[0].S_price, _this3.M_copies = response.data.palettes[0].M_copies, _this3.M_avalibles = response.data.palettes[0].M_avalible, _this3.M_price = response.data.palettes[0].M_price, _this3.L_copies = response.data.palettes[0].L_copies, _this3.L_avalibles = response.data.palettes[0].L_avalible, _this3.L_price = response.data.palettes[0].L_price, _this3.sizing_details = response.data.palettes[0].sizing_details;
+        _this3.name = response.data.palettes[0].name, _this3.cardId = response.data.palettes[0].id, _this3.S_copies = response.data.palettes[0].S_copies, _this3.S_avalible = response.data.palettes[0].S_avalible, _this3.S_price = response.data.palettes[0].S_price, _this3.M_copies = response.data.palettes[0].M_copies, _this3.M_avalibles = response.data.palettes[0].M_avalible, _this3.M_price = response.data.palettes[0].M_price, _this3.L_copies = response.data.palettes[0].L_copies, _this3.L_avalibles = response.data.palettes[0].L_avalible, _this3.L_price = response.data.palettes[0].L_price, _this3.sizing_details = response.data.palettes[0].sizing_details;
       })["catch"](function (error) {
         return console.log(error.response.data);
       });
       $('.details').on('click', function () {
         $(this).addClass('active').siblings().removeClass('active');
+      });
+    },
+    addtocart: function addtocart($id) {
+      axios.post('/api/addtocart?id=' + $id).then()["catch"](function (error) {
+        return console.log(error.response.data);
       });
     }
   }
@@ -42773,7 +42803,7 @@ var render = function() {
             }
           }),
           _vm._v(" "),
-          _c("span", [_vm._v("0")])
+          _c("span", [_vm._v(_vm._s(_vm.cartcount))])
         ]
       ),
       _vm._v(" "),
@@ -42791,152 +42821,196 @@ var render = function() {
                         attrs: { role: "document" }
                       },
                       [
-                        _c("div", { staticClass: "modal-content" }, [
-                          _c("div", { staticClass: "modal-header" }, [
-                            _c("h5", { staticClass: "modal-title" }, [
-                              _vm._v("Cart")
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "button",
-                              {
-                                staticClass: "close",
-                                attrs: {
-                                  type: "button",
-                                  "data-dismiss": "modal",
-                                  "aria-label": "Close"
-                                }
-                              },
-                              [
-                                _c(
-                                  "span",
-                                  {
-                                    attrs: { "aria-hidden": "true" },
-                                    on: {
-                                      click: function($event) {
-                                        _vm.showModal = false
-                                      }
-                                    }
-                                  },
-                                  [_vm._v("×")]
-                                )
-                              ]
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "modal-body" }, [
-                            _c("div", { staticClass: "row" }, [
-                              _c("div", { staticClass: "col-md-sm-4 ml-3" }, [
-                                _c("img", {
-                                  attrs: {
-                                    src:
-                                      "//cdn.shopify.com/s/files/1/3000/4362/products/Ehmiyat_Walltones_Product_Image_1.jpg?v=1581337922"
-                                  }
-                                })
+                        _c(
+                          "div",
+                          { staticClass: "modal-content" },
+                          [
+                            _c("div", { staticClass: "modal-header" }, [
+                              _c("h5", { staticClass: "modal-title" }, [
+                                _vm._v("Cart")
                               ]),
                               _vm._v(" "),
-                              _c("div", { staticClass: "col-md-sm-8 ml-3" }, [
-                                _c("span", [
-                                  _vm._v("All I Ever Wanted Was Everything")
-                                ]),
-                                _vm._v(" "),
-                                _c("h6", [_vm._v('70x93.5cm (28x37")')]),
-                                _vm._v(" "),
-                                _c("h6", [_vm._v("$70.00")])
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              [
-                                _c(
-                                  "v-form",
-                                  {
-                                    staticStyle: {
-                                      width: "50%",
-                                      display: "inline-block"
-                                    }
-                                  },
-                                  [
-                                    _c(
-                                      "v-text-field",
-                                      {
-                                        model: {
-                                          value: _vm.value,
-                                          callback: function($$v) {
-                                            _vm.value = $$v
-                                          },
-                                          expression: "value"
-                                        }
-                                      },
-                                      [
-                                        _c(
-                                          "v-icon",
-                                          {
-                                            attrs: { slot: "append" },
-                                            on: { click: _vm.plus },
-                                            slot: "append"
-                                          },
-                                          [_vm._v("mdi-plus")]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "v-icon",
-                                          {
-                                            attrs: { slot: "prepend" },
-                                            on: { click: _vm.minus },
-                                            slot: "prepend"
-                                          },
-                                          [_vm._v("mdi-minus")]
-                                        )
-                                      ],
-                                      1
-                                    )
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c("v-btn", { staticClass: "ml-3" }, [
-                                  _vm._v("Remove")
-                                ])
-                              ],
-                              1
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "modal-footer" },
-                            [
                               _c(
-                                "router-link",
+                                "button",
                                 {
-                                  staticStyle: {
-                                    margin: "auto",
-                                    color: "#fff"
-                                  },
-                                  attrs: { to: "/payment" }
+                                  staticClass: "close",
+                                  attrs: {
+                                    type: "button",
+                                    "data-dismiss": "modal",
+                                    "aria-label": "Close"
+                                  }
                                 },
                                 [
                                   _c(
-                                    "button",
+                                    "span",
                                     {
-                                      staticClass: "btn btn-dark",
-                                      staticStyle: { "font-size": "18px" },
-                                      attrs: { type: "button" }
+                                      attrs: { "aria-hidden": "true" },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.showModal = false
+                                        }
+                                      }
                                     },
-                                    [
-                                      _vm._v("$890    "),
-                                      _c("strong", [_vm._v(".")]),
-                                      _vm._v("   Checkout")
-                                    ]
+                                    [_vm._v("×")]
                                   )
                                 ]
                               )
-                            ],
-                            1
-                          )
-                        ])
+                            ]),
+                            _vm._v(" "),
+                            _vm._l(_vm.pallatecart, function(pallate) {
+                              return _c(
+                                "div",
+                                {
+                                  key: pallate.id,
+                                  staticClass: "modal-body",
+                                  staticStyle: { height: "0" }
+                                },
+                                [
+                                  _c("div", { staticClass: "row" }, [
+                                    _c(
+                                      "div",
+                                      { staticClass: "col-md-sm-4 ml-3" },
+                                      [
+                                        _c("img", {
+                                          attrs: {
+                                            src:
+                                              "//cdn.shopify.com/s/files/1/3000/4362/products/Ehmiyat_Walltones_Product_Image_1.jpg?v=1581337922"
+                                          }
+                                        })
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      { staticClass: "col-md-sm-8 ml-3" },
+                                      [
+                                        _c("span", [
+                                          _vm._v(
+                                            "All I Ever Wanted Was Everything"
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("h6", [
+                                          _vm._v('70x93.5cm (28x37")')
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("h6", [
+                                          _vm._v("$" + _vm._s(pallate.S_price))
+                                        ])
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    [
+                                      _c(
+                                        "v-form",
+                                        {
+                                          staticStyle: {
+                                            width: "50%",
+                                            display: "inline-block"
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "v-text-field",
+                                            {
+                                              model: {
+                                                value: _vm.value,
+                                                callback: function($$v) {
+                                                  _vm.value = $$v
+                                                },
+                                                expression: "value"
+                                              }
+                                            },
+                                            [
+                                              _c(
+                                                "v-icon",
+                                                {
+                                                  attrs: { slot: "append" },
+                                                  on: {
+                                                    click: function($event) {
+                                                      return _vm.plus(
+                                                        pallate.id
+                                                      )
+                                                    }
+                                                  },
+                                                  slot: "append"
+                                                },
+                                                [_vm._v("mdi-plus")]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "v-icon",
+                                                {
+                                                  attrs: { slot: "prepend" },
+                                                  on: { click: _vm.minus },
+                                                  slot: "prepend"
+                                                },
+                                                [_vm._v("mdi-minus")]
+                                              )
+                                            ],
+                                            1
+                                          )
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-btn",
+                                        {
+                                          staticClass: "ml-3",
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.remove(pallate.id)
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("Remove")]
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ]
+                              )
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "modal-footer" },
+                              [
+                                _c(
+                                  "router-link",
+                                  {
+                                    staticStyle: {
+                                      margin: "auto",
+                                      color: "#fff"
+                                    },
+                                    attrs: { to: "/payment" }
+                                  },
+                                  [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-dark",
+                                        staticStyle: { "font-size": "18px" },
+                                        attrs: { type: "button" }
+                                      },
+                                      [
+                                        _vm._v("$890    "),
+                                        _c("strong", [_vm._v(".")]),
+                                        _vm._v("   Checkout")
+                                      ]
+                                    )
+                                  ]
+                                )
+                              ],
+                              1
+                            )
+                          ],
+                          2
+                        )
                       ]
                     )
                   ])
@@ -43671,47 +43745,47 @@ var render = function() {
             })
           : _vm._e(),
         _vm._v(" "),
-        _c("div", { staticClass: "hero-content" }, [
-          _c("p", { staticClass: "hero-subtitle" }, [
-            _vm._v(_vm._s(_vm.$t("message.introducing")))
-          ]),
-          _vm._v(" "),
-          _c("h3", { staticClass: "hero-title" }, [
-            _vm._v(_vm._s(_vm.$t("message.fineart")))
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "hero-counter" }, [
-            _c("span", { staticClass: "hero-counter__live" }, [
-              _vm._v(_vm._s(_vm.$t("message.live")))
+        _c(
+          "div",
+          { staticClass: "hero-content" },
+          [
+            _c("p", { staticClass: "hero-subtitle" }, [
+              _vm._v(_vm._s(_vm.$t("message.introducing")))
             ]),
             _vm._v(" "),
-            _c("img", {
-              staticClass: "hero-counter__eye ml-2 mr-1",
-              attrs: {
-                src:
-                  "//cdn.shopify.com/s/files/1/3000/4362/t/109/assets/eye.png?v=10839783198912625093"
-              }
-            }),
+            _c("h3", { staticClass: "hero-title" }, [
+              _vm._v(_vm._s(_vm.$t("message.fineart")))
+            ]),
             _vm._v(" "),
-            _c("span", { attrs: { id: "hero-counter" } }, [_vm._v("408")]),
-            _vm._v(
-              "\n                   " +
-                _vm._s(_vm.$t("message.shoppers")) +
-                "\n               "
-            )
-          ]),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "hero-btn btn",
-              attrs: {
-                href: "https://ecstase.com/pages/walltones?artwork=synthetic-3"
-              }
-            },
-            [_vm._v(_vm._s(_vm.$t("message.shopnow")))]
-          )
-        ])
+            _c("div", { staticClass: "hero-counter" }, [
+              _c("span", { staticClass: "hero-counter__live" }, [
+                _vm._v(_vm._s(_vm.$t("message.live")))
+              ]),
+              _vm._v(" "),
+              _c("img", {
+                staticClass: "hero-counter__eye ml-2 mr-1",
+                attrs: {
+                  src:
+                    "//cdn.shopify.com/s/files/1/3000/4362/t/109/assets/eye.png?v=10839783198912625093"
+                }
+              }),
+              _vm._v(" "),
+              _c("span", { attrs: { id: "hero-counter" } }, [_vm._v("408")]),
+              _vm._v(
+                "\n                   " +
+                  _vm._s(_vm.$t("message.shoppers")) +
+                  "\n               "
+              )
+            ]),
+            _vm._v(" "),
+            _c("router-link", { attrs: { to: "/shop" } }, [
+              _c("a", { staticClass: "hero-btn btn" }, [
+                _vm._v(_vm._s(_vm.$t("message.shopnow")))
+              ])
+            ])
+          ],
+          1
+        )
       ])
     ])
   ])
@@ -44781,20 +44855,31 @@ var render = function() {
                   1
                 ),
                 _vm._v(" "),
-                _c("button", { staticClass: "btn add-button " }, [
-                  _vm.active_el == 1
-                    ? _c("span", [_vm._v("$" + _vm._s(_vm.S_price))])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.active_el == 2
-                    ? _c("span", [_vm._v("$" + _vm._s(_vm.M_price))])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.active_el == 3
-                    ? _c("span", [_vm._v("$" + _vm._s(_vm.L_price))])
-                    : _vm._e(),
-                  _vm._v(" - " + _vm._s(_vm.$t("message.cart")))
-                ]),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn add-button ",
+                    on: {
+                      click: function($event) {
+                        return _vm.addtocart(_vm.cardId)
+                      }
+                    }
+                  },
+                  [
+                    _vm.active_el == 1
+                      ? _c("span", [_vm._v("$" + _vm._s(_vm.S_price))])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.active_el == 2
+                      ? _c("span", [_vm._v("$" + _vm._s(_vm.M_price))])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.active_el == 3
+                      ? _c("span", [_vm._v("$" + _vm._s(_vm.L_price))])
+                      : _vm._e(),
+                    _vm._v(" - " + _vm._s(_vm.$t("message.cart")))
+                  ]
+                ),
                 _vm._v(" "),
                 _c(
                   "p",

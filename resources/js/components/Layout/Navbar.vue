@@ -45,7 +45,7 @@
             </ul>
         </div>
             <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
-            <button class="nav-btns" @click="showModal = true"> <img src="//cdn.shopify.com/s/files/1/3000/4362/t/109/assets/nav_icons_bag.svg?v=8412811641524949656" alt="Shopping Cart" width="33px"> <span>0</span> </button>
+            <button class="nav-btns" @click="showModal = true"> <img src="//cdn.shopify.com/s/files/1/3000/4362/t/109/assets/nav_icons_bag.svg?v=8412811641524949656" alt="Shopping Cart" width="33px"> <span>{{cartcount}}</span> </button>
             <div v-if="showModal">
                 <transition name="modal">
                 <div class="modal-mask">
@@ -58,7 +58,7 @@
                             <span aria-hidden="true" @click="showModal = false">&times;</span>
                             </button>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body" style="height:0" v-for="pallate in pallatecart" :key="pallate.id">
                             <div class="row">
                                 <div class="col-md-sm-4 ml-3">
                                     <img src="//cdn.shopify.com/s/files/1/3000/4362/products/Ehmiyat_Walltones_Product_Image_1.jpg?v=1581337922">
@@ -66,21 +66,21 @@
                                 <div class="col-md-sm-8 ml-3">
                                     <span>All I Ever Wanted Was Everything</span>
                                     <h6 >70x93.5cm (28x37")</h6>
-                                    <h6>$70.00</h6>
+                                    <h6>${{pallate.S_price}}</h6>
                                 </div>
                             </div>
 
                             <div>
                                 <v-form style="width:50%;display:inline-block">
                                     <v-text-field  v-model="value">
-
-                                        <v-icon slot="append" @click="plus">mdi-plus</v-icon>
+                                        <v-icon slot="append" @click="plus(pallate.id)">mdi-plus</v-icon>
                                         <v-icon slot="prepend" @click="minus">mdi-minus</v-icon>
                                     </v-text-field>
                                 </v-form>
-                                <v-btn class="ml-3">Remove</v-btn>
+                                <v-btn class="ml-3" @click="remove(pallate.id)">Remove</v-btn>
                             </div>
                         </div>
+                        
                         <div class="modal-footer">
                             <router-link style="margin: auto;color: #fff;" to="/payment">
                                 <button type="button" class="btn btn-dark" style="font-size: 18px;">$890 &nbsp;  <strong>.</strong> &nbsp; Checkout</button>
@@ -104,10 +104,20 @@ export default {
         return {
             showModal: false,
             value:1,
+            pallatecart:[],
+            cartcount:''
         }
     },
+    created(){
+        axios.get('/api/getpallatecart')
+        .then(res=>{
+            this.cartcount = res.data.palettes.length            
+            this.pallatecart=res.data.palettes
+            })
+        .catch(error => console.log(error.response.data))
+    },
     methods:{
-        plus(){
+        plus($id){
             this.value +=1
         },
         minus(){
@@ -115,6 +125,13 @@ export default {
             if(this.value <= 0){
                 this.value = 0
             }
+        },
+        remove($id){
+            axios.post('/api/removefromcart?id='+ $id)
+            .then(res => {
+                this.pallatecart.splice(res.data.paletteCart,1)
+                })
+            .catch(error => console.log(error.response.data))
         }
     }
 }

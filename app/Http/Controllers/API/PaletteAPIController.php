@@ -60,7 +60,27 @@ class PaletteAPIController extends AppBaseController
         $minPalettes = Paletteimage::where('palatte_id',$request->id)->limit(6)->get(); 
         return response()->json(['minPalettes' => $minPalettes,'palettes' =>$palettes]);
     }
+    public function addtocart(Request $request) {
+        $paletteCart = Palette::find($request->id);
+        if($paletteCart){
+            $paletteCart->addtocart =1;
+            $paletteCart->save();
+            return response()->json(['paletteCart' =>$paletteCart]);
+        }
+    }
+    public function removefromcart(Request $request) {
+        $paletteCart = Palette::find($request->id);
+        if($paletteCart){
+            $paletteCart->addtocart =0;
+            $paletteCart->save();
+            return response()->json(['paletteCart' =>$paletteCart]);
+        }
+    }
+    public function getpallatecart() {
+        $palettes = Palette::where('addtocart',1)->get();
+        return response()->json(['palettes' =>$palettes]);
 
+    }
     /**
      * Store a newly created Palette in storage.
      * POST /palettes

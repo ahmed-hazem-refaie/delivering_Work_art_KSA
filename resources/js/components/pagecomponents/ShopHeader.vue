@@ -64,7 +64,7 @@
                             <h3 class="mt-4 mb-4" v-if="active_el==3">70x93.5cm (28x37") <strong style="float:right">{{L_copies}}/{{L_avalible}} left</strong></h3>
                             <div style="clear:both"></div>
                         </div>
-                        <button class="btn add-button "><span v-if="active_el==1">${{S_price}}</span>
+                        <button class="btn add-button " @click="addtocart(cardId)"><span v-if="active_el==1">${{S_price}}</span>
                         <span v-if="active_el==2">${{M_price}}</span>
                         <span v-if="active_el==3">${{L_price}}</span> - {{ $t("message.cart") }}</button>
                         <p>
@@ -165,7 +165,8 @@ export default {
             L_avalible:'',
             L_price:'',
             sizing_details:'',
-            name:''
+            name:'',
+            cardId:''
 
             
         }
@@ -180,6 +181,7 @@ export default {
         .then(response =>{
             this.palettes = response.data.palettes
             this.name=response.data.palettes[0].name,
+            this.cardId=response.data.palettes[0].id,
             this.S_copies=response.data.palettes[0].S_copies,
             this.S_avalible=response.data.palettes[0].S_avalible,
             this.S_price=response.data.palettes[0].S_price,
@@ -275,6 +277,7 @@ export default {
                 .then(response =>{
                     this.minPalettes = response.data.minPalettes
                     this.name=response.data.palettes[0].name,
+                    this.cardId=response.data.palettes[0].id,
                     this.S_copies=response.data.palettes[0].S_copies,
                     this.S_avalible=response.data.palettes[0].S_avalible,
                     this.S_price=response.data.palettes[0].S_price,
@@ -291,6 +294,12 @@ export default {
                 
                 $(this).addClass('active').siblings().removeClass('active');
             });
+        },
+        addtocart($id){
+            axios.post('/api/addtocart?id=' + $id)
+            .then()
+            .catch(error => console.log(error.response.data))
+
         }
 
     }

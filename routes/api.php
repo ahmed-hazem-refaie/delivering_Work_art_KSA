@@ -23,6 +23,9 @@ Route::resource('palettes', 'PaletteAPIController');
 Route::get('/view' ,'PaletteAPIController@Palettes');
 Route::get('/viewMinPalettes' ,'PaletteAPIController@viewMinPalettes');
 Route::get('review', 'PaletteAPIController@getReviews');
+Route::post('addtocart', 'PaletteAPIController@addtocart');
+Route::get('getpallatecart','PaletteAPIController@getpallatecart');
+Route::post('removefromcart','PaletteAPIController@removefromcart');
 
 Route::group(['middleware'=>['api']], function () {
     Route::post('add-order' ,'OrderController@store');
