@@ -271,6 +271,7 @@ nav.navbar {
     max-width: 100%;
     transition: all .4s ease;
     transform: translate(-50%, -50%);
+    /* height: 300px; */
 }
 
 .product-grid-item .product-grid-item__image .front {
@@ -281,10 +282,11 @@ nav.navbar {
     display: none;
     width: 100%;
 }
-.product-grid-item__image:hover .back
+.product-grid-item__image:hover img
 {
-    display: block;
-    z-index: 2;
+    /* transform: scale(1.2); */ 
+    transform: translate(-50%, -40%);
+
 }
 
 .product-grid-item .product-grid-item__tags .cms-special-description {

@@ -67,11 +67,11 @@
             </div>
             <div class="row">
                 <div class="col-xs-8">
-                    <div class="checkbox icheck">
+                    <!-- <div class="checkbox icheck">
                         <label>
                             <input type="checkbox" name="remember"> Remember Me
                         </label>
-                    </div>
+                    </div> -->
                 </div>
                 <!-- /.col -->
                 <div class="col-xs-4">
@@ -81,7 +81,8 @@
             </div>
         </form>
 
-        <a href="{{ url('/password/reset') }}">I forgot my password</a><br>
+        <!-- <a href="{{ url('/password/reset') }}">I forgot my password</a><br> -->
+        <br>
         <a href="{{ url('/register') }}" class="text-center">Register a new membership</a>
 
     </div>

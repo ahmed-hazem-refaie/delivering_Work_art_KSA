@@ -45,7 +45,7 @@
             </ul>
         </div>
             <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
-            <button class="nav-btns" @click="showModal = true"> <img src="//cdn.shopify.com/s/files/1/3000/4362/t/109/assets/nav_icons_bag.svg?v=8412811641524949656" alt="Shopping Cart" width="33px"> <span>{{cartcount}}</span> </button>
+            <button class="nav-btns" @click="showModal = true"> <img src="//cdn.shopify.com/s/files/1/3000/4362/t/109/assets/nav_icons_bag.svg?v=8412811641524949656" alt="Shopping Cart" width="33px"> <span id="count">{{cartcount}}</span> </button>
             <div v-if="showModal">
                 <transition name="modal">
                 <div class="modal-mask">
@@ -130,6 +130,7 @@ export default {
             axios.post('/api/removefromcart?id='+ $id)
             .then(res => {
                 this.pallatecart.splice(res.data.paletteCart,1)
+                $('#count')[0].innerText--;
                 })
             .catch(error => console.log(error.response.data))
         }

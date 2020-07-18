@@ -10,7 +10,7 @@
                 <div class="hero-counter">
                     <span class="hero-counter__live">{{ $t("message.live") }}</span>
                     <img class="hero-counter__eye ml-2 mr-1" src="//cdn.shopify.com/s/files/1/3000/4362/t/109/assets/eye.png?v=10839783198912625093">
-                    <span id="hero-counter">408</span>
+                    <span id="hero-counter">{{numbers}}</span>
                     {{ $t("message.shoppers") }}
                 </div>
                 <router-link to="/shop">
@@ -33,7 +33,8 @@ export default {
                 '//cdn.shopify.com/s/files/1/3000/4362/files/peach_desktop_final_post_2048x.jpg?v=1581001094',
                 '//cdn.shopify.com/s/files/1/3000/4362/files/sepia_dekstop_final_post_2048x.jpg?v=1565183372'
             ],
-            selectedImage: null
+            selectedImage: null,
+            numbers:""
         }
     },
     methods: {
@@ -42,7 +43,8 @@ export default {
         }
     },
     created() {
-        this.selectedImage = this.randomItem(this.images)
+        this.selectedImage = this.randomItem(this.images);
+        this.numbers=Math.floor(Math.random()*200)+50;
     }
 }
 </script>

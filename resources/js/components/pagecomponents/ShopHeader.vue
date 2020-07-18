@@ -12,7 +12,7 @@
                         <div class="details" v-for="(palettesArtist , index) in palettesArtists" @click="addActive(palettesArtist.id)" :class="{ 'active': index == 0 }"  :key="palettesArtist.id">
                             <img :src="palettesArtist.img" class="details_img" alt="...">
                             <div class="content" >
-                                <h6>Summer | {{palettesArtist.L_price}}$</h6>
+                                <h6>Summer | ${{palettesArtist.L_price}}</h6>
                                 <span><span class="text-success">{{palettesArtist.L_copies}}</span>/{{palettesArtist.L_avalible}} left</span>
                             </div>
                         </div>
@@ -95,9 +95,7 @@
                                     <i v-else class="fa fa-chevron-up" style="float:right"></i> 
                                 </h4>                              
                                 <span v-if="size">
-                                    it is delivered as the artwork comes ready to be hung on your wall.
-                                    The classical design and releases in this series make it an elegant
-                                    way to add a high-end.
+                                    {{sizing_details}}
                                 </span>
                             </li>
                             <li class="list-group-item" @click="details = !details">
@@ -297,7 +295,7 @@ export default {
         },
         addtocart($id){
             axios.post('/api/addtocart?id=' + $id)
-            .then()
+            .then(res=>{ $('#count')[0].innerText++})
             .catch(error => console.log(error.response.data))
 
         }

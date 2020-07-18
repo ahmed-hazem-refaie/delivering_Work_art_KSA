@@ -21,7 +21,7 @@
 </li>
 <br>
 <li class="{{ Request::is('appliedartists*') ? 'active' : '' }}">
-    <a href="/orders"><i class="fa fa-user-o" aria-hidden="true"></i>
+    <a href="/orders"><i class="fas fa-money-check-alt"></i>
         <span>Orders Requests</span></a>
 </li>
 <br> <br>

@@ -13,7 +13,6 @@
                     <div class="product-grid-item__image">
                         <a class="product-grid-item__imagewrapper" href="/products/son-this-is-the-universe" data-product-handle="son-this-is-the-universe" data-product-quantity="48">
                             <img class="front" :src="data.img" style="height:100%">
-                            <img class="back" src="//cdn.shopify.com/s/files/1/3000/4362/products/Son-this-is-the-Universe-DD-1_1024x1024.jpg?v=1592233469">
                         </a>
                         <div class="product-grid-item__variants">
                             <span>Size</span>

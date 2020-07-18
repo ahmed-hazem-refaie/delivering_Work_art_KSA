@@ -209,6 +209,7 @@ export default {
             .then(res =>{ 
                 this.review=false
                 this.reviews.unshift(res.data.review)
+                this.form='';
             })
             .catch(error => this.errors = error.response.data.errors)
         },
