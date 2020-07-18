@@ -82,7 +82,8 @@
                         </div>
                         
                         <div class="modal-footer">
-                            <router-link style="margin: auto;color: #fff;" to="/payment">
+                            <router-link style="margin: auto;color: #fff;"
+                            :to="{ path: '/payment', query: { myprop: this.pallatecart }}">
                                 <button type="button" class="btn btn-dark" style="font-size: 18px;">$890 &nbsp;  <strong>.</strong> &nbsp; Checkout</button>
                             </router-link>
 

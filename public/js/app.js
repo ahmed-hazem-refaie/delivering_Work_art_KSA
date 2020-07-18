@@ -2236,6 +2236,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -2535,64 +2536,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2609,23 +2552,37 @@ __webpack_require__.r(__webpack_exports__);
         postcode: null,
         items: [{
           paletteid: 1,
-          palettesize: 'medium',
+          palettesize: "medium",
           quantity: 2
         }]
       },
-      discount: '',
-      item: ['Egypt', 'Russian', 'Franch', 'Brazil'],
+      discount: "",
+      item: ["Egypt", "Russian", "Franch", "Brazil"],
+      errors: {},
       nameRules: [function (v) {
-        return !!v || 'Name is required';
+        return !!v || "Name is required";
       }],
-      checkbox: false
+      checkbox: false,
+      message: ""
     };
+  },
+  created: function created() {
+    console.log(this.$route.query.myprop);
   },
   methods: {
     send: function send() {
       var _this = this;
 
-      axios.post('/api/add-order', this.form).then()["catch"](function (error) {
+      axios.post("/api/add-order", this.form).then(function (data) {
+        console.log(data.data);
+
+        if (!data.data.status) {
+          console.log(data.data);
+          _this.errors = data.data.errors;
+        } else {
+          _this.message = "donnnnnnnnnnnnnnnnne";
+        }
+      })["catch"](function (error) {
         return _this.errors = error.response.data.errors;
       });
     }
@@ -7958,7 +7915,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.form[data-v-dc37895e]{\n    width: 60%;\n    margin: auto;\n}\n.img img[data-v-dc37895e]{\n    width: 62px;\n    height: 70px;\n}\n.form_discount[data-v-dc37895e]{\n    width: 70%;\n    padding: 10px;\n}\n.discount_section[data-v-dc37895e]{\n    width:65%;\n}\n@media(min-width: 767px) and (max-width: 991px)\n{\n.discount_section[data-v-dc37895e]{\n        width: 100%;\n}\n}\n\n", ""]);
+exports.push([module.i, "\n.form[data-v-dc37895e] {\n  width: 60%;\n  margin: auto;\n}\n.img img[data-v-dc37895e] {\n  width: 62px;\n  height: 70px;\n}\n.form_discount[data-v-dc37895e] {\n  width: 70%;\n  padding: 10px;\n}\n.discount_section[data-v-dc37895e] {\n  width: 65%;\n}\n@media (min-width: 767px) and (max-width: 991px) {\n.discount_section[data-v-dc37895e] {\n    width: 100%;\n}\n}\n", ""]);
 
 // exports
 
@@ -43043,7 +43000,12 @@ var render = function() {
                                       margin: "auto",
                                       color: "#fff"
                                     },
-                                    attrs: { to: "/payment" }
+                                    attrs: {
+                                      to: {
+                                        path: "/payment",
+                                        query: { myprop: this.pallatecart }
+                                      }
+                                    }
                                   },
                                   [
                                     _c(
@@ -43599,7 +43561,11 @@ var render = function() {
                   _vm._v(" "),
                   _c("v-btn", { attrs: { color: "#5cbbff", type: "submit" } }, [
                     _vm._v("Continue to Shipping")
-                  ])
+                  ]),
+                  _vm._v(" "),
+                  _vm.errors
+                    ? _c("span", [_vm._v(_vm._s(_vm.errors))])
+                    : _c("span", [_vm._v(_vm._s(_vm.message))])
                 ],
                 1
               )
@@ -43729,7 +43695,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("span", { staticStyle: { float: "right" } }, [
           _c("span", { staticStyle: { color: "#737171" } }, [_vm._v("USD")]),
-          _vm._v(" $70.00")
+          _vm._v(" $70.00\n          ")
         ]),
         _vm._v(" "),
         _c("div", { staticStyle: { clear: "both" } })
