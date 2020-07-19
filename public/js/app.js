@@ -2536,6 +2536,57 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2558,12 +2609,13 @@ __webpack_require__.r(__webpack_exports__);
       },
       discount: "",
       item: ["Egypt", "Russian", "Franch", "Brazil"],
-      errors: {},
+      errors: [],
       nameRules: [function (v) {
         return !!v || "Name is required";
       }],
       checkbox: false,
-      message: ""
+      message: "",
+      formview: ''
     };
   },
   created: function created() {
@@ -2580,6 +2632,9 @@ __webpack_require__.r(__webpack_exports__);
           console.log(data.data);
           _this.errors = data.data.errors;
         } else {
+          $('#exampleModalCenter').modal('show');
+          console.log($('#exampleModalCenter'));
+          _this.formview = data.data.view.main;
           _this.message = "donnnnnnnnnnnnnnnnne";
         }
       })["catch"](function (error) {
@@ -43304,10 +43359,207 @@ var render = function() {
               _c(
                 "v-container",
                 [
+                  _vm.errors.length > 0 && !_vm.message
+                    ? _c(
+                        "div",
+                        {
+                          staticClass:
+                            "alert alert-warning alert-dismissible fade show",
+                          attrs: { role: "alert" }
+                        },
+                        [
+                          _c("strong", [_vm._v("Sorry!")]),
+                          _vm._v(
+                            " You should check in on some of those fields below.\n                                  "
+                          ),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c(
+                            "ul",
+                            _vm._l(_vm.errors, function(item) {
+                              return _c("li", [
+                                _vm._v(
+                                  "\n                                          " +
+                                    _vm._s(item) +
+                                    "\n                                      "
+                                )
+                              ])
+                            }),
+                            0
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "close",
+                              attrs: {
+                                type: "button",
+                                "data-dismiss": "alert",
+                                "aria-label": "Close"
+                              }
+                            },
+                            [
+                              _c("span", { attrs: { "aria-hidden": "true" } }, [
+                                _vm._v("×")
+                              ])
+                            ]
+                          )
+                        ]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.message.length > 0
+                    ? _c(
+                        "div",
+                        {
+                          staticClass:
+                            "alert alert-warning alert-dismissible fade show",
+                          attrs: { role: "alert" }
+                        },
+                        [
+                          _c("h1", [_vm._v(" Done")]),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "close",
+                              attrs: {
+                                type: "button",
+                                "data-dismiss": "alert",
+                                "aria-label": "Close"
+                              }
+                            },
+                            [
+                              _c("span", { attrs: { "aria-hidden": "true" } }, [
+                                _vm._v("×")
+                              ])
+                            ]
+                          )
+                        ]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: {
+                        type: "button",
+                        "data-toggle": "modal",
+                        "data-target": "#exampleModalCenter"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                              Launch demo modal\n                              "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "modal show",
+                      attrs: {
+                        id: "exampleModalCenter",
+                        tabindex: "-1",
+                        role: "dialog",
+                        "aria-labelledby": "exampleModalCenterTitle",
+                        "aria-hidden": "true",
+                        show: "true"
+                      }
+                    },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "modal-dialog modal-dialog-centered",
+                          attrs: { role: "document" }
+                        },
+                        [
+                          _c("div", { staticClass: "modal-content" }, [
+                            _c("div", { staticClass: "modal-header" }, [
+                              _c(
+                                "h5",
+                                {
+                                  staticClass: "modal-title",
+                                  attrs: { id: "exampleModalLongTitle" }
+                                },
+                                [_vm._v("Modal title")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "close",
+                                  attrs: {
+                                    type: "button",
+                                    "data-dismiss": "modal",
+                                    "aria-label": "Close"
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "span",
+                                    { attrs: { "aria-hidden": "true" } },
+                                    [_vm._v("×")]
+                                  )
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _vm.formview.length > 0
+                              ? _c("div", { staticClass: "modal-body" }, [
+                                  _vm._v(
+                                    "\n                                      " +
+                                      _vm._s(_vm.formview) +
+                                      "\n                                      "
+                                  ),
+                                  _c("div", { attrs: { id: "momo" } }, [
+                                    _c("form", {
+                                      staticClass: "paymentWidgets",
+                                      attrs: {
+                                        action:
+                                          "http://localhost:8000/payment/26",
+                                        "data-brands": "VISA MASTER MADA "
+                                      }
+                                    })
+                                  ])
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "modal-footer" }, [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-secondary",
+                                  attrs: {
+                                    type: "button",
+                                    "data-dismiss": "modal"
+                                  }
+                                },
+                                [_vm._v("Close")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-primary",
+                                  attrs: { type: "button" }
+                                },
+                                [_vm._v("Save changes")]
+                              )
+                            ])
+                          ])
+                        ]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
                   _c(
                     "v-row",
                     [
-                      _c("h4", [_vm._v("Contact information")]),
+                      _c("h4", [_vm._v("Contactsss information ")]),
                       _vm._v(" "),
                       _c(
                         "v-col",

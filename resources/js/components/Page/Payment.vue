@@ -4,8 +4,59 @@
       <div class="col-md-7">
         <v-form class="form" @submit.prevent="send">
           <v-container>
+                            <div   v-if="errors.length > 0 && !message" class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    <strong>Sorry!</strong> You should check in on some of those fields below.
+                                    <br>
+                                    <ul >
+                                        <li v-for="item in errors">
+                                            {{ item }}
+                                        </li>
+                                    </ul>
+
+
+
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                            </div>
+                            <div   v-if=" message.length >0 " class="alert alert-warning alert-dismissible fade show" role="alert">
+                                  <h1> Done</h1>
+
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                            </div>
+                                                            <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                                Launch demo modal
+                                </button>
+
+                                <!-- Modal -->
+                                <div    class="modal show" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" show='true'>
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div v-if="formview.length>0" class="modal-body">
+                                        {{formview}}
+                                        <div id='momo'>
+                                            <form action="http://localhost:8000/payment/26" class="paymentWidgets" data-brands="VISA MASTER MADA "></form>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                    </div>
+                                </div>
+                                 </div>
+
             <v-row>
-              <h4>Contact information</h4>
+              <h4>Contactsss information </h4>
               <v-col cols="12" md="12">
                 <v-text-field v-model="form.email" label="E-mail" required></v-text-field>
               </v-col>
@@ -102,7 +153,7 @@
     </div>
   </section>
 </template>
-
+<script src="https://test.oppwa.com/v1/paymentWidgets.js?checkoutId=EED31D50ADB615AFB6C1108B25697ADA.uat01-vm-tx02"></script>
 <script>
 export default {
   data() {
@@ -128,14 +179,15 @@ export default {
       },
       discount: "",
       item: ["Egypt", "Russian", "Franch", "Brazil"],
-      errors: {},
+      errors: [],
       nameRules: [v => !!v || "Name is required"],
       checkbox: false,
-      message: ""
-    };  
+      message: "",
+      formview:'',
+    };
   },
   created(){
-      console.log(this.$route.query.myprop) 
+      console.log(this.$route.query.myprop)
   },
   methods: {
     send() {
@@ -147,6 +199,9 @@ export default {
             console.log(data.data);
             this.errors = data.data.errors;
           } else {
+              $('#exampleModalCenter').modal('show')
+              console.log($('#exampleModalCenter'));
+            this.formview=data.data.view.main
             this.message = "donnnnnnnnnnnnnnnnne";
           }
         })
