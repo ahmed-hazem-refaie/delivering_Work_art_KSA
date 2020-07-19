@@ -2586,7 +2586,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2633,9 +2632,13 @@ __webpack_require__.r(__webpack_exports__);
           _this.errors = data.data.errors;
         } else {
           $('#exampleModalCenter').modal('show');
-          console.log($('#exampleModalCenter'));
-          _this.formview = data.data.view.main;
+          console.log(data.data.checkid);
+          console.log(data.data.orderid);
+          _this.formview = data.data.orderid;
           _this.message = "donnnnnnnnnnnnnnnnne";
+          var tag = document.createElement("script");
+          tag.setAttribute("src", "https://test.oppwa.com/v1/paymentWidgets.js?checkoutId=".concat(data.data.checkid));
+          document.head.appendChild(tag);
         }
       })["catch"](function (error) {
         return _this.errors = error.response.data.errors;
@@ -43508,25 +43511,22 @@ var render = function() {
                               )
                             ]),
                             _vm._v(" "),
-                            _vm.formview.length > 0
-                              ? _c("div", { staticClass: "modal-body" }, [
-                                  _vm._v(
-                                    "\n                                      " +
-                                      _vm._s(_vm.formview) +
-                                      "\n                                      "
-                                  ),
-                                  _c("div", { attrs: { id: "momo" } }, [
-                                    _c("form", {
-                                      staticClass: "paymentWidgets",
-                                      attrs: {
-                                        action:
-                                          "http://localhost:8000/payment/26",
-                                        "data-brands": "VISA MASTER MADA "
-                                      }
-                                    })
-                                  ])
-                                ])
-                              : _vm._e(),
+                            _c("div", { staticClass: "modal-body" }, [
+                              _vm._v(
+                                "\n                                      " +
+                                  _vm._s(_vm.formview) +
+                                  "\n                                      "
+                              ),
+                              _c("h1", [_vm._v("ssss")]),
+                              _vm._v(" "),
+                              _c("form", {
+                                staticClass: "paymentWidgets",
+                                attrs: {
+                                  action: "http://localhost:8000/payment/27",
+                                  "data-brands": "VISA MASTER MADA "
+                                }
+                              })
+                            ]),
                             _vm._v(" "),
                             _c("div", { staticClass: "modal-footer" }, [
                               _c(

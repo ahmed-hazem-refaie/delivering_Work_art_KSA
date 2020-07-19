@@ -99,7 +99,7 @@ class OrderController extends Controller
         $view = view('ajax.form')->with(['checkoutid' => $checkoutid->id , 'orderid' => $order->id])
         ->renderSections();
 
-        return response()->json(['status'=>true,'data'=>$order,'items'=>$retitems,'view'=>$view,$totalprice]);
+        return response()->json(['status'=>true,'data'=>$order,'items'=>$retitems,'checkid'=>$checkoutid->id,'orderid'=>$order->id,$totalprice]);
     }
 
     /**

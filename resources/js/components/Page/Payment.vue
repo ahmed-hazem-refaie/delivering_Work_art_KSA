@@ -41,11 +41,11 @@
                                         <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <div v-if="formview.length>0" class="modal-body">
+                                    <div  class="modal-body">
                                         {{formview}}
-                                        <div id='momo'>
-                                            <form action="http://localhost:8000/payment/26" class="paymentWidgets" data-brands="VISA MASTER MADA "></form>
-                                        </div>
+                                        <h1>ssss</h1>
+                                        <form action="http://localhost:8000/payment/27" class="paymentWidgets" data-brands="VISA MASTER MADA "></form>
+
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -153,8 +153,7 @@
     </div>
   </section>
 </template>
-<script src="https://test.oppwa.com/v1/paymentWidgets.js?checkoutId=EED31D50ADB615AFB6C1108B25697ADA.uat01-vm-tx02"></script>
-<script>
+ <script>
 export default {
   data() {
     return {
@@ -200,9 +199,14 @@ export default {
             this.errors = data.data.errors;
           } else {
               $('#exampleModalCenter').modal('show')
-              console.log($('#exampleModalCenter'));
-            this.formview=data.data.view.main
+              console.log(data.data.checkid);
+              console.log(data.data.orderid);
+
+            this.formview=data.data.orderid
             this.message = "donnnnnnnnnnnnnnnnne";
+                          let tag = document.createElement("script");
+                              tag.setAttribute("src", `https://test.oppwa.com/v1/paymentWidgets.js?checkoutId=${data.data.checkid}`);
+                              document.head.appendChild(tag);
           }
         })
 
