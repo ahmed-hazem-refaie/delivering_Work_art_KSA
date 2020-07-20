@@ -27,30 +27,22 @@
                                     </button>
                             </div>
                                                             <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                                Launch demo modal
-                                </button>
+
 
                                 <!-- Modal -->
                                 <div    class="modal show" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" show='true'>
                                 <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div  class="modal-body">
-                                        {{formview}}
-                                        <h1>ssss</h1>
-                                        <form action="http://localhost:8000/payment/27" class="paymentWidgets" data-brands="VISA MASTER MADA "></form>
+                                    <div class="modal-content" style="display: contents;">
 
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Save changes</button>
-                                    </div>
+
+<div class="moda-body">
+
+                            <form action="/api/payment/40" class="paymentWidgets" data-brands="VISA MASTER AMEX"></form>
+
+</div>
+
+
+
                                     </div>
                                 </div>
                                  </div>
@@ -205,7 +197,7 @@ export default {
             this.formview=data.data.orderid
             this.message = "donnnnnnnnnnnnnnnnne";
                           let tag = document.createElement("script");
-                              tag.setAttribute("src", `https://test.oppwa.com/v1/paymentWidgets.js?checkoutId=${data.data.checkid}`);
+                              tag.setAttribute("src", `https://test.oppwa.com/v1/paymentWidgets.js?checkoutId=8B8DEB6B2E7F41066FDFE67E4C4255A0.uat01-vm-tx01`);
                               document.head.appendChild(tag);
           }
         })

@@ -2578,14 +2578,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2637,7 +2629,7 @@ __webpack_require__.r(__webpack_exports__);
           _this.formview = data.data.orderid;
           _this.message = "donnnnnnnnnnnnnnnnne";
           var tag = document.createElement("script");
-          tag.setAttribute("src", "https://test.oppwa.com/v1/paymentWidgets.js?checkoutId=".concat(data.data.checkid));
+          tag.setAttribute("src", "https://test.oppwa.com/v1/paymentWidgets.js?checkoutId=8B8DEB6B2E7F41066FDFE67E4C4255A0.uat01-vm-tx01");
           document.head.appendChild(tag);
         }
       })["catch"](function (error) {
@@ -43373,7 +43365,7 @@ var render = function() {
                         [
                           _c("strong", [_vm._v("Sorry!")]),
                           _vm._v(
-                            " You should check in on some of those fields below.\n                                  "
+                            " You should check in on some of those fields below.\n                                    "
                           ),
                           _c("br"),
                           _vm._v(" "),
@@ -43382,9 +43374,9 @@ var render = function() {
                             _vm._l(_vm.errors, function(item) {
                               return _c("li", [
                                 _vm._v(
-                                  "\n                                          " +
+                                  "\n                                            " +
                                     _vm._s(item) +
-                                    "\n                                      "
+                                    "\n                                        "
                                 )
                               ])
                             }),
@@ -43443,23 +43435,6 @@ var render = function() {
                     : _vm._e(),
                   _vm._v(" "),
                   _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-primary",
-                      attrs: {
-                        type: "button",
-                        "data-toggle": "modal",
-                        "data-target": "#exampleModalCenter"
-                      }
-                    },
-                    [
-                      _vm._v(
-                        "\n                              Launch demo modal\n                              "
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
                     "div",
                     {
                       staticClass: "modal show",
@@ -43480,77 +43455,24 @@ var render = function() {
                           attrs: { role: "document" }
                         },
                         [
-                          _c("div", { staticClass: "modal-content" }, [
-                            _c("div", { staticClass: "modal-header" }, [
-                              _c(
-                                "h5",
-                                {
-                                  staticClass: "modal-title",
-                                  attrs: { id: "exampleModalLongTitle" }
-                                },
-                                [_vm._v("Modal title")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "close",
+                          _c(
+                            "div",
+                            {
+                              staticClass: "modal-content",
+                              staticStyle: { display: "contents" }
+                            },
+                            [
+                              _c("div", { staticClass: "moda-body" }, [
+                                _c("form", {
+                                  staticClass: "paymentWidgets",
                                   attrs: {
-                                    type: "button",
-                                    "data-dismiss": "modal",
-                                    "aria-label": "Close"
+                                    action: "/api/payment/40",
+                                    "data-brands": "VISA MASTER AMEX"
                                   }
-                                },
-                                [
-                                  _c(
-                                    "span",
-                                    { attrs: { "aria-hidden": "true" } },
-                                    [_vm._v("×")]
-                                  )
-                                ]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "modal-body" }, [
-                              _vm._v(
-                                "\n                                      " +
-                                  _vm._s(_vm.formview) +
-                                  "\n                                      "
-                              ),
-                              _c("h1", [_vm._v("ssss")]),
-                              _vm._v(" "),
-                              _c("form", {
-                                staticClass: "paymentWidgets",
-                                attrs: {
-                                  action: "http://localhost:8000/payment/27",
-                                  "data-brands": "VISA MASTER MADA "
-                                }
-                              })
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "modal-footer" }, [
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-secondary",
-                                  attrs: {
-                                    type: "button",
-                                    "data-dismiss": "modal"
-                                  }
-                                },
-                                [_vm._v("Close")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-primary",
-                                  attrs: { type: "button" }
-                                },
-                                [_vm._v("Save changes")]
-                              )
-                            ])
-                          ])
+                                })
+                              ])
+                            ]
+                          )
                         ]
                       )
                     ]
@@ -43898,7 +43820,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("span", { staticStyle: { float: "right" } }, [
           _c("span", { staticStyle: { color: "#737171" } }, [_vm._v("USD")]),
-          _vm._v(" $70.00\n          ")
+          _vm._v(" $70.00\n            ")
         ]),
         _vm._v(" "),
         _c("div", { staticStyle: { clear: "both" } })
