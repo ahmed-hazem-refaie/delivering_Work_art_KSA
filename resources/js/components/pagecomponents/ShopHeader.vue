@@ -27,7 +27,7 @@
                         <span class="sr-only">Previous</span>
                     </a>
                 </div>
-                
+
             </div>
 
         </div>
@@ -44,11 +44,11 @@
                 <div class="col-lg-5">
                     <div class="add-cart p-3">
                         <p>Art paper framed by a wooden frame and non-reflective glass</p>
-                        <h2 class="font-weight-bold ">{{name}} II 
+                        <h2 class="font-weight-bold ">{{name}} II
                         <span v-if="active_el==1">${{S_price}}</span>
                         <span v-if="active_el==2">${{M_price}}</span>
                         <span v-if="active_el==3">${{L_price}}</span>
-                        
+
                         </h2>
                         <div class="mb-3 mt-2"> <span>silkscreen</span></div>
                         <div>
@@ -78,7 +78,7 @@
                                 <span v-if="show">
                                     it is delivered as the artwork comes ready to be hung on your wall.
                                     The classical design and releases in this series make it an elegant
-                                    way to add a high-end touch to your space. Each artwork contains 
+                                    way to add a high-end touch to your space. Each artwork contains
                                     a signed certificate of authenticity that guarantees its originality.
                                     Curated by Ecstase in a collaboration with Seamless for a limited edition of 50.
                                     This psychedelic triple artwork capitalizes on brilliant negative space and amazing detail.
@@ -92,8 +92,8 @@
                                 <h4 class="font-weight-bold ">
                                     Size
                                     <i v-if="!size" class="fa fa-chevron-down" style="float:right"></i>
-                                    <i v-else class="fa fa-chevron-up" style="float:right"></i> 
-                                </h4>                              
+                                    <i v-else class="fa fa-chevron-up" style="float:right"></i>
+                                </h4>
                                 <span v-if="size">
                                     {{sizing_details}}
                                 </span>
@@ -102,25 +102,25 @@
                                 <h4 class="font-weight-bold ">
                                     Product Details
                                     <i v-if="!details" class="fa fa-chevron-down" style="float:right"></i>
-                                    <i v-else class="fa fa-chevron-up" style="float:right"></i>                                    
+                                    <i v-else class="fa fa-chevron-up" style="float:right"></i>
                                 </h4>
                                 <span v-if="details">
                                     it is delivered as the artwork comes ready to be hung on your wall.
                                     The classical design and releases in this series make it an elegant
                                     way to add a high-end.
-                                </span>                        
+                                </span>
                             </li>
                             <li class="list-group-item" @click="shipping = !shipping">
                                 <h4 class="font-weight-bold ">
                                     Shipping
                                     <i v-if="!shipping" class="fa fa-chevron-down" style="float:right"></i>
-                                    <i v-else class="fa fa-chevron-up" style="float:right"></i>                              
+                                    <i v-else class="fa fa-chevron-up" style="float:right"></i>
                                 </h4>
                                 <span v-if="shipping">
                                     it is delivered as the artwork comes ready to be hung on your wall.
                                     The classical design and releases in this series make it an elegant
                                     way to add a high-end.
-                                </span>                       
+                                </span>
                             </li>
                         </ul>
                     </div>
@@ -166,7 +166,7 @@ export default {
             name:'',
             cardId:''
 
-            
+
         }
     },
     created() {
@@ -191,21 +191,21 @@ export default {
             this.L_price=response.data.palettes[0].L_price,
             this.sizing_details=response.data.palettes[0].sizing_details
             this.palettesArtists = response.data.palettesArtists
-           
+
             this.firstpalettesArtists = response.data.palettesArtists[0].id
             axios.get("/api/viewMinPalettes?id=" + this.firstpalettesArtists)
             .then(response =>{
                 this.minPalettes = response.data.minPalettes
-                })  
+                })
             .catch(error => console.log(error.response.data))
-        })  
-        .catch(error => console.log(error.response.data))          
+        })
+        .catch(error => console.log(error.response.data))
       }
 
     ).catch(error => console.log(error.response.data));
 
-        
-      
+
+
     },
     methods:{
         getdata($id){
@@ -218,7 +218,7 @@ export default {
             } else {
                 this.firstminPalettes = null
             }
-            
+
             if($id > response.data.artists.length){
                 axios.get("/api/view?id=" +1)
                 .then(response =>{
@@ -227,12 +227,12 @@ export default {
                     axios.get("/api/viewMinPalettes?id=" + this.firstminPalettes)
                     .then(response =>{
                         this.minPalettes = response.data.minPalettes
-                        })  
+                        })
                         .catch(error => console.log(error.response.data))
                     })
                 .catch(error => console.log(error.response.data))
             } else if($id == 0) {
-                
+
                 axios.get("/api/view?id=" + response.data.artists.length )
                 .then(response =>{
                     this.palettesArtists = response.data.palettesArtists
@@ -240,18 +240,18 @@ export default {
                     axios.get("/api/viewMinPalettes?id=" + this.firstminPalettes)
                     .then(response =>{
                         this.minPalettes = response.data.minPalettes
-                        })  
+                        })
                         .catch(error => console.log(error.response.data))
                     })
                 .catch(error => console.log(error.response.data))
             }
-                
+
             axios.get("/api/viewMinPalettes?id=" + this.firstminPalettes)
                 .then(response =>{
                     this.minPalettes = response.data.minPalettes
-                    })  
+                    })
                 .catch(error => console.log(error.response.data))
-        })  
+        })
         .catch(error => console.log(error.response.data))
         },
         small(el){
@@ -286,10 +286,10 @@ export default {
                     this.L_avalibles=response.data.palettes[0].L_avalible,
                     this.L_price=response.data.palettes[0].L_price,
                     this.sizing_details=response.data.palettes[0].sizing_details
-                    })  
+                    })
                 .catch(error => console.log(error.response.data))
             $('.details').on('click', function () {
-                
+
                 $(this).addClass('active').siblings().removeClass('active');
             });
         },
@@ -338,10 +338,10 @@ export default {
         position: absolute;
         top: 15%;
         left: 32%;
-        
+
     }
     .details{
-    width: 16%;
+    width: 80%;
     display: inline-block;
     margin: 15px;
     color: #fff;
@@ -410,7 +410,7 @@ export default {
         padding-left: 10px;
         padding-right: 10px;
     }
-/* 
+/*
     .carousel-control-prev{
         left: -50%;
     } */
