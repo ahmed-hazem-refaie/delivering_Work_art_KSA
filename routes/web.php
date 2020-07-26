@@ -3,6 +3,7 @@
 use Facade\FlareClient\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\CheckAdmin;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,29 +16,38 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes(['verify' => true]);
-// Route::view('/','userLayout.home');
-// Route::view('/{any}','userLayout.home');
-// Route::get('/home', 'HomeController@index')->middleware('verified')->name("home.index");
+Auth::routes();
+
+Route::view('/','userLayout.home');
+Route::group(['middleware' => 'isadmin'], function () {
+    Route::get('/admin', 'AdminController@index')->middleware(['isadmin'])->name("admin.index");
+    Route::resource('appliedartists', 'AppliedartistController');
+    Route::resource('artists', 'ArtistController');
+    Route::resource('reviews', 'ReviewController');
+    Route::resource('palettes', 'PaletteController');
+    Route::resource('paletteimages', 'PaletteimageController');
+    Route::get('orders', 'Api\orderController@index');
+    Route::get('addpaletteimages/{palette?}/create','PaletteimageController@create')->name("addimgpalette");
+    Route::get('changeStatus', 'UserController@changeStatus');
+    Route::get('users', 'UserController@index');
+    Route::get('changeStatus', 'UserController@changeStatus');
+
+
+});
+Route::get('/home', 'HomeController@index')->middleware('verified')->name("home.index");
 Route::get('/', 'HomeController@index');
-Route::get('/admin', 'AdminController@index')->middleware('verified')->name("admin.index");
 
 
-Route::resource('artists', 'ArtistController');
 
-Route::resource('appliedartists', 'AppliedartistController');
-Route::get('orders', 'Api\orderController@index');
 
-Route::resource('reviews', 'ReviewController');
 Route::post('like', 'ReviewController@like');
 Route::post('dislike', 'ReviewController@dislike');
 
-Route::resource('palettes', 'PaletteController');
-Route::resource('paletteimages', 'PaletteimageController');
-Route::get('addpaletteimages/{palette?}/create','PaletteimageController@create')->name("addimgpalette");
+
 
 Route::resource('discounts', 'DiscountController');
 
 Route::get('payment/{id?}', function ($id=null) {
 
 })->name('payment');
+Route::view('/{any}','userLayout.home');

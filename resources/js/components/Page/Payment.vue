@@ -218,7 +218,7 @@ export default {
             this.formview=data.data.orderid
             this.message = "donnnnnnnnnnnnnnnnne";
                           let tag = document.createElement("script");
-                              tag.setAttribute("src", `https://test.oppwa.com/v1/paymentWidgets.js?checkoutId=8B8DEB6B2E7F41066FDFE67E4C4255A0.uat01-vm-tx01`);
+                              tag.setAttribute("src", "https://test.oppwa.com/v1/paymentWidgets.js?checkoutId="+data.data.checkid);
                               document.head.appendChild(tag);
           }
         })

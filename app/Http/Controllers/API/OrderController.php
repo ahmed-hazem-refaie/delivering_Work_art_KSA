@@ -11,6 +11,7 @@ use  App\Models\Discount;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use App\Rules\instock;
 
 
 class OrderController extends Controller
@@ -82,7 +83,7 @@ class OrderController extends Controller
 
             'items.*.palettesize' => 'required|in:"small","large","medium"',
             'items.*.quantity' => 'required|numeric|gt:0',
-
+            'items.*' => new instock(),
             ]);
 
         // app()->setLocale('ar');
