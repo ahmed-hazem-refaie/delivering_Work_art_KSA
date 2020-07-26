@@ -24,6 +24,11 @@
     <a href="/orders"><i class="fas fa-money-check-alt"></i>
         <span>Orders Requests</span></a>
 </li>
+<br>
+<li class="{{ Request::is('appliedartists*') ? 'active' : '' }}">
+    <a href="/users"><i class="fas fa-money-check-alt"></i>
+        <span>Users Admins Requests</span></a>
+</li>
 <br> <br>
 <li class="{{ Request::is('artists*') ? 'active' : '' }}">
     <a href="{{ route('artists.index') }}"><i class="fa fa-plus" aria-hidden="true"></i>
