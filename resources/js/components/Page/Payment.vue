@@ -102,13 +102,18 @@
         </v-form>
       </div>
       <div class="col-md-5" style="background-color:#eaeaea">
+          
         <div class="discount_section mt-5">
-          <div class="img">
+          <div class="img"
+       v-for="item in cart"
+      :key="item.product.id"
+
+          >
             <img
-              src="//cdn.shopify.com/s/files/1/3000/4362/products/Ehmiyat_Walltones_Product_Image_1.jpg?v=1581337922"
+             :src="item.product.img"
             />
-            <span>All I Ever Wanted Was Everything</span>
-            <span style="float:right">$70.00</span>
+            <span> <strong>{{ item.product.name }}</strong></span>
+            <span style="float:right">{{ item.quantity }} x ${{item.product.L_price}}</span>
             <div style="clear:both"></div>
             <h6 style="width: 50%;margin-left: 70px;">70x93.5cm (28x37")</h6>
           </div>
@@ -136,7 +141,7 @@
           <div style="font-size:20px;padding:10px">
             <span>Total</span>
             <span style="float:right;">
-              <span style="color:#737171;">USD</span> $70.00
+              <span style="color:#737171;">USD</span> $ {{cartTotalPrice}}
             </span>
             <div style="clear:both"></div>
           </div>
@@ -147,6 +152,15 @@
 </template>
  <script>
 export default {
+
+    computed: {
+    cartTotalPrice() {
+      return this.$store.getters.cartTotalPrice;
+    },
+    cart() {
+      return this.$store.state.cart;
+    },
+  },
   data() {
     return {
       form: {
@@ -181,6 +195,13 @@ export default {
       console.log(this.$route.query.myprop)
   },
   methods: {
+       clearProductFromCart(product){
+      this.$store.dispatch("deleteCartItem",product)
+    },
+    clearCartItems(){
+      this.$store.dispatch("clearCartItems")
+    },
+
     send() {
       axios
         .post("/api/add-order", this.form)

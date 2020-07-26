@@ -1,5 +1,16 @@
 <template>
   <div>
+        <div class="loading-page">
+            <div class="counter">
+                <p>loading</p>
+                <h1>
+                    0%
+
+
+                </h1>
+                <hr />
+            </div>
+        </div>
     <shopHeader></shopHeader>
     <appslider></appslider>
   </div>

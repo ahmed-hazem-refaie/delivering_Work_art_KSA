@@ -33,7 +33,7 @@ class CreateOrdersTable extends Migration
             $table->string('promocode')->nullable();
             $table->string('discount')->nullable();
             $table->string('totalprice')->nullable();
-            $table->json('payment-transaction-return')->nullable();
+            $table->string('payment_transaction_return')->nullable();
 
             $table->timestamps();
         });
