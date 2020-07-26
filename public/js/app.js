@@ -2578,6 +2578,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -43339,6 +43340,8 @@ var render = function() {
         "div",
         { staticClass: "col-md-7" },
         [
+          _vm._m(0),
+          _vm._v(" "),
           _c(
             "v-form",
             {
@@ -43365,7 +43368,7 @@ var render = function() {
                         [
                           _c("strong", [_vm._v("Sorry!")]),
                           _vm._v(
-                            " You should check in on some of those fields below.\n                                    "
+                            " You should check in on some of those fields below.\n                                  "
                           ),
                           _c("br"),
                           _vm._v(" "),
@@ -43374,9 +43377,9 @@ var render = function() {
                             _vm._l(_vm.errors, function(item) {
                               return _c("li", [
                                 _vm._v(
-                                  "\n                                            " +
+                                  "\n                                          " +
                                     _vm._s(item) +
-                                    "\n                                        "
+                                    "\n                                      "
                                 )
                               ])
                             }),
@@ -43433,50 +43436,6 @@ var render = function() {
                         ]
                       )
                     : _vm._e(),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "modal show",
-                      attrs: {
-                        id: "exampleModalCenter",
-                        tabindex: "-1",
-                        role: "dialog",
-                        "aria-labelledby": "exampleModalCenterTitle",
-                        "aria-hidden": "true",
-                        show: "true"
-                      }
-                    },
-                    [
-                      _c(
-                        "div",
-                        {
-                          staticClass: "modal-dialog modal-dialog-centered",
-                          attrs: { role: "document" }
-                        },
-                        [
-                          _c(
-                            "div",
-                            {
-                              staticClass: "modal-content",
-                              staticStyle: { display: "contents" }
-                            },
-                            [
-                              _c("div", { staticClass: "moda-body" }, [
-                                _c("form", {
-                                  staticClass: "paymentWidgets",
-                                  attrs: {
-                                    action: "/api/payment/40",
-                                    "data-brands": "VISA MASTER AMEX"
-                                  }
-                                })
-                              ])
-                            ]
-                          )
-                        ]
-                      )
-                    ]
-                  ),
                   _vm._v(" "),
                   _c(
                     "v-row",
@@ -43709,7 +43668,7 @@ var render = function() {
         },
         [
           _c("div", { staticClass: "discount_section mt-5" }, [
-            _vm._m(0),
+            _vm._m(1),
             _vm._v(" "),
             _c("hr"),
             _vm._v(" "),
@@ -43742,11 +43701,11 @@ var render = function() {
             _vm._v(" "),
             _c("hr"),
             _vm._v(" "),
-            _vm._m(1),
+            _vm._m(2),
             _vm._v(" "),
             _c("hr"),
             _vm._v(" "),
-            _vm._m(2)
+            _vm._m(3)
           ])
         ]
       )
@@ -43754,6 +43713,57 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "modal show",
+        attrs: {
+          id: "exampleModalCenter",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalCenterTitle",
+          "aria-hidden": "true",
+          show: "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-dialog-centered",
+            attrs: { role: "document" }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "modal-content",
+                staticStyle: { display: "contents" }
+              },
+              [
+                _c("div", { staticClass: "moda-body" }, [
+                  _vm._v(
+                    "\n                                                              ss\n                                                        "
+                  ),
+                  _c("form", {
+                    staticClass: "paymentWidgets",
+                    attrs: {
+                      action: "/api/payment/40",
+                      "data-brands": "VISA MASTER AMEX"
+                    }
+                  })
+                ])
+              ]
+            )
+          ]
+        )
+      ]
+    )
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -43820,7 +43830,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("span", { staticStyle: { float: "right" } }, [
           _c("span", { staticStyle: { color: "#737171" } }, [_vm._v("USD")]),
-          _vm._v(" $70.00\n            ")
+          _vm._v(" $70.00\n          ")
         ]),
         _vm._v(" "),
         _c("div", { staticStyle: { clear: "both" } })

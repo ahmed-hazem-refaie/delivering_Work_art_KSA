@@ -26,11 +26,5 @@ class CheckPromo extends Controller
    {
     return response()->json(['status'=>false,'message'=>'code not found']);
    }
-    //     'id' => 'integer',
-    //     'code' => 'string',
-    //     'discount_percentage' => 'string'
-
-
-        return response()->json(['ddd'=>'ssss','data'=>$request->all()]);
     }
 }

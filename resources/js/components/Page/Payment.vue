@@ -2,6 +2,26 @@
   <section>
     <div class="row">
       <div class="col-md-7">
+                                                                      <!-- Button trigger modal -->
+
+
+                                <!-- Modal -->
+                                <div    class="modal show" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" show='true'>
+                                         <div class="modal-dialog modal-dialog-centered" role="document">
+                                                     <div class="modal-content" style="display: contents;">
+
+
+                                                        <div class="moda-body">
+                                                                ss
+                                                          <form action="/api/payment/40" class="paymentWidgets" data-brands="VISA MASTER AMEX"></form>
+
+                                                        </div>
+
+
+
+                                                 </div>
+                                        </div>
+                                 </div>
         <v-form class="form" @submit.prevent="send">
           <v-container>
                             <div   v-if="errors.length > 0 && !message" class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -26,26 +46,7 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                             </div>
-                                                            <!-- Button trigger modal -->
 
-
-                                <!-- Modal -->
-                                <div    class="modal show" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" show='true'>
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content" style="display: contents;">
-
-
-<div class="moda-body">
-
-                            <form action="/api/payment/40" class="paymentWidgets" data-brands="VISA MASTER AMEX"></form>
-
-</div>
-
-
-
-                                    </div>
-                                </div>
-                                 </div>
 
             <v-row>
               <h4>Contactsss information </h4>
