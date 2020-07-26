@@ -61,7 +61,12 @@ const messages = {
             name: "Your Name",
             email: "Your Email",
             phone: "Your Phone",
-            submit: "Submit"
+            submit: "Submit",
+        //    cart
+            checkOut:"CheckOut",
+            // footer
+            logo:"Website Name",
+            lorem:"lorem text",
         }
     },
     ar: {
@@ -102,7 +107,12 @@ const messages = {
             name: "إسمك",
             email: "إيميلك",
             phone: "رقم تليفونك",
-            submit: "إرسال"
+            submit: "إرسال",
+            // cart translation
+            checkOut:"شراء الان",
+            // footer
+            logo:"اسم الموقع",
+            lorem :"نص تجريبى "
         }
     }
 };

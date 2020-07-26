@@ -2,10 +2,10 @@
   <footer  class="myhome">
     <div class="row mb-3 pl-2">
         <div class="col-md-4 footer-col-1">
-            <a href="" class="footer-logo">Ecstase</a>
+            <a href="" class="footer-logo">{{$t("message.logo") }}</a>
             <div class="footer-info">
-                <p class="lead">ecstase BV. Westplein 12 <br>
-                    3016BM Rotterdam, The Netherlands</p>
+                <p class="lead">{{ $t("message.lorem") }}<br>
+                  {{ $t("message.lorem") }}</p>
             </div>
             <div class="footer-social">
                 <a href="" class="custom-social-link "><i class="fa fa-facebook facebook"></i></a>
@@ -20,11 +20,11 @@
                             {{ $t("message.Limitworks") }}
                         </li>
                         <li class="footer-menu-item">
-                            <a href="#" class="footer-menu-item-link">Porta ac consectetur ac</a>
+                            <a href="#" class="footer-menu-item-link">  {{ $t("message.lorem") }}</a>
 
                         </li>
                         <li class="footer-menu-item">
-                            <a href="#" class="footer-menu-item-link">Porta ac consectetur ac</a>
+                            <a href="#" class="footer-menu-item-link">  {{ $t("message.lorem") }}</a>
 
                         </li>
                     </ul>
@@ -35,11 +35,11 @@
                             {{ $t("message.company") }}
                         </li>
                         <li class="footer-menu-item">
-                            <a href="#" class="footer-menu-item-link">Porta ac consectetur ac</a>
+                            <a href="#" class="footer-menu-item-link">{{ $t("message.lorem") }}</a>
 
                         </li>
                         <li class="footer-menu-item">
-                            <a href="#" class="footer-menu-item-link">Porta ac consectetur ac</a>
+                            <a href="#" class="footer-menu-item-link">{{ $t("message.lorem") }}</a>
 
                         </li>
                     </ul>
@@ -50,11 +50,11 @@
                             {{ $t("message.others") }}
                         </li>
                         <li class="footer-menu-item">
-                            <a href="#" class="footer-menu-item-link">Porta ac consectetur ac</a>
+                            <a href="#" class="footer-menu-item-link">{{ $t("message.lorem") }}</a>
 
                         </li>
                         <li class="footer-menu-item">
-                            <a href="#" class="footer-menu-item-link">Porta ac consectetur ac</a>
+                            <a href="#" class="footer-menu-item-link">{{ $t("message.lorem") }}</a>
 
                         </li>
                     </ul>
