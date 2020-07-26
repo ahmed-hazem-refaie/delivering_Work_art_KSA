@@ -28,7 +28,7 @@
                                 <p>Walltones-studio added diamond dust to this print for a glittering effect that makes the artwork even more enticing. Additionally, keep in mind that each artwork is done by hand and therefore may slightly vary from the exemplary product images.</p>
                             </div>
                             <div class="cms-special-description">
-                                <span class="cms-special-label color-7">NEW RELEASE</span>
+                                <span class="cms-special-label color-7">{{ $t("message.newreleaseheader") }}</span>
                                 <p>This artwork was added recently (but will likely be sold out soon)</p>
                             </div>
                         </div>
@@ -38,7 +38,7 @@
                             <h3 class="product-grid-item__name"><a href="/products/son-this-is-the-universe" data-product-handle="son-this-is-the-universe" data-product-quantity="48">{{data.name}}</a></h3>
                             <span class="product-grid-item__price">from ${{data.L_price}}</span>
                         </div>
-                        <span class="product-grid-item__qty"><span class="prints-times text-success">{{data.palette_copies}} / </span><span>{{data.avalible_copies}} left</span></span>
+                        <span class="product-grid-item__qty"><span class="prints-times text-success">{{data.palette_copies}} / </span><span>{{data.avalible_copies}}{{$t("message.left") }}</span></span>
                     </div>
                 </div>
               </div>

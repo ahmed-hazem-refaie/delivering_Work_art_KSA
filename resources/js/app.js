@@ -9,16 +9,21 @@ require("./bootstrap");
 window.Vue = require("vue");
 
 import Vue from "vue";
-import Vuetify from "vuetify";
+import VueInternationalization from "vue-i18n";
 import VueRouter from "vue-router";
+import Vuetify from "vuetify";
+/**
+ * Next, we will create a fresh Vue application instance and attach it to
+ * the page. Then, you may begin adding components to this application
+ * or customize the JavaScript scaffolding to fit your unique needs.
+ */
+import router from "./Router/router.js";
+import store from "./store";
 
 Vue.use(Vuetify);
 Vue.use(VueRouter);
-import VueInternationalization from "vue-i18n";
-import Locale from "./vue-i18n-locales.generated";
 
 
-import store from "./store";
 
 Vue.use(VueInternationalization);
 const lang = localStorage.getItem("locale") || "en";
@@ -26,16 +31,18 @@ const messages = {
     en: {
         message: {
             home: "Home",
+            loading: "Loading",
             shopart: "Shop Art",
             about: "About",
             introducing: "INTRODUCING",
-            fineart: "Fine art",
+            fineart: "Fine Art",
             shoppers: "shoppers",
             live: "LIVE",
             shopnow: "Shop Now",
             newrelease: "New Release",
             newreleaseheader: "THIS WEEK’S RELEASE OF LIMITED ARTWORKS",
             readmore: "Read More",
+            readless: "Read Less",
             ourmission: "Our Mission",
             ourmissiontext1:
                 "You, like everyone else on this planet, were born a creative person with good intentions. Able to change the world in ways so much bigger than you probably can imagine right now. All the rules of society then programmed you to think and calculate yourself through life in a way that is useful and not disturbing anyone else. Conforming to this norm made you fit in, but also stripped you of your boundless childlike creativity, imagination and lust for exploration.",
@@ -62,16 +69,31 @@ const messages = {
             email: "Your Email",
             phone: "Your Phone",
             submit: "Submit",
+            // productslider
+            size:"Size",
+            productDetails:"Product Details ",
+            shipping:"Shipping", 
+            left:"Left",   
+            imgdetails:"Img Details",
+            limitedEdition:"Limited Edition",
+            
+        
         //    cart
-            checkOut:"CheckOut",
+            checkout:"CheckOut",
+            total:"Total Price",
+            remove:"Remove Product",
+            cartname:"Cart",
+
             // footer
             logo:"Website Name",
             lorem:"lorem text",
+            
         }
     },
     ar: {
         message: {
             home: "الصفحه الرئيسيه",
+            loading: "يرجى الانتظار",
             shopart: "متجر الفن",
             about: "من نحن",
             introducing: "مقدمه",
@@ -81,7 +103,8 @@ const messages = {
             shopnow: "اشتري اﻷن",
             newrelease: "إصدار جديد",
             newreleaseheader: "إصدار هذا الأسبوع من الأعمال الفنية المحدودة",
-            readmore: "إقراء أكثر",
+            readless:"إقرأ أقل",
+            readmore: "إقرأ أكثر",
             ourmission: "مهمتنا",
             ourmissiontext1:
                 " أنت ، مثل أي شخص آخر على هذا الكوكب ، ولدت شخصًا مبدعًا بحسن نية. قادرة على تغيير العالم بطرق أكبر بكثير مما يمكن أن تتخيله الآن. ثم برمجتك جميع قواعد المجتمع لتفكر وتحسب نفسك من خلال الحياة بطريقة مفيدة ولا تزعج أي شخص آخر. التوافق مع هذه القاعدة جعلك مناسبًا ، ولكنه جردك أيضًا من إبداعك الطفولي غير المحدود وخيالك وشهوة الاستكشاف.",
@@ -108,8 +131,20 @@ const messages = {
             email: "إيميلك",
             phone: "رقم تليفونك",
             submit: "إرسال",
+
+                // productslider
+                size:"الحجم",
+                productDetails:" تفاصيل المنتج",
+                shipping:"الشحن", 
+                left:"الباقى",   
+                imgdetails:"تفاصيل المنتج",
+                limitedEdition:"الطبعات المحدودة",    
+                DescriptionEdition:"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quae fugit minima nemo corporis eligendi voluptas quidem eius suscipit dignissimos recusandae soluta alias, provident ipsum officia, tempore laboriosam neque esse cupiditate!",
             // cart translation
-            checkOut:"شراء الان",
+            checkout:"شراء الان",
+            total:"الحساب الإجمالى",
+            remove:"مسح المنتج",
+            cartname:"السلة",
             // footer
             logo:"اسم الموقع",
             lorem :"نص تجريبى "
@@ -133,12 +168,6 @@ const i18n = new VueInternationalization({
 
 Vue.component("AppHome", require("./components/AppHome.vue").default);
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-import router from "./Router/router.js";
 
 const app = new Vue({
     el: "#app",

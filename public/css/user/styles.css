@@ -145,7 +145,7 @@ nav.navbar {
     font-size: 25px;
     margin-bottom: -16px;
     margin-top: 10px;
-    letter-spacing: 1.6px;
+
 }
 
 .hero-classic .hero-title {
@@ -184,7 +184,7 @@ nav.navbar {
     animation: blinking-button 2s infinite;
     animation-timing-function: ease-in-out;
     animation-direction: alternate;
-    letter-spacing: 1.3px;
+
     text-transform: uppercase;
     color: #fff;
     border-radius: 3px;
@@ -240,7 +240,7 @@ nav.navbar {
     font-weight: 700;
     display: block;
     margin-top: 5px;
-    letter-spacing: 2.5px;
+
     text-transform: uppercase;
 }
 
@@ -541,7 +541,7 @@ footer a {
     font-weight: 400;
     line-height: 2;
     margin: 0 0 10px;
-    letter-spacing: 0.2em;
+
 }
 .footer-menu-item-link {
     display: block;
@@ -563,7 +563,7 @@ footer a {
     font-weight: 400;
     line-height: 2;
     margin: 0 0 10px;
-    letter-spacing: 0.2em;
+  
 }
 .footer-col-2 p {
     font-size: 15px;

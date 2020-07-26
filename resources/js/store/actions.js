@@ -14,14 +14,14 @@ export const getProduct = ({ commit }, productId) => {
     });
 };
 
-export const addProductToCart = ({ commit }, { product, quantity }) => {
-  commit("ADD_TO_CART", { product, quantity });
-  console.log("action done")
+export const addProductToCart = ({ commit }, { product, quantity, price }) => {
+  commit("ADD_TO_CART", { product, quantity, price });
+  console.log("action done",price, "from action")
 
-  axios.post("http://127.0.0.1:8000/api/cart", {
-    product_id: product.id,
-    quantity,
-  });
+//   axios.post("http://127.0.0.1:8000/api/cart", {
+//     product_id: product.id,
+//     quantity,
+//   });
 };
 
 export const getCartItems = ({ commit }) => {

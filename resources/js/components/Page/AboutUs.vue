@@ -2,7 +2,7 @@
   <section >
   <div class="loading-page">
             <div class="counter">
-                <p>loading</p>
+                <p>{{ $t("message.loading") }}</p>
                 <h1>
                     0%
 

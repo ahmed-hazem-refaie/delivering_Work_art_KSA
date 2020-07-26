@@ -3065,6 +3065,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3312,6 +3319,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3347,7 +3360,8 @@ __webpack_require__.r(__webpack_exports__);
       L_price: '',
       sizing_details: '',
       name: '',
-      cardId: ''
+      cardId: '',
+      priceTarget: ''
     };
   },
   created: function created() {
@@ -3387,7 +3401,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     addToCart: function addToCart(product) {
-      console.log(product);
       this.$store.dispatch('addProductToCart', {
         product: product,
         quantity: 1
@@ -3456,8 +3469,9 @@ __webpack_require__.r(__webpack_exports__);
         return console.log(error.response.data);
       });
     },
-    small: function small(el) {
+    small: function small(el, price) {
       this.active_el = el;
+      this.priceTarget = price;
       jquery__WEBPACK_IMPORTED_MODULE_2___default()(".active>.details_img").css({
         width: "78%",
         height: "160px"
@@ -3467,8 +3481,9 @@ __webpack_require__.r(__webpack_exports__);
         margin: "7px 0"
       });
     },
-    medium: function medium(el) {
+    medium: function medium(el, price) {
       this.active_el = el;
+      this.priceTarget = price;
       jquery__WEBPACK_IMPORTED_MODULE_2___default()(".active>.details_img").css({
         width: "88%",
         height: "200px"
@@ -3477,8 +3492,9 @@ __webpack_require__.r(__webpack_exports__);
         width: "88%"
       });
     },
-    larg: function larg(el) {
+    larg: function larg(el, price) {
       this.active_el = el;
+      this.priceTarget = price;
       jquery__WEBPACK_IMPORTED_MODULE_2___default()(".active>.details_img").css({
         width: "100%",
         height: "250px"
@@ -3500,11 +3516,22 @@ __webpack_require__.r(__webpack_exports__);
         jquery__WEBPACK_IMPORTED_MODULE_2___default()(this).addClass('active').siblings().removeClass('active');
       });
     },
-    addtocart: function addtocart($id) {
+    addtocart: function addtocart($id, price) {
+      var _this4 = this;
+
+      console.log(price);
       axios.post('/api/addtocart?id=' + $id).then(function (res) {
-        jquery__WEBPACK_IMPORTED_MODULE_2___default()('#count')[0].innerText++;
+        console.log(res.data.paletteCart); // $('#count')[0].innerText++
+
+        var product = res.data.paletteCart;
+
+        _this4.$store.dispatch('addProductToCart', {
+          product: product,
+          quantity: 1,
+          price: price
+        });
       })["catch"](function (error) {
-        return console.log(error.response.data);
+        return console.log(error);
       });
     }
   }
@@ -43137,7 +43164,7 @@ var render = function() {
                         _c("div", { staticClass: "modal-content" }, [
                           _c("div", { staticClass: "modal-header" }, [
                             _c("h5", { staticClass: "modal-title" }, [
-                              _vm._v("Cart")
+                              _vm._v(" " + _vm._s(_vm.$t("message.cartname")))
                             ]),
                             _vm._v(" "),
                             _c(
@@ -43197,7 +43224,9 @@ var render = function() {
                                       _vm._v(" "),
                                       _c("h6", [
                                         _vm._v(
-                                          _vm._s(item.product.L_size) + ")"
+                                          "(" +
+                                            _vm._s(item.product.L_size) +
+                                            ")"
                                         )
                                       ]),
                                       _vm._v(" "),
@@ -43205,7 +43234,7 @@ var render = function() {
                                         _vm._v(
                                           _vm._s(item.quantity) +
                                             " x $" +
-                                            _vm._s(item.product.L_price)
+                                            _vm._s(item.price)
                                         )
                                       ])
                                     ]
@@ -43279,7 +43308,7 @@ var render = function() {
                                       ),
                                       _vm._v(" "),
                                       _c(
-                                        "v-btn",
+                                        "button",
                                         {
                                           staticClass: "ml-3 btn btn-danger",
                                           on: {
@@ -43291,7 +43320,12 @@ var render = function() {
                                             }
                                           }
                                         },
-                                        [_vm._v("Remove my bro")]
+                                        [
+                                          _vm._v(
+                                            " " +
+                                              _vm._s(_vm.$t("message.remove"))
+                                          )
+                                        ]
                                       )
                                     ],
                                     1
@@ -43330,12 +43364,17 @@ var render = function() {
                                     },
                                     [
                                       _vm._v(
-                                        "Total Price : " +
+                                        " " +
+                                          _vm._s(_vm.$t("message.total")) +
+                                          ": " +
                                           _vm._s(_vm.cartTotalPrice) +
                                           "    "
                                       ),
                                       _c("strong", [_vm._v(".")]),
-                                      _vm._v("   Checkout")
+                                      _vm._v(
+                                        "    " +
+                                          _vm._s(_vm.$t("message.checkout"))
+                                      )
                                     ]
                                   )
                                 ]
@@ -43417,7 +43456,15 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("section", [
-    _vm._m(0),
+    _c("div", { staticClass: "loading-page" }, [
+      _c("div", { staticClass: "counter" }, [
+        _c("p", [_vm._v(_vm._s(_vm.$t("message.loading")))]),
+        _vm._v(" "),
+        _c("h1", [_vm._v("\n                  0%\n\n\n              ")]),
+        _vm._v(" "),
+        _c("hr")
+      ])
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "mission myhome mt-4" }, [
       !_vm.mission
@@ -43618,22 +43665,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "loading-page" }, [
-      _c("div", { staticClass: "counter" }, [
-        _c("p", [_vm._v("loading")]),
-        _vm._v(" "),
-        _c("h1", [_vm._v("\n                  0%\n\n\n              ")]),
-        _vm._v(" "),
-        _c("hr")
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -43658,7 +43690,15 @@ var render = function() {
   return _c(
     "div",
     [
-      _vm._m(0),
+      _c("div", { staticClass: "loading-page" }, [
+        _c("div", { staticClass: "counter" }, [
+          _c("p", [_vm._v(_vm._s(_vm.$t("message.loading")))]),
+          _vm._v(" "),
+          _c("h1", [_vm._v("\n                0%\n\n\n            ")]),
+          _vm._v(" "),
+          _c("hr")
+        ])
+      ]),
       _vm._v(" "),
       _c("appheader", { staticClass: "myhome" }),
       _vm._v(" "),
@@ -43669,22 +43709,7 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "loading-page" }, [
-      _c("div", { staticClass: "counter" }, [
-        _c("p", [_vm._v("loading")]),
-        _vm._v(" "),
-        _c("h1", [_vm._v("\n                0%\n\n\n            ")]),
-        _vm._v(" "),
-        _c("hr")
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -44235,26 +44260,25 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    [_vm._m(0), _vm._v(" "), _c("shopHeader"), _vm._v(" "), _c("appslider")],
+    [
+      _c("div", { staticClass: "loading-page" }, [
+        _c("div", { staticClass: "counter" }, [
+          _c("p", [_vm._v(_vm._s(_vm.$t("message.loading")))]),
+          _vm._v(" "),
+          _c("h1", [_vm._v("\n                  0%\n\n\n              ")]),
+          _vm._v(" "),
+          _c("hr")
+        ])
+      ]),
+      _vm._v(" "),
+      _c("shopHeader"),
+      _vm._v(" "),
+      _c("appslider")
+    ],
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "loading-page" }, [
-      _c("div", { staticClass: "counter" }, [
-        _c("p", [_vm._v("loading")]),
-        _vm._v(" "),
-        _c("h1", [_vm._v("\n                  0%\n\n\n              ")]),
-        _vm._v(" "),
-        _c("hr")
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -45149,21 +45173,23 @@ var render = function() {
                                   _vm._v(
                                     "/" +
                                       _vm._s(palettesArtist.L_avalible) +
-                                      " left"
+                                      " " +
+                                      _vm._s(_vm.$t("message.left"))
                                   )
                                 ]),
                                 _vm._v(" "),
                                 _c(
                                   "button",
                                   {
-                                    staticClass: "form-control btn btn-success",
+                                    staticClass:
+                                      "form-control btn btn-info border-0",
                                     on: {
                                       click: function($event) {
                                         return _vm.addToCart(palettesArtist)
                                       }
                                     }
                                   },
-                                  [_vm._v("Add to Cart")]
+                                  [_vm._v(_vm._s(_vm.$t("message.cart")))]
                                 )
                               ])
                             ])
@@ -45307,7 +45333,7 @@ var render = function() {
                             class: { active_btn: _vm.active_el == 1 },
                             on: {
                               click: function($event) {
-                                return _vm.small(1)
+                                return _vm.small(1, _vm.S_price)
                               }
                             }
                           },
@@ -45335,7 +45361,7 @@ var render = function() {
                             class: { active_btn: _vm.active_el == 2 },
                             on: {
                               click: function($event) {
-                                return _vm.medium(2)
+                                return _vm.medium(2, _vm.M_price)
                               }
                             }
                           },
@@ -45363,7 +45389,7 @@ var render = function() {
                             class: { active_btn: _vm.active_el == 3 },
                             on: {
                               click: function($event) {
-                                return _vm.larg(3)
+                                return _vm.larg(3, _vm.L_price)
                               }
                             }
                           },
@@ -45391,7 +45417,8 @@ var render = function() {
                               _vm._s(_vm.S_copies) +
                                 "/" +
                                 _vm._s(_vm.S_avalible) +
-                                " left"
+                                "  " +
+                                _vm._s(_vm.$t("message.left"))
                             )
                           ])
                         ])
@@ -45405,7 +45432,8 @@ var render = function() {
                               _vm._s(_vm.M_copies) +
                                 "/" +
                                 _vm._s(_vm.M_avalible) +
-                                " left"
+                                "  " +
+                                _vm._s(_vm.$t("message.left"))
                             )
                           ])
                         ])
@@ -45419,7 +45447,8 @@ var render = function() {
                               _vm._s(_vm.L_copies) +
                                 "/" +
                                 _vm._s(_vm.L_avalible) +
-                                " left"
+                                "  " +
+                                _vm._s(_vm.$t("message.left"))
                             )
                           ])
                         ])
@@ -45430,20 +45459,35 @@ var render = function() {
                   1
                 ),
                 _vm._v(" "),
-                _c("button", { staticClass: "btn add-button addToCart " }, [
-                  _vm.active_el == 1
-                    ? _c("span", [_vm._v("$" + _vm._s(_vm.S_price))])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.active_el == 2
-                    ? _c("span", [_vm._v("$" + _vm._s(_vm.M_price))])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.active_el == 3
-                    ? _c("span", [_vm._v("$" + _vm._s(_vm.L_price))])
-                    : _vm._e(),
-                  _vm._v(" - " + _vm._s(_vm.$t("message.cart")))
-                ]),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn add-button addToCart ",
+                    on: {
+                      click: function($event) {
+                        return _vm.addtocart(_vm.cardId, _vm.priceTarget)
+                      }
+                    }
+                  },
+                  [
+                    _vm.active_el == 1
+                      ? _c("span", [_vm._v("$" + _vm._s(_vm.S_price))])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.active_el == 2
+                      ? _c("span", [_vm._v("$" + _vm._s(_vm.M_price))])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.active_el == 3
+                      ? _c("span", [_vm._v("$" + _vm._s(_vm.L_price))])
+                      : _vm._e(),
+                    _vm._v(
+                      "\n                     -" +
+                        _vm._s(_vm.$t("message.cart")) +
+                        "\n\n                    "
+                    )
+                  ]
+                ),
                 _vm._v(" "),
                 _c(
                   "p",
@@ -45475,7 +45519,7 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._v("Read More")]
+                          [_vm._v(_vm._s(_vm.$t("message.readmore")))]
                         )
                       : _c(
                           "a",
@@ -45487,7 +45531,7 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._v("Read Less")]
+                          [_vm._v(_vm._s(_vm.$t("message.readless")))]
                         )
                   ],
                   1
@@ -45507,7 +45551,9 @@ var render = function() {
                     [
                       _c("h4", { staticClass: "font-weight-bold " }, [
                         _vm._v(
-                          "\n                                Size\n                                "
+                          "\n                               " +
+                            _vm._s(_vm.$t("message.size")) +
+                            "\n                                "
                         ),
                         !_vm.size
                           ? _c("i", {
@@ -45545,7 +45591,9 @@ var render = function() {
                     [
                       _c("h4", { staticClass: "font-weight-bold " }, [
                         _vm._v(
-                          "\n                                Product Details\n                                "
+                          "\n\n                               " +
+                            _vm._s(_vm.$t("message.productDetails")) +
+                            "\n                                "
                         ),
                         !_vm.details
                           ? _c("i", {
@@ -45561,7 +45609,7 @@ var render = function() {
                       _vm.details
                         ? _c("span", [
                             _vm._v(
-                              "\n                                it is delivered as the artwork comes ready to be hung on your wall.\n                                The classical design and releases in this series make it an elegant\n                                way to add a high-end.\n                            "
+                              "\n                                it is delivered as the artwork comes ready to be hung on your wall.\n                                The classical design and  releases in this series make it an elegant\n                                way to add a high-end.\n                            "
                             )
                           ])
                         : _vm._e()
@@ -45581,7 +45629,9 @@ var render = function() {
                     [
                       _c("h4", { staticClass: "font-weight-bold " }, [
                         _vm._v(
-                          "\n                                Shipping\n                                "
+                          "\n                                 " +
+                            _vm._s(_vm.$t("message.shipping")) +
+                            "\n                                "
                         ),
                         !_vm.shipping
                           ? _c("i", {
@@ -45798,7 +45848,19 @@ var render = function() {
                         ])
                       ]),
                       _vm._v(" "),
-                      _vm._m(1, true)
+                      _c("div", { staticClass: "cms-special-description" }, [
+                        _c(
+                          "span",
+                          { staticClass: "cms-special-label color-7" },
+                          [_vm._v(_vm._s(_vm.$t("message.newreleaseheader")))]
+                        ),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "This artwork was added recently (but will likely be sold out soon)"
+                          )
+                        ])
+                      ])
                     ])
                   ]),
                   _vm._v(" "),
@@ -45828,7 +45890,10 @@ var render = function() {
                         _vm._v(_vm._s(data.palette_copies) + " / ")
                       ]),
                       _c("span", [
-                        _vm._v(_vm._s(data.avalible_copies) + " left")
+                        _vm._v(
+                          _vm._s(data.avalible_copies) +
+                            _vm._s(_vm.$t("message.left"))
+                        )
                       ])
                     ])
                   ])
@@ -45874,22 +45939,6 @@ var staticRenderFns = [
         _c("a", { attrs: { href: "#", "data-cart-add": "32583351402599" } }, [
           _vm._v("S")
         ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "cms-special-description" }, [
-      _c("span", { staticClass: "cms-special-label color-7" }, [
-        _vm._v("NEW RELEASE")
-      ]),
-      _vm._v(" "),
-      _c("p", [
-        _vm._v(
-          "This artwork was added recently (but will likely be sold out soon)"
-        )
       ])
     ])
   }
@@ -106156,13 +106205,12 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vuetify__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuetify */ "./node_modules/vuetify/dist/vuetify.js");
-/* harmony import */ var vuetify__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vuetify__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vue_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-i18n */ "./node_modules/vue-i18n/dist/vue-i18n.esm.js");
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
-/* harmony import */ var vue_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-i18n */ "./node_modules/vue-i18n/dist/vue-i18n.esm.js");
-/* harmony import */ var _vue_i18n_locales_generated__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./vue-i18n-locales.generated */ "./resources/js/vue-i18n-locales.generated.js");
+/* harmony import */ var vuetify__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuetify */ "./node_modules/vuetify/dist/vuetify.js");
+/* harmony import */ var vuetify__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vuetify__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _Router_router_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Router/router.js */ "./resources/js/Router/router.js");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
-/* harmony import */ var _Router_router_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Router/router.js */ "./resources/js/Router/router.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -106174,27 +106222,35 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuetify__WEBPACK_IMPORTED_MODULE_1___default.a);
+
+/**
+ * Next, we will create a fresh Vue application instance and attach it to
+ * the page. Then, you may begin adding components to this application
+ * or customize the JavaScript scaffolding to fit your unique needs.
+ */
+
+
+
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuetify__WEBPACK_IMPORTED_MODULE_3___default.a);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]);
-
-
-
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_i18n__WEBPACK_IMPORTED_MODULE_3__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_i18n__WEBPACK_IMPORTED_MODULE_1__["default"]);
 var lang = localStorage.getItem("locale") || "en";
 var messages = {
   en: {
     message: {
       home: "Home",
+      loading: "Loading",
       shopart: "Shop Art",
       about: "About",
       introducing: "INTRODUCING",
-      fineart: "Fine art",
+      fineart: "Fine Art",
       shoppers: "shoppers",
       live: "LIVE",
       shopnow: "Shop Now",
       newrelease: "New Release",
       newreleaseheader: "THIS WEEK’S RELEASE OF LIMITED ARTWORKS",
       readmore: "Read More",
+      readless: "Read Less",
       ourmission: "Our Mission",
       ourmissiontext1: "You, like everyone else on this planet, were born a creative person with good intentions. Able to change the world in ways so much bigger than you probably can imagine right now. All the rules of society then programmed you to think and calculate yourself through life in a way that is useful and not disturbing anyone else. Conforming to this norm made you fit in, but also stripped you of your boundless childlike creativity, imagination and lust for exploration.",
       ourmissiontext2: "Right now, what the world needs most, is people who find that version of themselves back again. People who come alive again. People who wonder, can be amazed and feel ecstatic like they did when they were little kids. Bringing you alive again, and reminding you of the version of yourself that can do anything, that is our mission. ",
@@ -106217,8 +106273,18 @@ var messages = {
       email: "Your Email",
       phone: "Your Phone",
       submit: "Submit",
+      // productslider
+      size: "Size",
+      productDetails: "Product Details ",
+      shipping: "Shipping",
+      left: "Left",
+      imgdetails: "Img Details",
+      limitedEdition: "Limited Edition",
       //    cart
-      checkOut: "CheckOut",
+      checkout: "CheckOut",
+      total: "Total Price",
+      remove: "Remove Product",
+      cartname: "Cart",
       // footer
       logo: "Website Name",
       lorem: "lorem text"
@@ -106227,6 +106293,7 @@ var messages = {
   ar: {
     message: {
       home: "الصفحه الرئيسيه",
+      loading: "يرجى الانتظار",
       shopart: "متجر الفن",
       about: "من نحن",
       introducing: "مقدمه",
@@ -106236,7 +106303,8 @@ var messages = {
       shopnow: "اشتري اﻷن",
       newrelease: "إصدار جديد",
       newreleaseheader: "إصدار هذا الأسبوع من الأعمال الفنية المحدودة",
-      readmore: "إقراء أكثر",
+      readless: "إقرأ أقل",
+      readmore: "إقرأ أكثر",
       ourmission: "مهمتنا",
       ourmissiontext1: " أنت ، مثل أي شخص آخر على هذا الكوكب ، ولدت شخصًا مبدعًا بحسن نية. قادرة على تغيير العالم بطرق أكبر بكثير مما يمكن أن تتخيله الآن. ثم برمجتك جميع قواعد المجتمع لتفكر وتحسب نفسك من خلال الحياة بطريقة مفيدة ولا تزعج أي شخص آخر. التوافق مع هذه القاعدة جعلك مناسبًا ، ولكنه جردك أيضًا من إبداعك الطفولي غير المحدود وخيالك وشهوة الاستكشاف.",
       ourmissiontext2: " الآن ، أكثر ما يحتاجه العالم ، هو الأشخاص الذين يجدون هذا الإصدار من أنفسهم مرة أخرى. الناس الذين يأتون على قيد الحياة مرة أخرى. الناس الذين يتساءلون ، يمكن أن يندهشوا ويشعروا بسعادة غامرة كما كانوا عندما كانوا صغارًا. نعيد لك الحياة مرة أخرى ، وتذكيرك بنسخة من نفسك يمكنها أن تفعل أي شيء ، هذه هي مهمتناز",
@@ -106259,15 +106327,26 @@ var messages = {
       email: "إيميلك",
       phone: "رقم تليفونك",
       submit: "إرسال",
+      // productslider
+      size: "الحجم",
+      productDetails: " تفاصيل المنتج",
+      shipping: "الشحن",
+      left: "الباقى",
+      imgdetails: "تفاصيل المنتج",
+      limitedEdition: "الطبعات المحدودة",
+      DescriptionEdition: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quae fugit minima nemo corporis eligendi voluptas quidem eius suscipit dignissimos recusandae soluta alias, provident ipsum officia, tempore laboriosam neque esse cupiditate!",
       // cart translation
-      checkOut: "شراء الان",
+      checkout: "شراء الان",
+      total: "الحساب الإجمالى",
+      remove: "مسح المنتج",
+      cartname: "السلة",
       // footer
       logo: "اسم الموقع",
       lorem: "نص تجريبى "
     }
   }
 };
-var i18n = new vue_i18n__WEBPACK_IMPORTED_MODULE_3__["default"]({
+var i18n = new vue_i18n__WEBPACK_IMPORTED_MODULE_1__["default"]({
   locale: "en",
   messages: messages
 });
@@ -106282,19 +106361,12 @@ var i18n = new vue_i18n__WEBPACK_IMPORTED_MODULE_3__["default"]({
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("AppHome", __webpack_require__(/*! ./components/AppHome.vue */ "./resources/js/components/AppHome.vue")["default"]);
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: "#app",
-  router: _Router_router_js__WEBPACK_IMPORTED_MODULE_6__["default"],
+  router: _Router_router_js__WEBPACK_IMPORTED_MODULE_4__["default"],
   store: _store__WEBPACK_IMPORTED_MODULE_5__["default"],
   i18n: i18n,
-  vuetify: new vuetify__WEBPACK_IMPORTED_MODULE_1___default.a()
+  vuetify: new vuetify__WEBPACK_IMPORTED_MODULE_3___default.a()
 });
 
 /***/ }),
@@ -107602,16 +107674,17 @@ var getProduct = function getProduct(_ref2, productId) {
 var addProductToCart = function addProductToCart(_ref3, _ref4) {
   var commit = _ref3.commit;
   var product = _ref4.product,
-      quantity = _ref4.quantity;
+      quantity = _ref4.quantity,
+      price = _ref4.price;
   commit("ADD_TO_CART", {
     product: product,
-    quantity: quantity
+    quantity: quantity,
+    price: price
   });
-  console.log("action done");
-  axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("http://127.0.0.1:8000/api/cart", {
-    product_id: product.id,
-    quantity: quantity
-  });
+  console.log("action done", price, "from action"); //   axios.post("http://127.0.0.1:8000/api/cart", {
+  //     product_id: product.id,
+  //     quantity,
+  //   });
 };
 var getCartItems = function getCartItems(_ref5) {
   var commit = _ref5.commit;
@@ -107720,24 +107793,34 @@ var SET_PRODUCTS = function SET_PRODUCTS(state, products) {
 };
 var SET_PRODUCT = function SET_PRODUCT(state, product) {
   state.product = product;
-};
+}; // we size
+
 var ADD_TO_CART = function ADD_TO_CART(state, _ref) {
   var product = _ref.product,
-      quantity = _ref.quantity;
-  console.log("state push done");
+      quantity = _ref.quantity,
+      price = _ref.price;
+  console.log("state push done", price, "price from mutations");
+  var check = false;
   var productInCart = state.cart.find(function (item) {
-    return item.product.id == product.id;
+    if (item.product.id == product.id) {
+      check = true;
+      return item.product;
+    } else {
+      check = false;
+    }
   });
 
-  if (productInCart) {
+  if (check == true) {
     productInCart.quantity++;
-    return;
   }
 
-  state.cart.push({
-    product: product,
-    quantity: quantity
-  });
+  if (check == false) {
+    state.cart.push({
+      product: product,
+      quantity: quantity,
+      price: price
+    });
+  }
 };
 var SET_CART = function SET_CART(state, cartItems) {
   state.cart = cartItems;
@@ -107782,161 +107865,6 @@ __webpack_require__.r(__webpack_exports__);
   products: [],
   product: null,
   cart: []
-});
-
-/***/ }),
-
-/***/ "./resources/js/vue-i18n-locales.generated.js":
-/*!****************************************************!*\
-  !*** ./resources/js/vue-i18n-locales.generated.js ***!
-  \****************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ({
-  "ar": {
-    "message": {
-      "table": {
-        "home": "الصفحه الرئيسيه"
-      }
-    }
-  },
-  "en": {
-    "auth": {
-      "failed": "These credentials do not match our records.",
-      "throttle": "Too many login attempts. Please try again in {seconds} seconds."
-    },
-    "pagination": {
-      "previous": "&laquo; Previous",
-      "next": "Next &raquo;"
-    },
-    "message": {
-      "table": {
-        "home": "Home"
-      }
-    },
-    "validation": {
-      "accepted": "The {attribute} must be accepted.",
-      "active_url": "The {attribute} is not a valid URL.",
-      "after": "The {attribute} must be a date after {date}.",
-      "after_or_equal": "The {attribute} must be a date after or equal to {date}.",
-      "alpha": "The {attribute} may only contain letters.",
-      "alpha_dash": "The {attribute} may only contain letters, numbers, dashes and underscores.",
-      "alpha_num": "The {attribute} may only contain letters and numbers.",
-      "array": "The {attribute} must be an array.",
-      "before": "The {attribute} must be a date before {date}.",
-      "before_or_equal": "The {attribute} must be a date before or equal to {date}.",
-      "between": {
-        "numeric": "The {attribute} must be between {min} and {max}.",
-        "file": "The {attribute} must be between {min} and {max} kilobytes.",
-        "string": "The {attribute} must be between {min} and {max} characters.",
-        "array": "The {attribute} must have between {min} and {max} items."
-      },
-      "boolean": "The {attribute} field must be true or false.",
-      "confirmed": "The {attribute} confirmation does not match.",
-      "date": "The {attribute} is not a valid date.",
-      "date_equals": "The {attribute} must be a date equal to {date}.",
-      "date_format": "The {attribute} does not match the format {format}.",
-      "different": "The {attribute} and {other} must be different.",
-      "digits": "The {attribute} must be {digits} digits.",
-      "digits_between": "The {attribute} must be between {min} and {max} digits.",
-      "dimensions": "The {attribute} has invalid image dimensions.",
-      "distinct": "The {attribute} field has a duplicate value.",
-      "email": "The {attribute} must be a valid email address.",
-      "ends_with": "The {attribute} must end with one of the following: {values}.",
-      "exists": "The selected {attribute} is invalid.",
-      "file": "The {attribute} must be a file.",
-      "filled": "The {attribute} field must have a value.",
-      "gt": {
-        "numeric": "The {attribute} must be greater than {value}.",
-        "file": "The {attribute} must be greater than {value} kilobytes.",
-        "string": "The {attribute} must be greater than {value} characters.",
-        "array": "The {attribute} must have more than {value} items."
-      },
-      "gte": {
-        "numeric": "The {attribute} must be greater than or equal {value}.",
-        "file": "The {attribute} must be greater than or equal {value} kilobytes.",
-        "string": "The {attribute} must be greater than or equal {value} characters.",
-        "array": "The {attribute} must have {value} items or more."
-      },
-      "image": "The {attribute} must be an image.",
-      "in": "The selected {attribute} is invalid.",
-      "in_array": "The {attribute} field does not exist in {other}.",
-      "integer": "The {attribute} must be an integer.",
-      "ip": "The {attribute} must be a valid IP address.",
-      "ipv4": "The {attribute} must be a valid IPv4 address.",
-      "ipv6": "The {attribute} must be a valid IPv6 address.",
-      "json": "The {attribute} must be a valid JSON string.",
-      "lt": {
-        "numeric": "The {attribute} must be less than {value}.",
-        "file": "The {attribute} must be less than {value} kilobytes.",
-        "string": "The {attribute} must be less than {value} characters.",
-        "array": "The {attribute} must have less than {value} items."
-      },
-      "lte": {
-        "numeric": "The {attribute} must be less than or equal {value}.",
-        "file": "The {attribute} must be less than or equal {value} kilobytes.",
-        "string": "The {attribute} must be less than or equal {value} characters.",
-        "array": "The {attribute} must not have more than {value} items."
-      },
-      "max": {
-        "numeric": "The {attribute} may not be greater than {max}.",
-        "file": "The {attribute} may not be greater than {max} kilobytes.",
-        "string": "The {attribute} may not be greater than {max} characters.",
-        "array": "The {attribute} may not have more than {max} items."
-      },
-      "mimes": "The {attribute} must be a file of type: {values}.",
-      "mimetypes": "The {attribute} must be a file of type: {values}.",
-      "min": {
-        "numeric": "The {attribute} must be at least {min}.",
-        "file": "The {attribute} must be at least {min} kilobytes.",
-        "string": "The {attribute} must be at least {min} characters.",
-        "array": "The {attribute} must have at least {min} items."
-      },
-      "not_in": "The selected {attribute} is invalid.",
-      "not_regex": "The {attribute} format is invalid.",
-      "numeric": "The {attribute} must be a number.",
-      "password": "The password is incorrect.",
-      "present": "The {attribute} field must be present.",
-      "regex": "The {attribute} format is invalid.",
-      "required": "The {attribute} field is required.",
-      "required_if": "The {attribute} field is required when {other} is {value}.",
-      "required_unless": "The {attribute} field is required unless {other} is in {values}.",
-      "required_with": "The {attribute} field is required when {values} is present.",
-      "required_with_all": "The {attribute} field is required when {values} are present.",
-      "required_without": "The {attribute} field is required when {values} is not present.",
-      "required_without_all": "The {attribute} field is required when none of {values} are present.",
-      "same": "The {attribute} and {other} must match.",
-      "size": {
-        "numeric": "The {attribute} must be {size}.",
-        "file": "The {attribute} must be {size} kilobytes.",
-        "string": "The {attribute} must be {size} characters.",
-        "array": "The {attribute} must contain {size} items."
-      },
-      "starts_with": "The {attribute} must start with one of the following: {values}.",
-      "string": "The {attribute} must be a string.",
-      "timezone": "The {attribute} must be a valid zone.",
-      "unique": "The {attribute} has already been taken.",
-      "uploaded": "The {attribute} failed to upload.",
-      "url": "The {attribute} format is invalid.",
-      "uuid": "The {attribute} must be a valid UUID.",
-      "custom": {
-        "attribute-name": {
-          "rule-name": "custom-message"
-        }
-      },
-      "attributes": []
-    },
-    "passwords": {
-      "reset": "Your password has been reset!",
-      "sent": "We have emailed your password reset link!",
-      "throttled": "Please wait before retrying.",
-      "token": "This password reset token is invalid.",
-      "user": "We can't find a user with that email address."
-    }
-  }
 });
 
 /***/ }),

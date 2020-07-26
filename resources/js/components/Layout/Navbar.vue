@@ -58,7 +58,7 @@
                         <div class="modal-header">
 
 
-                            <h5 class="modal-title">Cart</h5>
+                            <h5 class="modal-title"> {{ $t("message.cartname") }}</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true" @click="showModal = false">&times;</span>
                             </button>
@@ -74,8 +74,8 @@
                                 </div>
                                 <div class="col-md-sm-8 ml-3">
                                     <span> <strong>{{ item.product.name }}</strong></span>
-                                    <h6 >{{ item.product.L_size }})</h6>
-                                    <h6>{{ item.quantity }} x ${{item.product.L_price}}</h6>
+                                    <h6 >({{ item.product.L_size }})</h6>
+                                    <h6>{{ item.quantity }} x ${{item.price}}</h6>
                                 </div>
                                   <div>
                                 <v-form style="width:50%;display:inline-block">
@@ -84,7 +84,7 @@
                                         <v-icon slot="prepend"  @click.prevent="decreaseProduct(item.product)"  >mdi-minus</v-icon>
                                     </v-text-field>
                                 </v-form>
-                                <v-btn class="ml-3 btn btn-danger" @click.prevent="clearProductFromCart(item.product)">Remove my bro</v-btn>
+                                <button class="ml-3 btn btn-danger" @click.prevent="clearProductFromCart(item.product)"> {{ $t("message.remove") }}</button>
                             </div>
                             </div>
 
@@ -95,7 +95,7 @@
                         <div class="modal-footer">
                             <router-link style="margin: auto;color: #fff;"
                             :to="{ path: '/payment', query: { myprop: this.pallatecart }}">
-                                <button type="button" class="btn btn-dark" style="font-size: 18px;">Total Price : {{cartTotalPrice}} &nbsp;  <strong>.</strong> &nbsp; Checkout</button>
+                                <button type="button" class="btn btn-dark" style="font-size: 18px;"> {{ $t("message.total") }}: {{cartTotalPrice}} &nbsp;  <strong>.</strong> &nbsp;  {{ $t("message.checkout") }}</button>
                             </router-link>
 
                         </div>

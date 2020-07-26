@@ -1,6 +1,9 @@
 <template>
     <section class="myhome">
 
+
+
+
         <div id="carouselExampleCaptions" class="carousel slide" data-interval="false">
             <ol class="carousel-indicators">
                 <li data-target="#carouselExampleCaptions" v-for="(artist) in artists" :class="{ 'active': artist.id === 1 }" @click="getdata(artist.id)" :key="artist.id" data-slide-to="artist.id" >{{artist.name}}</li>
@@ -13,15 +16,14 @@
                               <div class=" row  d-flex justify-content-center ">
 
 
-
                             <div  class="details myhome col-md-3 col-sm-6"  v-for="(palettesArtist , index) in palettesArtists" @click="addActive(palettesArtist.id)" :class="{ 'active': index == 0 }"  :key="palettesArtist.id">
                                <div class="details-content">
                                     <img    :src="palettesArtist.img" class="details_img" alt="...">
                                     <div class="content" >
                                         <div class="triangle"></div>
                                         <h6>{{palettesArtist.name}}  | ${{palettesArtist.L_price}}</h6>
-                                        <span><span class="text-success">{{palettesArtist.L_copies}}</span>/{{palettesArtist.L_avalible}} left</span>
-                                        <button  @click="addToCart(palettesArtist)"  class="form-control btn btn-success">Add to Cart</button>
+                                        <span><span class="text-success">{{palettesArtist.L_copies}}</span>/{{palettesArtist.L_avalible}} {{ $t("message.left") }}</span>
+                                        <button  @click="addToCart(palettesArtist)"  class="form-control btn btn-info border-0">{{ $t("message.cart") }}</button>
                                     </div>
                                 </div>
                             </div>
@@ -67,24 +69,27 @@
                         <div class="mb-3 mt-2"> <span>silkscreen</span></div>
                         <div>
 
-                            <v-btn class="mb-2 size_btn small"  :class="{ active_btn : active_el == 1 }" v-if="S_copies>0"  @click="small(1)">S</v-btn>
+                            <v-btn class="mb-2 size_btn small"  :class="{ active_btn : active_el == 1 }" v-if="S_copies>0"  @click="small(1,S_price)">S</v-btn>
                             <v-btn class="mb-2 size_btn small" style="cursor: not-allowed;background-color:#737373;color:#fff;border:none" v-else >Empty</v-btn>
-                            <v-btn class="mb-2 size_btn medium" :class="{ active_btn : active_el == 2 }" v-if="M_copies>0" @click="medium(2)">M</v-btn>
+                            <v-btn class="mb-2 size_btn medium" :class="{ active_btn : active_el == 2 }" v-if="M_copies>0" @click="medium(2,M_price)">M</v-btn>
                             <v-btn class="mb-2 size_btn small" style="cursor: not-allowed;background-color:#737373;color:#fff;border:none" v-else >Empty</v-btn>
-                            <v-btn class="mb-2 size_btn larg" :class="{ active_btn : active_el == 3 }" v-if="L_copies>0" @click="larg(3)">L</v-btn>
+                            <v-btn class="mb-2 size_btn larg" :class="{ active_btn : active_el == 3 }" v-if="L_copies>0" @click="larg(3,L_price)">L</v-btn>
                             <v-btn class="mb-2 size_btn small" style="cursor: not-allowed;background-color:#737373;color:#fff;border:none" v-else >Empty</v-btn>
-                            <h3 class="mt-4 mb-4" v-if="active_el==1">30x40cm (12x16") <strong style="float:right">{{S_copies}}/{{S_avalible}} left</strong></h3>
-                            <h3 class="mt-4 mb-4" v-if="active_el==2">50x66.5cm (20x26") <strong style="float:right">{{M_copies}}/{{M_avalible}} left</strong></h3>
-                            <h3 class="mt-4 mb-4" v-if="active_el==3">70x93.5cm (28x37") <strong style="float:right">{{L_copies}}/{{L_avalible}} left</strong></h3>
+                            <h3 class="mt-4 mb-4" v-if="active_el==1">30x40cm (12x16") <strong style="float:right">{{S_copies}}/{{S_avalible}}  {{ $t("message.left") }}</strong></h3>
+                            <h3 class="mt-4 mb-4" v-if="active_el==2">50x66.5cm (20x26") <strong style="float:right">{{M_copies}}/{{M_avalible}}  {{ $t("message.left") }}</strong></h3>
+                            <h3 class="mt-4 mb-4" v-if="active_el==3">70x93.5cm (28x37") <strong style="float:right">{{L_copies}}/{{L_avalible}}  {{ $t("message.left") }}</strong></h3>
                             <div style="clear:both"></div>
                         </div>
-                        <button class="btn add-button addToCart "
+                        <button @click="  addtocart(cardId,priceTarget)" class="btn add-button addToCart "
 
 
 
                          ><span v-if="active_el==1">${{S_price}}</span>
                         <span v-if="active_el==2">${{M_price}}</span>
-                        <span v-if="active_el==3">${{L_price}}</span> - {{ $t("message.cart") }}</button>
+                        <span v-if="active_el==3">${{L_price}}</span>
+                         -{{ $t("message.cart") }}
+
+                        </button>
                         <p>
                             <span class="font-weight-bold ">This is the Classic</span>, designed and manufactured by Ecstase,
                             the Classic is made up of a wooden frame, a passe-partout,
@@ -102,13 +107,13 @@
                                     This psychedelic triple artwork capitalizes on brilliant negative space and amazing detail.
                                 </span>
                             </transition>
-                            <a class="more text-primary btn btn-block" v-if="!show" @click="show = !show">Read More</a>
-                            <a class="more text-primary btn btn-block" v-else @click="show = !show">Read Less</a>
+                            <a class="more text-primary btn btn-block" v-if="!show" @click="show = !show">{{ $t("message.readmore") }}</a>
+                            <a class="more text-primary btn btn-block" v-else @click="show = !show">{{ $t("message.readless") }}</a>
                         </p>
                         <ul class="list-group">
                             <li class="list-group-item" @click="size = !size">
                                 <h4 class="font-weight-bold ">
-                                    Size
+                                   {{ $t("message.size") }}
                                     <i v-if="!size" class="fa fa-chevron-down" style="float:right"></i>
                                     <i v-else class="fa fa-chevron-up" style="float:right"></i>
                                 </h4>
@@ -118,19 +123,20 @@
                             </li>
                             <li class="list-group-item" @click="details = !details">
                                 <h4 class="font-weight-bold ">
-                                    Product Details
+
+                                   {{ $t("message.productDetails") }}
                                     <i v-if="!details" class="fa fa-chevron-down" style="float:right"></i>
                                     <i v-else class="fa fa-chevron-up" style="float:right"></i>
                                 </h4>
                                 <span v-if="details">
                                     it is delivered as the artwork comes ready to be hung on your wall.
-                                    The classical design and releases in this series make it an elegant
+                                    The classical design and  releases in this series make it an elegant
                                     way to add a high-end.
                                 </span>
                             </li>
                             <li class="list-group-item" @click="shipping = !shipping">
                                 <h4 class="font-weight-bold ">
-                                    Shipping
+                                     {{ $t("message.shipping") }}
                                     <i v-if="!shipping" class="fa fa-chevron-down" style="float:right"></i>
                                     <i v-else class="fa fa-chevron-up" style="float:right"></i>
                                 </h4>
@@ -185,7 +191,8 @@ export default {
             L_price:'',
             sizing_details:'',
             name:'',
-            cardId:''
+            cardId:'',
+            priceTarget:''
 
 
         }
@@ -246,7 +253,7 @@ export default {
 
 
         addToCart(product){
-             console.log(product)
+
             this.$store.dispatch('addProductToCart',{
                  product,
                 quantity:1
@@ -315,19 +322,23 @@ export default {
         })
         .catch(error => console.log(error.response.data))
         },
-        small(el){
+        small(el,price){
             this.active_el = el;
+            this.priceTarget=price
+
             $(".active>.details_img").css({width:"78%",height:"160px"})
             $(".active>.content").css({width:"78%",margin:"7px 0"})
 
         },
-        medium(el){
+        medium(el,price){
             this.active_el = el;
+            this.priceTarget=price
             $(".active>.details_img").css({width:"88%",height:"200px"})
             $(".active>.content").css({width:"88%"})
         },
-        larg(el){
+        larg(el,price){
             this.active_el = el;
+            this.priceTarget=price
             $(".active>.details_img").css({width:"100%",height:"250px"})
             $(".active>.content").css({width:"100%"})
         },
@@ -354,10 +365,28 @@ export default {
                 $(this).addClass('active').siblings().removeClass('active');
             });
         },
-        addtocart($id){
+        addtocart($id,price){
+            console.log(price)
+
             axios.post('/api/addtocart?id=' + $id)
-            .then(res=>{ $('#count')[0].innerText++})
-            .catch(error => console.log(error.response.data))
+            .then(res=>{
+
+            console.log(res.data.paletteCart)
+
+                // $('#count')[0].innerText++
+
+           let product=  res.data.paletteCart
+
+            this.$store.dispatch('addProductToCart',{
+                 product,
+                quantity:1,
+                price:price
+
+            })
+            }
+
+            )
+            .catch(error => console.log(error))
 
         }
 
