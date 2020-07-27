@@ -40,12 +40,15 @@
                     <router-link to="/">
                         <a class="nav-link"> {{ $t("message.home") }}<span class="sr-only">(current)</span></a>
                     </router-link>
-                    
+
                 </li>
             </ul>
         </div>
             <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
-            <button class="nav-btns" @click="showModal = true"> <img src="//cdn.shopify.com/s/files/1/3000/4362/t/109/assets/nav_icons_bag.svg?v=8412811641524949656" alt="Shopping Cart" width="33px"> <span id="count">{{cartcount}}</span> </button>
+            <button class="nav-btns" @click="showModal = true">
+        <img src="//cdn.shopify.com/s/files/1/3000/4362/t/109/assets/nav_icons_bag.svg?v=8412811641524949656" alt="Shopping Cart" width="33px">
+         <span id="count">{{cartItemCount}}</span>
+          </button>
             <div v-if="showModal">
                 <transition name="modal">
                 <div class="modal-mask">
@@ -53,38 +56,47 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Cart</h5>
+
+
+                            <h5 class="modal-title"> {{ $t("message.cartname") }}</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true" @click="showModal = false">&times;</span>
                             </button>
                         </div>
-                        <div class="modal-body" style="height:0" v-for="pallate in pallatecart" :key="pallate.id">
-                            <div class="row">
+                        <div class="modal-body" >
+
+<!-- -------------------------------------------pallalet cart----------------- -->
+                            <div class="row mt-2 border-bottom"
+                                 v-for="(item,index) in cart "
+                                 :key="{index}">
                                 <div class="col-md-sm-4 ml-3">
-                                    <img src="//cdn.shopify.com/s/files/1/3000/4362/products/Ehmiyat_Walltones_Product_Image_1.jpg?v=1581337922">
+                                    <img :src="item.product.img">
                                 </div>
                                 <div class="col-md-sm-8 ml-3">
-                                    <span>All I Ever Wanted Was Everything</span>
-                                    <h6 >70x93.5cm (28x37")</h6>
-                                    <h6>${{pallate.S_price}}</h6>
+                                    <span> <strong>{{ item.product.name }}</strong></span>
+                                    <h6 >{{ item.product.L_size }}</h6>
+                                     <!-- <h6 >{{ item.avilableTarget }}</h6> -->
+                                    <h6>{{ item.quantity }} x ${{item.price}}</h6>
                                 </div>
+                                  <div>
+                                <v-form style="width:50%;display:inline-block">
+                                    <!-- <v-text-field  v-model=" item.quantity  ">
+                                        <v-icon slot="append" @click="addToCart(item.product )">mdi-plus</v-icon>
+                                        <v-icon slot="prepend"  @click.prevent="decreaseProduct(item.product)"  >mdi-minus</v-icon>
+                                    </v-text-field> -->
+                                </v-form>
+                                <button class="ml-3 btn btn-danger" @click.prevent="clearProductFromCart(index)"> {{ $t("message.remove") }}</button>
+                            </div>
                             </div>
 
-                            <div>
-                                <v-form style="width:50%;display:inline-block">
-                                    <v-text-field  v-model="value">
-                                        <v-icon slot="append" @click="plus(pallate.id)">mdi-plus</v-icon>
-                                        <v-icon slot="prepend" @click="minus">mdi-minus</v-icon>
-                                    </v-text-field>
-                                </v-form>
-                                <v-btn class="ml-3" @click="remove(pallate.id)">Remove</v-btn>
-                            </div>
+
+
                         </div>
-                        
+
                         <div class="modal-footer">
                             <router-link style="margin: auto;color: #fff;"
                             :to="{ path: '/payment', query: { myprop: this.pallatecart }}">
-                                <button type="button" class="btn btn-dark" style="font-size: 18px;">$890 &nbsp;  <strong>.</strong> &nbsp; Checkout</button>
+                                <button type="button" class="btn btn-dark" style="font-size: 18px;"> {{ $t("message.total") }}: {{cartTotalPrice}} &nbsp;  <strong>.</strong> &nbsp;  {{ $t("message.checkout") }}</button>
                             </router-link>
 
                         </div>
@@ -100,6 +112,17 @@
 <script>
 import LanguageDropdown from './LanguageDropdown';
 export default {
+    computed: {
+    cartTotalPrice() {
+      return this.$store.getters.cartTotalPrice;
+    },
+    cart() {
+      return this.$store.state.cart;
+    },
+    cartItemCount(){
+      return this.$store.getters.cartItemCount
+    }
+  },
     components:{LanguageDropdown},
     data(){
         return {
@@ -112,12 +135,33 @@ export default {
     created(){
         axios.get('/api/getpallatecart')
         .then(res=>{
-            this.cartcount = res.data.palettes.length            
+            this.cartcount = res.data.palettes.length
             this.pallatecart=res.data.palettes
             })
         .catch(error => console.log(error.response.data))
     },
     methods:{
+           decreaseProduct(product){
+
+            this.$store.dispatch('decreaseProduct',{
+                 product,
+                quantity:1
+            })
+        },
+         addToCart(product){
+             console.log(product)
+            this.$store.dispatch('addProductToCart',{
+                 product,
+                quantity:1
+            })
+        },
+         clearProductFromCart(index){
+      this.$store.dispatch("deleteCartItem",index)
+    },
+    clearCartItems(){
+      this.$store.dispatch("clearCartItems")
+    },
+
         plus($id){
             this.value +=1
         },
@@ -142,11 +186,11 @@ export default {
 <style scoped>
 .modal-mask {
   position: fixed;
-  z-index: 9998;
+
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+
   background-color: rgba(0, 0, 0, .5);
   display: block;
   transition: opacity .3s ease;
@@ -159,11 +203,26 @@ export default {
 }
 .modal-content{
     top: -27px;
-    height: 947px;
+    overflow: scroll;
+
+    min-height: 800px;
 
 }
+.modal-body {
+    position: relative;
+    -ms-flex: 1 1 auto;
+    max-height: 500px;
+    flex: 1 1 auto;
+    overflow: auto;
+    padding: 1rem;
+}
+/* .modal-body{
+    position: absolute;
+    width: 400px;
+        overflow: scroll;
+} */
 .modal-body img{
     width: 62px;
-    height: 70px;
+    height: 40px;
 }
 </style>

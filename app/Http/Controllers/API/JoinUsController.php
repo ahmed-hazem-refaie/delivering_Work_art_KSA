@@ -19,7 +19,7 @@ class JoinUsController extends Controller
         $validator = Validator::make($request->all(), [
             'email' => 'required|email:rfc,dns',
             'name' => 'required|string|max:100',
-            'phone' => ['required', 'regex:/^(009665|9665|\+9665|05|5)(5|0|3|6|4|9|1|8|7)([0-9]{7})$/'],            ]);
+            'phone' => ['required', 'regex:/^\+(?:[0-9] ?){6,14}[0-9]$/'],            ]);
                 if($validator->errors()->count() > 0)
                 {
                     return response()->json(['status'=>false,'errors'=>$validator->errors()->all()]);

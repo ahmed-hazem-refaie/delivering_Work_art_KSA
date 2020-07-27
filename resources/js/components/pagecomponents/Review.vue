@@ -6,7 +6,7 @@
         <hr>
         <div class="rating" v-if="$i18n.locale == 'en'">
             <span class="fa fa-star text-warning" v-for="i in 5" :key="i.id"></span>
-            <span class="ml-2">{{reviewscount}} {{ $t("message.review") }}</span>
+            <span id="reviewscount" class="ml-2">{{reviewscount}} {{ $t("message.review") }}</span>
             <v-btn style="background-color:black;color:#fff;float:right" @click="review = !review"><i class="fa fa-edit mr-2"></i>{{ $t("message.writereview") }}</v-btn>
             <div style="clear:both"></div>
         </div>
@@ -28,8 +28,8 @@
             <v-rating v-if="$i18n.locale == 'en'" v-model="form.rate" color="orange" medium></v-rating>
             <v-rating v-else style="float:right;" dir="rtl" v-model="form.rate" color="orange" medium></v-rating>
             <div style="clear:both"></div>
-            <v-form class="form" v-if="$i18n.locale == 'en'" @submit.prevent="send">
-                <v-row>
+            <v-form class="form" v-if="$i18n.locale == 'en'" @submit.prevent="send" v-model="valid">
+                <v-row >
                     <v-col
                     cols="12"
                     sm="12"
@@ -66,12 +66,13 @@
                         v-model="form.email"
                         label="E-mail"
                         required
+                        :rules="emailRules"
                     ></v-text-field>
                     </v-col>
                 </v-row>
                 <v-btn color="#f2efeb" style="margin-left:12px;margin-bottom:10px" type="submit">Post</v-btn>
             </v-form>
-            <v-form class="form" v-else @submit.prevent="send">
+            <v-form class="form" v-else @submit.prevent="send" v-model="valid">
                 <v-row>
                     <v-col
                     cols="12"
@@ -113,6 +114,7 @@
                         label="اﻷيميل"
                         required
                         dir="rtl"
+                         :rules="emailRules"
                     ></v-text-field>
                     </v-col>
                 </v-row>
@@ -201,7 +203,14 @@ export default {
         meta:0,
         reviews:[],
         current_page:0,
-        reviewscount:''
+        count2:0,
+        reviewscount:'',
+              emailRules: [
+        v => !!v || 'E-mail is required',
+        v => /.+@.+/.test(v) || 'E-mail must be valid',
+      ],
+        valid: false,
+
     }),
         methods:{
         send(){
@@ -209,7 +218,14 @@ export default {
             .then(res =>{
                 this.review=false
                 this.reviews.unshift(res.data.review)
-                this.form='';
+                this.form.rate=0;
+                this.form.name="";
+                this.form.email="";
+                this.form.title="";
+                this.form.body="";
+
+                this.count2=parseInt( $("#reviewscount")[0].innerText) ;
+                $("#reviewscount")[0].innerText = ++this.count2;
 
 })
             .catch(error => this.errors = error.response.data.errors)
@@ -251,7 +267,6 @@ export default {
         this.meta = response.data.last_page
         this.current_page = response.data.current_page
         this.reviewscount = response.data.total
-        console.log($('#reviewscount'));
       })
       .catch(error => console.log(error.response.data));
     },

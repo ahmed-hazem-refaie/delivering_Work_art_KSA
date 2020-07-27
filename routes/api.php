@@ -20,6 +20,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::resource('palettes', 'PaletteAPIController');
+Route::get('hover/{id?}', 'PaletteAPIController@hover');
+Route::get('countries', 'OrderPaletteController@countries');
+
+
+
 Route::get('/view' ,'PaletteAPIController@Palettes');
 Route::get('/viewMinPalettes' ,'PaletteAPIController@viewMinPalettes');
 Route::get('review', 'PaletteAPIController@getReviews');

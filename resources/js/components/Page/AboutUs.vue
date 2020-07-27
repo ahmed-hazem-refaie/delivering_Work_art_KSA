@@ -1,8 +1,20 @@
 <template>
-  <section>
-    <div class="mission mt-4">
-      <h3 class="title" @click="mission = !mission" v-if="!mission">{{ $t("message.ourmission") }}</h3>
-      <h3 class="title" @click="mission = !mission" v-else>{{ $t("message.ourmission") }}</h3>
+  <section >
+  <div class="loading-page">
+            <div class="counter">
+                <p>{{ $t("message.loading") }}</p>
+                <h1>
+                    0%
+
+
+                </h1>
+                <hr />
+            </div>
+        </div>
+
+    <div class="mission myhome mt-4">
+      <h3 class="title" @click="mission = !mission" v-if="!mission"><span>{{ $t("message.ourmission") }} </span > <span class="plus" v-if="mission==false">+</span>  </h3>
+      <h3 class="title" @click="mission = !mission" v-else>  <span > {{ $t("message.ourmission") }} </span > <span class="plus" v-if="mission==true">-</span>  </h3>
       <div class="row mt-5 text-center" v-if="mission">
         <div class="col-md-8" v-if=" $i18n.locale == 'en'">
           <p>
@@ -35,8 +47,8 @@
       </div>
     </div>
     <div class="artists mt-4 mb-2">
-        <h3 class="title" @click="artist = !artist" v-if="!artist">{{ $t("message.artists") }} </h3>
-        <h3 class="title" @click="artist = !artist" v-else>{{ $t("message.artists") }}</h3>
+        <h3 class="title" @click="artist = !artist" v-if="!artist"> <span>{{ $t("message.artists") }}</span > <span class="plus" v-if="artist==false">+</span>   </h3>
+        <h3 class="title" @click="artist = !artist" v-else>{{ $t("message.artists") }} <span class="false" v-if="artist==true">-</span> </h3>
         <div class=" mt-5 text-center" v-if="artist">
             <div class="row">
                 <div class="col-sm-12">
@@ -66,7 +78,7 @@ export default {
   data() {
     return {
       artists: [],
-      mission: false,
+      mission: true,
       artist: false,
       form: {
         name: null,
@@ -85,7 +97,7 @@ export default {
       })
       .catch(error => console.log(error.response.data));
   },
-  
+
 };
 </script>
 

@@ -36,3 +36,4 @@ v-for="(locale, index) in locales" :key="index"
         }
     }
  </script>
+
