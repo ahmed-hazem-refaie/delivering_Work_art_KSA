@@ -344,13 +344,7 @@ export default {
         country: 'Saudi Arabia',
         goverment: 'Saudi Arabia',
         postcode: null,
-        items: [
-          {
-            paletteid: 1,
-            palettesize: "medium",
-            quantity: 2
-          }
-        ]
+        items: [],
       },
       discount: "",
       item: [
@@ -612,6 +606,16 @@ export default {
     };
   },
   created(){
+
+//  {"paletteid":"3","palettesize":"medium","quantity":5}
+this.cart.forEach(element => {
+
+    this.form.items.push({
+            paletteid: element.product.id,
+            palettesize: element.sizeTarget,
+            quantity: element.quantity,
+    })
+});
 
 
   },

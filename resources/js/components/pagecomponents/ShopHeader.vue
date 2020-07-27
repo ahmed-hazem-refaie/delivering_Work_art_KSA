@@ -70,18 +70,18 @@
                         <div class="mb-3 mt-2"> <span>silkscreen</span></div>
                         <div>
 
-                            <v-btn class="mb-2 size_btn small"  :class="{ active_btn : active_el == 1 }" v-if="S_copies>0"  @click="small(1,S_price,S_avalible,cardId)">S</v-btn>
-                            <v-btn class="mb-2 size_btn small" style="cursor: not-allowed;background-color:#737373;color:#fff;border:none" v-else >Empty</v-btn>
-                            <v-btn class="mb-2 size_btn medium" :class="{ active_btn : active_el == 2 }" v-if="M_copies>0" @click="medium(2,M_price, M_avalible ,cardId)">M</v-btn>
-                            <v-btn class="mb-2 size_btn small" style="cursor: not-allowed;background-color:#737373;color:#fff;border:none" v-else >Empty</v-btn>
-                            <v-btn class="mb-2 size_btn larg" :class="{ active_btn : active_el == 3 }" v-if="L_copies>0" @click="larg(3,L_price,L_avalible,cardId )">L</v-btn>
-                            <v-btn class="mb-2 size_btn small" style="cursor: not-allowed;background-color:#737373;color:#fff;border:none" v-else >Empty</v-btn>
+                            <v-btn class="mb-2 size_btn small"  :class="{ active_btn : active_el == 1 }" v-if="S_avalible>0"  @click="small(1,S_price,S_avalible,cardId)">S</v-btn>
+                            <v-btn class="mb-2 size_btn small" style="cursor: not-allowed;background-color:#737373;color:#fff;border:none" v-else >{{ $t("message.empty") }}</v-btn>
+                            <v-btn class="mb-2 size_btn medium" :class="{ active_btn : active_el == 2 }" v-if="M_avalible>0" @click="medium(2,M_price, M_avalible ,cardId)">M</v-btn>
+                            <v-btn class="mb-2 size_btn small" style="cursor: not-allowed;background-color:#737373;color:#fff;border:none" v-else >{{ $t("message.empty") }}</v-btn>
+                            <v-btn class="mb-2 size_btn larg" :class="{ active_btn : active_el == 3 }" v-if="L_avalible>0" @click="larg(3,L_price,L_avalible,cardId )">L</v-btn>
+                            <v-btn class="mb-2 size_btn small" style="cursor: not-allowed;background-color:#737373;color:#fff;border:none" v-else >{{ $t("message.empty") }}</v-btn>
                             <h3 class="mt-4 mb-4" v-if="active_el==1">small - 30x40cm (12x16") <strong style="float:right">{{S_copies}}/{{S_avalible}}  {{ $t("message.left") }}</strong></h3>
                             <h3 class="mt-4 mb-4" v-if="active_el==2">medium - 50x66.5cm (20x26") <strong style="float:right">{{M_copies}}/{{M_avalible}}  {{ $t("message.left") }}</strong></h3>
                             <h3 class="mt-4 mb-4" v-if="active_el==3">large - 70x93.5cm (28x37") <strong style="float:right">{{L_copies}}/{{L_avalible}}  {{ $t("message.left") }}</strong></h3>
                             <div style="clear:both"></div>
                         </div>
-                        <button @click="  addtocart(cardId,priceTarget, avilableTarget , sizeTarget)" class="btn add-button addToCart "
+                        <button @click="  addtocart(cardId,priceTarget, avilableTarget , sizeTarget)" v-if="button" class="btn add-button addToCart "
 
 
 
@@ -91,6 +91,8 @@
                          -{{ $t("message.cart") }}
 
                         </button>
+                        <v-btn class="mb-2 size_btn small" style="cursor: not-allowed;background-color:#737373;color:#fff;border:none" v-else >{{ $t("message.select_size") }}</v-btn>
+
                         <p>
                             <span class="font-weight-bold ">This is the Classic</span>, designed and manufactured by Ecstase,
                             the Classic is made up of a wooden frame, a passe-partout,
@@ -196,6 +198,7 @@ export default {
             priceTarget:'',
             avilableTarget:'',
             sizeTarget:'',
+            button:false,
 
 
 
@@ -329,10 +332,11 @@ export default {
         .catch(error => console.log(error.response.data))
         },
         small(el,price,avilable,cardId){
-            this.sizeTarget="Small - 30x40cm(12x16)"
+            this.sizeTarget="small"
             this.avilableTarget=avilable;
             this.active_el = el;
             this.priceTarget=price
+            this.button=true;
 
 
 
@@ -348,10 +352,11 @@ export default {
 
         },
         medium(el,price,avilable,cardId){
-            this.sizeTarget="Medium - 50x66.5cm (20x26)"
+            this.sizeTarget="medium"
             this.avilableTarget=avilable;
             this.active_el = el;
             this.priceTarget=price
+            this.button=true;
 
 
                $(".details .details_img").css({width:"100%",height:"200px"})
@@ -368,10 +373,11 @@ export default {
 
         },
         larg(el,price,avilable,cardId){
-             this.sizeTarget="Large - 70x93.5cm (28x37)"
+             this.sizeTarget="large"
             this.avilableTarget=avilable;
             this.active_el = el;
             this.priceTarget=price
+            this.button=true;
 
             $(".details .details_img").css({width:"100%",height:"200px"})
             $(".details  .content").css({width:"100%"})
@@ -401,10 +407,10 @@ export default {
                     this.S_avalible=response.data.palettes[0].S_avalible,
                     this.S_price=response.data.palettes[0].S_price,
                     this.M_copies=response.data.palettes[0].M_copies,
-                    this.M_avalibles=response.data.palettes[0].M_avalible,
+                    this.M_avalible=response.data.palettes[0].M_avalible,
                     this.M_price=response.data.palettes[0].M_price,
                     this.L_copies=response.data.palettes[0].L_copies,
-                    this.L_avalibles=response.data.palettes[0].L_avalible,
+                    this.L_avalible=response.data.palettes[0].L_avalible,
                     this.L_price=response.data.palettes[0].L_price,
                     this.sizing_details=response.data.palettes[0].sizing_details
                     })
@@ -426,6 +432,34 @@ export default {
 
            let product=  res.data.paletteCart
 
+           if(sizeTarget=='large')
+           {
+               if(this.L_avalible<=0)
+               {
+
+                this.L_avalible=0;
+                return
+               }
+               --this.L_avalible;
+           }else if(sizeTarget=='small')
+           {
+                if(this.S_avalible<=0)
+               {
+               this.S_avalible =  0;
+               return
+               }
+                --this.S_avalible;
+
+           }else{
+             if(this.M_avalible<=0)
+               {
+                    this.M_avalible=0;
+                    return
+
+               }
+               --this.M_avalible;
+
+           }
             this.$store.dispatch('addProductToCart',{
                  product,
                 quantity:1,
