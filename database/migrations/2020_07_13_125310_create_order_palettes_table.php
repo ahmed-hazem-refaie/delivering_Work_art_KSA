@@ -17,6 +17,8 @@ class CreateOrderPalettesTable extends Migration
             $table->id();
 
             $table->unsignedBigInteger('order_id')->nullable();
+            $table->integer('palatte_id')->unsigned()->nullable();
+
             $table->string('size')->nullable();
             $table->string('extrainfo')->nullable();
             $table->double('price')->nullable();
@@ -24,6 +26,8 @@ class CreateOrderPalettesTable extends Migration
 
 
             $table->foreign('order_id')->references('id')->on('orders')
+            ->onDelete('cascade');
+            $table->foreign('palatte_id')->references('id')->on('palettes')
             ->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();

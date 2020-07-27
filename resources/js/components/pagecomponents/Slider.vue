@@ -63,6 +63,7 @@
       .then(response =>{
           this.artists = response.data.artists
           this.sliderPalettes = response.data.palettesSlider
+          console.log(this.sliderPalettes)
 
       })
       .catch(error => console.log(error.response.data))

@@ -13,7 +13,7 @@
         <div class="rating" v-else>
             <v-btn style="background-color:black;color:#fff;" @click="review = !review"><i class="fa fa-edit mr-2"></i>{{ $t("message.writereview") }}</v-btn>
             <span class="fa fa-star text-warning" style="float:right" v-for="i in 5" :key="i.id"></span>
-            <span class="mr-2" style="float:right">{{reviewscount}} {{ $t("message.review") }}</span>
+            <span id="reviewscount" class="mr-2" style="float:right">{{reviewscount}} {{ $t("message.review") }}</span>
             <div style="clear:both"></div>
 
         </div>
@@ -121,14 +121,14 @@
             </v-form>
         </div>
           <v-card class="card" v-for="(review,index) in reviews" :key="index">
-              
+
                 <div class="userimg">
                     <div class="userimg2">
                         <span>{{review.name.charAt(0).toUpperCase()}}</span>
                     </div>
-                    
+
                 </div>
-                <div style="width:95%;display:inline-block"> 
+                <div style="width:95%;display:inline-block">
                     <v-card-subtitle class="pb-0">{{review.name}} <span style="float:right">{{review.created_at}}</span></v-card-subtitle>
                     <div style="clear:both"></div>
                     <span class="ml-2">
@@ -181,12 +181,12 @@
             ></v-pagination>
         </div>
     </div>
-  
+
 </template>
 
 <script>
 export default {
-    data: () => ({        
+    data: () => ({
         review:false,
         form:{
             rate: 0,
@@ -206,11 +206,12 @@ export default {
         methods:{
         send(){
             axios.post('/reviews',this.form)
-            .then(res =>{ 
+            .then(res =>{
                 this.review=false
                 this.reviews.unshift(res.data.review)
                 this.form='';
-            })
+
+})
             .catch(error => this.errors = error.response.data.errors)
         },
         changePage(page){
@@ -228,7 +229,7 @@ export default {
             axios.post('/like?id=' +id)
             .then(res => {
                 $('#'+id)[0].innerText = res.data.review.like_counter
-                event.target.style.color="blue"               
+                event.target.style.color="blue"
             })
             .catch(error => this.errors = error.response.data.errors)
         },
@@ -250,6 +251,7 @@ export default {
         this.meta = response.data.last_page
         this.current_page = response.data.current_page
         this.reviewscount = response.data.total
+        console.log($('#reviewscount'));
       })
       .catch(error => console.log(error.response.data));
     },
@@ -284,6 +286,6 @@ export default {
 .v-card>.userimg {
     border-top-left-radius: none !important;
     border-top-right-radius: none !important;
-    
+
 }
 </style>

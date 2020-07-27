@@ -341,7 +341,7 @@ export default {
 
     }
     .details{
-    width: 80%;
+    width: 30%;
     display: inline-block;
     margin: 15px;
     color: #fff;
