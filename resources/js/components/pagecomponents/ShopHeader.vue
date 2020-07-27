@@ -16,13 +16,14 @@
                               <div class=" row  d-flex justify-content-center ">
 
 
-                            <div  class="details myhome col-md-3 col-sm-6"  v-for="(palettesArtist , index) in palettesArtists" @click="addActive(palettesArtist.id)" :class="{ 'active': index == 0 }"  :key="palettesArtist.id">
-                               <div class="details-content">
+                            <div  class="details myhome col-md-2 col-sm-6 "  v-for="(palettesArtist , index) in palettesArtists" @click="addActive(palettesArtist.id)"   :key="palettesArtist.id">
+                               <div :class="{ 'active': index == 0 }" class=" details-content">
                                     <img    :src="palettesArtist.img" class="details_img" alt="...">
                                     <div class="content" >
                                         <div class="triangle"></div>
                                         <h6>{{palettesArtist.name}}  | ${{palettesArtist.L_price}}</h6>
-                                        <span><span class="text-success">{{palettesArtist.L_copies}}</span>/{{palettesArtist.L_avalible}} {{ $t("message.left") }}</span>
+
+                                        <span><span class="text-success">{{palettesArtist.L_avalible + palettesArtist.M_avalible + palettesArtist.S_avalible }}</span>/{{palettesArtist.L_copies + palettesArtist.M_copies + palettesArtist.S_copies }}  {{palettesArtist.L_avalible}} {{ $t("message.left") }}</span>
                                         <!-- <button  @click="addToCart(palettesArtist)"  class="form-control btn btn-info border-0">{{ $t("message.cart") }}</button> -->
                                     </div>
                                 </div>
@@ -69,18 +70,18 @@
                         <div class="mb-3 mt-2"> <span>silkscreen</span></div>
                         <div>
 
-                            <v-btn class="mb-2 size_btn small"  :class="{ active_btn : active_el == 1 }" v-if="S_copies>0"  @click="small(1,S_price,S_avalible)">S</v-btn>
+                            <v-btn class="mb-2 size_btn small"  :class="{ active_btn : active_el == 1 }" v-if="S_copies>0"  @click="small(1,S_price,S_avalible,cardId)">S</v-btn>
                             <v-btn class="mb-2 size_btn small" style="cursor: not-allowed;background-color:#737373;color:#fff;border:none" v-else >Empty</v-btn>
-                            <v-btn class="mb-2 size_btn medium" :class="{ active_btn : active_el == 2 }" v-if="M_copies>0" @click="medium(2,M_price, M_avalible)">M</v-btn>
+                            <v-btn class="mb-2 size_btn medium" :class="{ active_btn : active_el == 2 }" v-if="M_copies>0" @click="medium(2,M_price, M_avalible ,cardId)">M</v-btn>
                             <v-btn class="mb-2 size_btn small" style="cursor: not-allowed;background-color:#737373;color:#fff;border:none" v-else >Empty</v-btn>
-                            <v-btn class="mb-2 size_btn larg" :class="{ active_btn : active_el == 3 }" v-if="L_copies>0" @click="larg(3,L_price,L_avalible )">L</v-btn>
+                            <v-btn class="mb-2 size_btn larg" :class="{ active_btn : active_el == 3 }" v-if="L_copies>0" @click="larg(3,L_price,L_avalible,cardId )">L</v-btn>
                             <v-btn class="mb-2 size_btn small" style="cursor: not-allowed;background-color:#737373;color:#fff;border:none" v-else >Empty</v-btn>
-                            <h3 class="mt-4 mb-4" v-if="active_el==1">30x40cm (12x16") <strong style="float:right">{{S_copies}}/{{S_avalible}}  {{ $t("message.left") }}</strong></h3>
-                            <h3 class="mt-4 mb-4" v-if="active_el==2">50x66.5cm (20x26") <strong style="float:right">{{M_copies}}/{{M_avalible}}  {{ $t("message.left") }}</strong></h3>
-                            <h3 class="mt-4 mb-4" v-if="active_el==3">70x93.5cm (28x37") <strong style="float:right">{{L_copies}}/{{L_avalible}}  {{ $t("message.left") }}</strong></h3>
+                            <h3 class="mt-4 mb-4" v-if="active_el==1">small - 30x40cm (12x16") <strong style="float:right">{{S_copies}}/{{S_avalible}}  {{ $t("message.left") }}</strong></h3>
+                            <h3 class="mt-4 mb-4" v-if="active_el==2">medium - 50x66.5cm (20x26") <strong style="float:right">{{M_copies}}/{{M_avalible}}  {{ $t("message.left") }}</strong></h3>
+                            <h3 class="mt-4 mb-4" v-if="active_el==3">large - 70x93.5cm (28x37") <strong style="float:right">{{L_copies}}/{{L_avalible}}  {{ $t("message.left") }}</strong></h3>
                             <div style="clear:both"></div>
                         </div>
-                        <button @click="  addtocart(cardId,priceTarget, avilableTarget)" class="btn add-button addToCart "
+                        <button @click="  addtocart(cardId,priceTarget, avilableTarget , sizeTarget)" class="btn add-button addToCart "
 
 
 
@@ -118,7 +119,7 @@
                                     <i v-else class="fa fa-chevron-up" style="float:right"></i>
                                 </h4>
                                 <span v-if="size">
-                                    {{sizing_details}}
+                                    {{sizing_details}} CM
                                 </span>
                             </li>
                             <li class="list-group-item" @click="details = !details">
@@ -179,7 +180,7 @@ export default {
             first:null,
             firstpalettesArtists:null,
             firstminPalettes:null,
-            active_el:3,
+            active_el:0,
             S_copies:'',
             S_avalible:'',
             S_price:'',
@@ -193,12 +194,16 @@ export default {
             name:'',
             cardId:'',
             priceTarget:'',
-            avilableTarget:''
+            avilableTarget:'',
+            sizeTarget:'',
+
 
 
         }
     },
     created() {
+
+
 
       axios.get('/api/palettes')
       .then(response =>{
@@ -323,30 +328,70 @@ export default {
         })
         .catch(error => console.log(error.response.data))
         },
-        small(el,price,avilable){
+        small(el,price,avilable,cardId){
+            this.sizeTarget="Small - 30x40cm(12x16)"
             this.avilableTarget=avilable;
             this.active_el = el;
             this.priceTarget=price
 
-            $(".active>.details_img").css({width:"78%",height:"160px"})
-            $(".active>.content").css({width:"78%",margin:"7px 0"})
+
+
+             $(".details .details_img").css({width:"100%",height:"200px"})
+            $(".details  .content").css({width:"100%"})
+
+                $(".details.active .details_img").css({width:"75%",height:"100px"})
+            $(".details.active .content").css({width:"90%"})
+
+            // $("html,body").animate({
+            //     scrollTop:"100px"
+            // },1000)
 
         },
-        medium(el,price,avilable){
+        medium(el,price,avilable,cardId){
+            this.sizeTarget="Medium - 50x66.5cm (20x26)"
             this.avilableTarget=avilable;
             this.active_el = el;
             this.priceTarget=price
-            $(".active>.details_img").css({width:"88%",height:"200px"})
-            $(".active>.content").css({width:"88%"})
+
+
+               $(".details .details_img").css({width:"100%",height:"200px"})
+            $(".details  .content").css({width:"95%"})
+
+
+            $(".details.active .details_img").css({width:"80%",height:"150px"})
+            $(".details.active .content").css({width:"100%"})
+
+            // $("html,body").animate({
+            //     scrollTop:"100px"
+            // },1000)
+
+
         },
-        larg(el,price,avilable){
+        larg(el,price,avilable,cardId){
+             this.sizeTarget="Large - 70x93.5cm (28x37)"
             this.avilableTarget=avilable;
             this.active_el = el;
             this.priceTarget=price
-            $(".active>.details_img").css({width:"100%",height:"250px"})
-            $(".active>.content").css({width:"100%"})
+
+            $(".details .details_img").css({width:"100%",height:"200px"})
+            $(".details  .content").css({width:"100%"})
+
+                $(".details.active .details_img").css({width:"100%",height:"200px"})
+            $(".details.active .content").css({width:"100%"})
+
+
+            // $("html,body").animate({
+            //     scrollTop:"100px"
+            // },1000)
+
         },
         addActive($minPalette_id){
+
+
+            $("html,body").animate({
+                scrollTop:"450px"
+            },1000)
+
                 axios.get("/api/viewMinPalettes?id=" + $minPalette_id)
                 .then(response =>{
                     this.minPalettes = response.data.minPalettes
@@ -369,8 +414,8 @@ export default {
                 $(this).addClass('active').siblings().removeClass('active');
             });
         },
-        addtocart($id,price,avilableTarget){
-            console.log(price,"avaliable",avilableTarget)
+        addtocart($id,price,avilableTarget, sizeTarget){
+
 
             axios.post('/api/addtocart?id=' + $id)
             .then(res=>{
@@ -385,13 +430,11 @@ export default {
                  product,
                 quantity:1,
                 price:price,
-                avilableTarget
+                avilableTarget,
+                sizeTarget
 
             })
-            }
-
-            )
-            .catch(error => console.log(error))
+            }).catch(error => console.log(error))
 
         }
 
@@ -415,7 +458,11 @@ export default {
 
         }
         .carousel-item .header{
-            height: 600px;
+            height: 1281px;
+            overflow: scroll;
+        }
+        .carousel-item {
+            height: 1281px;
         }
     }
     .header_sm{
@@ -447,12 +494,15 @@ export default {
     cursor: pointer;
     transition: all 1s;
 
+
     }
     .details img{
         width: 100%;
         transition: all 1s;
         height: 250px;
-        box-shadow: 5px 5px 5px black;
+        /* box-shadow: 5px 5px 5px black; */
+        border: 10px solid #111;
+        height: 200px;
     }
     .wrapper .details .content{
         position: relative;
@@ -463,20 +513,25 @@ export default {
         transition: all .5s;
         color:#00a4ee;
         border-radius: 10px;
-        background-color: white;
+          background: rgba(0,0,0,0.9);
         background-repeat: no-repeat;
         background-position: 50%;
         background-size: 100%;
         z-index: 2;
+        top: 10px;
     }
         .wrapper .details .content .triangle{
-    position: absolute;
+    position: relative;
     z-index: 1;
-    padding: 16px;
-    top: 0;
+    padding: 10px;
+    display: inline-block;
+    top: -12px;
     left: 50%;
     transform: rotate(45deg) translate(-50%, 19%);
-    background: white;
+    border-top: 1px solid #00a4ee;
+    border-left: 1px solid #00a4ee ;
+     background: rgba(0,0,0,0.9);
+
 
 
     }
@@ -555,7 +610,7 @@ export default {
 }
 @media(max-width: 991px){
     .carousel-indicators{
-        bottom: -15%;
+        bottom: -8%
     }
 }
 .carousel-indicators .active{
@@ -566,7 +621,7 @@ export default {
     margin-right: 20px !important;
     font-size: 20px ;
 }
-.active>.content {
+.active .content {
     border: 2px solid #00a4ee;
 }
 .active_btn{

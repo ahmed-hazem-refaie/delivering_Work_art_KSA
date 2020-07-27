@@ -212,13 +212,13 @@ export default {
     font-weight: bold;
     color: gray;
     border:1px solid white;
-    border-radius: 40px;
+   /* border-radius: 40px; */
     overflow: hidden;
 
 }
 
 .modal-header{
-      background: linear-gradient(45deg ,black 50% , #0c6bd1 50%);
+      background:#0c6bd1
 }
 
 #modalLoginForms .modal-content .fa{
@@ -241,11 +241,11 @@ export default {
 
 .form-control{
     border: 1px solid #0c6bd1;
-    border-radius: 20px;
+
 }
 
 .modal-title-sign{
-    color: white;
+     color:orangered;
     font-size: 30px;
 }
 .modal-title-sign span{
