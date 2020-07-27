@@ -8,17 +8,16 @@ export const SET_PRODUCT = (state, product) => {
     state.product = product;
 };
 // we size
-export const ADD_TO_CART = (state, { product, quantity, price,avilableTarget }) => {
+export const ADD_TO_CART = (state, { product, quantity, price,avilableTarget,sizeTarget }) => {
 
 
 
-    var ckeckAvaiable=0
+
     var check = false
+
     var productInCart = state.cart.find(item => {
-        if(item.avilableTarget>=2){
-            ckeckAvaiable=item.avilableTarget
-            console.log("القطعالمتوفرة", item.avilableTarget)
-        if(  item.product.id == product.id && item.price==price){
+
+        if(  item.product.id == product.id && item.sizeTarget ==sizeTarget){
             check =true
            return item.product
         }
@@ -26,11 +25,9 @@ export const ADD_TO_CART = (state, { product, quantity, price,avilableTarget }) 
             check = false
         }
 
-    }
 
     });
 
-if(ckeckAvaiable>=0){
 
 
     if (check==true) {
@@ -45,12 +42,12 @@ if(ckeckAvaiable>=0){
             product,
             quantity,
             price,
-            avilableTarget
+            avilableTarget,
+            sizeTarget
         });
 
 
-        
-    }
+
 
 }
 
@@ -82,3 +79,69 @@ export const DECREASE_PRODUCT = (state, { product, quantity }) => {
 export const DELETE_CART = state => {
     state.cart = [];
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// export const ADD_TO_CART = (state, { product, quantity, price,avilableTarget,sizeTarget }) => {
+
+
+
+//     var ckeckAvaiable=0
+//     var check = false
+//     var productInCart = state.cart.find(item => {
+//         if(item.avilableTarget>=2){
+//             ckeckAvaiable=item.avilableTarget
+//              console.log(item.avilableTarget)
+
+//         if(  item.product.id == product.id && item.sizeTarget ==sizeTarget){
+//             check =true
+//            return item.product
+//         }
+//         else{
+//             check = false
+//         }
+
+//     }
+
+//     });
+
+//         if(ckeckAvaiable>=0){
+
+
+//             if (check==true) {
+//                 productInCart.quantity++;
+//                 productInCart.avilableTarget--
+//                 if(productInCart.avilableTarget==0){
+//                     productInCart.avilableTarget=0
+//                 }
+
+
+//             } if(check==false) {
+
+
+//                 state.cart.push({
+//                     product,
+//                     quantity,
+//                     price,
+//                     avilableTarget,
+//                     sizeTarget
+//                 });
+
+
+
+//             }
+
+//         }
+
+// };

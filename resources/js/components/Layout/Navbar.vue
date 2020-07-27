@@ -66,7 +66,7 @@
                         <div class="modal-body" >
 
 <!-- -------------------------------------------pallalet cart----------------- -->
-                            <div class="row mt-2 border-bottom"
+                            <div class="row p-4 mt-2 border-bottom"
                                  v-for="(item,index) in cart "
                                  :key="{index}">
                                 <div class="col-md-sm-4 ml-3">
@@ -74,8 +74,7 @@
                                 </div>
                                 <div class="col-md-sm-8 ml-3">
                                     <span> <strong>{{ item.product.name }}</strong></span>
-                                    <h6 >{{ item.product.L_size }}</h6>
-                                     <!-- <h6 >{{ item.avilableTarget }}</h6> -->
+                                     <h6  style="font-size:14px">{{ item.sizeTarget }}</h6>
                                     <h6>{{ item.quantity }} x ${{item.price}}</h6>
                                 </div>
                                   <div>
@@ -85,7 +84,7 @@
                                         <v-icon slot="prepend"  @click.prevent="decreaseProduct(item.product)"  >mdi-minus</v-icon>
                                     </v-text-field> -->
                                 </v-form>
-                                <button class="ml-3 btn btn-danger" @click.prevent="clearProductFromCart(index)"> {{ $t("message.remove") }}</button>
+                                <button class="ml-3 btn delete btn-danger" @click.prevent="clearProductFromCart(index)"> {{ $t("message.remove") }}</button>
                             </div>
                             </div>
 
@@ -96,7 +95,7 @@
                         <div class="modal-footer">
                             <router-link style="margin: auto;color: #fff;"
                             :to="{ path: '/payment', query: { myprop: this.pallatecart }}">
-                                <button type="button" class="btn btn-dark" style="font-size: 18px;"> {{ $t("message.total") }}: {{cartTotalPrice}} &nbsp;  <strong>.</strong> &nbsp;  {{ $t("message.checkout") }}</button>
+                                <button type="button" class="btn btn-dark" style="font-size: 18px;"> {{ $t("message.total") }} : $ {{cartTotalPrice}} &nbsp;  <strong>.</strong> &nbsp;  {{ $t("message.checkout") }}</button>
                             </router-link>
 
                         </div>
@@ -222,7 +221,12 @@ export default {
         overflow: scroll;
 } */
 .modal-body img{
-    width: 62px;
-    height: 40px;
+    width: 80px;
+    height: 80px;
+}
+
+.delete{
+     width: 90px !important;
+    float: right;
 }
 </style>

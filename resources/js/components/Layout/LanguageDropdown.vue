@@ -13,10 +13,13 @@
       </template>
       <v-list>
         <v-list-item
-v-for="(locale, index) in locales" :key="index"
+v-for="(locale, index) in locales"  :key="index"
          @click.prevent="setLocale(locale)"
         >
-          <v-list-item-title>{{ locale }}</v-list-item-title>
+          <v-list-item-title class="mb-3">
+              {{ locale }} <img style="width:40px; height:40px; border-radius:50%" :src="'images/'+locale+'.png'">
+
+          </v-list-item-title>
         </v-list-item>
       </v-list>
     </v-menu>
@@ -27,6 +30,7 @@ v-for="(locale, index) in locales" :key="index"
         data() {
             return {
                 locales: ['en', 'ar'],
+
             }
         },
         methods: {

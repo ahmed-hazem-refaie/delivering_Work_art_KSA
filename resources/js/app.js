@@ -81,12 +81,28 @@ const messages = {
         //    cart
             checkout:"CheckOut",
             total:"Total Price",
-            remove:"Remove Product",
+            remove:"Remove ",
             cartname:"Cart",
 
             // footer
             logo:"Website Name",
             lorem:"lorem text",
+            // Payment
+            email:"E-mail",
+            firstname:"First Name",
+            lastname:"Last Name",
+            address:"Address",
+            appartment:"Apartment, Suite, etc. (optional)",
+            city:"City",
+            phone:"Phone",
+            postcode:"Post Code ",
+            discount:"Discount",
+            Aplly:"APPLY",
+            subtotal:"Sub Total",
+            total:"Total",
+            calulated:"Calculated at next",
+            toshipping:"Continue to Shipping"
+
 
         }
     },
@@ -143,11 +159,27 @@ const messages = {
             // cart translation
             checkout:"شراء الان",
             total:"الحساب الإجمالى",
-            remove:"مسح المنتج",
+            remove:"حذف",
             cartname:"السلة",
             // footer
             logo:"اسم الموقع",
-            lorem :"نص تجريبى "
+            lorem :"نص تجريبى ",
+             // Payment
+             email:"البريد الإلكترونى",
+             firstname:"الإسم الأول ",
+             lastname:"الإسم الأخير",
+             address:"العنوان",
+             appartment:"طاقم العمل ",
+             city:"المدينه",
+             phone:"رقم الموبايل",
+             postcode:"الرمز البريدى",
+             discount:"الخصم",
+             Aplly:"الحصول",
+             subtotal:"الخصم",
+             total:"السعر الإجمالى",
+             calulated:"الحساب سيتم الكرة القادة ",
+             toshipping:"متابعة الشراء"
+
         }
     }
 };
