@@ -66,25 +66,26 @@
                         <div class="modal-body" >
 
 <!-- -------------------------------------------pallalet cart----------------- -->
-                            <div class="row"
-                                 v-for="item in cart"
-                                 :key="item.product.id">
+                            <div class="row mt-2 border-bottom"
+                                 v-for="(item,index) in cart "
+                                 :key="{index}">
                                 <div class="col-md-sm-4 ml-3">
                                     <img :src="item.product.img">
                                 </div>
                                 <div class="col-md-sm-8 ml-3">
                                     <span> <strong>{{ item.product.name }}</strong></span>
-                                    <h6 >({{ item.product.L_size }})</h6>
+                                    <h6 >{{ item.product.L_size }}</h6>
+                                     <!-- <h6 >{{ item.avilableTarget }}</h6> -->
                                     <h6>{{ item.quantity }} x ${{item.price}}</h6>
                                 </div>
                                   <div>
                                 <v-form style="width:50%;display:inline-block">
-                                    <v-text-field  v-model=" item.quantity  ">
+                                    <!-- <v-text-field  v-model=" item.quantity  ">
                                         <v-icon slot="append" @click="addToCart(item.product )">mdi-plus</v-icon>
                                         <v-icon slot="prepend"  @click.prevent="decreaseProduct(item.product)"  >mdi-minus</v-icon>
-                                    </v-text-field>
+                                    </v-text-field> -->
                                 </v-form>
-                                <button class="ml-3 btn btn-danger" @click.prevent="clearProductFromCart(item.product)"> {{ $t("message.remove") }}</button>
+                                <button class="ml-3 btn btn-danger" @click.prevent="clearProductFromCart(index)"> {{ $t("message.remove") }}</button>
                             </div>
                             </div>
 
@@ -154,8 +155,8 @@ export default {
                 quantity:1
             })
         },
-         clearProductFromCart(product){
-      this.$store.dispatch("deleteCartItem",product)
+         clearProductFromCart(index){
+      this.$store.dispatch("deleteCartItem",index)
     },
     clearCartItems(){
       this.$store.dispatch("clearCartItems")

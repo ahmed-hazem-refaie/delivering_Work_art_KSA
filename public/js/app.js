@@ -2251,6 +2251,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: {
@@ -2299,8 +2300,8 @@ __webpack_require__.r(__webpack_exports__);
         quantity: 1
       });
     },
-    clearProductFromCart: function clearProductFromCart(product) {
-      this.$store.dispatch("deleteCartItem", product);
+    clearProductFromCart: function clearProductFromCart(index) {
+      this.$store.dispatch("deleteCartItem", index);
     },
     clearCartItems: function clearCartItems() {
       this.$store.dispatch("clearCartItems");
@@ -3361,7 +3362,8 @@ __webpack_require__.r(__webpack_exports__);
       sizing_details: '',
       name: '',
       cardId: '',
-      priceTarget: ''
+      priceTarget: '',
+      avilableTarget: ''
     };
   },
   created: function created() {
@@ -3469,7 +3471,8 @@ __webpack_require__.r(__webpack_exports__);
         return console.log(error.response.data);
       });
     },
-    small: function small(el, price) {
+    small: function small(el, price, avilable) {
+      this.avilableTarget = avilable;
       this.active_el = el;
       this.priceTarget = price;
       jquery__WEBPACK_IMPORTED_MODULE_2___default()(".active>.details_img").css({
@@ -3481,7 +3484,8 @@ __webpack_require__.r(__webpack_exports__);
         margin: "7px 0"
       });
     },
-    medium: function medium(el, price) {
+    medium: function medium(el, price, avilable) {
+      this.avilableTarget = avilable;
       this.active_el = el;
       this.priceTarget = price;
       jquery__WEBPACK_IMPORTED_MODULE_2___default()(".active>.details_img").css({
@@ -3492,7 +3496,8 @@ __webpack_require__.r(__webpack_exports__);
         width: "88%"
       });
     },
-    larg: function larg(el, price) {
+    larg: function larg(el, price, avilable) {
+      this.avilableTarget = avilable;
       this.active_el = el;
       this.priceTarget = price;
       jquery__WEBPACK_IMPORTED_MODULE_2___default()(".active>.details_img").css({
@@ -3516,10 +3521,10 @@ __webpack_require__.r(__webpack_exports__);
         jquery__WEBPACK_IMPORTED_MODULE_2___default()(this).addClass('active').siblings().removeClass('active');
       });
     },
-    addtocart: function addtocart($id, price) {
+    addtocart: function addtocart($id, price, avilableTarget) {
       var _this4 = this;
 
-      console.log(price);
+      console.log(price, "avaliable", avilableTarget);
       axios.post('/api/addtocart?id=' + $id).then(function (res) {
         console.log(res.data.paletteCart); // $('#count')[0].innerText++
 
@@ -3528,7 +3533,8 @@ __webpack_require__.r(__webpack_exports__);
         _this4.$store.dispatch('addProductToCart', {
           product: product,
           quantity: 1,
-          price: price
+          price: price,
+          avilableTarget: avilableTarget
         });
       })["catch"](function (error) {
         return console.log(error);
@@ -43197,10 +43203,13 @@ var render = function() {
                           _c(
                             "div",
                             { staticClass: "modal-body" },
-                            _vm._l(_vm.cart, function(item) {
+                            _vm._l(_vm.cart, function(item, index) {
                               return _c(
                                 "div",
-                                { key: item.product.id, staticClass: "row" },
+                                {
+                                  key: { index: index },
+                                  staticClass: "row mt-2 border-bottom"
+                                },
                                 [
                                   _c(
                                     "div",
@@ -43223,11 +43232,7 @@ var render = function() {
                                       ]),
                                       _vm._v(" "),
                                       _c("h6", [
-                                        _vm._v(
-                                          "(" +
-                                            _vm._s(item.product.L_size) +
-                                            ")"
-                                        )
+                                        _vm._v(_vm._s(item.product.L_size))
                                       ]),
                                       _vm._v(" "),
                                       _c("h6", [
@@ -43243,69 +43248,12 @@ var render = function() {
                                   _c(
                                     "div",
                                     [
-                                      _c(
-                                        "v-form",
-                                        {
-                                          staticStyle: {
-                                            width: "50%",
-                                            display: "inline-block"
-                                          }
-                                        },
-                                        [
-                                          _c(
-                                            "v-text-field",
-                                            {
-                                              model: {
-                                                value: item.quantity,
-                                                callback: function($$v) {
-                                                  _vm.$set(
-                                                    item,
-                                                    "quantity",
-                                                    $$v
-                                                  )
-                                                },
-                                                expression: " item.quantity  "
-                                              }
-                                            },
-                                            [
-                                              _c(
-                                                "v-icon",
-                                                {
-                                                  attrs: { slot: "append" },
-                                                  on: {
-                                                    click: function($event) {
-                                                      return _vm.addToCart(
-                                                        item.product
-                                                      )
-                                                    }
-                                                  },
-                                                  slot: "append"
-                                                },
-                                                [_vm._v("mdi-plus")]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "v-icon",
-                                                {
-                                                  attrs: { slot: "prepend" },
-                                                  on: {
-                                                    click: function($event) {
-                                                      $event.preventDefault()
-                                                      return _vm.decreaseProduct(
-                                                        item.product
-                                                      )
-                                                    }
-                                                  },
-                                                  slot: "prepend"
-                                                },
-                                                [_vm._v("mdi-minus")]
-                                              )
-                                            ],
-                                            1
-                                          )
-                                        ],
-                                        1
-                                      ),
+                                      _c("v-form", {
+                                        staticStyle: {
+                                          width: "50%",
+                                          display: "inline-block"
+                                        }
+                                      }),
                                       _vm._v(" "),
                                       _c(
                                         "button",
@@ -43315,7 +43263,7 @@ var render = function() {
                                             click: function($event) {
                                               $event.preventDefault()
                                               return _vm.clearProductFromCart(
-                                                item.product
+                                                index
                                               )
                                             }
                                           }
@@ -45176,21 +45124,7 @@ var render = function() {
                                       " " +
                                       _vm._s(_vm.$t("message.left"))
                                   )
-                                ]),
-                                _vm._v(" "),
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass:
-                                      "form-control btn btn-info border-0",
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.addToCart(palettesArtist)
-                                      }
-                                    }
-                                  },
-                                  [_vm._v(_vm._s(_vm.$t("message.cart")))]
-                                )
+                                ])
                               ])
                             ])
                           ]
@@ -45333,7 +45267,7 @@ var render = function() {
                             class: { active_btn: _vm.active_el == 1 },
                             on: {
                               click: function($event) {
-                                return _vm.small(1, _vm.S_price)
+                                return _vm.small(1, _vm.S_price, _vm.S_avalible)
                               }
                             }
                           },
@@ -45361,7 +45295,11 @@ var render = function() {
                             class: { active_btn: _vm.active_el == 2 },
                             on: {
                               click: function($event) {
-                                return _vm.medium(2, _vm.M_price)
+                                return _vm.medium(
+                                  2,
+                                  _vm.M_price,
+                                  _vm.M_avalible
+                                )
                               }
                             }
                           },
@@ -45389,7 +45327,7 @@ var render = function() {
                             class: { active_btn: _vm.active_el == 3 },
                             on: {
                               click: function($event) {
-                                return _vm.larg(3, _vm.L_price)
+                                return _vm.larg(3, _vm.L_price, _vm.L_avalible)
                               }
                             }
                           },
@@ -45465,7 +45403,11 @@ var render = function() {
                     staticClass: "btn add-button addToCart ",
                     on: {
                       click: function($event) {
-                        return _vm.addtocart(_vm.cardId, _vm.priceTarget)
+                        return _vm.addtocart(
+                          _vm.cardId,
+                          _vm.priceTarget,
+                          _vm.avilableTarget
+                        )
                       }
                     }
                   },
@@ -106265,7 +106207,7 @@ var messages = {
       checkreview: "Was This Review Helpful",
       signup: "Sign up for a notification email when new limited artworks are released.",
       Newsletter: "Newsletter",
-      SUBSCRIBE: "SUBSCRIBE",
+      SUBSCRIBE: "join us",
       others: "Others",
       company: "Company",
       Limitworks: "Limitworks",
@@ -107675,13 +107617,14 @@ var addProductToCart = function addProductToCart(_ref3, _ref4) {
   var commit = _ref3.commit;
   var product = _ref4.product,
       quantity = _ref4.quantity,
-      price = _ref4.price;
+      price = _ref4.price,
+      avilableTarget = _ref4.avilableTarget;
   commit("ADD_TO_CART", {
     product: product,
     quantity: quantity,
-    price: price
-  });
-  console.log("action done", price, "from action"); //   axios.post("http://127.0.0.1:8000/api/cart", {
+    price: price,
+    avilableTarget: avilableTarget
+  }); //   axios.post("http://127.0.0.1:8000/api/cart", {
   //     product_id: product.id,
   //     quantity,
   //   });
@@ -107692,10 +107635,11 @@ var getCartItems = function getCartItems(_ref5) {
     commit("SET_CART", response.data);
   });
 };
-var deleteCartItem = function deleteCartItem(_ref6, product) {
+var deleteCartItem = function deleteCartItem(_ref6, index) {
   var commit = _ref6.commit;
-  //   axios.delete(`http://127.0.0.1:8000/api/cart/${product.id}`);
-  commit("DELETE_PRODUCT", product);
+  console.log(index); //   axios.delete(`http://127.0.0.1:8000/api/cart/${product.id}`);
+
+  commit("DELETE_PRODUCT", index);
 };
 var decreaseProduct = function decreaseProduct(_ref7, _ref8) {
   var commit = _ref7.commit;
@@ -107732,7 +107676,7 @@ var cartItemCount = function cartItemCount(state) {
 var cartTotalPrice = function cartTotalPrice(state) {
   var total = 0;
   state.cart.forEach(function (item) {
-    total += item.product.L_price * item.quantity;
+    total += item.price * item.quantity;
   });
   return total;
 };
@@ -107798,37 +107742,45 @@ var SET_PRODUCT = function SET_PRODUCT(state, product) {
 var ADD_TO_CART = function ADD_TO_CART(state, _ref) {
   var product = _ref.product,
       quantity = _ref.quantity,
-      price = _ref.price;
-  console.log("state push done", price, "price from mutations");
+      price = _ref.price,
+      avilableTarget = _ref.avilableTarget;
+  var ckeckAvaiable = 0;
   var check = false;
   var productInCart = state.cart.find(function (item) {
-    if (item.product.id == product.id) {
-      check = true;
-      return item.product;
-    } else {
-      check = false;
+    if (item.avilableTarget >= 2) {
+      ckeckAvaiable = item.avilableTarget;
+      console.log("القطعالمتوفرة", item.avilableTarget);
+
+      if (item.product.id == product.id && item.price == price) {
+        check = true;
+        return item.product;
+      } else {
+        check = false;
+      }
     }
   });
 
-  if (check == true) {
-    productInCart.quantity++;
-  }
+  if (ckeckAvaiable >= 0) {
+    if (check == true) {
+      productInCart.quantity++;
+      productInCart.avilableTarget--;
+    }
 
-  if (check == false) {
-    state.cart.push({
-      product: product,
-      quantity: quantity,
-      price: price
-    });
+    if (check == false) {
+      state.cart.push({
+        product: product,
+        quantity: quantity,
+        price: price,
+        avilableTarget: avilableTarget
+      });
+    }
   }
 };
 var SET_CART = function SET_CART(state, cartItems) {
   state.cart = cartItems;
 };
-var DELETE_PRODUCT = function DELETE_PRODUCT(state, product) {
-  state.cart = state.cart.filter(function (item) {
-    return item.product.id !== product.id;
-  });
+var DELETE_PRODUCT = function DELETE_PRODUCT(state, index) {
+  return state.cart.splice(index, 1);
 };
 var DECREASE_PRODUCT = function DECREASE_PRODUCT(state, _ref2) {
   var product = _ref2.product,

@@ -61,7 +61,7 @@ const messages = {
             signup:
                 "Sign up for a notification email when new limited artworks are released.",
             Newsletter: "Newsletter",
-            SUBSCRIBE: "SUBSCRIBE",
+            SUBSCRIBE: "join us",
             others: "Others",
             company: "Company",
             Limitworks: "Limitworks",
@@ -72,12 +72,12 @@ const messages = {
             // productslider
             size:"Size",
             productDetails:"Product Details ",
-            shipping:"Shipping", 
-            left:"Left",   
+            shipping:"Shipping",
+            left:"Left",
             imgdetails:"Img Details",
             limitedEdition:"Limited Edition",
-            
-        
+
+
         //    cart
             checkout:"CheckOut",
             total:"Total Price",
@@ -87,7 +87,7 @@ const messages = {
             // footer
             logo:"Website Name",
             lorem:"lorem text",
-            
+
         }
     },
     ar: {
@@ -135,10 +135,10 @@ const messages = {
                 // productslider
                 size:"الحجم",
                 productDetails:" تفاصيل المنتج",
-                shipping:"الشحن", 
-                left:"الباقى",   
+                shipping:"الشحن",
+                left:"الباقى",
                 imgdetails:"تفاصيل المنتج",
-                limitedEdition:"الطبعات المحدودة",    
+                limitedEdition:"الطبعات المحدودة",
                 DescriptionEdition:"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quae fugit minima nemo corporis eligendi voluptas quidem eius suscipit dignissimos recusandae soluta alias, provident ipsum officia, tempore laboriosam neque esse cupiditate!",
             // cart translation
             checkout:"شراء الان",

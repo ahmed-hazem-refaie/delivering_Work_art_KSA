@@ -23,7 +23,7 @@
                                         <div class="triangle"></div>
                                         <h6>{{palettesArtist.name}}  | ${{palettesArtist.L_price}}</h6>
                                         <span><span class="text-success">{{palettesArtist.L_copies}}</span>/{{palettesArtist.L_avalible}} {{ $t("message.left") }}</span>
-                                        <button  @click="addToCart(palettesArtist)"  class="form-control btn btn-info border-0">{{ $t("message.cart") }}</button>
+                                        <!-- <button  @click="addToCart(palettesArtist)"  class="form-control btn btn-info border-0">{{ $t("message.cart") }}</button> -->
                                     </div>
                                 </div>
                             </div>
@@ -69,18 +69,18 @@
                         <div class="mb-3 mt-2"> <span>silkscreen</span></div>
                         <div>
 
-                            <v-btn class="mb-2 size_btn small"  :class="{ active_btn : active_el == 1 }" v-if="S_copies>0"  @click="small(1,S_price)">S</v-btn>
+                            <v-btn class="mb-2 size_btn small"  :class="{ active_btn : active_el == 1 }" v-if="S_copies>0"  @click="small(1,S_price,S_avalible)">S</v-btn>
                             <v-btn class="mb-2 size_btn small" style="cursor: not-allowed;background-color:#737373;color:#fff;border:none" v-else >Empty</v-btn>
-                            <v-btn class="mb-2 size_btn medium" :class="{ active_btn : active_el == 2 }" v-if="M_copies>0" @click="medium(2,M_price)">M</v-btn>
+                            <v-btn class="mb-2 size_btn medium" :class="{ active_btn : active_el == 2 }" v-if="M_copies>0" @click="medium(2,M_price, M_avalible)">M</v-btn>
                             <v-btn class="mb-2 size_btn small" style="cursor: not-allowed;background-color:#737373;color:#fff;border:none" v-else >Empty</v-btn>
-                            <v-btn class="mb-2 size_btn larg" :class="{ active_btn : active_el == 3 }" v-if="L_copies>0" @click="larg(3,L_price)">L</v-btn>
+                            <v-btn class="mb-2 size_btn larg" :class="{ active_btn : active_el == 3 }" v-if="L_copies>0" @click="larg(3,L_price,L_avalible )">L</v-btn>
                             <v-btn class="mb-2 size_btn small" style="cursor: not-allowed;background-color:#737373;color:#fff;border:none" v-else >Empty</v-btn>
                             <h3 class="mt-4 mb-4" v-if="active_el==1">30x40cm (12x16") <strong style="float:right">{{S_copies}}/{{S_avalible}}  {{ $t("message.left") }}</strong></h3>
                             <h3 class="mt-4 mb-4" v-if="active_el==2">50x66.5cm (20x26") <strong style="float:right">{{M_copies}}/{{M_avalible}}  {{ $t("message.left") }}</strong></h3>
                             <h3 class="mt-4 mb-4" v-if="active_el==3">70x93.5cm (28x37") <strong style="float:right">{{L_copies}}/{{L_avalible}}  {{ $t("message.left") }}</strong></h3>
                             <div style="clear:both"></div>
                         </div>
-                        <button @click="  addtocart(cardId,priceTarget)" class="btn add-button addToCart "
+                        <button @click="  addtocart(cardId,priceTarget, avilableTarget)" class="btn add-button addToCart "
 
 
 
@@ -192,7 +192,8 @@ export default {
             sizing_details:'',
             name:'',
             cardId:'',
-            priceTarget:''
+            priceTarget:'',
+            avilableTarget:''
 
 
         }
@@ -322,7 +323,8 @@ export default {
         })
         .catch(error => console.log(error.response.data))
         },
-        small(el,price){
+        small(el,price,avilable){
+            this.avilableTarget=avilable;
             this.active_el = el;
             this.priceTarget=price
 
@@ -330,13 +332,15 @@ export default {
             $(".active>.content").css({width:"78%",margin:"7px 0"})
 
         },
-        medium(el,price){
+        medium(el,price,avilable){
+            this.avilableTarget=avilable;
             this.active_el = el;
             this.priceTarget=price
             $(".active>.details_img").css({width:"88%",height:"200px"})
             $(".active>.content").css({width:"88%"})
         },
-        larg(el,price){
+        larg(el,price,avilable){
+            this.avilableTarget=avilable;
             this.active_el = el;
             this.priceTarget=price
             $(".active>.details_img").css({width:"100%",height:"250px"})
@@ -365,8 +369,8 @@ export default {
                 $(this).addClass('active').siblings().removeClass('active');
             });
         },
-        addtocart($id,price){
-            console.log(price)
+        addtocart($id,price,avilableTarget){
+            console.log(price,"avaliable",avilableTarget)
 
             axios.post('/api/addtocart?id=' + $id)
             .then(res=>{
@@ -380,7 +384,8 @@ export default {
             this.$store.dispatch('addProductToCart',{
                  product,
                 quantity:1,
-                price:price
+                price:price,
+                avilableTarget
 
             })
             }

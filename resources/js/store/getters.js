@@ -5,7 +5,7 @@ export const cartItemCount = (state)=>{
 export const cartTotalPrice = (state)=>{
     let total=0;
     state.cart.forEach(item => {
-        total+=item.product.L_price * item.quantity;
+        total+=item.price * item.quantity;
     });
     return total
 

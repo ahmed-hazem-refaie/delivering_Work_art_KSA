@@ -14,9 +14,9 @@ export const getProduct = ({ commit }, productId) => {
     });
 };
 
-export const addProductToCart = ({ commit }, { product, quantity, price }) => {
-  commit("ADD_TO_CART", { product, quantity, price });
-  console.log("action done",price, "from action")
+export const addProductToCart = ({ commit }, { product, quantity, price ,avilableTarget}) => {
+  commit("ADD_TO_CART", { product, quantity, price,avilableTarget });
+
 
 //   axios.post("http://127.0.0.1:8000/api/cart", {
 //     product_id: product.id,
@@ -30,9 +30,10 @@ export const getCartItems = ({ commit }) => {
   });
 };
 
-export const deleteCartItem = ({ commit }, product) => {
+export const deleteCartItem = ({ commit }, index) => {
+    console.log(index)
 //   axios.delete(`http://127.0.0.1:8000/api/cart/${product.id}`);
-  commit("DELETE_PRODUCT", product);
+  commit("DELETE_PRODUCT", index);
 };
 
 
