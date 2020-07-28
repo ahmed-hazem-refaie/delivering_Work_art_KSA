@@ -8,7 +8,7 @@ export const SET_PRODUCT = (state, product) => {
     state.product = product;
 };
 // we size
-export const ADD_TO_CART = (state, { product, quantity, price,avilableTarget,sizeTarget }) => {
+export const ADD_TO_CART = (state, { product, quantity, price,avilableTarget,sizeTarget,sizeCm }) => {
 
 
 
@@ -43,7 +43,8 @@ export const ADD_TO_CART = (state, { product, quantity, price,avilableTarget,siz
             quantity,
             price,
             avilableTarget,
-            sizeTarget
+            sizeTarget,
+            sizeCm
         });
 
 

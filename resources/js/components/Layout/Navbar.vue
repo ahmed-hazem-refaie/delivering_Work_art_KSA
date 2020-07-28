@@ -81,7 +81,7 @@
                                 </div>
                                 <div class="col-md-sm-8 ml-3">
                                     <span> <strong>{{ item.product.name }}</strong></span>
-                                     <h6  style="font-size:14px">{{ item.sizeTarget }}</h6>
+                                     <h6  style="font-size:14px">{{ item.sizeTarget }} - {{item.sizeCm}} </h6>
                                     <h6>{{ item.quantity }} x ${{item.price}}</h6>
                                 </div>
                                   <div>
