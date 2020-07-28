@@ -39,25 +39,48 @@ class PaletteAPIController extends AppBaseController
     {
         $artists = Artist::all();
         $palettesSlider = Palette::all();
+
         return response()->json(['artists' => $artists,'palettesSlider' =>$palettesSlider]);
-       
+
+    }
+
+        /**
+     * Display a listing of the Palette.
+     * GET|HEAD /palettes
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function hover($id=null )
+    {
+        $palette = Palette::find($id);
+        if($palette)
+        {
+           $hove_image=  $palette->images->first();
+            return response()->json([ 'status'=>true,'hover_image'=>$hove_image]  );
+
+        }else
+        return response()->json([ 'status'=>false,'error'=>'error acccured']  );
+
+
+
     }
     public function getReviews(){
         return Review::latest()->paginate(3);
         // return response()->json(['review' => $review]);
     }
     public function Palettes(Request $request){
-        
+
 
         $palettesArtists = Palette::where('artist_id',$request->id)->limit(3)->get();
         $artists = Artist::all();
-        $palettes = Palette::where('artist_id',$request->id)->limit(6)->get();     
+        $palettes = Palette::where('artist_id',$request->id)->limit(6)->get();
         return response()->json([ 'palettesArtists' =>$palettesArtists,'palettes' =>$palettes,'artists' => $artists]);
     }
     public function viewMinPalettes(Request $request){
-        
-        $palettes = Palette::where('id',$request->id)->get(); 
-        $minPalettes = Paletteimage::where('palatte_id',$request->id)->limit(6)->get(); 
+
+        $palettes = Palette::where('id',$request->id)->get();
+        $minPalettes = Paletteimage::where('palatte_id',$request->id)->limit(6)->get();
         return response()->json(['minPalettes' => $minPalettes,'palettes' =>$palettes]);
     }
     public function addtocart(Request $request) {
@@ -98,7 +121,7 @@ class PaletteAPIController extends AppBaseController
         return $this->sendResponse($palette->toArray(), 'Palette saved successfully');
     }
 
-    
+
     /**
      * Display the specified Palette.
      * GET|HEAD /palettes/{id}
@@ -109,8 +132,8 @@ class PaletteAPIController extends AppBaseController
      */
     public function show(Request $request)
     {
-        $palettes = Palette::where('artist_id',$request->id)->get();     
-        return response()->json(['palettes' =>$palettes]);     
+        $palettes = Palette::where('artist_id',$request->id)->get();
+        return response()->json(['palettes' =>$palettes]);
     }
 
     /**

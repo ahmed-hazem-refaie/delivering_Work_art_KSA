@@ -287,9 +287,12 @@ nav.navbar {
     display: none;
     width: 100%;
 }
-.product-grid-item__image:hover img {
+.product-grid-item__image:hover .back {
     /* transform: scale(1.2); */
-    transform: translate(-50%, -40%);
+    /* transform: translate(-50%, -40%); */
+    display: block;
+    z-index: 2;
+
 }
 
 .product-grid-item .product-grid-item__tags .cms-special-description {
@@ -563,7 +566,7 @@ footer a {
     font-weight: 400;
     line-height: 2;
     margin: 0 0 10px;
-  
+
 }
 .footer-col-2 p {
     font-size: 15px;

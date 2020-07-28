@@ -17,14 +17,14 @@ class CheckPromo extends Controller
     public function check_promo(Request $request)
     {
 
-        $discount = Discount::where('code', '=', $request->code)->first();
-        if($discount)
-   {
-    return response()->json(['status'=>true,'data'=>$discount,'percentage'=>$discount->discount_percentage]);
-   }
-   else
-   {
-    return response()->json(['status'=>false,'message'=>'code not found']);
-   }
-    }
+                $discount = Discount::where('code', '=', $request->code)->first();
+                if($discount)
+        {
+            return response()->json(['status'=>true,'data'=>$discount,'percentage'=>$discount->discount_percentage]);
+        }
+        else
+        {
+            return response()->json(['status'=>false,'message'=>'code not found']);
+        }
+    }a
 }

@@ -8,11 +8,13 @@
         </h2>
         <div class="swiper-container mt-5">
             <div class="swiper-wrapper">
-              <div class="swiper-slide ml-1" v-for="data in sliderPalettes" :key="data.id">
+              <div @mouseover="hover(data.id)" class="swiper-slide " v-for="data in sliderPalettes" :key="data.id">
                 <div class="product-grid-item">
                     <div class="product-grid-item__image">
                         <a class="product-grid-item__imagewrapper" href="/products/son-this-is-the-universe" data-product-handle="son-this-is-the-universe" data-product-quantity="48">
                             <img class="front" :src="data.img" style="height:100%">
+                            <img class="back" :src="image_hover" style="height:100%">
+
                         </a>
                         <div class="product-grid-item__variants">
                             <span>Size</span>
@@ -54,18 +56,22 @@
     export default {
         data(){
             return{
-                sliderPalettes:[]
+                sliderPalettes:[],
+                image_hover:'',
             }
         },
     created() {
 
+
       axios.get('/api/palettes')
       .then(response =>{
           this.artists = response.data.artists
-          this.sliderPalettes = response.data.palettesSlider
+          this.sliderPalettes = response.data.palettesSlider;
+
 
       })
       .catch(error => console.log(error.response.data))
+
     },
         mounted(){
             var swiper = new Swiper('.swiper-container', {
@@ -76,8 +82,27 @@
                     el: '.swiper-pagination',
                     clickable: true,
                 },
+                observer:true,
+                observerParents:true
             });
+            swiper.update();
+        },
+    methods:{
+        hover(id=null){
+                axios.get('/api/hover/'+id).then(res=>{
+
+                    if(res.data.status)
+                    {
+                        this.image_hover=res.data.hover_image.img;
+                    }else{
+                        console.log(res.data);
+
+                    }
+                }).catch(e=>{console.log(e.data);
+                })
         }
+    }
+
     }
 </script>
 

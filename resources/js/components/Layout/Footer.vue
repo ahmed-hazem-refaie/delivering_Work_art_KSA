@@ -74,7 +74,32 @@
                                         </button>
                                     </div>
 
-                                    <form action="" method="">
+
+
+                            <div   v-if="errors.length > 0 && !message" class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    <strong>Sorry!</strong> You should check in on some of those fields below.
+                                    <br>
+                                    <ul >
+                                        <li v-for="item in errors">
+                                            {{ item }}
+                                        </li>
+                                    </ul>
+
+
+
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                            </div>
+                            <div   v-if=" message.length >0 " class="alert alert-warning alert-dismissible fade show" role="alert">
+                                  <h1> {{message}}</h1>
+
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                            </div>
+
+                                    <form @submit.prevent="send">
                                         <!-- @csrf -->
 
                                         <div id='consmodal' class="modal-body mx-3 text-dark">
@@ -84,8 +109,8 @@
 
                                                   <label data-error="wrong" v-if="$i18n.locale == 'en'" data-success="right" for="defaultForm-email">{{ $t("message.name") }}</label>
                                                 <label data-error="wrong" v-else style="float:right" data-success="right" for="defaultForm-email">{{ $t("message.name") }}</label>
-                                                <input  type="text" class="form-control validate" v-if="$i18n.locale == 'en'" name="username">
-                                                <input  type="text" class="form-control validate" v-else dir="rtl" name="username">
+                                                <input   v-model="form.name" type="text" class="form-control validate" v-if="$i18n.locale == 'en'" >
+                                                <input  v-model="form.name" type="text" class="form-control validate" v-else dir="rtl" >
 
 
                                             </div>
@@ -95,8 +120,8 @@
 
                                                  <label data-error="wrong" data-success="right" v-if="$i18n.locale == 'en'" for="defaultForm-email">{{ $t("message.email") }}</label>
                                                 <label data-error="wrong" data-success="right" v-else style="float:right" for="defaultForm-email">{{ $t("message.email") }}</label>
-                                                <input  type="email" class="form-control validate" v-if="$i18n.locale == 'en'" name="email">
-                                                <input  type="email" class="form-control validate" v-else dir="rtl" name="email">
+                                                <input  type="email" class="form-control validate" v-if="$i18n.locale == 'en'"  v-model="form.email">
+                                                <input  type="email" class="form-control validate" v-else dir="rtl"  v-model="form.email" >
 
 
                                             </div>
@@ -106,14 +131,14 @@
 
                                                    <label data-error="wrong" data-success="right" v-if="$i18n.locale == 'en'" for="defaultForm-pass">{{ $t("message.phone") }}</label>
                                                 <label data-error="wrong" data-success="right" v-else style="float:right" for="defaultForm-pass">{{ $t("message.phone") }}</label>
-                                                <input  type="text" name="phone" v-if="$i18n.locale == 'en'" class="form-control validate">
-                                                <input  type="text" name="phone" v-else dir="rtl" class="form-control validate">
+                                                <input  type="text"  v-model="form.phone" v-if="$i18n.locale == 'en'" class="form-control validate">
+                                                <input  type="text"  v-model="form.phone" v-else dir="rtl" class="form-control validate">
 
 
                                             </div>
                                         </div>
                                         <div class="modal-footer d-flex justify-content-center">
-                                            <button class="btn btn-info btn-block">{{ $t("message.submit") }}</button>
+                                            <button type="submit" class="btn btn-info btn-block">{{ $t("message.submit") }}</button>
                                         </div>
                                     </form>
 
@@ -146,6 +171,35 @@
 
 export default {
 
+            data:()=>({
+                form:{phone:'',name:'',email:''},
+                errors:[],
+                message:''
+            }),
+            methods:{
+                send(){
+            axios.post('/api/artist-request',this.form)
+            .then(res =>{
+
+                if (!res.data.status)
+                {
+                    console.log(res.data);
+                    this.errors = res.data.errors;
+
+
+                }else{
+                    console.log(res.data);
+                    this.message = 'Successful';
+                    this.form.phone="";
+                    this.form.name="";
+                    this.form.email="";
+
+
+                }
+            })
+            .catch(error => this.errors = error.response.data.errors)
+                }
+            }
 }
 
 

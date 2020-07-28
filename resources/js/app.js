@@ -62,7 +62,7 @@ const messages = {
             signup:
                 "Sign up for a notification email when new limited artworks are released.",
             Newsletter: "Newsletter",
-            SUBSCRIBE: "join us",
+            SUBSCRIBE: "Join Us",
             others: "Others",
             company: "Company",
             Limitworks: "Limitworks",
@@ -102,7 +102,10 @@ const messages = {
             subtotal:"Sub Total",
             total:"Total",
             calulated:"Calculated at next",
-            toshipping:"Continue to Shipping"
+            toshipping:"Continue to Shipping",
+            select_size:'Please Select Size',
+            empty:'EMPTY',
+
 
 
         }
@@ -179,7 +182,11 @@ const messages = {
              subtotal:"الخصم",
              total:"السعر الإجمالى",
              calulated:"الحساب سيتم الكرة القادة ",
-             toshipping:"متابعة الشراء"
+             toshipping:"متابعة الشراء",
+             select_size:'من فضلك اختر الحجم',
+             empty:'فارغ',
+
+
 
         }
     }

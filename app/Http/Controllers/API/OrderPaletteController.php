@@ -5,7 +5,7 @@ namespace App\Http\Controllers\API;
 use App\OrderPalette;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use PragmaRX\Countries\Package\Countries as Countries;
 
 class OrderPaletteController extends Controller
 {
@@ -26,7 +26,21 @@ class OrderPaletteController extends Controller
      */
     public function create()
     {
-        //
+
+
+    }
+
+
+        /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function countries()
+    {
+
+        $countries = Countries::all();
+        return response()->json(['countries'=>$countries]);
     }
 
     /**

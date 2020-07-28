@@ -6,14 +6,14 @@
         <hr>
         <div class="rating" v-if="$i18n.locale == 'en'">
             <span class="fa fa-star text-warning" v-for="i in 5" :key="i.id"></span>
-            <span class="ml-2">{{reviewscount}} {{ $t("message.review") }}</span>
+            <span id="reviewscount" class="ml-2">{{reviewscount}} {{ $t("message.review") }}</span>
             <v-btn style="background-color:black;color:#fff;float:right" @click="review = !review"><i class="fa fa-edit mr-2"></i>{{ $t("message.writereview") }}</v-btn>
             <div style="clear:both"></div>
         </div>
         <div class="rating" v-else>
             <v-btn style="background-color:black;color:#fff;" @click="review = !review"><i class="fa fa-edit mr-2"></i>{{ $t("message.writereview") }}</v-btn>
             <span class="fa fa-star text-warning" style="float:right" v-for="i in 5" :key="i.id"></span>
-            <span class="mr-2" style="float:right">{{reviewscount}} {{ $t("message.review") }}</span>
+            <span id="reviewscount" class="mr-2" style="float:right">{{reviewscount}} {{ $t("message.review") }}</span>
             <div style="clear:both"></div>
 
         </div>
@@ -28,8 +28,8 @@
             <v-rating v-if="$i18n.locale == 'en'" v-model="form.rate" color="orange" medium></v-rating>
             <v-rating v-else style="float:right;" dir="rtl" v-model="form.rate" color="orange" medium></v-rating>
             <div style="clear:both"></div>
-            <v-form class="form" v-if="$i18n.locale == 'en'" @submit.prevent="send">
-                <v-row>
+            <v-form class="form" v-if="$i18n.locale == 'en'" @submit.prevent="send" v-model="valid">
+                <v-row >
                     <v-col
                     cols="12"
                     sm="12"
@@ -66,12 +66,13 @@
                         v-model="form.email"
                         label="E-mail"
                         required
+                        :rules="emailRules"
                     ></v-text-field>
                     </v-col>
                 </v-row>
                 <v-btn color="#f2efeb" style="margin-left:12px;margin-bottom:10px" type="submit">Post</v-btn>
             </v-form>
-            <v-form class="form" v-else @submit.prevent="send">
+            <v-form class="form" v-else @submit.prevent="send" v-model="valid">
                 <v-row>
                     <v-col
                     cols="12"
@@ -113,6 +114,7 @@
                         label="اﻷيميل"
                         required
                         dir="rtl"
+                         :rules="emailRules"
                     ></v-text-field>
                     </v-col>
                 </v-row>
@@ -121,14 +123,14 @@
             </v-form>
         </div>
           <v-card class="card" v-for="(review,index) in reviews" :key="index">
-              
+
                 <div class="userimg">
                     <div class="userimg2">
                         <span>{{review.name.charAt(0).toUpperCase()}}</span>
                     </div>
-                    
+
                 </div>
-                <div style="width:95%;display:inline-block"> 
+                <div style="width:95%;display:inline-block">
                     <v-card-subtitle class="pb-0">{{review.name}} <span style="float:right">{{review.created_at}}</span></v-card-subtitle>
                     <div style="clear:both"></div>
                     <span class="ml-2">
@@ -181,19 +183,12 @@
             ></v-pagination>
         </div>
     </div>
-  
+
 </template>
-لا لسااااااااااااااااا
 
-هو كان فاضل بس ابعت الاوبجيكت وخلاص 
-تمام اشطا اشطا جدا تسلم يا كبير
-تماااااااااام
-
-بس استنى 
-الاعلام فين
 <script>
 export default {
-    data: () => ({        
+    data: () => ({
         review:false,
         form:{
             rate: 0,
@@ -208,16 +203,31 @@ export default {
         meta:0,
         reviews:[],
         current_page:0,
-        reviewscount:''
+        count2:0,
+        reviewscount:'',
+              emailRules: [
+        v => !!v || 'E-mail is required',
+        v => /.+@.+/.test(v) || 'E-mail must be valid',
+      ],
+        valid: false,
+
     }),
         methods:{
         send(){
             axios.post('/reviews',this.form)
-            .then(res =>{ 
+            .then(res =>{
                 this.review=false
                 this.reviews.unshift(res.data.review)
-                this.form='';
-            })
+                this.form.rate=0;
+                this.form.name="";
+                this.form.email="";
+                this.form.title="";
+                this.form.body="";
+
+                this.count2=parseInt( $("#reviewscount")[0].innerText) ;
+                $("#reviewscount")[0].innerText = ++this.count2;
+
+})
             .catch(error => this.errors = error.response.data.errors)
         },
         changePage(page){
@@ -235,7 +245,7 @@ export default {
             axios.post('/like?id=' +id)
             .then(res => {
                 $('#'+id)[0].innerText = res.data.review.like_counter
-                event.target.style.color="blue"               
+                event.target.style.color="blue"
             })
             .catch(error => this.errors = error.response.data.errors)
         },
@@ -291,6 +301,6 @@ export default {
 .v-card>.userimg {
     border-top-left-radius: none !important;
     border-top-right-radius: none !important;
-    
+
 }
 </style>

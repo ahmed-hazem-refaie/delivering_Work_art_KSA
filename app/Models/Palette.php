@@ -37,7 +37,7 @@ class Palette extends Model
     use SoftDeletes;
 
     public $table = 'palettes';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -101,8 +101,12 @@ class Palette extends Model
      * @var array
      */
     public static $rules = [
-        
+
     ];
+    public function images()
+    {
+        return $this->hasMany('App\Models\Paletteimage','palatte_id');
+    }
     // public function artist(){
     //     return $this->belongsTo(Artist::class,"artist_id");
     // }
