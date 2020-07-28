@@ -419,23 +419,23 @@ nav.navbar {
 }
 
 /* Swiper Style */
-.swiper-pagination {
+/* .swiper-pagination {
     position: static;
-}
+} */
 .swiper-pagination-bullet {
     background-color: #757373;
 }
 .swiper-pagination-bullet-active {
     background: #8a8888;
 }
-.swiper-slide {
+/* .swiper-slide {
     width: 80% !important;
 }
 @media (min-width: 768px) {
     .swiper-slide {
         width: 33.33% !important;
     }
-}
+} */
 
 /* Start Home Video */
 header {

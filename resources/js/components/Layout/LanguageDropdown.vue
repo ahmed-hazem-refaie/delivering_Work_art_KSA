@@ -17,7 +17,7 @@ v-for="(locale, index) in locales"  :key="index"
          @click.prevent="setLocale(locale)"
         >
           <v-list-item-title class="mb-3">
-              {{ locale }} <img style="width:40px; height:40px; border-radius:50%" :src="'images/'+locale+'.png'">
+              {{ locale }} <img style="width:20px; height:20px; border-radius:50%" :src="'images/'+locale+'.png'">
 
           </v-list-item-title>
         </v-list-item>

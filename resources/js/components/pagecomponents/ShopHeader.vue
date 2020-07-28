@@ -534,11 +534,13 @@ export default {
 
         }
         .carousel-item .header{
-            height: 1281px;
             overflow: scroll;
+            height: 1281px;
+
         }
         .carousel-item {
             height: 1281px;
+             overflow: scroll;
         }
     }
     .header_sm{
@@ -577,7 +579,8 @@ export default {
         transition: all 1s;
         height: 250px;
         /* box-shadow: 5px 5px 5px black; */
-        border: 10px solid #111;
+        border-top: 2px solid #111;
+        border-bottom: 2px solid #111;
         height: 200px;
     }
     .wrapper .details .content{
@@ -705,10 +708,10 @@ export default {
 }
 
 .rotate{
-   width: 189%;
-    position: absolute;
-    height: 3px;
-    transform: rotate(157deg);
+ width: 100%;
+    position: relative;
+    height: 82px;
+    transform: rotate(49deg);
     background: black;
 }
 </style>
