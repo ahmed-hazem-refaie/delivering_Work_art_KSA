@@ -684,4 +684,8 @@ this.cart.forEach(element => {
     width: 100%;
   }
 }
+
+.alert{
+    text-align: center;
+}
 </style>

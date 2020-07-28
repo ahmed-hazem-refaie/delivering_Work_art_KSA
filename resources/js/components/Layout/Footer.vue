@@ -238,14 +238,20 @@ export default {
     padding: 10px;
 }
 
-
+#modalLoginForms .modal-content .btn-info[data-v-78547fe5] {
+    color:white
+}
 .form-control{
     border: 1px solid #0c6bd1;
 
 }
+.alert {
+        text-align: center;
+}
+
 
 .modal-title-sign{
-     color:orangered;
+     color:white;
     font-size: 30px;
 }
 .modal-title-sign span{

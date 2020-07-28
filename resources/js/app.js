@@ -104,7 +104,7 @@ const messages = {
             calulated:"Calculated at next",
             toshipping:"Continue to Shipping",
             select_size:'Please Select Size',
-            empty:'EMPTY',
+            empty:'      ',
 
 
 
@@ -184,7 +184,7 @@ const messages = {
              calulated:"الحساب سيتم الكرة القادة ",
              toshipping:"متابعة الشراء",
              select_size:'من فضلك اختر الحجم',
-             empty:'فارغ',
+             empty:'      ',
 
 
 
