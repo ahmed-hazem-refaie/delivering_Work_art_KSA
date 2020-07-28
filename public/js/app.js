@@ -3942,7 +3942,7 @@ __webpack_require__.r(__webpack_exports__);
     $route: function $route(to, from) {
       var _this5 = this;
 
-      // this.addActive(this.$route.query.mydata)
+      this.addActive(this.$route.query.mydata);
       axios.get("/api/viewMinPalettes?id=" + this.$route.query.mydata).then(function (response) {
         _this5.minPalettes = response.data.minPalettes;
         console.log(_this5.$route.query.mydata);
@@ -4071,7 +4071,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     var swiper = new Swiper('.swiper-container', {
-      slidesPerView: 3,
+      slidesPerView: 2,
       spaceBetween: 30,
       freeMode: true,
       pagination: {
@@ -40727,7 +40727,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /*!
- * vue-i18n v8.18.2 
+ * vue-i18n v8.19.0 
  * (c) 2020 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -42853,7 +42853,7 @@ Object.defineProperty(VueI18n, 'availabilities', {
 });
 
 VueI18n.install = install;
-VueI18n.version = '8.18.2';
+VueI18n.version = '8.19.0';
 
 /* harmony default export */ __webpack_exports__["default"] = (VueI18n);
 
@@ -44585,7 +44585,7 @@ var render = function() {
                             "v-col",
                             {
                               staticClass: "d-flex",
-                              attrs: { cols: "12", sm: "4" }
+                              attrs: { cols: "12", sm: "8" }
                             },
                             [
                               _c("v-select", {
@@ -44600,33 +44600,6 @@ var render = function() {
                                     _vm.$set(_vm.form, "country", $$v)
                                   },
                                   expression: "form.country"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-col",
-                            {
-                              staticClass: "d-flex",
-                              attrs: { cols: "12", sm: "4" }
-                            },
-                            [
-                              _c("v-select", {
-                                attrs: {
-                                  "item-text": "name",
-                                  "item-value": "last",
-                                  items: _vm.item,
-                                  label: "governate",
-                                  outlined: ""
-                                },
-                                model: {
-                                  value: _vm.form.goverment,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.form, "goverment", $$v)
-                                  },
-                                  expression: "form.goverment"
                                 }
                               })
                             ],
@@ -44777,8 +44750,6 @@ var render = function() {
                   _vm._v(" "),
                   _c("hr"),
                   _vm._v(" "),
-                  _vm._m(1),
-                  _vm._v(" "),
                   _c(
                     "div",
                     { staticStyle: { "font-size": "20px", padding: "10px" } },
@@ -44806,7 +44777,7 @@ var render = function() {
             "div",
             { staticClass: "col-md-7" },
             [
-              _vm._m(2),
+              _vm._m(1),
               _vm._v(" "),
               _c(
                 "v-form",
@@ -45223,7 +45194,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("hr"),
                   _vm._v(" "),
-                  _vm._m(3),
+                  _vm._m(2),
                   _vm._v(" "),
                   _c(
                     "div",
@@ -45300,37 +45271,6 @@ var staticRenderFns = [
             )
           ]
         )
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "discount_text",
-        staticStyle: { color: "#737171", padding: "10px" }
-      },
-      [
-        _c("div", [
-          _c("span", [_vm._v("Sub Total")]),
-          _vm._v(" "),
-          _c("span", { staticStyle: { float: "right" } }, [_vm._v("$70.00")]),
-          _vm._v(" "),
-          _c("div", { staticStyle: { clear: "both" } })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "mt-3" }, [
-          _c("span", [_vm._v("Shipping")]),
-          _vm._v(" "),
-          _c("span", { staticStyle: { float: "right" } }, [
-            _vm._v("calculated at next")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticStyle: { clear: "both" } })
-        ])
       ]
     )
   },
@@ -45482,11 +45422,7 @@ var render = function() {
     _c("div", { staticClass: "row" }, [
       _c("img", {
         staticClass: "hero-image-md",
-        attrs: {
-          src:
-            "//cdn.shopify.com/s/files/1/3000/4362/files/desktop-hero-1_2048x.jpg?v=1592197390",
-          alt: "Fine art"
-        }
+        attrs: { src: _vm.data.image, alt: "Fine art" }
       }),
       _vm._v(" "),
       _c("div", { staticClass: "col-md-12" }, [
@@ -109052,19 +108988,19 @@ var cartTotalPrice = function cartTotalPrice(state) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./state */ "./resources/js/store/state.js");
 /* harmony import */ var _getters__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./getters */ "./resources/js/store/getters.js");
 /* harmony import */ var _mutations__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./mutations */ "./resources/js/store/mutations.js");
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./actions */ "./resources/js/store/actions.js");
 
 
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_6__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
 
 
 
 
-/* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_6__["default"].Store({
+/* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   state: _state__WEBPACK_IMPORTED_MODULE_2__["default"],
   getters: _getters__WEBPACK_IMPORTED_MODULE_3__,
   mutations: _mutations__WEBPACK_IMPORTED_MODULE_4__,

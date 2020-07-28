@@ -1,7 +1,7 @@
 <template>
    <div class="hero hero-classic">
     <div class="row">
-        <img class="hero-image-md" src="//cdn.shopify.com/s/files/1/3000/4362/files/desktop-hero-1_2048x.jpg?v=1592197390" alt="Fine art">
+        <img class="hero-image-md" :src="data.image"  alt="Fine art">
 
         <div class="col-md-12"    >
             <img style="width:100%;height:500px" class="hero-image-pc" :src="data.image" alt="Fine art">

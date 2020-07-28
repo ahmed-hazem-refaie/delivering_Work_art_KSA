@@ -79,10 +79,10 @@
               <v-col cols="12" md="12">
                 <v-text-field v-model="form.city" label="city" required></v-text-field>
               </v-col>
-              <v-col class="d-flex" cols="12" sm="4">
+              <v-col class="d-flex" cols="12" sm="8">
                 <v-select v-model="form.country" :items="item" label="country" outlined></v-select>
               </v-col>
-              <v-col class="d-flex" cols="12" sm="4">
+              <!-- <v-col class="d-flex" cols="12" sm="4">
                 <v-select
                   v-model="form.goverment"
 
@@ -92,7 +92,7 @@
                   label="governate"
                   outlined
                 ></v-select>
-              </v-col>
+              </v-col> -->
               <v-col cols="12" sm="4">
                 <v-text-field v-model="form.postcode" label="Post Code" required></v-text-field>
               </v-col>
@@ -131,18 +131,18 @@
             </v-form>
           </div>
           <hr />
-          <div class="discount_text" style="color:#737171;padding:10px">
-            <div>
+          <!-- <div class="discount_text" style="color:#737171;padding:10px"> -->
+            <!-- <div>
               <span>Sub Total</span>
               <span style="float:right">$70.00</span>
               <div style="clear:both"></div>
-            </div>
-            <div class="mt-3">
+            </div> -->
+            <!-- <div class="mt-3">
               <span>Shipping</span>
               <span style="float:right">calculated at next</span>
               <div style="clear:both"></div>
-            </div>
-          </div>
+            </div> -->
+          <!-- </div> -->
 
           <div style="font-size:20px;padding:10px">
             <span> Total Price : </span>

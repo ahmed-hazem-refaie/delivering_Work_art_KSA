@@ -75,7 +75,7 @@
     },
         mounted(){
             var swiper = new Swiper('.swiper-container', {
-                slidesPerView: 3,
+                slidesPerView: 2,
                 spaceBetween: 30,
                 freeMode: true,
                 pagination: {
@@ -83,7 +83,8 @@
                     clickable: true,
                 },
                 observer:true,
-                observerParents:true
+                observerParents:true,
+
             });
             swiper.update();
         },

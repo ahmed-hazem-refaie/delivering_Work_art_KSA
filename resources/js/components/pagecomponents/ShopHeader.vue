@@ -503,7 +503,7 @@ export default {
     watch:{
     $route (to, from){
 
-            // this.addActive(this.$route.query.mydata)
+            this.addActive(this.$route.query.mydata)
             axios.get("/api/viewMinPalettes?id=" + this.$route.query.mydata)
             .then(response =>{
 
