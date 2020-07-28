@@ -3077,12 +3077,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       images: ['//cdn.shopify.com/s/files/1/3000/4362/files/desktop-hero-1_2048x.jpg?v=1592197390', '//cdn.shopify.com/s/files/1/3000/4362/files/Augmented_Art_Hero_Desktop_2048x.png?v=1594004875', '//cdn.shopify.com/s/files/1/3000/4362/files/peach_desktop_final_post_2048x.jpg?v=1581001094', '//cdn.shopify.com/s/files/1/3000/4362/files/sepia_dekstop_final_post_2048x.jpg?v=1565183372'],
       selectedImage: null,
-      numbers: ""
+      numbers: "",
+      data: {}
     };
   },
   methods: {
@@ -3091,8 +3113,17 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
+    var _this = this;
+
     this.selectedImage = this.randomItem(this.images);
     this.numbers = Math.floor(Math.random() * 200) + 50;
+    axios.get('/api/homedata').then(function (result) {
+      if (result.data.status) {
+        _this.data = result.data.data;
+      }
+    })["catch"](function (err) {
+      console.log(err.data);
+    });
   }
 });
 
@@ -3121,8 +3152,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      data: ''
+    };
+  },
+  beforeCreate: function beforeCreate() {
+    var _this = this;
+
+    axios.get('/api/homedata').then(function (result) {
+      if (result.data.status) {
+        _this.data = "/" + result.data.data.video;
+      }
+    })["catch"](function (err) {
+      console.log(err.data);
+    });
+  }
+});
 
 /***/ }),
 
@@ -3644,25 +3691,36 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    axios.get('/api/palettes').then(function (response) {
-      _this.artists = response.data.artists;
-      _this.first = response.data.artists[0].id;
-      axios.get("/api/view?id=" + _this.first).then(function (response) {
-        _this.palettes = response.data.palettes;
-        _this.name = response.data.palettes[0].name, _this.cardId = response.data.palettes[0].id, _this.S_copies = response.data.palettes[0].S_copies, _this.S_avalible = response.data.palettes[0].S_avalible, _this.S_price = response.data.palettes[0].S_price, _this.M_copies = response.data.palettes[0].M_copies, _this.M_avalible = response.data.palettes[0].M_avalible, _this.M_price = response.data.palettes[0].M_price, _this.L_copies = response.data.palettes[0].L_copies, _this.L_avalible = response.data.palettes[0].L_avalible, _this.L_price = response.data.palettes[0].L_price, _this.sizing_details = response.data.palettes[0].sizing_details;
-        _this.palettesArtists = response.data.palettesArtists;
-        _this.firstpalettesArtists = response.data.palettesArtists[0].id;
-        axios.get("/api/viewMinPalettes?id=" + _this.firstpalettesArtists).then(function (response) {
-          _this.minPalettes = response.data.minPalettes;
+    if (this.$route.query.mydata) {
+      this.addActive(this.$route.query.mydata);
+      axios.get("/api/viewMinPalettes?id=" + this.$route.query.mydata).then(function (response) {
+        _this.minPalettes = response.data.minPalettes;
+        console.log(_this.$route.query.mydata);
+      })["catch"](function (error) {
+        return console.log(error.response.data);
+      });
+    } else {
+      axios.get('/api/palettes').then(function (response) {
+        _this.artists = response.data.artists;
+        _this.first = response.data.artists[0].id;
+        axios.get("/api/view?id=" + _this.first).then(function (response) {
+          _this.palettes = response.data.palettes;
+          _this.name = response.data.palettes[0].name, _this.cardId = response.data.palettes[0].id, _this.S_copies = response.data.palettes[0].S_copies, _this.S_avalible = response.data.palettes[0].S_avalible, _this.S_price = response.data.palettes[0].S_price, _this.M_copies = response.data.palettes[0].M_copies, _this.M_avalible = response.data.palettes[0].M_avalible, _this.M_price = response.data.palettes[0].M_price, _this.L_copies = response.data.palettes[0].L_copies, _this.L_avalible = response.data.palettes[0].L_avalible, _this.L_price = response.data.palettes[0].L_price, _this.sizing_details = response.data.palettes[0].sizing_details;
+          _this.palettesArtists = response.data.palettesArtists;
+          _this.firstpalettesArtists = response.data.palettesArtists[0].id;
+          axios.get("/api/viewMinPalettes?id=" + _this.firstpalettesArtists).then(function (response) {
+            _this.minPalettes = response.data.minPalettes;
+          })["catch"](function (error) {
+            return console.log(error.response.data);
+          });
         })["catch"](function (error) {
           return console.log(error.response.data);
         });
       })["catch"](function (error) {
         return console.log(error.response.data);
       });
-    })["catch"](function (error) {
-      return console.log(error.response.data);
-    });
+    } //////
+
   },
   computed: {
     cart: function cart() {
@@ -3876,6 +3934,21 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         return console.log(error);
       });
+    } //lklk
+
+  },
+  //method
+  watch: {
+    $route: function $route(to, from) {
+      var _this5 = this;
+
+      // this.addActive(this.$route.query.mydata)
+      axios.get("/api/viewMinPalettes?id=" + this.$route.query.mydata).then(function (response) {
+        _this5.minPalettes = response.data.minPalettes;
+        console.log(_this5.$route.query.mydata);
+      })["catch"](function (error) {
+        return console.log(error.response.data);
+      });
     }
   }
 });
@@ -4011,21 +4084,20 @@ __webpack_require__.r(__webpack_exports__);
     swiper.update();
   },
   methods: {
-    hover: function hover() {
+    hover: function hover(id) {
       var _this2 = this;
 
-      var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
       axios.get('/api/hover/' + id).then(function (res) {
-        if (res.data.status) {
+        // console.log(id,this.image_hover,'dssdsd',res.data);
+        if (res.data.hover_image) {
           _this2.image_hover = res.data.hover_image.img;
-          console.log(id, _this2.image_hover, 'dssdsd');
-        } else {
-          console.log(res.data);
+        } else {// console.log(res.data);
         }
       })["catch"](function (e) {
         console.log(e.data);
       });
-    }
+    },
+    showmore: function showmore(id) {}
   }
 });
 
@@ -8473,7 +8545,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#modalLoginForms .modal-content[data-v-78547fe5]{\r\n    /* background: linear-gradient(-45deg , white 50% , #0c6bd1 50%); */\r\n    font-weight: bold;\r\n    color: gray;\r\n    border:1px solid white;\r\n   /* border-radius: 40px; */\r\n    overflow: hidden;\n}\n.modal-header[data-v-78547fe5]{\r\n      background:#0c6bd1\n}\n#modalLoginForms .modal-content .fa[data-v-78547fe5]{\r\n color: #0c6bd1;\n}\n#modalLoginForms .modal-footer[data-v-78547fe5]{\r\n    padding: 0;\n}\n#modalLoginForms .md-form[data-v-78547fe5]{\r\n    padding: 13px;\n}\n#modalLoginForms .modal-content .btn-info[data-v-78547fe5]{\r\n    margin: 0;\r\n    border-radius: 0;\r\n    background: #0c6bd1;\r\n    padding: 10px;\n}\n.form-control[data-v-78547fe5]{\r\n    border: 1px solid #0c6bd1;\n}\n.modal-title-sign[data-v-78547fe5]{\r\n     color:orangered;\r\n    font-size: 30px;\n}\n.modal-title-sign span[data-v-78547fe5]{\r\n\r\n        color:white;\n}\n.modal-header .close[data-v-78547fe5]{\r\n    color: white;\n}\n.row[data-v-78547fe5]{\r\n    margin-left: 0;\r\n    margin-right: 0;\n}\r\n\r\n", ""]);
+exports.push([module.i, "\n#modalLoginForms .modal-content[data-v-78547fe5]{\n    /* background: linear-gradient(-45deg , white 50% , #0c6bd1 50%); */\n    font-weight: bold;\n    color: gray;\n    border:1px solid white;\n   /* border-radius: 40px; */\n    overflow: hidden;\n}\n.modal-header[data-v-78547fe5]{\n      background:#0c6bd1\n}\n#modalLoginForms .modal-content .fa[data-v-78547fe5]{\n color: #0c6bd1;\n}\n#modalLoginForms .modal-footer[data-v-78547fe5]{\n    padding: 0;\n}\n#modalLoginForms .md-form[data-v-78547fe5]{\n    padding: 13px;\n}\n#modalLoginForms .modal-content .btn-info[data-v-78547fe5]{\n    margin: 0;\n    border-radius: 0;\n    background: #0c6bd1;\n    padding: 10px;\n}\n.form-control[data-v-78547fe5]{\n    border: 1px solid #0c6bd1;\n}\n.modal-title-sign[data-v-78547fe5]{\n     color:orangered;\n    font-size: 30px;\n}\n.modal-title-sign span[data-v-78547fe5]{\n\n        color:white;\n}\n.modal-header .close[data-v-78547fe5]{\n    color: white;\n}\n.row[data-v-78547fe5]{\n    margin-left: 0;\n    margin-right: 0;\n}\n\n", ""]);
 
 // exports
 
@@ -40655,7 +40727,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /*!
- * vue-i18n v8.19.0 
+ * vue-i18n v8.18.2 
  * (c) 2020 kazuya kawaguchi
  * Released under the MIT License.
  */
@@ -42781,7 +42853,7 @@ Object.defineProperty(VueI18n, 'availabilities', {
 });
 
 VueI18n.install = install;
-VueI18n.version = '8.19.0';
+VueI18n.version = '8.18.2';
 
 /* harmony default export */ __webpack_exports__["default"] = (VueI18n);
 
@@ -45418,24 +45490,31 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("div", { staticClass: "col-md-12" }, [
-        _vm.selectedImage
-          ? _c("img", {
-              staticClass: "hero-image-pc",
-              attrs: { src: _vm.selectedImage, alt: "Fine art" }
-            })
-          : _vm._e(),
+        _c("img", {
+          staticClass: "hero-image-pc",
+          staticStyle: { width: "100%", height: "500px" },
+          attrs: { src: _vm.data.image, alt: "Fine art" }
+        }),
         _vm._v(" "),
         _c(
           "div",
           { staticClass: "hero-content" },
           [
-            _c("p", { staticClass: "hero-subtitle" }, [
-              _vm._v(_vm._s(_vm.$t("message.introducing")))
-            ]),
+            _vm.$i18n.locale == "en"
+              ? _c("p", { staticClass: "hero-subtitle" }, [
+                  _vm._v(_vm._s(_vm.data.word1_en))
+                ])
+              : _c("p", { staticClass: "hero-subtitle" }, [
+                  _vm._v(_vm._s(_vm.data.word1_ar))
+                ]),
             _vm._v(" "),
-            _c("h3", { staticClass: "hero-title" }, [
-              _vm._v(_vm._s(_vm.$t("message.fineart")))
-            ]),
+            _vm.$i18n.locale == "en"
+              ? _c("h3", { staticClass: "hero-title" }, [
+                  _vm._v(_vm._s(_vm.data.word2_en))
+                ])
+              : _c("h3", { staticClass: "hero-title" }, [
+                  _vm._v(_vm._s(_vm.data.word2_ar))
+                ]),
             _vm._v(" "),
             _c("div", { staticClass: "hero-counter" }, [
               _c("span", { staticClass: "hero-counter__live" }, [
@@ -45497,27 +45576,16 @@ var render = function() {
   return _c("header", { staticClass: "about-us" }, [
     _c("div", { staticClass: "overlay" }),
     _vm._v(" "),
-    _c(
-      "video",
-      {
-        attrs: {
-          playsinline: "playsinline",
-          autoplay: "autoplay",
-          muted: "muted",
-          loop: "loop"
-        },
-        domProps: { muted: true }
+    _c("video", {
+      attrs: {
+        src: _vm.data,
+        playsinline: "playsinline",
+        autoplay: "autoplay",
+        muted: "muted",
+        loop: "loop"
       },
-      [
-        _c("source", {
-          attrs: {
-            src:
-              "https://cdn.shopify.com/s/files/1/3000/4362/files/16-9Desktop.mp4?v=1592998652",
-            type: "video/mp4"
-          }
-        })
-      ]
-    ),
+      domProps: { muted: true }
+    }),
     _vm._v(" "),
     _c(
       "div",
@@ -47018,64 +47086,76 @@ var render = function() {
               },
               [
                 _c("div", { staticClass: "product-grid-item" }, [
-                  _c("div", { staticClass: "product-grid-item__image" }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "product-grid-item__imagewrapper",
-                        attrs: {
-                          href: "/products/son-this-is-the-universe",
-                          "data-product-handle": "son-this-is-the-universe",
-                          "data-product-quantity": "48"
+                  _c(
+                    "div",
+                    {
+                      staticClass: "product-grid-item__image",
+                      on: {
+                        click: function($event) {
+                          return _vm.showmore(data.id)
                         }
-                      },
-                      [
-                        _c("img", {
-                          staticClass: "front",
-                          staticStyle: { height: "100%" },
-                          attrs: { src: data.img }
-                        }),
-                        _vm._v(" "),
-                        _c("img", {
-                          staticClass: "back",
-                          staticStyle: { height: "100%" },
-                          attrs: { src: _vm.image_hover }
-                        })
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _vm._m(0, true),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "product-grid-item__tags" }, [
-                      _c("div", { staticClass: "cms-special-description" }, [
-                        _c(
-                          "span",
-                          { staticClass: "cms-special-label color-4" },
-                          [_vm._v(_vm._s(data.name))]
-                        ),
-                        _vm._v(" "),
-                        _c("p", [
-                          _vm._v(
-                            "Walltones-studio added diamond dust to this print for a glittering effect that makes the artwork even more enticing. Additionally, keep in mind that each artwork is done by hand and therefore may slightly vary from the exemplary product images."
-                          )
-                        ])
-                      ]),
+                      }
+                    },
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "product-grid-item__imagewrapper",
+                          attrs: {
+                            to: { path: "/shop", query: { mydata: data.id } },
+                            "data-product-handle": "son-this-is-the-universe",
+                            "data-product-quantity": "48"
+                          }
+                        },
+                        [
+                          _c("img", {
+                            staticClass: "front",
+                            staticStyle: { height: "100%" },
+                            attrs: { src: data.img }
+                          }),
+                          _vm._v(" "),
+                          _c("img", {
+                            staticClass: "back",
+                            staticStyle: { height: "100%" },
+                            attrs: { src: _vm.image_hover }
+                          })
+                        ]
+                      ),
                       _vm._v(" "),
-                      _c("div", { staticClass: "cms-special-description" }, [
-                        _c(
-                          "span",
-                          { staticClass: "cms-special-label color-7" },
-                          [_vm._v(_vm._s(_vm.$t("message.newreleaseheader")))]
-                        ),
+                      _vm._m(0, true),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "product-grid-item__tags" }, [
+                        _c("div", { staticClass: "cms-special-description" }, [
+                          _c(
+                            "span",
+                            { staticClass: "cms-special-label color-4" },
+                            [_vm._v(_vm._s(data.name))]
+                          ),
+                          _vm._v(" "),
+                          _c("p", [
+                            _vm._v(
+                              "Walltones-studio added diamond dust to this print for a glittering effect that makes the artwork even more enticing. Additionally, keep in mind that each artwork is done by hand and therefore may slightly vary from the exemplary product images."
+                            )
+                          ])
+                        ]),
                         _vm._v(" "),
-                        _c("p", [
-                          _vm._v(
-                            "This artwork was added recently (but will likely be sold out soon)"
-                          )
+                        _c("div", { staticClass: "cms-special-description" }, [
+                          _c(
+                            "span",
+                            { staticClass: "cms-special-label color-7" },
+                            [_vm._v(_vm._s(_vm.$t("message.newreleaseheader")))]
+                          ),
+                          _vm._v(" "),
+                          _c("p", [
+                            _vm._v(
+                              "This artwork was added recently (but will likely be sold out soon)"
+                            )
+                          ])
                         ])
                       ])
-                    ])
-                  ]),
+                    ],
+                    1
+                  ),
                   _vm._v(" "),
                   _c("div", { staticClass: "product-grid-item__info" }, [
                     _c("div", { staticClass: "product-grid-item__title" }, [
@@ -47084,7 +47164,6 @@ var render = function() {
                           "a",
                           {
                             attrs: {
-                              href: "/products/son-this-is-the-universe",
                               "data-product-handle": "son-this-is-the-universe",
                               "data-product-quantity": "48"
                             }
@@ -108973,19 +109052,19 @@ var cartTotalPrice = function cartTotalPrice(state) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./state */ "./resources/js/store/state.js");
 /* harmony import */ var _getters__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./getters */ "./resources/js/store/getters.js");
 /* harmony import */ var _mutations__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./mutations */ "./resources/js/store/mutations.js");
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./actions */ "./resources/js/store/actions.js");
 
 
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_6__["default"]);
 
 
 
 
-/* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
+/* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_6__["default"].Store({
   state: _state__WEBPACK_IMPORTED_MODULE_2__["default"],
   getters: _getters__WEBPACK_IMPORTED_MODULE_3__,
   mutations: _mutations__WEBPACK_IMPORTED_MODULE_4__,
@@ -109147,8 +109226,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! E:\shedid-website\ARTWORKS\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! E:\shedid-website\ARTWORKS\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/macbookair/Desktop/yassmin/ARTWORKS/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/macbookair/Desktop/yassmin/ARTWORKS/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

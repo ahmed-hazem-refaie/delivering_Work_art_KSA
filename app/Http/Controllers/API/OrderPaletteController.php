@@ -6,6 +6,8 @@ use App\OrderPalette;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use PragmaRX\Countries\Package\Countries as Countries;
+use App\Models\HomeData;
+
 
 class OrderPaletteController extends Controller
 {
@@ -36,11 +38,16 @@ class OrderPaletteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function countries()
+
+
+    public function homedata()
     {
 
-        $countries = Countries::all();
-        return response()->json(['countries'=>$countries]);
+        $homedata = HomeData::latest()->first();
+        if($homedata)
+        return response()->json(['status'=>true,'data'=>$homedata]);
+        return response()->json(['status'=>false,'errors'=>['error']]);
+
     }
 
     /**

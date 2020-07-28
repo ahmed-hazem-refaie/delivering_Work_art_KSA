@@ -211,8 +211,24 @@ export default {
 
         }
     },
+
     created() {
 
+                        if(this.$route.query.mydata)
+        {
+                        this.addActive(this.$route.query.mydata)
+            axios.get("/api/viewMinPalettes?id=" + this.$route.query.mydata)
+            .then(response =>{
+
+                this.minPalettes = response.data.minPalettes
+                console.log(this.$route.query.mydata );
+
+                })
+            .catch(error => console.log(error.response.data))
+
+
+
+        }else{
 
 
       axios.get('/api/palettes')
@@ -247,12 +263,13 @@ export default {
       }
 
     ).catch(error => console.log(error.response.data));
-
+        }//////
 
 
     },
 
       computed: {
+
       cart() {
         return this.products.filter(product => product.quantity > 0);
       },
@@ -480,9 +497,24 @@ export default {
             })
             }).catch(error => console.log(error))
 
-        }
+        },//lklk
 
-    }
+    },//method
+    watch:{
+    $route (to, from){
+
+            // this.addActive(this.$route.query.mydata)
+            axios.get("/api/viewMinPalettes?id=" + this.$route.query.mydata)
+            .then(response =>{
+
+                this.minPalettes = response.data.minPalettes
+                console.log(this.$route.query.mydata );
+
+                })
+            .catch(error => console.log(error.response.data))
+
+}
+}
 
 }
 

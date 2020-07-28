@@ -31,7 +31,7 @@ Route::group(['middleware' => 'isadmin'], function () {
     Route::get('changeStatus', 'UserController@changeStatus');
     Route::get('users', 'UserController@index');
     Route::get('changeStatus', 'UserController@changeStatus');
-
+    Route::resource('homeDatas', 'HomeDataController');
 
 });
 Route::get('/home', 'HomeController@index')->middleware('verified')->name("home.index");
@@ -51,3 +51,11 @@ Route::get('payment/{id?}', function ($id=null) {
 
 })->name('payment');
 Route::view('/{any}','userLayout.home');
+
+
+
+
+
+
+
+

@@ -1,8 +1,7 @@
 <template>
     <header class="about-us">
         <div class="overlay"></div>
-        <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
-        <source src="https://cdn.shopify.com/s/files/1/3000/4362/files/16-9Desktop.mp4?v=1592998652" type="video/mp4">
+        <video :src="data" playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
         </video>
         <div class="text mb-4 about-content">
             <h1>{{ $t("message.about") }}</h1>
@@ -15,6 +14,24 @@
 
 <script>
 export default {
+    data(){
+        return{
+            data:'',
+        }
+    },
+    beforeCreate(){
+                axios.get('/api/homedata').then((result) => {
+
+            if(result.data.status)
+            {
+
+                this.data="/"+result.data.data.video
+            }
+        }).catch((err) => {
+            console.log(err.data);
+
+        });
+    }
 
 }
 </script>

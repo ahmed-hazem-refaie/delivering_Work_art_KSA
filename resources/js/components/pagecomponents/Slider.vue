@@ -10,12 +10,12 @@
             <div class="swiper-wrapper">
               <div @mouseover="hover(data.id)" class="swiper-slide " v-for="data in sliderPalettes" :key="data.id">
                 <div class="product-grid-item">
-                    <div class="product-grid-item__image">
-                        <a class="product-grid-item__imagewrapper" href="/products/son-this-is-the-universe" data-product-handle="son-this-is-the-universe" data-product-quantity="48">
+                    <div @click="showmore(data.id)" class="product-grid-item__image">
+                        <router-link  :to="{ path: '/shop', query: { mydata: data.id }}" class="product-grid-item__imagewrapper"  data-product-handle="son-this-is-the-universe" data-product-quantity="48">
                             <img class="front" :src="data.img" style="height:100%">
                             <img class="back" :src="image_hover" style="height:100%">
 
-                        </a>
+                        </router-link>
                         <div class="product-grid-item__variants">
                             <span>Size</span>
                             <div class="product-grid-item__variants--content">
@@ -37,7 +37,7 @@
                     </div>
                     <div class="product-grid-item__info">
                         <div class="product-grid-item__title">
-                            <h3 class="product-grid-item__name"><a href="/products/son-this-is-the-universe" data-product-handle="son-this-is-the-universe" data-product-quantity="48">{{data.name}}</a></h3>
+                            <h3 class="product-grid-item__name"><a  data-product-handle="son-this-is-the-universe" data-product-quantity="48">{{data.name}}</a></h3>
                             <span class="product-grid-item__price">from ${{data.L_price}}</span>
                         </div>
                         <span class="product-grid-item__qty"><span class="prints-times text-success">{{data.palette_copies}} / </span><span>{{data.avalible_copies}}{{$t("message.left") }}</span></span>
@@ -88,23 +88,30 @@
             swiper.update();
         },
     methods:{
-        hover(id=null){
+        hover(id){
 
                 axios.get('/api/hover/'+id).then(res=>{
 
-                    if(res.data.status)
+                                // console.log(id,this.image_hover,'dssdsd',res.data);
+
+                    if(res.data.hover_image)
                     {
                         this.image_hover=res.data.hover_image.img;
-                                    console.log(id,this.image_hover,'dssdsd');
 
                     }else{
-                        console.log(res.data);
+                        // console.log(res.data);
 
                     }
                 }).catch(e=>{console.log(e.data);
                 })
-        }
-    }
+        },
+            showmore(id){
+
+
+}
+
+    },
+
 
     }
 </script>

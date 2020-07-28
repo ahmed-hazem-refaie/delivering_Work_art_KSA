@@ -54,3 +54,9 @@
         </i><span>Discounts</span></a>
 
 
+
+
+<li class="{{ Request::is('homeDatas*') ? 'active' : '' }}">
+    <a href="{{ route('homeDatas.index') }}"><i class="fa fa-edit"></i><span>Home Datas</span></a>
+</li>
+
