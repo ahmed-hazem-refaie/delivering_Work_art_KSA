@@ -3991,6 +3991,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('/api/hover/' + id).then(function (res) {
         if (res.data.status) {
           _this2.image_hover = res.data.hover_image.img;
+          console.log(id, _this2.image_hover, 'dssdsd');
         } else {
           console.log(res.data);
         }

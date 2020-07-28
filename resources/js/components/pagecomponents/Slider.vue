@@ -89,11 +89,14 @@
         },
     methods:{
         hover(id=null){
+
                 axios.get('/api/hover/'+id).then(res=>{
 
                     if(res.data.status)
                     {
                         this.image_hover=res.data.hover_image.img;
+                                    console.log(id,this.image_hover,'dssdsd');
+
                     }else{
                         console.log(res.data);
 
