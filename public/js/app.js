@@ -2143,7 +2143,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _LanguageDropdown__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LanguageDropdown */ "./resources/js/components/Layout/LanguageDropdown.vue");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _LanguageDropdown__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LanguageDropdown */ "./resources/js/components/Layout/LanguageDropdown.vue");
 //
 //
 //
@@ -2254,6 +2256,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: {
@@ -2268,14 +2278,15 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   components: {
-    LanguageDropdown: _LanguageDropdown__WEBPACK_IMPORTED_MODULE_0__["default"]
+    LanguageDropdown: _LanguageDropdown__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
       showModal: false,
       value: 1,
       pallatecart: [],
-      cartcount: ''
+      cartcount: '',
+      expand: false
     };
   },
   created: function created() {
@@ -2289,6 +2300,11 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
+    expanding: function expanding() {
+      this.expand = !this.expand;
+      $(".navbar-collapse").toggleClass("show");
+      console.log("done");
+    },
     decreaseProduct: function decreaseProduct(product) {
       this.$store.dispatch('decreaseProduct', {
         product: product,
@@ -43246,9 +43262,26 @@ var render = function() {
     "nav",
     { staticClass: "navbar navbar-expand-lg navbar-light px-3 sticky-top" },
     [
-      _vm._m(0),
+      _c(
+        "button",
+        {
+          staticClass: "navbar-toggler",
+          attrs: {
+            type: "button",
+            "aria-controls": "navbarTogglerDemo03",
+            "aria-expanded": _vm.expand,
+            "aria-label": "Toggle navigation"
+          },
+          on: {
+            click: function($event) {
+              return _vm.expanding()
+            }
+          }
+        },
+        [_c("span", { staticClass: "navbar-toggler-icon" })]
+      ),
       _vm._v(" "),
-      _vm._m(1),
+      _vm._m(0),
       _vm._v(" "),
       _c("LanguageDropdown"),
       _vm._v(" "),
@@ -43572,26 +43605,6 @@ var render = function() {
   )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "navbar-toggler",
-        attrs: {
-          type: "button",
-          "data-toggle": "collapse",
-          "data-target": "#navbarTogglerDemo03",
-          "aria-controls": "navbarTogglerDemo03",
-          "aria-expanded": "false",
-          "aria-label": "Toggle navigation"
-        }
-      },
-      [_c("span", { staticClass: "navbar-toggler-icon" })]
-    )
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
