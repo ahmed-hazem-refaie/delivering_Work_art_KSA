@@ -71,17 +71,23 @@
                         <div>
 
                             <v-btn class="mb-2 size_btn small"  :class="{ active_btn : active_el == 1 }" v-if="S_avalible>0"  @click="small(1,S_price,S_avalible,cardId)">S</v-btn>
-                            <v-btn class="mb-2 size_btn small" style="cursor: not-allowed;background-color:#737373;color:#fff;border:none" v-else >{{ $t("message.empty") }}</v-btn>
+                            <v-btn class="mb-2 size_btn small" style="cursor: not-allowed;background-color:#737373;color:#fff;border:none" v-else >
+                                <div class="rotate"></div>
+                                {{ $t("message.empty") }}</v-btn>
                             <v-btn class="mb-2 size_btn medium" :class="{ active_btn : active_el == 2 }" v-if="M_avalible>0" @click="medium(2,M_price, M_avalible ,cardId)">M</v-btn>
-                            <v-btn class="mb-2 size_btn small" style="cursor: not-allowed;background-color:#737373;color:#fff;border:none" v-else >{{ $t("message.empty") }}</v-btn>
+                            <v-btn class="mb-2 size_btn small" style="cursor: not-allowed;background-color:#737373;color:#fff;border:none" v-else >
+                                <div class="rotate"></div>
+                                {{ $t("message.empty") }}</v-btn>
                             <v-btn class="mb-2 size_btn larg" :class="{ active_btn : active_el == 3 }" v-if="L_avalible>0" @click="larg(3,L_price,L_avalible,cardId )">L</v-btn>
-                            <v-btn class="mb-2 size_btn small" style="cursor: not-allowed;background-color:#737373;color:#fff;border:none" v-else >{{ $t("message.empty") }}</v-btn>
-                            <h3 class="mt-4 mb-4" v-if="active_el==1">small - 30x40cm (12x16") <strong style="float:right">{{S_copies}}/{{S_avalible}}  {{ $t("message.left") }}</strong></h3>
-                            <h3 class="mt-4 mb-4" v-if="active_el==2">medium - 50x66.5cm (20x26") <strong style="float:right">{{M_copies}}/{{M_avalible}}  {{ $t("message.left") }}</strong></h3>
-                            <h3 class="mt-4 mb-4" v-if="active_el==3">large - 70x93.5cm (28x37") <strong style="float:right">{{L_copies}}/{{L_avalible}}  {{ $t("message.left") }}</strong></h3>
+                            <v-btn class="mb-2 size_btn small" style="cursor: not-allowed;background-color:#737373;color:#fff;border:none" v-else >
+                                <div class="rotate"></div>
+                                {{ $t("message.empty") }}</v-btn>
+                            <h3 class="mt-4 mb-4" v-if="active_el==1">small - 30x40cm (12x16) <strong style="float:right">{{S_copies}}/{{S_avalible}}  {{ $t("message.left") }}</strong></h3>
+                            <h3 class="mt-4 mb-4" v-if="active_el==2">medium - 50x66.5cm (20x26) <strong style="float:right">{{M_copies}}/{{M_avalible}}  {{ $t("message.left") }}</strong></h3>
+                            <h3 class="mt-4 mb-4" v-if="active_el==3">large - 70x93.5cm (28x37) <strong style="float:right">{{L_copies}}/{{L_avalible}}  {{ $t("message.left") }}</strong></h3>
                             <div style="clear:both"></div>
                         </div>
-                        <button @click="  addtocart(cardId,priceTarget, avilableTarget , sizeTarget)" v-if="button" class="btn add-button addToCart "
+                        <button @click="  addtocart(cardId,priceTarget, avilableTarget , sizeTarget,sizeCm)" v-if="button" class="btn add-button addToCart "
 
 
 
@@ -199,6 +205,7 @@ export default {
             avilableTarget:'',
             sizeTarget:'',
             button:false,
+            sizeCm:""
 
 
 
@@ -337,13 +344,12 @@ export default {
             this.active_el = el;
             this.priceTarget=price
             this.button=true;
-
-
+            this.sizeCm="30x40cm (12x16)"
 
              $(".details .details_img").css({width:"100%",height:"200px"})
             $(".details  .content").css({width:"100%"})
 
-                $(".details.active .details_img").css({width:"75%",height:"100px"})
+                $(".details.active .details_img").css({width:"83%",height:"150px"})
             $(".details.active .content").css({width:"90%"})
 
             // $("html,body").animate({
@@ -357,13 +363,15 @@ export default {
             this.active_el = el;
             this.priceTarget=price
             this.button=true;
+            this.sizeCm="50x66.5cm (20x26)"
+
 
 
                $(".details .details_img").css({width:"100%",height:"200px"})
             $(".details  .content").css({width:"95%"})
 
 
-            $(".details.active .details_img").css({width:"80%",height:"150px"})
+            $(".details.active .details_img").css({width:"90%",height:"180px"})
             $(".details.active .content").css({width:"100%"})
 
             // $("html,body").animate({
@@ -378,6 +386,7 @@ export default {
             this.active_el = el;
             this.priceTarget=price
             this.button=true;
+            this.sizeCm="70x93.5cm (28x37)"
 
             $(".details .details_img").css({width:"100%",height:"200px"})
             $(".details  .content").css({width:"100%"})
@@ -420,7 +429,7 @@ export default {
                 $(this).addClass('active').siblings().removeClass('active');
             });
         },
-        addtocart($id,price,avilableTarget, sizeTarget){
+        addtocart($id,price,avilableTarget, sizeTarget,sizeCm){
 
 
             axios.post('/api/addtocart?id=' + $id)
@@ -465,7 +474,8 @@ export default {
                 quantity:1,
                 price:price,
                 avilableTarget,
-                sizeTarget
+                sizeTarget,
+                sizeCm
 
             })
             }).catch(error => console.log(error))
@@ -660,5 +670,13 @@ export default {
 }
 .active_btn{
     border: 2px solid #00a4ee;
+}
+
+.rotate{
+   width: 189%;
+    position: absolute;
+    height: 3px;
+    transform: rotate(157deg);
+    background: black;
 }
 </style>

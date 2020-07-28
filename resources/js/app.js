@@ -12,6 +12,7 @@ import Vue from "vue";
 import VueInternationalization from "vue-i18n";
 import VueRouter from "vue-router";
 import Vuetify from "vuetify";
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

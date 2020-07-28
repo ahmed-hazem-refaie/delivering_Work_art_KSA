@@ -1,6 +1,13 @@
 <template>
+
+
+
+
+
+
+
     <nav class="navbar navbar-expand-lg navbar-light px-3 sticky-top">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" @click="expanding()" aria-controls="navbarTogglerDemo03" :aria-expanded=expand aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <a class="navbar-brand" href="/"><img class="logo-ecs" src="//cdn.shopify.com/s/files/1/3000/4362/t/109/assets/logo-ecs.png?v=2452931808056810559" width="32px" alt=""></a>
@@ -74,7 +81,7 @@
                                 </div>
                                 <div class="col-md-sm-8 ml-3">
                                     <span> <strong>{{ item.product.name }}</strong></span>
-                                     <h6  style="font-size:14px">{{ item.sizeTarget }}</h6>
+                                     <h6  style="font-size:14px">{{ item.sizeTarget }} - {{item.sizeCm}} </h6>
                                     <h6>{{ item.quantity }} x ${{item.price}}</h6>
                                 </div>
                                   <div>
@@ -109,6 +116,8 @@
 </template>
 
 <script>
+
+import "jquery"
 import LanguageDropdown from './LanguageDropdown';
 export default {
     computed: {
@@ -128,7 +137,8 @@ export default {
             showModal: false,
             value:1,
             pallatecart:[],
-            cartcount:''
+            cartcount:'',
+            expand:false
         }
     },
     created(){
@@ -140,6 +150,11 @@ export default {
         .catch(error => console.log(error.response.data))
     },
     methods:{
+        expanding(){
+            this.expand=!this.expand;
+            $(".navbar-collapse").toggleClass("show")
+            console.log("done")
+        },
            decreaseProduct(product){
 
             this.$store.dispatch('decreaseProduct',{
